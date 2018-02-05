@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="movie.dao.TheaterDao">
+	<resultMap type="Theater" id="TheaterResult">
+		<result property="theaterNo" column="theater_no"/>
+		<result property="theaterName" column="theater_name"/>
+		<result property="theaterFloor" column="theater_floor"/>
+		<result property="theaterMaxcount" column="theater_maxcount"/>
+		<result property="seatA" column="seat_A"/>
+		<result property="seatB" column="seat_B"/>
+		<result property="seatC" column="seat_C"/>
+		<result property="theaterType" column="theater_Type"/>
+	</resultMap>
+</mapper>

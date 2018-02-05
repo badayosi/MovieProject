@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="movie.dao.ReservationDao">
+	<resultMap type="Reservation" id="ReservationResult">
+		<result property="no" column="n"/>
+		<result property="userId" column="user_id"/>
+		<result property="timetableNo" column="timetalbe_no"/>
+		<result property="price" column="price"/>
+		<result property="seatRank" column="seat_rank"/>
+	</resultMap>
+</mapper>
