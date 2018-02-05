@@ -35,4 +35,5 @@ public class UserRank {
 		return "UserRank [name=" + name + ", discount=" + discount + "]";
 	}
 
+
 }

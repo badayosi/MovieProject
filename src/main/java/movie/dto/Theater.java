@@ -1,7 +1,7 @@
 package movie.dto;
 
 public class Theater {
-	int theater_no;
+	int theaterNo;
 	String theatherName;
 	int theaterFloor;
 	int theaterMaxcount;
@@ -18,7 +18,7 @@ public class Theater {
 	public Theater(int theater_no, String theatherName, int theaterFloor, int theaterMaxcount, int seatA, int seatB,
 			int seatC, String theaterType) {
 		super();
-		this.theater_no = theater_no;
+		this.theaterNo = theater_no;
 		this.theatherName = theatherName;
 		this.theaterFloor = theaterFloor;
 		this.theaterMaxcount = theaterMaxcount;
@@ -29,11 +29,11 @@ public class Theater {
 	}
 
 	public int getTheater_no() {
-		return theater_no;
+		return theaterNo;
 	}
 
 	public void setTheater_no(int theater_no) {
-		this.theater_no = theater_no;
+		this.theaterNo = theater_no;
 	}
 
 	public String getTheatherName() {
@@ -94,7 +94,7 @@ public class Theater {
 
 	@Override
 	public String toString() {
-		return "Theater [theater_no=" + theater_no + ", theatherName=" + theatherName + ", theaterFloor=" + theaterFloor
+		return "Theater [theater_no=" + theaterNo + ", theatherName=" + theatherName + ", theaterFloor=" + theaterFloor
 				+ ", theaterMaxcount=" + theaterMaxcount + ", seatA=" + seatA + ", seatB=" + seatB + ", seatC=" + seatC
 				+ ", theaterType=" + theaterType + "]";
 	}
