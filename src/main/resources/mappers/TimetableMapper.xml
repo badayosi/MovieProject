@@ -10,4 +10,7 @@
 		<result property="startTime" column="start_Time"/>
 		<result property="endTime" column="end_Time"/>
 	</resultMap>
+	<select id="selectAll" resultMap="TimetableResult">
+		select * from Timetable
+	</select>
 </mapper>

@@ -10,4 +10,7 @@
 		<result property="price" column="price"/>
 		<result property="seatRank" column="seat_rank"/>
 	</resultMap>
+	<select id="selectAll" resultMap="ReservationResult">
+		select * from Reservation
+	</select>
 </mapper>

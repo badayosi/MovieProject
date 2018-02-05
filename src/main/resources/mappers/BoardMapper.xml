@@ -12,4 +12,7 @@
 		<result property="regdate" column="regdate"/>
 		<result property="grade" column="grade"/>
 	</resultMap>
+	<select id="selectAll" resultMap="boardResult">
+		select * from Board
+	</select>
 </mapper>

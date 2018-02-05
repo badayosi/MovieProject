@@ -13,4 +13,7 @@
 		<result property="seatC" column="seat_C"/>
 		<result property="theaterType" column="theater_Type"/>
 	</resultMap>
+	<select id="selectAll" resultMap="TheaterResult">
+		select * from Theater
+	</select>
 </mapper>

@@ -13,4 +13,7 @@
 		<result property="gender" column="gender"/>
 		<result property="userRank" column="userRank"/>
 	</resultMap>
+	<select id="selectAll" resultMap="uesrResult">
+		select * from User
+	</select>
 </mapper>
