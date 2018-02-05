@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
-import kr.or.dgit.SaleManagement.jdbc_setting.dao.DatabaseDao;
+
 
 public class InitService implements DbService {
 	private static final InitService instance = new InitService();

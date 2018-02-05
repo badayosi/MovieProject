@@ -9,9 +9,6 @@ import java.io.UnsupportedEncodingException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import kr.or.dgit.SaleManagement.jdbc_setting.Config;
-import kr.or.dgit.SaleManagement.jdbc_setting.dao.DatabaseDao;
-import kr.or.dgit.SaleManagement.jdbc_setting.jdbc.jdbcUtil;
 
 public class ExportService implements DbService {
 	private static final ExportService instance = new ExportService();

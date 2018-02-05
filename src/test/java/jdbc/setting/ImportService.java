@@ -1,7 +1,6 @@
 package jdbc.setting;
 
-import kr.or.dgit.SaleManagement.jdbc_setting.Config;
-import kr.or.dgit.SaleManagement.jdbc_setting.dao.DatabaseDao;
+
 
 public class ImportService implements DbService {
 	private static final ImportService instance = new ImportService();

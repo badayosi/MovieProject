@@ -1,12 +1,10 @@
-package kr.or.dgit.SaleManagement.jdbc_setting.dao;
+package jdbc.setting;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import kr.or.dgit.SaleManagement.jdbc_setting.jdbc.DBCon;
-import kr.or.dgit.SaleManagement.jdbc_setting.jdbc.jdbcUtil;
 
 public class DatabaseDao {
 	private static final DatabaseDao instance = new DatabaseDao();
