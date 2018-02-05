@@ -37,7 +37,7 @@ public class TestDao {
 				for(Address address: list){
 					System.out.println(address);
 				}
-			}
+			} 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
