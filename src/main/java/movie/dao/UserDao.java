@@ -6,4 +6,5 @@ import movie.dto.User;
 
 public interface UserDao {
 	public List<User> selectAll();
+	public User selectById(String id);
 }
