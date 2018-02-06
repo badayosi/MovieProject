@@ -1,89 +1,102 @@
 -- movie
-DROP SCHEMA movie;
+DROP SCHEMA IF EXISTS movie;
 
 -- movie
 CREATE SCHEMA movie;
 
 -- address
 CREATE TABLE movie.address (
-	addrNo    CHAR(5)     NULL, -- ¿ìÆí¹øÈ£
-	sido      VARCHAR(20) NULL, -- ½Ãµµ
-	sigungu   VARCHAR(20) NULL, -- ½Ã±º±¸
-	doro      VARCHAR(20) NULL, -- µµ·Î
-	building1 INT(5)      NULL, -- °Ç¹°¹øÈ£1
-	building2 INT(5)      NULL  -- °Ç¹°¹øÈ£2
-);
+	addrNo    CHAR(5)     NULL COMMENT 'ìš°í¸ë²ˆí˜¸', -- ìš°í¸ë²ˆí˜¸
+	sido      VARCHAR(20) NULL COMMENT 'ì‹œë„', -- ì‹œë„
+	sigungu   VARCHAR(20) NULL COMMENT 'ì‹œêµ°êµ¬', -- ì‹œêµ°êµ¬
+	doro      VARCHAR(20) NULL COMMENT 'ë„ë¡œ', -- ë„ë¡œ
+	building1 INT(5)      NULL COMMENT 'ê±´ë¬¼ë²ˆí˜¸1', -- ê±´ë¬¼ë²ˆí˜¸1
+	building2 INT(5)      NULL COMMENT 'ê±´ë¬¼ë²ˆí˜¸2' -- ê±´ë¬¼ë²ˆí˜¸2
+)
+COMMENT 'address';
 
 -- board
 CREATE TABLE movie.board (
-	board_no      INT(11)      NOT NULL, -- °Ô½ÃÆÇ¹øÈ£
-	user_id       VARCHAR(50)  NOT NULL, -- È¸¿øid
-	movie_no      INT(11)      NOT NULL, -- ¿µÈ­_no
-	board_title   VARCHAR(255) NOT NULL, -- °Ô½ÃÆÇÁ¦¸ñ
-	board_content TEXT         NULL,     -- °Ô½ÃÆÇ³»¿ë
-	regdate       DATE         NOT NULL, -- µî·ÏÀÏ
-	grade         INT(11)      NULL      -- °³ÀÎº°Á¡
-);
+	board_no      INT(11)      NOT NULL COMMENT 'ê²Œì‹œíŒë²ˆí˜¸', -- ê²Œì‹œíŒë²ˆí˜¸
+	user_id       VARCHAR(50)  NOT NULL COMMENT 'íšŒì›id', -- íšŒì›id
+	movie_no      INT(11)      NOT NULL COMMENT 'ì˜í™”_no', -- ì˜í™”_no
+	board_title   VARCHAR(255) NOT NULL COMMENT 'ê²Œì‹œíŒì œëª©', -- ê²Œì‹œíŒì œëª©
+	board_content TEXT         NULL     COMMENT 'ê²Œì‹œíŒë‚´ìš©', -- ê²Œì‹œíŒë‚´ìš©
+	regdate       DATE         NOT NULL COMMENT 'ë“±ë¡ì¼', -- ë“±ë¡ì¼
+	grade         INT(11)      NULL     COMMENT 'ê°œì¸ë³„ì ' -- ê°œì¸ë³„ì 
+)
+COMMENT 'board';
 
 -- board
 ALTER TABLE movie.board
 	ADD CONSTRAINT
 		PRIMARY KEY (
-			board_no -- °Ô½ÃÆÇ¹øÈ£
+			board_no -- ê²Œì‹œíŒë²ˆí˜¸
 		);
+
+ALTER TABLE movie.board
+	MODIFY COLUMN board_no INT(11) NOT NULL AUTO_INCREMENT COMMENT 'ê²Œì‹œíŒë²ˆí˜¸';
 
 -- movie
 CREATE TABLE movie.movie (
-	movie_no      INT(11)      NOT NULL, -- ¿µÈ­_no
-	movie_name    VARCHAR(50)  NOT NULL, -- ¿µÈ­ÀÌ¸§
-	path_poster   VARCHAR(255) NULL,     -- Æ÷½ºÅÍ
-	play_time     INT(11)      NULL,     -- »ó¿µ½Ã°£
-	rating        INT(11)      NULL,     -- µî±Ş
-	grade         DOUBLE       NULL,     -- ÃÑÆòÁ¡
-	open_date     DATE         NULL,     -- °³ºÀÀÏ
-	close_date    DATE         NULL,     -- Á¾·áÀÏ
-	genre         VARCHAR(255) NULL,     -- Àå¸£
-	path_steelcut VARCHAR(255) NULL,     -- ½ºÆ¿ÄÆ
-	path_video    VARCHAR(255) NULL,     -- µ¿¿µ»ó
-	synopsis      TEXT         NULL,     -- ÁÙ°Å¸®
-	actor         VARCHAR(255) NULL,     -- ¹è¿ì
-	director      VARCHAR(255) NULL      -- °¨µ¶
-);
+	movie_no      INT(11)      NOT NULL COMMENT 'ì˜í™”_no', -- ì˜í™”_no
+	movie_name    VARCHAR(50)  NOT NULL COMMENT 'ì˜í™”ì´ë¦„', -- ì˜í™”ì´ë¦„
+	path_poster   VARCHAR(255) NULL     COMMENT 'í¬ìŠ¤í„°', -- í¬ìŠ¤í„°
+	play_time     INT(11)      NULL     COMMENT 'ìƒì˜ì‹œê°„', -- ìƒì˜ì‹œê°„
+	rating        INT(11)      NULL     COMMENT 'ë“±ê¸‰', -- ë“±ê¸‰
+	grade         DOUBLE       NULL     COMMENT 'ì´í‰ì ', -- ì´í‰ì 
+	open_date     DATE         NULL     COMMENT 'ê°œë´‰ì¼', -- ê°œë´‰ì¼
+	close_date    DATE         NULL     COMMENT 'ì¢…ë£Œì¼', -- ì¢…ë£Œì¼
+	genre         VARCHAR(255) NULL     COMMENT 'ì¥ë¥´', -- ì¥ë¥´
+	path_steelcut VARCHAR(255) NULL     COMMENT 'ìŠ¤í‹¸ì»·', -- ìŠ¤í‹¸ì»·
+	path_video    VARCHAR(255) NULL     COMMENT 'ë™ì˜ìƒ', -- ë™ì˜ìƒ
+	synopsis      TEXT         NULL     COMMENT 'ì¤„ê±°ë¦¬', -- ì¤„ê±°ë¦¬
+	actor         VARCHAR(255) NULL     COMMENT 'ë°°ìš°', -- ë°°ìš°
+	director      VARCHAR(255) NULL     COMMENT 'ê°ë…' -- ê°ë…
+)
+COMMENT 'movie';
 
 -- movie
 ALTER TABLE movie.movie
 	ADD CONSTRAINT
 		PRIMARY KEY (
-			movie_no -- ¿µÈ­_no
+			movie_no -- ì˜í™”_no
 		);
+
+ALTER TABLE movie.movie
+	MODIFY COLUMN movie_no INT(11) NOT NULL AUTO_INCREMENT COMMENT 'ì˜í™”_no';
 
 -- reservation
 CREATE TABLE movie.reservation (
-	no           INT(11)      NOT NULL, -- ¿¹¾à¹øÈ£
-	user_id      VARCHAR(50)  NOT NULL, -- È¸¿øid
-	timetable_no INT(11)      NOT NULL, -- »ó¿µ½Ã°£Ç¥_no
-	price        INT(11)      NOT NULL, -- °¡°İ
-	seat_rank    VARCHAR(255) NOT NULL  -- ÁÂ¼®µî±Ş
-);
+	no           INT(11)      NOT NULL COMMENT 'ì˜ˆì•½ë²ˆí˜¸', -- ì˜ˆì•½ë²ˆí˜¸
+	user_id      VARCHAR(50)  NOT NULL COMMENT 'íšŒì›id', -- íšŒì›id
+	timetable_no INT(11)      NOT NULL COMMENT 'ìƒì˜ì‹œê°„í‘œ_no', -- ìƒì˜ì‹œê°„í‘œ_no
+	price        INT(11)      NOT NULL COMMENT 'ê°€ê²©', -- ê°€ê²©
+	seat         VARCHAR(255) NOT NULL COMMENT 'ì¢Œì„ë“±ê¸‰' -- ì¢Œì„ë²ˆí˜¸
+)
+COMMENT 'reservation';
 
 -- reservation
 ALTER TABLE movie.reservation
 	ADD CONSTRAINT
 		PRIMARY KEY (
-			no -- ¿¹¾à¹øÈ£
+			no -- ì˜ˆì•½ë²ˆí˜¸
 		);
+
+ALTER TABLE movie.reservation
+	MODIFY COLUMN no INT(11) NOT NULL AUTO_INCREMENT COMMENT 'ì˜ˆì•½ë²ˆí˜¸';
 
 -- theater
 CREATE TABLE movie.theater (
-	theater_no       INT(11)      NOT NULL, -- theater_no
-	theather_name    VARCHAR(255) NOT NULL, -- ÀÌ¸§
-	theater_floor    INT(11)      NOT NULL, -- Ãş¼ö
-	theater_maxcount INT(11)      NOT NULL, -- ÀÎ¿ø
-	seat_a           INT(11)      NOT NULL, -- ÁÂ¼®A
-	seat_b           INT(11)      NULL,     -- ÁÂ¼®B
-	seat_c           INT(11)      NULL,     -- ÁÂ¼®C
-	theater_type     VARCHAR(255) NOT NULL  -- »ó¿µ°üÁ¾·ù
-);
+	theater_no       INT(11)      NOT NULL COMMENT 'theater_no', -- theater_no
+	theater_name    VARCHAR(255) NOT NULL COMMENT 'ì´ë¦„', -- ì´ë¦„
+	theater_floor    INT(11)      NOT NULL COMMENT 'ì¸µìˆ˜', -- ì¸µìˆ˜
+	theater_maxcount INT(11)      NOT NULL COMMENT 'ì¸ì›', -- ì¸ì›
+	row              VARCHAR(2)   NOT NULL COMMENT 'ë°°ì¹˜', -- í–‰
+	col              INT(11)      NULL     COMMENT 'ì—´', -- ì—´
+	theater_type     VARCHAR(255) NOT NULL COMMENT 'ìƒì˜ê´€ì¢…ë¥˜' -- ìƒì˜ê´€ì¢…ë¥˜
+)
+COMMENT 'theater';
 
 -- theater
 ALTER TABLE movie.theater
@@ -92,46 +105,55 @@ ALTER TABLE movie.theater
 			theater_no -- theater_no
 		);
 
+ALTER TABLE movie.theater
+	MODIFY COLUMN theater_no INT(11) NOT NULL AUTO_INCREMENT COMMENT 'theater_no';
+
 -- timetable
 CREATE TABLE movie.timetable (
-	table_no   INT(11) NOT NULL, -- ½Ã°£Ç¥no
-	movie_no   INT(11) NOT NULL, -- ¿µÈ­_no
-	theater_no INT(11) NOT NULL, -- »ó¿µ°ü_no
-	start_time DATE    NOT NULL, -- ¹æ¿µ½ÃÀÛ½Ã°£
-	end_time   DATE    NOT NULL  -- ¹æ¿µÁ¾·á½Ã°£
-);
+	table_no   INT(11) NOT NULL COMMENT 'ì‹œê°„í‘œno', -- ì‹œê°„í‘œno
+	movie_no   INT(11) NOT NULL COMMENT 'ì˜í™”_no', -- ì˜í™”_no
+	theater_no INT(11) NOT NULL COMMENT 'ìƒì˜ê´€_no', -- ìƒì˜ê´€_no
+	start_time DATE    NOT NULL COMMENT 'ë°©ì˜ì‹œì‘ì‹œê°„', -- ë°©ì˜ì‹œì‘ì‹œê°„
+	end_time   DATE    NOT NULL COMMENT 'ë°©ì˜ì¢…ë£Œì‹œê°„' -- ë°©ì˜ì¢…ë£Œì‹œê°„
+)
+COMMENT 'timetable';
 
 -- timetable
 ALTER TABLE movie.timetable
 	ADD CONSTRAINT
 		PRIMARY KEY (
-			table_no -- ½Ã°£Ç¥no
+			table_no -- ì‹œê°„í‘œno
 		);
+
+ALTER TABLE movie.timetable
+	MODIFY COLUMN table_no INT(11) NOT NULL AUTO_INCREMENT COMMENT 'ì‹œê°„í‘œno';
 
 -- user
 CREATE TABLE movie.user (
-	user_id   VARCHAR(50)  NOT NULL, -- È¸¿øid
-	password  VARCHAR(50)  NOT NULL, -- ºñ¹Ğ¹øÈ£
-	point     INT(11)      NULL,     -- Æ÷ÀÎÆ®
-	email     VARCHAR(50)  NOT NULL, -- email
-	phone     INT(11)      NOT NULL, -- ÀüÈ­¹øÈ£
-	addr      VARCHAR(255) NOT NULL, -- ÁÖ¼Ò
-	gender    VARCHAR(50)  NOT NULL, -- ¼ºº°
-	user_rank VARCHAR(50)  NULL      -- È¸¿øµî±Ş
-);
+	user_id   VARCHAR(50)  NOT NULL COMMENT 'íšŒì›id', -- íšŒì›id
+	password  VARCHAR(50)  NOT NULL COMMENT 'ë¹„ë°€ë²ˆí˜¸', -- ë¹„ë°€ë²ˆí˜¸
+	point     INT(11)      NULL     COMMENT 'í¬ì¸íŠ¸', -- í¬ì¸íŠ¸
+	email     VARCHAR(50)  NOT NULL COMMENT 'email', -- email
+	phone     INT(11)      NOT NULL COMMENT 'ì „í™”ë²ˆí˜¸', -- ì „í™”ë²ˆí˜¸
+	addr      VARCHAR(255) NOT NULL COMMENT 'ì£¼ì†Œ', -- ì£¼ì†Œ
+	gender    VARCHAR(50)  NOT NULL COMMENT 'ì„±ë³„', -- ì„±ë³„
+	user_rank VARCHAR(50)  NULL     COMMENT 'íšŒì›ë“±ê¸‰' -- íšŒì›ë“±ê¸‰
+)
+COMMENT 'user';
 
 -- user
 ALTER TABLE movie.user
 	ADD CONSTRAINT
 		PRIMARY KEY (
-			user_id -- È¸¿øid
+			user_id -- íšŒì›id
 		);
 
 -- user_rank
 CREATE TABLE movie.user_rank (
-	name     VARCHAR(50) NOT NULL, -- name
-	discount INT(11)     NULL      -- discount
-);
+	name     VARCHAR(50) NOT NULL COMMENT 'name', -- name
+	discount INT(11)     NULL     COMMENT 'discount' -- discount
+)
+COMMENT 'user_rank';
 
 -- user_rank
 ALTER TABLE movie.user_rank
@@ -144,89 +166,94 @@ ALTER TABLE movie.user_rank
 ALTER TABLE movie.board
 	ADD CONSTRAINT FK_movie_TO_board -- FK_movie_TO_board
 		FOREIGN KEY (
-			movie_no -- ¿µÈ­_no
+			movie_no -- ì˜í™”_no
 		)
 		REFERENCES movie.movie ( -- movie
-			movie_no -- ¿µÈ­_no
+			movie_no -- ì˜í™”_no
 		),
 	ADD INDEX FK_movie_TO_board (
-		movie_no -- ¿µÈ­_no
+		movie_no -- ì˜í™”_no
 	);
 
 -- board
 ALTER TABLE movie.board
 	ADD CONSTRAINT FK_user_TO_board -- FK_user_TO_board
 		FOREIGN KEY (
-			user_id -- È¸¿øid
+			user_id -- íšŒì›id
 		)
 		REFERENCES movie.user ( -- user
-			user_id -- È¸¿øid
+			user_id -- íšŒì›id
 		),
 	ADD INDEX FK_user_TO_board (
-		user_id -- È¸¿øid
+		user_id -- íšŒì›id
 	);
 
 -- reservation
 ALTER TABLE movie.reservation
 	ADD CONSTRAINT FK_timetable_TO_reservation -- FK_timetable_TO_reservation
 		FOREIGN KEY (
-			timetable_no -- »ó¿µ½Ã°£Ç¥_no
+			timetable_no -- ìƒì˜ì‹œê°„í‘œ_no
 		)
 		REFERENCES movie.timetable ( -- timetable
-			table_no -- ½Ã°£Ç¥no
+			table_no -- ì‹œê°„í‘œno
 		),
 	ADD INDEX FK_timetable_TO_reservation (
-		timetable_no -- »ó¿µ½Ã°£Ç¥_no
+		timetable_no -- ìƒì˜ì‹œê°„í‘œ_no
 	);
 
 -- reservation
 ALTER TABLE movie.reservation
 	ADD CONSTRAINT FK_user_TO_reservation -- FK_user_TO_reservation
 		FOREIGN KEY (
-			user_id -- È¸¿øid
+			user_id -- íšŒì›id
 		)
 		REFERENCES movie.user ( -- user
-			user_id -- È¸¿øid
+			user_id -- íšŒì›id
 		),
 	ADD INDEX FK_user_TO_reservation (
-		user_id -- È¸¿øid
+		user_id -- íšŒì›id
 	);
 
 -- timetable
 ALTER TABLE movie.timetable
 	ADD CONSTRAINT FK_movie_TO_timetable -- FK_movie_TO_timetable
 		FOREIGN KEY (
-			movie_no -- ¿µÈ­_no
+			movie_no -- ì˜í™”_no
 		)
 		REFERENCES movie.movie ( -- movie
-			movie_no -- ¿µÈ­_no
+			movie_no -- ì˜í™”_no
 		),
 	ADD INDEX FK_movie_TO_timetable (
-		movie_no -- ¿µÈ­_no
+		movie_no -- ì˜í™”_no
 	);
 
 -- timetable
 ALTER TABLE movie.timetable
 	ADD CONSTRAINT FK_theater_TO_timetable -- FK_theater_TO_timetable
 		FOREIGN KEY (
-			theater_no -- »ó¿µ°ü_no
+			theater_no -- ìƒì˜ê´€_no
 		)
 		REFERENCES movie.theater ( -- theater
 			theater_no -- theater_no
 		),
 	ADD INDEX FK_theater_TO_timetable (
-		theater_no -- »ó¿µ°ü_no
+		theater_no -- ìƒì˜ê´€_no
 	);
 
 -- user
 ALTER TABLE movie.user
 	ADD CONSTRAINT FK_user_rank_TO_user -- FK_user_rank_TO_user
 		FOREIGN KEY (
-			user_rank -- È¸¿øµî±Ş
+			user_rank -- íšŒì›ë“±ê¸‰
 		)
 		REFERENCES movie.user_rank ( -- user_rank
 			name -- name
 		),
 	ADD INDEX FK_user_rank_TO_user (
-		user_rank -- È¸¿øµî±Ş
+		user_rank -- íšŒì›ë“±ê¸‰
 	);
+	use movie;
+
+delete from article_content where article_no=5;
+insert into theater (theater_name, theater_floor, theater_maxcount, row, col, theater_Type)
+   values ('1ê´€',2,50,'G',15,'ì¼ë°˜');
