@@ -45,7 +45,7 @@ public class TestDao {
 		}
 	}
 	
-	@Test
+	//@Test
 	public void testSelectAll2(){
 		SqlSession session=null;
 		try {
@@ -65,7 +65,7 @@ public class TestDao {
 		}
 	}
 	
-	@Test
+	//@Test
 	public void testSelectAll3(){
 		SqlSession session=null;
 		try {
@@ -85,7 +85,7 @@ public class TestDao {
 		}
 	}
 	
-	@Test
+	//@Test
 	public void testSelectAll4(){
 		SqlSession session=null;
 		try {
@@ -125,7 +125,7 @@ public class TestDao {
 		}
 	}
 	
-	@Test
+	//@Test
 	public void testSelectAll6(){
 		SqlSession session=null;
 		try {
@@ -145,7 +145,7 @@ public class TestDao {
 		}
 	}
 	
-	@Test
+	//@Test
 	public void testSelectAll7(){
 		SqlSession session=null;
 		try {
@@ -165,7 +165,7 @@ public class TestDao {
 		}
 	}
 	
-	@Test
+	//@Test
 	public void testSelectAll8(){
 		SqlSession session=null;
 		try {

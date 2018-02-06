@@ -89,7 +89,7 @@ ALTER TABLE movie.reservation
 -- theater
 CREATE TABLE movie.theater (
 	theater_no       INT(11)      NOT NULL COMMENT 'theater_no', -- theater_no
-	theather_name    VARCHAR(255) NOT NULL COMMENT '이름', -- 이름
+	theater_name    VARCHAR(255) NOT NULL COMMENT '이름', -- 이름
 	theater_floor    INT(11)      NOT NULL COMMENT '층수', -- 층수
 	theater_maxcount INT(11)      NOT NULL COMMENT '인원', -- 인원
 	row              VARCHAR(2)   NOT NULL COMMENT '배치', -- 행
@@ -252,3 +252,8 @@ ALTER TABLE movie.user
 	ADD INDEX FK_user_rank_TO_user (
 		user_rank -- 회원등급
 	);
+	use movie;
+
+delete from article_content where article_no=5;
+insert into theater (theater_name, theater_floor, theater_maxcount, row, col, theater_Type)
+   values ('1관',2,50,'G',15,'일반');
