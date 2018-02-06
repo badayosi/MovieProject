@@ -36,7 +36,7 @@ public class TestDao {
 			if(list.size()>0){
 				for(Address address: list){
 					System.out.println(address);
-				}
+				} 
 			} 
 		} catch (Exception e) {
 			e.printStackTrace();
