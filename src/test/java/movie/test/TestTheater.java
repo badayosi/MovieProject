@@ -84,10 +84,9 @@ public class TestTheater {
 	@Test
 	public void test(){
 		TheaterService service = TheaterService.getInstance();
-		Theater theater = new Theater(10, "5관", 10, 50, "G", 9, "일반");
+		Theater theater = new Theater(10, "4aaaa", 10, 50, "G", 9, "일반");
 		int a = service.updateTheater(theater);
-		System.out.println(a);
-		
+		//System.out.println(a);
 	}
 	
 	//@Test

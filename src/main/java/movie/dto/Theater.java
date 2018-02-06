@@ -22,11 +22,11 @@ public class Theater {
 		this.theaterNo = theaterNo;
 	}
 
-	public String getTheatherName() {
+	public String getTheaterName() {
 		return theaterName;
 	}
 
-	public void setTheatherName(String theaterName) {
+	public void setTheaterName(String theaterName) {
 		this.theaterName = theaterName;
 	}
 
@@ -70,11 +70,11 @@ public class Theater {
 		this.theaterType = theaterType;
 	}
 
-	public Theater(int theaterNo, String theatherName, int theaterFloor, int theaterMaxcount, String row, int col,
+	public Theater(int theaterNo, String theaterName, int theaterFloor, int theaterMaxcount, String row, int col,
 			String theaterType) {
 		super();
 		this.theaterNo = theaterNo;
-		this.theaterName = theatherName;
+		this.theaterName = theaterName;
 		this.theaterFloor = theaterFloor;
 		this.theaterMaxcount = theaterMaxcount;
 		this.row = row;
@@ -84,10 +84,10 @@ public class Theater {
 	
 	
 
-	public Theater(String theatherName, int theaterFloor, int theaterMaxcount, String row, int col,
+	public Theater(String theaterName, int theaterFloor, int theaterMaxcount, String row, int col,
 			String theaterType) {
 		super();
-		this.theaterName = theatherName;
+		this.theaterName = theaterName;
 		this.theaterFloor = theaterFloor;
 		this.theaterMaxcount = theaterMaxcount;
 		this.row = row;

@@ -104,7 +104,6 @@ public class TheaterService {
 			session.commit();
 			
 			return 1;
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
