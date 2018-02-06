@@ -4,6 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <properties resource="db.properties"/>
+  
+  <typeAliases>
+  	<typeAlias type="movie.dto.Address" alias="Address"/>
+  	<typeAlias type="movie.dto.Board" alias="Board"/>
+  	<typeAlias type="movie.dto.Movie" alias="Movie"/>
+  	<typeAlias type="movie.dto.Reservation" alias="Reservation"/>
+  	<typeAlias type="movie.dto.Theater" alias="Theater"/>
+  	<typeAlias type="movie.dto.Timetable" alias="Timetable"/>
+  	<typeAlias type="movie.dto.User" alias="User"/>
+  	<typeAlias type="movie.dto.UserRank" alias="UserRank"/>
+  </typeAliases>
+    
+
+  
    <environments default="development">
     <environment id="development">
       <transactionManager type="JDBC"/>
@@ -32,6 +46,13 @@
     </environment>
   </environments>
   <mappers>
-  	
+  	<mapper resource="mappers/AddressMapper.xml"/>
+  	<mapper resource="mappers/BoardMapper.xml"/>
+  	<mapper resource="mappers/MovieMapper.xml"/>
+  	<mapper resource="mappers/ReservationMapper.xml"/>
+  	<mapper resource="mappers/TheaterMapper.xml"/>
+  	<mapper resource="mappers/TimetableMapper.xml"/>
+  	<mapper resource="mappers/UserMapper.xml"/>
+  	<mapper resource="mappers/UserRankMapper.xml"/>
   </mappers>
 </configuration>

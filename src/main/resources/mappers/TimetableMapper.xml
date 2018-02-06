@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="movie.dao.TimetableDao">
+	<resultMap type="Timetable" id="TimetableResult">
+		<result property="tableNo" column="table_No"/>
+		<result property="movieNo" column="movie_No"/>
+		<result property="theaterNo" column="theater_No"/>
+		<result property="startTime" column="start_Time"/>
+		<result property="endTime" column="end_Time"/>
+	</resultMap>
+	<select id="selectAll" resultMap="TimetableResult">
+		select * from Timetable
+	</select>
+</mapper>
