@@ -2,12 +2,11 @@ package movie.dto;
 
 public class Theater {
 	int theaterNo;
-	String theatherName;
+	String theaterName;
 	int theaterFloor;
 	int theaterMaxcount;
-	int seatA;
-	int seatB;
-	int seatC;
+	String row;
+	int col;
 	String theaterType;
 
 	public Theater() {
@@ -15,33 +14,20 @@ public class Theater {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Theater(int theater_no, String theatherName, int theaterFloor, int theaterMaxcount, int seatA, int seatB,
-			int seatC, String theaterType) {
-		super();
-		this.theaterNo = theater_no;
-		this.theatherName = theatherName;
-		this.theaterFloor = theaterFloor;
-		this.theaterMaxcount = theaterMaxcount;
-		this.seatA = seatA;
-		this.seatB = seatB;
-		this.seatC = seatC;
-		this.theaterType = theaterType;
-	}
-
-	public int getTheater_no() {
+	public int getTheaterNo() {
 		return theaterNo;
 	}
 
-	public void setTheater_no(int theater_no) {
-		this.theaterNo = theater_no;
+	public void setTheaterNo(int theaterNo) {
+		this.theaterNo = theaterNo;
 	}
 
 	public String getTheatherName() {
-		return theatherName;
+		return theaterName;
 	}
 
-	public void setTheatherName(String theatherName) {
-		this.theatherName = theatherName;
+	public void setTheatherName(String theaterName) {
+		this.theaterName = theaterName;
 	}
 
 	public int getTheaterFloor() {
@@ -60,28 +46,20 @@ public class Theater {
 		this.theaterMaxcount = theaterMaxcount;
 	}
 
-	public int getSeatA() {
-		return seatA;
+	public String getRow() {
+		return row;
 	}
 
-	public void setSeatA(int seatA) {
-		this.seatA = seatA;
+	public void setRow(String row) {
+		this.row = row;
 	}
 
-	public int getSeatB() {
-		return seatB;
+	public int getCol() {
+		return col;
 	}
 
-	public void setSeatB(int seatB) {
-		this.seatB = seatB;
-	}
-
-	public int getSeatC() {
-		return seatC;
-	}
-
-	public void setSeatC(int seatC) {
-		this.seatC = seatC;
+	public void setCol(int col) {
+		this.col = col;
 	}
 
 	public String getTheaterType() {
@@ -92,11 +70,38 @@ public class Theater {
 		this.theaterType = theaterType;
 	}
 
+	public Theater(int theaterNo, String theatherName, int theaterFloor, int theaterMaxcount, String row, int col,
+			String theaterType) {
+		super();
+		this.theaterNo = theaterNo;
+		this.theaterName = theatherName;
+		this.theaterFloor = theaterFloor;
+		this.theaterMaxcount = theaterMaxcount;
+		this.row = row;
+		this.col = col;
+		this.theaterType = theaterType;
+	}
+	
+	
+
+	public Theater(String theatherName, int theaterFloor, int theaterMaxcount, String row, int col,
+			String theaterType) {
+		super();
+		this.theaterName = theatherName;
+		this.theaterFloor = theaterFloor;
+		this.theaterMaxcount = theaterMaxcount;
+		this.row = row;
+		this.col = col;
+		this.theaterType = theaterType;
+	}
+
 	@Override
 	public String toString() {
-		return "Theater [theater_no=" + theaterNo + ", theatherName=" + theatherName + ", theaterFloor=" + theaterFloor
-				+ ", theaterMaxcount=" + theaterMaxcount + ", seatA=" + seatA + ", seatB=" + seatB + ", seatC=" + seatC
-				+ ", theaterType=" + theaterType + "]";
+		return "Theater [theaterNo=" + theaterNo + ", theaterName=" + theaterName + ", theaterFloor=" + theaterFloor
+				+ ", theaterMaxcount=" + theaterMaxcount + ", row=" + row + ", col=" + col + ", theaterType="
+				+ theaterType + "]";
 	}
+
+	
 
 }

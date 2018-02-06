@@ -5,10 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">	
+</style>
 </head>
-<body>
-	<jsp:include page="include/header.jsp"></jsp:include>
-		
-	<jsp:include page="include/footer.jsp"></jsp:include>
+<body> 
+<jsp:include page="../include/managerHeader.jsp"></jsp:include>
+
+<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>
