@@ -1,4 +1,3 @@
-
 -- movie
 DROP SCHEMA IF EXISTS movie;
 
@@ -35,6 +34,9 @@ ALTER TABLE movie.board
 			board_no -- 게시판번호
 		);
 
+ALTER TABLE movie.board
+	MODIFY COLUMN board_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '게시판번호';
+
 -- movie
 CREATE TABLE movie.movie (
 	movie_no      INT(11)      NOT NULL COMMENT '영화_no', -- 영화_no
@@ -61,6 +63,9 @@ ALTER TABLE movie.movie
 			movie_no -- 영화_no
 		);
 
+ALTER TABLE movie.movie
+	MODIFY COLUMN movie_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '영화_no';
+
 -- reservation
 CREATE TABLE movie.reservation (
 	no           INT(11)      NOT NULL COMMENT '예약번호', -- 예약번호
@@ -77,6 +82,9 @@ ALTER TABLE movie.reservation
 		PRIMARY KEY (
 			no -- 예약번호
 		);
+
+ALTER TABLE movie.reservation
+	MODIFY COLUMN no INT(11) NOT NULL AUTO_INCREMENT COMMENT '예약번호';
 
 -- theater
 CREATE TABLE movie.theater (
@@ -97,6 +105,9 @@ ALTER TABLE movie.theater
 			theater_no -- theater_no
 		);
 
+ALTER TABLE movie.theater
+	MODIFY COLUMN theater_no INT(11) NOT NULL AUTO_INCREMENT COMMENT 'theater_no';
+
 -- timetable
 CREATE TABLE movie.timetable (
 	table_no   INT(11) NOT NULL COMMENT '시간표no', -- 시간표no
@@ -113,6 +124,9 @@ ALTER TABLE movie.timetable
 		PRIMARY KEY (
 			table_no -- 시간표no
 		);
+
+ALTER TABLE movie.timetable
+	MODIFY COLUMN table_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '시간표no';
 
 -- user
 CREATE TABLE movie.user (
