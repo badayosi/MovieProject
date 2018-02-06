@@ -31,4 +31,17 @@ public class MovieService {
 		}
 		return null;
 	}
+	
+	public int insert(Movie movie){
+			SqlSession session=null;
+			try {
+				session=MySqlSessionFactory.openSession();
+				MovieDao dao=session.getMapper(MovieDao.class);
+				
+				int result=dao.insert(movie);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		return 0;
+	}
 }

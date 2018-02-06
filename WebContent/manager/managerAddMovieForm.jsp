@@ -84,7 +84,7 @@
 			</tr>
 			<tr>
 				<th>스틸컷</th>
-				<td><input type="file" name="movieSteelCut"></td>
+				<td><input type="file" multiple="multiple" name="movieSteelCut"></td>
 			</tr>
 			<tr>
 				<th>동영상</th>
