@@ -56,12 +56,6 @@
 		
 	}
 </style>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script>
-	$(function(){
-		
-	})
-</script>
 <div id="headerWrap">
 	<h2>Hello 2018</h2>
 	<h1>DGV</h1>

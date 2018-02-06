@@ -35,7 +35,7 @@ public class ControllerUsingURI extends HttpServlet {
 			String command = (String)keyIter.next();
 			// VALUE
 			String handlerClassName = prop.getProperty(command);
-		System.out.println(handlerClassName);
+		
 			try{
 				// 문자열에 해당하는 부분을 CLASS화
 				Class<?> handlerClass = Class.forName(handlerClassName);
