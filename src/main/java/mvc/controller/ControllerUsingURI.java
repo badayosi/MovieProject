@@ -18,12 +18,14 @@ public class ControllerUsingURI extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		String configFile = getInitParameter("configFile");
+		
 		Properties prop = new Properties();
 		String configFilePath = getServletContext().getRealPath(configFile);
 		
 		try(FileReader fis = new FileReader(configFilePath)){
 			prop.load(fis);
 		}catch(Exception e){
+			e.printStackTrace();
 			throw new ServletException();
 		}
 		
@@ -33,10 +35,12 @@ public class ControllerUsingURI extends HttpServlet {
 			String command = (String)keyIter.next();
 			// VALUE
 			String handlerClassName = prop.getProperty(command);
+		System.out.println(handlerClassName);
 			try{
 				// 문자열에 해당하는 부분을 CLASS화
 				Class<?> handlerClass = Class.forName(handlerClassName);
 				// NEW 후 Instance화 과정을 진행
+				
 				CommandHandler handlerInstance = (CommandHandler)handlerClass.newInstance();
 				commandHandlerMap.put(command, handlerInstance);
 			}catch(Exception e){

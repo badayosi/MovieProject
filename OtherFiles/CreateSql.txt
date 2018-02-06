@@ -1,4 +1,4 @@
--- movie
+ -- movie
 DROP SCHEMA IF EXISTS movie;
 
 -- movie
@@ -6,254 +6,250 @@ CREATE SCHEMA movie;
 
 -- address
 CREATE TABLE movie.address (
-	addrNo    CHAR(5)     NULL COMMENT '우편번호', -- 우편번호
-	sido      VARCHAR(20) NULL COMMENT '시도', -- 시도
-	sigungu   VARCHAR(20) NULL COMMENT '시군구', -- 시군구
-	doro      VARCHAR(20) NULL COMMENT '도로', -- 도로
-	building1 INT(5)      NULL COMMENT '건물번호1', -- 건물번호1
-	building2 INT(5)      NULL COMMENT '건물번호2' -- 건물번호2
+   addrNo    CHAR(5)     NULL COMMENT '우편번호', -- 우편번호
+   sido      VARCHAR(20) NULL COMMENT '시도', -- 시도
+   sigungu   VARCHAR(20) NULL COMMENT '시군구', -- 시군구
+   doro      VARCHAR(20) NULL COMMENT '도로', -- 도로
+   building1 INT(5)      NULL COMMENT '건물번호1', -- 건물번호1
+   building2 INT(5)      NULL COMMENT '건물번호2' -- 건물번호2
 )
 COMMENT 'address';
 
 -- board
 CREATE TABLE movie.board (
-	board_no      INT(11)      NOT NULL COMMENT '게시판번호', -- 게시판번호
-	user_id       VARCHAR(50)  NOT NULL COMMENT '회원id', -- 회원id
-	movie_no      INT(11)      NOT NULL COMMENT '영화_no', -- 영화_no
-	board_title   VARCHAR(255) NOT NULL COMMENT '게시판제목', -- 게시판제목
-	board_content TEXT         NULL     COMMENT '게시판내용', -- 게시판내용
-	regdate       DATE         NOT NULL COMMENT '등록일', -- 등록일
-	grade         INT(11)      NULL     COMMENT '개인별점' -- 개인별점
+   board_no      INT(11)      NOT NULL COMMENT '게시판번호', -- 게시판번호
+   user_id       VARCHAR(50)  NOT NULL COMMENT '회원id', -- 회원id
+   movie_no      INT(11)      NOT NULL COMMENT '영화_no', -- 영화_no
+   board_title   VARCHAR(255) NOT NULL COMMENT '게시판제목', -- 게시판제목
+   board_content TEXT         NULL     COMMENT '게시판내용', -- 게시판내용
+   regdate       DATE         NOT NULL COMMENT '등록일', -- 등록일
+   grade         INT(11)      NULL     COMMENT '개인별점' -- 개인별점
 )
 COMMENT 'board';
 
 -- board
 ALTER TABLE movie.board
-	ADD CONSTRAINT
-		PRIMARY KEY (
-			board_no -- 게시판번호
-		);
+   ADD CONSTRAINT
+      PRIMARY KEY (
+         board_no -- 게시판번호
+      );
 
 ALTER TABLE movie.board
-	MODIFY COLUMN board_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '게시판번호';
+   MODIFY COLUMN board_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '게시판번호';
 
 -- movie
 CREATE TABLE movie.movie (
-	movie_no      INT(11)      NOT NULL COMMENT '영화_no', -- 영화_no
-	movie_name    VARCHAR(50)  NOT NULL COMMENT '영화이름', -- 영화이름
-	path_poster   VARCHAR(255) NULL     COMMENT '포스터', -- 포스터
-	play_time     INT(11)      NULL     COMMENT '상영시간', -- 상영시간
-	rating        INT(11)      NULL     COMMENT '등급', -- 등급
-	grade         DOUBLE       NULL     COMMENT '총평점', -- 총평점
-	open_date     DATE         NULL     COMMENT '개봉일', -- 개봉일
-	close_date    DATE         NULL     COMMENT '종료일', -- 종료일
-	genre         VARCHAR(255) NULL     COMMENT '장르', -- 장르
-	path_steelcut VARCHAR(255) NULL     COMMENT '스틸컷', -- 스틸컷
-	path_video    VARCHAR(255) NULL     COMMENT '동영상', -- 동영상
-	synopsis      TEXT         NULL     COMMENT '줄거리', -- 줄거리
-	actor         VARCHAR(255) NULL     COMMENT '배우', -- 배우
-	director      VARCHAR(255) NULL     COMMENT '감독' -- 감독
+   movie_no      INT(11)      NOT NULL COMMENT '영화_no', -- 영화_no
+   movie_name    VARCHAR(50)  NOT NULL COMMENT '영화이름', -- 영화이름
+   path_poster   VARCHAR(255) NULL     COMMENT '포스터', -- 포스터
+   play_time     INT(11)      NULL     COMMENT '상영시간', -- 상영시간
+   rating        INT(11)      NULL     COMMENT '등급', -- 등급
+   grade         DOUBLE       NULL     COMMENT '총평점', -- 총평점
+   open_date     DATE         NULL     COMMENT '개봉일', -- 개봉일
+   close_date    DATE         NULL     COMMENT '종료일', -- 종료일
+   genre         VARCHAR(255) NULL     COMMENT '장르', -- 장르
+   path_steelcut VARCHAR(255) NULL     COMMENT '스틸컷', -- 스틸컷
+   path_video    VARCHAR(255) NULL     COMMENT '동영상', -- 동영상
+   synopsis      TEXT         NULL     COMMENT '줄거리', -- 줄거리
+   actor         VARCHAR(255) NULL     COMMENT '배우', -- 배우
+   director      VARCHAR(255) NULL     COMMENT '감독' -- 감독
 )
 COMMENT 'movie';
 
 -- movie
 ALTER TABLE movie.movie
-	ADD CONSTRAINT
-		PRIMARY KEY (
-			movie_no -- 영화_no
-		);
+   ADD CONSTRAINT
+      PRIMARY KEY (
+         movie_no -- 영화_no
+      );
 
 ALTER TABLE movie.movie
-	MODIFY COLUMN movie_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '영화_no';
+   MODIFY COLUMN movie_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '영화_no';
 
 -- reservation
 CREATE TABLE movie.reservation (
-	no           INT(11)      NOT NULL COMMENT '예약번호', -- 예약번호
-	user_id      VARCHAR(50)  NOT NULL COMMENT '회원id', -- 회원id
-	timetable_no INT(11)      NOT NULL COMMENT '상영시간표_no', -- 상영시간표_no
-	price        INT(11)      NOT NULL COMMENT '가격', -- 가격
-	seat         VARCHAR(255) NOT NULL COMMENT '좌석등급' -- 좌석번호
+   no           INT(11)      NOT NULL COMMENT '예약번호', -- 예약번호
+   user_id      VARCHAR(50)  NOT NULL COMMENT '회원id', -- 회원id
+   timetable_no INT(11)      NOT NULL COMMENT '상영시간표_no', -- 상영시간표_no
+   price        INT(11)      NOT NULL COMMENT '가격', -- 가격
+   seat         VARCHAR(255) NOT NULL COMMENT '좌석등급' -- 좌석번호
 )
 COMMENT 'reservation';
 
 -- reservation
 ALTER TABLE movie.reservation
-	ADD CONSTRAINT
-		PRIMARY KEY (
-			no -- 예약번호
-		);
+   ADD CONSTRAINT
+      PRIMARY KEY (
+         no -- 예약번호
+      );
 
 ALTER TABLE movie.reservation
-	MODIFY COLUMN no INT(11) NOT NULL AUTO_INCREMENT COMMENT '예약번호';
+   MODIFY COLUMN no INT(11) NOT NULL AUTO_INCREMENT COMMENT '예약번호';
 
 -- theater
 CREATE TABLE movie.theater (
-	theater_no       INT(11)      NOT NULL COMMENT 'theater_no', -- theater_no
-	theater_name    VARCHAR(255) NOT NULL COMMENT '이름', -- 이름
-	theater_floor    INT(11)      NOT NULL COMMENT '층수', -- 층수
-	theater_maxcount INT(11)      NOT NULL COMMENT '인원', -- 인원
-	row              VARCHAR(2)   NOT NULL COMMENT '배치', -- 행
-	col              INT(11)      NULL     COMMENT '열', -- 열
-	theater_type     VARCHAR(255) NOT NULL COMMENT '상영관종류' -- 상영관종류
+   theater_no       INT(11)      NOT NULL COMMENT 'theater_no', -- theater_no
+   theater_name    VARCHAR(255) NOT NULL COMMENT '이름', -- 이름
+   theater_floor    INT(11)      NOT NULL COMMENT '층수', -- 층수
+   theater_maxcount INT(11)      NOT NULL COMMENT '인원', -- 인원
+   row              VARCHAR(2)   NOT NULL COMMENT '배치', -- 행
+   col              INT(11)      NULL     COMMENT '열', -- 열
+   theater_type     VARCHAR(255) NOT NULL COMMENT '상영관종류' -- 상영관종류
 )
 COMMENT 'theater';
 
 -- theater
 ALTER TABLE movie.theater
-	ADD CONSTRAINT
-		PRIMARY KEY (
-			theater_no -- theater_no
-		);
+   ADD CONSTRAINT
+      PRIMARY KEY (
+         theater_no -- theater_no
+      );
 
 ALTER TABLE movie.theater
-	MODIFY COLUMN theater_no INT(11) NOT NULL AUTO_INCREMENT COMMENT 'theater_no';
+   MODIFY COLUMN theater_no INT(11) NOT NULL AUTO_INCREMENT COMMENT 'theater_no';
 
 -- timetable
 CREATE TABLE movie.timetable (
-	table_no   INT(11) NOT NULL COMMENT '시간표no', -- 시간표no
-	movie_no   INT(11) NOT NULL COMMENT '영화_no', -- 영화_no
-	theater_no INT(11) NOT NULL COMMENT '상영관_no', -- 상영관_no
-	start_time DATE    NOT NULL COMMENT '방영시작시간', -- 방영시작시간
-	end_time   DATE    NOT NULL COMMENT '방영종료시간' -- 방영종료시간
+   table_no   INT(11) NOT NULL COMMENT '시간표no', -- 시간표no
+   movie_no   INT(11) NOT NULL COMMENT '영화_no', -- 영화_no
+   theater_no INT(11) NOT NULL COMMENT '상영관_no', -- 상영관_no
+   start_time DATETIME    NOT NULL COMMENT '방영시작시간', -- 방영시작시간
+   end_time   DATETIME    NOT NULL COMMENT '방영종료시간' -- 방영종료시간
 )
 COMMENT 'timetable';
 
 -- timetable
 ALTER TABLE movie.timetable
-	ADD CONSTRAINT
-		PRIMARY KEY (
-			table_no -- 시간표no
-		);
+   ADD CONSTRAINT
+      PRIMARY KEY (
+         table_no -- 시간표no
+      );
 
 ALTER TABLE movie.timetable
-	MODIFY COLUMN table_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '시간표no';
+   MODIFY COLUMN table_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '시간표no';
 
 -- user
 CREATE TABLE movie.user (
-	user_id   VARCHAR(50)  NOT NULL COMMENT '회원id', -- 회원id
-	password  VARCHAR(50)  NOT NULL COMMENT '비밀번호', -- 비밀번호
-	point     INT(11)      NULL     COMMENT '포인트', -- 포인트
-	email     VARCHAR(50)  NOT NULL COMMENT 'email', -- email
-	phone     INT(11)      NOT NULL COMMENT '전화번호', -- 전화번호
-	addr      VARCHAR(255) NOT NULL COMMENT '주소', -- 주소
-	gender    VARCHAR(50)  NOT NULL COMMENT '성별', -- 성별
-	user_rank VARCHAR(50)  NULL     COMMENT '회원등급' -- 회원등급
+   user_id   VARCHAR(50)  NOT NULL COMMENT '회원id', -- 회원id
+   password  VARCHAR(50)  NOT NULL COMMENT '비밀번호', -- 비밀번호
+   point     INT(11)      NULL     COMMENT '포인트', -- 포인트
+   email     VARCHAR(50)  NOT NULL COMMENT 'email', -- email
+   phone     INT(11)      NOT NULL COMMENT '전화번호', -- 전화번호
+   addr      VARCHAR(255) NOT NULL COMMENT '주소', -- 주소
+   name       VARCHAR(255) NOT NULL COMMENT '이름', -- 이름
+   gender    VARCHAR(50)  NOT NULL COMMENT '성별', -- 성별
+   user_rank VARCHAR(50)  NULL     COMMENT '회원등급' -- 회원등급
 )
 COMMENT 'user';
 
 -- user
 ALTER TABLE movie.user
-	ADD CONSTRAINT
-		PRIMARY KEY (
-			user_id -- 회원id
-		);
+   ADD CONSTRAINT
+      PRIMARY KEY (
+         user_id -- 회원id
+      );
 
 -- user_rank
 CREATE TABLE movie.user_rank (
-	name     VARCHAR(50) NOT NULL COMMENT 'name', -- name
-	discount INT(11)     NULL     COMMENT 'discount' -- discount
+   name     VARCHAR(50) NOT NULL COMMENT 'name', -- name
+   discount INT(11)     NULL     COMMENT 'discount' -- discount
 )
 COMMENT 'user_rank';
 
 -- user_rank
 ALTER TABLE movie.user_rank
-	ADD CONSTRAINT
-		PRIMARY KEY (
-			name -- name
-		);
+   ADD CONSTRAINT
+      PRIMARY KEY (
+         name -- name
+      );
 
 -- board
 ALTER TABLE movie.board
-	ADD CONSTRAINT FK_movie_TO_board -- FK_movie_TO_board
-		FOREIGN KEY (
-			movie_no -- 영화_no
-		)
-		REFERENCES movie.movie ( -- movie
-			movie_no -- 영화_no
-		),
-	ADD INDEX FK_movie_TO_board (
-		movie_no -- 영화_no
-	);
+   ADD CONSTRAINT FK_movie_TO_board -- FK_movie_TO_board
+      FOREIGN KEY (
+         movie_no -- 영화_no
+      )
+      REFERENCES movie.movie ( -- movie
+         movie_no -- 영화_no
+      ),
+   ADD INDEX FK_movie_TO_board (
+      movie_no -- 영화_no
+   );
 
 -- board
 ALTER TABLE movie.board
-	ADD CONSTRAINT FK_user_TO_board -- FK_user_TO_board
-		FOREIGN KEY (
-			user_id -- 회원id
-		)
-		REFERENCES movie.user ( -- user
-			user_id -- 회원id
-		),
-	ADD INDEX FK_user_TO_board (
-		user_id -- 회원id
-	);
+   ADD CONSTRAINT FK_user_TO_board -- FK_user_TO_board
+      FOREIGN KEY (
+         user_id -- 회원id
+      )
+      REFERENCES movie.user ( -- user
+         user_id -- 회원id
+      ),
+   ADD INDEX FK_user_TO_board (
+      user_id -- 회원id
+   );
 
 -- reservation
 ALTER TABLE movie.reservation
-	ADD CONSTRAINT FK_timetable_TO_reservation -- FK_timetable_TO_reservation
-		FOREIGN KEY (
-			timetable_no -- 상영시간표_no
-		)
-		REFERENCES movie.timetable ( -- timetable
-			table_no -- 시간표no
-		),
-	ADD INDEX FK_timetable_TO_reservation (
-		timetable_no -- 상영시간표_no
-	);
+   ADD CONSTRAINT FK_timetable_TO_reservation -- FK_timetable_TO_reservation
+      FOREIGN KEY (
+         timetable_no -- 상영시간표_no
+      )
+      REFERENCES movie.timetable ( -- timetable
+         table_no -- 시간표no
+      ),
+   ADD INDEX FK_timetable_TO_reservation (
+      timetable_no -- 상영시간표_no
+   );
 
 -- reservation
 ALTER TABLE movie.reservation
-	ADD CONSTRAINT FK_user_TO_reservation -- FK_user_TO_reservation
-		FOREIGN KEY (
-			user_id -- 회원id
-		)
-		REFERENCES movie.user ( -- user
-			user_id -- 회원id
-		),
-	ADD INDEX FK_user_TO_reservation (
-		user_id -- 회원id
-	);
+   ADD CONSTRAINT FK_user_TO_reservation -- FK_user_TO_reservation
+      FOREIGN KEY (
+         user_id -- 회원id
+      )
+      REFERENCES movie.user ( -- user
+         user_id -- 회원id
+      ),
+   ADD INDEX FK_user_TO_reservation (
+      user_id -- 회원id
+   );
 
 -- timetable
 ALTER TABLE movie.timetable
-	ADD CONSTRAINT FK_movie_TO_timetable -- FK_movie_TO_timetable
-		FOREIGN KEY (
-			movie_no -- 영화_no
-		)
-		REFERENCES movie.movie ( -- movie
-			movie_no -- 영화_no
-		),
-	ADD INDEX FK_movie_TO_timetable (
-		movie_no -- 영화_no
-	);
+   ADD CONSTRAINT FK_movie_TO_timetable -- FK_movie_TO_timetable
+      FOREIGN KEY (
+         movie_no -- 영화_no
+      )
+      REFERENCES movie.movie ( -- movie
+         movie_no -- 영화_no
+      ),
+   ADD INDEX FK_movie_TO_timetable (
+      movie_no -- 영화_no
+   );
 
 -- timetable
 ALTER TABLE movie.timetable
-	ADD CONSTRAINT FK_theater_TO_timetable -- FK_theater_TO_timetable
-		FOREIGN KEY (
-			theater_no -- 상영관_no
-		)
-		REFERENCES movie.theater ( -- theater
-			theater_no -- theater_no
-		),
-	ADD INDEX FK_theater_TO_timetable (
-		theater_no -- 상영관_no
-	);
+   ADD CONSTRAINT FK_theater_TO_timetable -- FK_theater_TO_timetable
+      FOREIGN KEY (
+         theater_no -- 상영관_no
+      )
+      REFERENCES movie.theater ( -- theater
+         theater_no -- theater_no
+      ),
+   ADD INDEX FK_theater_TO_timetable (
+      theater_no -- 상영관_no
+   );
 
 -- user
 ALTER TABLE movie.user
-	ADD CONSTRAINT FK_user_rank_TO_user -- FK_user_rank_TO_user
-		FOREIGN KEY (
-			user_rank -- 회원등급
-		)
-		REFERENCES movie.user_rank ( -- user_rank
-			name -- name
-		),
-	ADD INDEX FK_user_rank_TO_user (
-		user_rank -- 회원등급
-	);
-	use movie;
-
-delete from article_content where article_no=5;
-insert into theater (theater_name, theater_floor, theater_maxcount, row, col, theater_Type)
-   values ('1관',2,50,'G',15,'일반');
+   ADD CONSTRAINT FK_user_rank_TO_user -- FK_user_rank_TO_user
+      FOREIGN KEY (
+         user_rank -- 회원등급
+      )
+      REFERENCES movie.user_rank ( -- user_rank
+         name -- name
+      ),
+   ADD INDEX FK_user_rank_TO_user (
+      user_rank -- 회원등급
+   );
