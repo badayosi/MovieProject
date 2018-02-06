@@ -8,12 +8,32 @@
 		<result property="theaterName" column="theater_name"/>
 		<result property="theaterFloor" column="theater_floor"/>
 		<result property="theaterMaxcount" column="theater_maxcount"/>
-		<result property="seatA" column="seat_A"/>
-		<result property="seatB" column="seat_B"/>
-		<result property="seatC" column="seat_C"/>
+		<result property="row" column="row"/>
+		<result property="col" column="col"/>
 		<result property="theaterType" column="theater_Type"/>
 	</resultMap>
 	<select id="selectAll" resultMap="TheaterResult">
 		select * from Theater
 	</select>
+	
+	<select id="selectById" resultMap="TheaterResult" parameterType="int">
+		select * from Theater where theater_no = #{theaterNo}
+	</select>
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="theaterNo" parameterType="Theater">
+		insert into theater values
+		(null, #{theaterName},#{theaterFloor},#{theaterMaxcount},#{row},#{col},#{theaterType})
+	</insert>
+	
+	<update id="update" parameterType="Theater">
+		update theater set 
+		theater_name=#{theaterName},theater_floor=#{theaterFloor},
+		theater_maxcount=#{theaterMaxcount},row=#{row},col=#{col},theater_Type=#{theaterType}
+		 where theater_no=#{theaterNo}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from theater where theater_no = #{theaterNo}
+	</delete>
+	
 </mapper>
