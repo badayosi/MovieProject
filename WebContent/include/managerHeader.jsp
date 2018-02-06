@@ -12,23 +12,25 @@
 	}
 	#commonHeader #headerList{
 		list-style: none;
+		margin-bottom:50px;
 	}
 	#commonHeader #headerList li{
 		display:inline;
 		margin:15px;
 	}
-
+	#commonHeader #headerList li a{
+		font-size: 1.3em; 
+	}
 </style>
 </head>
 <body>
 	<div id="commonHeader">
 		<ul id="headerList">
-			<li><a href="managerMovieList.do">영화</a></li>
+			<li><a href="managerListMovie.do">영화</a></li>
 			<li><a href="#">상영관</a></li>
 			<li><a href="#">필요한사람쓰세요</a></li>
 		</ul>
-		<br><br>
-		<h1>필요한 메뉴 클릭해서 사용하세요.</h1>
+
 	</div>
 </body>
 </html>

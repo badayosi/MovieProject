@@ -10,7 +10,8 @@
 </head>
 <body> 
 <jsp:include page="../include/managerHeader.jsp"></jsp:include>
-
+		<br><br>
+		<h1>필요한 메뉴 클릭해서 사용하세요.</h1>
 <jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>

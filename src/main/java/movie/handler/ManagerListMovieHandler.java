@@ -9,16 +9,17 @@ import movie.dto.Movie;
 import movie.service.MovieService;
 import mvc.controller.CommandHandler;
 
-public class ManagerLIstMovieHandler implements CommandHandler {
+public class ManagerListMovieHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		System.out.println("listMovieHandler");
 		if(req.getMethod().equalsIgnoreCase("get")){
 			MovieService service=MovieService.getInstance();
 			List<Movie> list=service.selectAll();
 			req.setAttribute("movieList", list);
 			
-			return "managerListForm.jsp";
+			return "managerListMovieForm.jsp";
 		}
 		return null;
 	}
