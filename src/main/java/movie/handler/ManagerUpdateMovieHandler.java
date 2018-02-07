@@ -26,7 +26,7 @@ if(req.getMethod().equalsIgnoreCase("get")){
 			req.setAttribute("openDate", openDate);
 			req.setAttribute("closeDate", closeDate);
 
-			return "managerReadMovieForm.jsp";
+			return "managerUpdateMovieForm.jsp";
 		}else if(req.getMethod().equalsIgnoreCase("post")){
 			
 			return "managerUpdateMovie.do";

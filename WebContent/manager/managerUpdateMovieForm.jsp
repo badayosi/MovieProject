@@ -57,7 +57,7 @@
 			<tr>
 				<th>장르</th>
 				<td><input type="text" name="movieGenre" value="${movie.genre }"></td>
-			</tr>
+			</tr> 
 			<tr>
 				<th>관람등급</th>
 				<td><input type="text" name="movieRating" value="${movie.rating }"></td>
@@ -79,6 +79,10 @@
 				<td><input type="date" name="movieEndDate" value="${closeDate }"></td>
 			</tr>
 			<tr>
+				<th></th>
+				<td></td>
+			</tr>
+			<tr>
 				<th>포스터</th>
 				<td><input type="file" name="moviePoster"  value="${movie.pathPoster }"></td>
 			</tr>
@@ -93,7 +97,7 @@
 		</table>
 		<hr>
 		<input type="submit" value="수정">
-		<a href="managerListMovie.do"><input type="button" value="취소"></a>
+		<a href="managerReadMovie.do"><input type="button" value="취소"></a>
 	</form>	
 </div>
    
