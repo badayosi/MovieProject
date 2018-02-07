@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="movie.dao.ReservationDao">
 	<resultMap type="Reservation" id="ReservationResult">
-		<result property="no" column="n"/>
+		<result property="no" column="no"/>
 		<result property="userId" column="user_id"/>
 		<result property="timetableNo" column="timetalbe_no"/>
 		<result property="price" column="price"/>
