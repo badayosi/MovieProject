@@ -22,10 +22,11 @@
 	$("button").eq(0).click(function(){
 		var a = $("input[name='row']").val();
 		
-		a = a.toUpperCase()				//소문자->대문자
+		a = a.toUpperCase();				//소문자->대문자
 		
-		var i = a.charCodeAt(0)-16;		//영어->숫자
-		//var i = a.charCodeAt(0)-16;	//숫자->영어
+		//var i = a.charCodeAt(0)-16;		//영어->숫자
+		var i = a.charCodeAt(0)+16;	//숫자->영어
+		
 		
 		a = String.fromCharCode(i);		//아스키코드->문자
 		alert(i + " - " +a);
@@ -35,7 +36,7 @@
  </script>
 </head>
 <body>
-	<!-- <form action="insert.do" method="post" name="f1"> -->
+	<form action="insert.do" method="post" name="f1">
 		<p>
 			<label>상영관이름</label>
 			<input type="text" name="name">
@@ -65,6 +66,6 @@
 		<p>
 			<input type="submit" value="추가">
 		</p>
-	<!-- </form> -->
+	</form>
 </body>
 </html>

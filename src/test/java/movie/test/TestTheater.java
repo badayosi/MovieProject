@@ -84,8 +84,9 @@ public class TestTheater {
 	@Test
 	public void test(){
 		TheaterService service = TheaterService.getInstance();
-		Theater theater = new Theater(10, "4aaaa", 10, 50, "G", 9, "일반");
-		int a = service.updateTheater(theater);
+		Theater theater = new Theater(3, "4관", 100, 100, "G", 10, "일반");
+		theater.setTheaterTable("test111");
+		int a = service.updateTheaterTable(theater);
 		//System.out.println(a);
 	}
 	
@@ -115,11 +116,9 @@ public class TestTheater {
 			TheaterDao dao=session.getMapper(TheaterDao.class);
 			
 			Theater t = new Theater(3, "1관", 9, 50, "G", 10, "일반");
-
-			dao.update(t);
+			t.setTheaterTable("table");
+			dao.update_table(t);
 			session.commit();
-			
-
 			
 		} catch (Exception e) {
 			e.printStackTrace();

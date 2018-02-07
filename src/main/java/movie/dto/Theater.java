@@ -8,6 +8,8 @@ public class Theater {
 	String row;
 	int col;
 	String theaterType;
+	String theaterTable;
+	
 
 	public Theater() {
 		super();
@@ -18,6 +20,15 @@ public class Theater {
 		return theaterNo;
 	}
 
+	public String getTheaterTable() {
+		return theaterTable;
+	}
+
+	public void setTheaterTable(String theaterTable) {
+		this.theaterTable = theaterTable;
+	}
+	
+	
 	public void setTheaterNo(int theaterNo) {
 		this.theaterNo = theaterNo;
 	}

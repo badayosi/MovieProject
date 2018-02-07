@@ -7,7 +7,7 @@ import movie.dto.Theater;
 import movie.service.TheaterService;
 import mvc.controller.CommandHandler;
 
-public class TheaterModifyHandler implements CommandHandler {
+public class TheaterSeatHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -19,23 +19,21 @@ public class TheaterModifyHandler implements CommandHandler {
 			//System.out.println(theater);
 			req.setAttribute("item", theater);
 			
-			return "managerModify.jsp";
+			return "managerSeat.jsp";
 		}else if(req.getMethod().equalsIgnoreCase("post")){
 			req.setCharacterEncoding("utf-8");
 			String no1 = req.getParameter("number");
 			int no =Integer.parseInt(no1);
-			
-			Theater theater = new Theater(no,req.getParameter("name"), 
-							Integer.parseInt(req.getParameter("floor")),
-							Integer.parseInt(req.getParameter("maxcount")), 
-							req.getParameter("row"), 
-							Integer.parseInt(req.getParameter("col")), 
-							req.getParameter("type"));
-			
-			//System.out.println(theater.toString());
-			//System.out.println(no);
+			Theater theater = new Theater();
+			theater.setTheaterNo(no);
+			theater.setTheaterMaxcount(Integer.parseInt(req.getParameter("maxcount")));
+			theater.setCol(Integer.parseInt(req.getParameter("col")));
+			theater.setRow(req.getParameter("row"));
+			theater.setTheaterTable(req.getParameter("table"));
+		
+			//System.out.println(theater.getTheaterTable());
 			TheaterService service = TheaterService.getInstance();
-			int result = service.updateTheater(theater);
+			int result = service.updateTheaterTable(theater);
 			
 			if(result<0){
 				req.setAttribute("result", "에러");
