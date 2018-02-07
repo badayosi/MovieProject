@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="movie.dao.ReservationMemberDao">
+<mapper namespace="movie.dao.ReservationGuideDao">
 	<resultMap type="ReservationGuide" id="GuideResult">
 		<result property="reservationNo" column="no"/>
 		<result property="userId" column="user_Id"/>
@@ -21,4 +21,7 @@
 	<select id="selectByAll" resultMap="GuideResult">
 		select * from reservation_guide
 	</select>
+	<delete id="deleteByNo" parameterType="integer">
+		delete from reservation where no = #{no}
+	</delete>
 </mapper>

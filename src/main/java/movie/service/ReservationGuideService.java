@@ -49,4 +49,21 @@ public class ReservationGuideService {
 		}
 	}
 
+	public void deleteByNo(String[] check) {
+		SqlSession session = null;
+		
+		try{
+			session = MySqlSessionFactory.openSession();
+			ReservationGuideDao dao = session.getMapper(ReservationGuideDao.class);
+			for(int i=0 ; i<check.length ; i++){
+				System.out.println(Integer.valueOf(check[i]));
+				dao.deleteByNo(Integer.valueOf(check[i]));
+				
+				session.commit();
+			}
+		} finally {
+			MySqlSessionFactory.closeSession(session);
+		}
+	}
+
 }

@@ -30,4 +30,20 @@ public class TestReservation {
 			MySqlSessionFactory.closeSession(session);
 		}
 	}
+	
+	@Test
+	public void testDeleteById(){
+		SqlSession session=null;
+		try {
+			session=MySqlSessionFactory.openSession();
+			ReservationGuideDao dao = session.getMapper(ReservationGuideDao.class);
+			
+			dao.deleteByNo(6);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			MySqlSessionFactory.closeSession(session);
+		}
+	}
 }
