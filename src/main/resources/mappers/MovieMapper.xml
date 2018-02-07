@@ -20,7 +20,7 @@
 	</resultMap>
 	
 	<select id="selectAll" resultMap="movieResult">
-		select * from movie
+		select * from movie  
 	</select>
 	
 	<insert id="insert" parameterType="Movie">
