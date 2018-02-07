@@ -42,7 +42,7 @@
 			</tr>
 			<c:forEach var="item" items="${movieList }">
 				<tr>
-					<td><a href="readMovie.do">${item.movieName}</a></td>
+					<td><a href="managerReadMovie.do?no=${item.movieNo }">${item.movieName}</a></td>
 					<td>${item.openDate}</td>
 					<td>${item.closeDate}</td>
 				</tr>

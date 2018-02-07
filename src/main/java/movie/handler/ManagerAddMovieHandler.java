@@ -17,6 +17,7 @@ public class ManagerAddMovieHandler implements CommandHandler {
 		if(req.getMethod().equalsIgnoreCase("get")){
 			return "managerAddMovieForm.jsp";
 		}else if(req.getMethod().equalsIgnoreCase("post")){
+			System.out.println("addMovie 진행중");
 			String name=req.getParameter("movieName");
 			String director=req.getParameter("movieDirector");
 			String actor=req.getParameter("movieActor");
@@ -40,8 +41,8 @@ public class ManagerAddMovieHandler implements CommandHandler {
 			MovieService service=MovieService.getInstance();
 			service.insert(movie);
 			
-			
-			return "managerListMovie.do";
+			res.sendRedirect("managerListMovie.do");
+			return null;
 		}
 		return null;
 	}

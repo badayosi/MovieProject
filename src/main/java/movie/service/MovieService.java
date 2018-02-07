@@ -32,6 +32,23 @@ public class MovieService {
 		return null;
 	}
 	
+	public Movie selectById(int no){
+		SqlSession session=null;
+		try {
+			session=MySqlSessionFactory.openSession();
+			MovieDao dao=session.getMapper(MovieDao.class);
+			
+			Movie movie=dao.selectById(no);
+			
+			return movie; 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			MySqlSessionFactory.closeSession(session);
+		}
+		return null;
+	}
+	
 	public int insert(Movie movie){
 			SqlSession session=null;
 			try {
@@ -39,7 +56,7 @@ public class MovieService {
 				MovieDao dao=session.getMapper(MovieDao.class);
 				
 				int result=dao.insert(movie);
-				
+				session.commit();
 				return 1;
 			} catch (Exception e) {
 				e.printStackTrace();

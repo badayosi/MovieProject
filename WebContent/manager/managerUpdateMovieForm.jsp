@@ -36,63 +36,63 @@
 	}
 </style>
 </head>
-<body> 
-<jsp:include page="../include/managerHeader.jsp"></jsp:include>
+<body>
+   <jsp:include page="../include/managerHeader.jsp"></jsp:include>
 
 <div id="addDiv">
 	<form id="addForm" method="post" action="managerAddMovie.do">
 		<table id="infoTable">
 			<tr>
 				<th>영화제목</th>
-				<td><input type="text" name="movieName"></td>
+				<td><input type="text" name="movieName" value="${movie.movieName}"></td>
 			</tr>
 			<tr>
 				<th>감독</th>
-				<td><input type="text" name="movieDirector"></td>
+				<td><input type="text" name="movieDirector" value="${movie.director }"></td>
 			</tr>
 			<tr>
 				<th>배우</th>
-				<td><input type="text" name="movieActor"></td>
+				<td><input type="text" name="movieActor" value="${movie.actor }"></td>
 			</tr>
 			<tr>
 				<th>장르</th>
-				<td><input type="text" name="movieGenre"></td>
+				<td><input type="text" name="movieGenre" value="${movie.genre }"></td>
 			</tr>
 			<tr>
 				<th>관람등급</th>
-				<td><input type="text" name="movieRating"></td>
+				<td><input type="text" name="movieRating" value="${movie.rating }"></td>
 			</tr>
 			<tr>
 				<th>상영시간</th>
-				<td><input type="text" name="moviePlaytime"></td>
+				<td><input type="text" name="moviePlaytime" value="${movie.playTime }"></td>
 			</tr>
 			<tr>
 				<th>줄거리</th>
-				<td><textarea rows="15" cols="55" name="movieSynopsis"></textarea></td>
+				<td><textarea rows="15" cols="55" name="movieSynopsis">${movie.synopsis }</textarea></td>
 			</tr>
 			<tr>
 				<th>개봉일</th>
-				<td><input type="date" name="movieOpenDate"></td>
+				<td><input type="date" name="movieOpenDate" value="${openDate}"></td>
 			</tr>
 			<tr>
 				<th>종료일</th>
-				<td><input type="date" name="movieEndDate"></td>
+				<td><input type="date" name="movieEndDate" value="${closeDate }"></td>
 			</tr>
 			<tr>
 				<th>포스터</th>
-				<td><input type="file" name="moviePoster"></td>
+				<td><input type="file" name="moviePoster"  value="${movie.pathPoster }"></td>
 			</tr>
 			<tr>
 				<th>스틸컷</th>
-				<td><input type="file" multiple="multiple" name="movieSteelCut"></td>
+				<td><input type="file" multiple="multiple" name="movieSteelCut"  value="${movie.pathSteelcut }"></td>
 			</tr>
 			<tr>
 				<th>동영상</th>
-				<td><input type="file" name="movieVideo"></td>
+				<td><input type="file" name="movieVideo"  value="${movie.pathVideo }"></td>
 			</tr>
 		</table>
 		<hr>
-		<input type="submit" value="등록">
+		<input type="submit" value="수정">
 		<a href="managerListMovie.do"><input type="button" value="취소"></a>
 	</form>	
 </div>
