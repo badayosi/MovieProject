@@ -8,6 +8,7 @@
   		<param-name>configFile</param-name>
   		<param-value>/WEB-INF/CommandHandler.properties</param-value>
   	</init-param>
+  	<load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
   	<servlet-name>ControllerUsingURI</servlet-name>
