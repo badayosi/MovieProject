@@ -18,5 +18,7 @@
 	<div id="container">
 		<a href="findReservation.do?id=user2">회원의 예약현황 가져오기</a>
 	</div>
+	
+	
 </body>
 </html>
