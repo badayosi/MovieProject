@@ -135,7 +135,7 @@ CREATE TABLE movie.user (
    password  VARCHAR(50)  NOT NULL COMMENT '비밀번호', -- 비밀번호
    point     INT(11)      NULL     COMMENT '포인트', -- 포인트
    email     VARCHAR(50)  NOT NULL COMMENT 'email', -- email
-   phone     INT(11)      NOT NULL COMMENT '전화번호', -- 전화번호
+   phone     VARCHAR(50)      NOT NULL COMMENT '전화번호', -- 전화번호
    addr      VARCHAR(255) NOT NULL COMMENT '주소', -- 주소
    name       VARCHAR(255) NOT NULL COMMENT '이름', -- 이름
    gender    VARCHAR(50)  NOT NULL COMMENT '성별', -- 성별
