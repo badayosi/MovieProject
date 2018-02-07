@@ -12,35 +12,45 @@
   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
   crossorigin="anonymous"></script>
   <style type="text/css">
-  	table {
-		border-spacing:8px;
+  	#tableContent{
+  		border: 1px solid black;
+  		background: #f9f8f3;
+  		color: #848484;
+  		margin: 0 auto;
+  	}
+  	#tableContent table {
+		border-spacing:3px;
+		text-align: center;
 	}
 	span{
 		display: block;
+		width: 20px;
+  		height: 20px;
+  		background: #848484;
+  		color: white;
 	}
 	.seat{
   		border: 2px solid black;
-  		width: 30px;
-  		height: 30px;
+  		
   		text-align: center;
   		padding: 10px;
   	}
   	.noSeat{
   		border: 2px solid red;
-  		width: 30px;
-  		height: 30px;
   		text-align: center;
   		padding: 10px;
   	}
   	.tem{
-  		background: blue;
+  		background: #000000;
   		color: white;
   		font-weight: bold;
   	}
   	.way{
   		margin-right:30px; 
   	}
-  	
+  	#input1{
+  		display: none;
+  	}
   </style>
 <%	
 	
@@ -55,6 +65,7 @@
 <script type="text/javascript">
 	$(function(){
 		//setTable();
+		
 		$("input[name='count']").val($(".seat").length);
 		$("#set").click(function(){
 			setTable();
@@ -70,7 +81,7 @@
 			$(".tem").addClass("seat");
 			$(".tem").removeClass("noSeat");
 			$(".tem").removeClass("tem");
-			$("#input1").val($("#content").html());
+			$("#input1").val($("#tableContent").html());
 			$("input[name='maxcount']").val($(".seat").length);
 		})
 		
@@ -78,26 +89,26 @@
 			$(".tem").addClass("noSeat");
 			$(".tem").removeClass("seat");
 			$(".tem").removeClass("tem");
-			$("#input1").val($("#content").html());
+			$("#input1").val($("#tableContent").html());
 			$("input[name='maxcount']").val($(".seat").length);
 		})
 		$("#way").click(function(){
 			$(".tem").addClass("way");			
 			$(".tem").removeClass("tem");
-			$("#input1").val($("#content").html());
+			$("#input1").val($("#tableContent").html());
 			$("input[name='maxcount']").val($(".seat").length);
 		})
 		$("#wayNo").click(function(){	
 			$(".way").removeClass("way");
-			$("#input1").val($("#content").html());
+			$("#input1").val($("#tableContent").html());
 		})
 		
 	})
 	
 	function setTable(){
 		
-		$("#content").empty();
-		var t = "<table class='table'>";
+		$("#tableContent").empty();
+		var t = "<table class='seatTable'>";
 		
 		var col = <%=col%>;
 		var num = <%=num%>;
@@ -115,10 +126,10 @@
 			for( k =1; k<=col; k++){
 				var code = String.fromCharCode(i);
 				if(num1<=num){
-					t += "<td><span class='seat'>"+code+k+"<br>"+num1+"</span></td>";
+					t += "<td><span class='seat'>"+code+k+"</span></td>";
 					num1++;
 				}else{
-					t += "<td><span class='noSeat'>"+code+k+"<br>"+num1+"</span></td>";
+					t += "<td><span class='noSeat'>"+code+k+"</span></td>";
 					num1++;
 				}
 			}
@@ -128,12 +139,12 @@
 		}
 		t += "</table>";
 		
-		$("#content").html(t);
-		//alert($("#content").html());
+		$("#tableContent").html(t);
+		//alert($("#tableContent").html());
 		$("input[name='count']").val($(".seat").length);
 		$("input[name='maxcount']").val($(".seat").length);
 		
-		$("#input1").val($("#content").html());
+		$("#input1").val($("#tableContent").html());
 	}
 </script>
 </head>
@@ -144,17 +155,20 @@
 	<br>
 	<hr>
 	<br>
-	
-	<c:if test="${item.theaterTable==null }">
-			<script type="text/javascript">
-				setTable();
-			</script>
-	</c:if> 
-	<c:if test="${item.theaterTable!=null }">
-	<div id="content">
-		${item.theaterTable }
+	<div id="tableContent">
+		<c:if test="${item.theaterTable!=null }">
+			${item.theaterTable }
+		</c:if>
 	</div>
-	</c:if>
+
+
+
+	<c:if test="${item.theaterTable==null }">
+		<script type="text/javascript">
+				setTable();
+		</script>
+	</c:if>  
+
 		
 	<button id="test">세팅</button>
 	<button id="set">재설정</button>

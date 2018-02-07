@@ -17,6 +17,9 @@
 </style>
 </head>
 <body>
+	<c:if test="${list==null }">
+			<%response.sendRedirect("list.do"); %>
+	</c:if>
 	<a href="list.do">리스트</a><br>
 	<a href="insert.do">추가</a>
 	<br>
