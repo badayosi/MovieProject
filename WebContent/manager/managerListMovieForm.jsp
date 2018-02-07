@@ -6,10 +6,34 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	#listBody{
+		width:60%;
+		margin:0 auto;
+		text-align: center;
+	}
+	#listBody #btnAdd{
+		float:right;
+	}
+	#listBody table{
+		clear:both;
+		border-collapse: collapse;
+		width:100%;
+		margin:0 auto;
+	}
+	#listBody table tr th,td{
+		border:1px solid black;
+	}
+	#listBody table tr th{ 
+		width:200px;
+	}
+</style>
 </head>
 <body>
 <jsp:include page="../include/managerHeader.jsp"></jsp:include>
 	<div id="listBody">
+		<a id="btnAdd" href="managerAddMovie.do">영화추가</a>
+		<br><br>
 		<table>
 			<tr>
 				<th>제목</th>

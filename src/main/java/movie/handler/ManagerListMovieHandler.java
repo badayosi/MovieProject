@@ -19,7 +19,7 @@ public class ManagerListMovieHandler implements CommandHandler {
 			List<Movie> list=service.selectAll();
 			req.setAttribute("movieList", list);
 			
-			return "managerListMovieForm.jsp";
+			return "/manager/managerListMovieForm.jsp";
 		}
 		return null;
 	}

@@ -68,7 +68,7 @@
 			</tr>
 			<tr>
 				<th>줄거리</th>
-				<td><textarea rows="15" cols="55"></textarea></td>
+				<td><textarea rows="15" cols="55" name="movieSynopsis"></textarea></td>
 			</tr>
 			<tr>
 				<th>개봉일</th>
@@ -80,7 +80,7 @@
 			</tr>
 			<tr>
 				<th>포스터</th>
-				<td><input type="file" name="moviePostre"></td>
+				<td><input type="file" name="moviePoster"></td>
 			</tr>
 			<tr>
 				<th>스틸컷</th>
@@ -93,7 +93,7 @@
 		</table>
 		<hr>
 		<input type="submit" value="등록">
-		<a href="#"><input type="button" value="취소"></a>
+		<a href="managerListMovie.do"><input type="button" value="취소"></a>
 	</form>	
 </div>
    
