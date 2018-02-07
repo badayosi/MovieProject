@@ -19,6 +19,6 @@
 		<result property="director" column="director"/>
 	</resultMap>
 	<select id="selectAll" resultMap="movieResult">
-		select * from movie 
+		select * from movie  
 	</select>
 </mapper>
