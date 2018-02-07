@@ -1,0 +1,23 @@
+use movie;
+
+/* RESERVATION VIEW */
+create view reservation_guide as
+select reservation.`no`, user.user_id, movie.movie_name, theater.theater_floor, theater.theater_name, theater.theater_type, timetable.start_time, timetable.end_time, reservation.seat, reservation.price  
+from reservation, timetable, theater, movie, user
+where reservation.user_id = user.user_id
+	and reservation.timetable_no = timetable.table_no
+	and timetable.movie_no = movie.movie_no
+	and timetable.theater_no = theater.theater_no;
+
+/* ADDRESS */	
+load data local infile 'D:/workspace_bigdata/post_search/DataFiles/대구광역시.txt'
+into table address
+character set 'euckr'
+fields terminated by '|'
+ignore 1 lines
+(@zipcode, @sido, @d, @sigungu , @d, @d, @d, @d, @doro, @d, @d, @building1, @building2, @d, @d, @d, @d, @d, @d, @d, @d, @d, @d, @d, @d, @d)
+set addrNo = @zipcode, sido = @sido, sigungu = @sigungu, doro = @doro, building1 = @building1, building2= @building2;
+
+create INDEX idx_post_sido On address(sido);
+create INDEX idx_post_doro ON address(doro);
+create index idx_post_sigungu on address(sigungu);

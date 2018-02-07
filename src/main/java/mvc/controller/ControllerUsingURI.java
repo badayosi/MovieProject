@@ -35,13 +35,13 @@ public class ControllerUsingURI extends HttpServlet {
 			String command = (String)keyIter.next();
 			// VALUE
 			String handlerClassName = prop.getProperty(command);
-		System.out.println(handlerClassName);
 			try{
 				// 문자열에 해당하는 부분을 CLASS화
 				Class<?> handlerClass = Class.forName(handlerClassName);
 				// NEW 후 Instance화 과정을 진행
 				
 				CommandHandler handlerInstance = (CommandHandler)handlerClass.newInstance();
+				System.out.println("key = " + command);
 				commandHandlerMap.put(command, handlerInstance);
 			}catch(Exception e){
 				throw new ServletException();
@@ -66,8 +66,9 @@ public class ControllerUsingURI extends HttpServlet {
 		if(command.indexOf(contextPath) == 0){
 			command = command.substring(contextPath.length());
 		}
-		
+		//System.out.println("command =" + command);
 		CommandHandler handler = commandHandlerMap.get(command);
+		//System.out.println(handler);		
 		// COMMAND를 제대로 가져오지 못하였을때 예외처리
 		if(handler == null){
 			handler = new NullHandler();
@@ -81,7 +82,6 @@ public class ControllerUsingURI extends HttpServlet {
 			e.printStackTrace();
 			throw new ServletException();
 		}
-		
 		if(viewPage != null){
 			RequestDispatcher dis = request.getRequestDispatcher(viewPage);
 			dis.forward(request, response);
