@@ -104,7 +104,25 @@ public class TheaterService {
 			session.commit();
 			
 			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return -1;
+	}
+	
+	public int updateTheaterTable(Theater theater){
+		SqlSession session = null;
+		
+		try {
+			session = MySqlSessionFactory.openSession();
+			TheaterDao dao=session.getMapper(TheaterDao.class);
 			
+			dao.update_table(theater);
+			session.commit();
+			
+			return 1;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{

@@ -8,10 +8,12 @@
 		<result property="theaterName" column="theater_name"/>
 		<result property="theaterFloor" column="theater_floor"/>
 		<result property="theaterMaxcount" column="theater_maxcount"/>
-		<result property="row" column="row"/>
-		<result property="col" column="col"/>
+		<result property="row" column="theater_row"/>
+		<result property="col" column="theater_col"/>
 		<result property="theaterType" column="theater_Type"/>
+		<result property="theaterTable" column="theater_table"/>
 	</resultMap>
+
 	<select id="selectAll" resultMap="TheaterResult">
 		select * from Theater
 	</select>
@@ -22,14 +24,20 @@
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="theaterNo" parameterType="Theater">
 		insert into theater values
-		(null, #{theaterName},#{theaterFloor},#{theaterMaxcount},#{row},#{col},#{theaterType})
+		(null, #{theaterName},#{theaterFloor},#{theaterMaxcount},#{row},#{col},#{theaterType},null)
 	</insert>
 	
 	<update id="update" parameterType="Theater">
 		update theater set 
 		theater_name=#{theaterName},theater_floor=#{theaterFloor},
-		theater_maxcount=#{theaterMaxcount},row=#{row},col=#{col},theater_Type=#{theaterType}
+		theater_maxcount=#{theaterMaxcount},theater_row=#{row},theater_col=#{col},theater_Type=#{theaterType}
 		 where theater_no=#{theaterNo}
+	</update>
+	
+	<update id="update_table" parameterType="Theater">
+		update theater set 
+		theater_maxcount=#{theaterMaxcount},theater_row=#{row},theater_col=#{col},theater_table=#{theaterTable}
+		where theater_no=#{theaterNo}
 	</update>
 	
 	<delete id="delete" parameterType="int">

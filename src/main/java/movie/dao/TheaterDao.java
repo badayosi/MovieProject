@@ -10,5 +10,7 @@ public interface TheaterDao {
 	
 	public void delete(int i);
 	public void update(Theater theater);
+	public void update_table(Theater theater);
+	
 	public int insert(Theater theater);
 }
