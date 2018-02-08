@@ -5,13 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="theme.css">
 <style>
-* {
-	margin: 0;
-	padding: 0;
-	font-family: "나눔 고딕", 'Nanum Gothic', 'ng';
-}
-
 #loginContainer {
 	min-height: 600px;
 	width: 100%;
