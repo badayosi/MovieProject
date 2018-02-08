@@ -52,7 +52,7 @@ public class ManagerAddMovieHandler implements CommandHandler {
 				ArrayList<String> arrSteelCut = new ArrayList<String>();
 				ArrayList<String> arrOriginSteelCut = new ArrayList<String>();
 
-				Enumeration<String> e = multi.getFileNames();
+				Enumeration<String> e = multi.getFileNames(); 
 				System.out.println("이너머레이션"+multi.getFileNames().toString());
 				
 				for (int i = 0; i < 5; i++) {
