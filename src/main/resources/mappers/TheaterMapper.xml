@@ -30,13 +30,13 @@
 	<update id="update" parameterType="Theater">
 		update theater set 
 		theater_name=#{theaterName},theater_floor=#{theaterFloor},
-		theater_maxcount=#{theaterMaxcount},row=#{row},theater_col=#{col},theater_Type=#{theaterType}
+		theater_maxcount=#{theaterMaxcount},theater_row=#{row},theater_col=#{col},theater_Type=#{theaterType}
 		 where theater_no=#{theaterNo}
 	</update>
 	
 	<update id="update_table" parameterType="Theater">
 		update theater set 
-		theater_maxcount=#{theaterMaxcount},row=#{row},theater_col=#{col},theater_table=#{theaterTable}
+		theater_maxcount=#{theaterMaxcount},theater_row=#{row},theater_col=#{col},theater_table=#{theaterTable}
 		where theater_no=#{theaterNo}
 	</update>
 	
