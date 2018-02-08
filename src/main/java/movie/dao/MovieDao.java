@@ -6,4 +6,8 @@ import movie.dto.Movie;
 
 public interface MovieDao {
 	public List<Movie> selectAll();
+	
+	public int insert(Movie movie);
+	
+	public Movie selectById(int no);
 }

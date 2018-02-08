@@ -94,8 +94,8 @@ CREATE TABLE movie.theater (
    theater_maxcount INT(11)      NOT NULL COMMENT '인원', -- 인원
    row              VARCHAR(2)   NOT NULL COMMENT '배치', -- 행
    col              INT(11)      NULL     COMMENT '열', -- 열
-   theater_type     VARCHAR(255) NOT NULL COMMENT '상영관종류' -- 상영관종류
-   theater_table	TEXT         NULL     COMMENT '좌석배치도' -- 좌석배치도
+   theater_type     VARCHAR(255) NOT NULL COMMENT '상영관종류', -- 상영관종류
+   theater_table    TEXT         NULL     COMMENT '좌석배치도' -- 좌석배치도
 )
 COMMENT 'theater';
 
