@@ -11,7 +11,9 @@
 		<result property="building1" column="building1"/>
 		<result property="building2" column="building2"/>
 	</resultMap>
-	<select id="selectAll" resultMap="AddressResult">
-		select * from Address
+	
+	<select id="selectBydoro" resultMap="AddressResult">
+		select * from Address where doro like #{doro}
 	</select>
+	
 </mapper>

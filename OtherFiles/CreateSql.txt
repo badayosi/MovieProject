@@ -89,13 +89,13 @@ ALTER TABLE movie.reservation
 -- theater
 CREATE TABLE movie.theater (
    theater_no       INT(11)      NOT NULL COMMENT 'theater_no', -- theater_no
-   theater_name    VARCHAR(255) NOT NULL COMMENT '이름', -- 이름
+   theater_name     VARCHAR(255) NOT NULL COMMENT '이름', -- 이름
    theater_floor    INT(11)      NOT NULL COMMENT '층수', -- 층수
    theater_maxcount INT(11)      NOT NULL COMMENT '인원', -- 인원
-   row              VARCHAR(2)   NOT NULL COMMENT '배치', -- 행
-   col              INT(11)      NULL     COMMENT '열', -- 열
-   theater_type     VARCHAR(255) NOT NULL COMMENT '상영관종류' -- 상영관종류
-   theater_table	TEXT         NULL     COMMENT '좌석배치도' -- 좌석배치도
+   theater_row      VARCHAR(2)   NOT NULL COMMENT '배치', -- 행
+   theater_col      INT(11)      NULL     COMMENT '열', -- 열
+   theater_type     VARCHAR(255) NOT NULL COMMENT '상영관종류', -- 상영관종류
+   theater_table    TEXT         NULL     COMMENT '좌석배치도' -- 좌석배치도
 )
 COMMENT 'theater';
 

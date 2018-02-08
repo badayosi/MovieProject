@@ -10,7 +10,7 @@ where reservation.user_id = user.user_id
 	and timetable.theater_no = theater.theater_no;
 
 /* ADDRESS */	
-load data local infile 'D:/workspace_bigdata/post_search/DataFiles/대구광역시.txt'
+load data local infile 'D:/workspace_bigdata/post_search/DataFiles/DAEGU.txt'
 into table address
 character set 'euckr'
 fields terminated by '|'

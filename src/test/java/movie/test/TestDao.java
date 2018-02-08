@@ -25,7 +25,7 @@ import mvc.util.MySqlSessionFactory;
 
 public class TestDao {
 
-	//@Test
+	/*//@Test
 	public void testSelectAll1(){
 		SqlSession session=null;
 		try {
@@ -43,7 +43,7 @@ public class TestDao {
 		}finally {
 			MySqlSessionFactory.closeSession(session);
 		}
-	}
+	}*/
 	
 	//@Test
 	public void testSelectAll2(){

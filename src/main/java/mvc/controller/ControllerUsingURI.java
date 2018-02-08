@@ -21,7 +21,6 @@ public class ControllerUsingURI extends HttpServlet {
 		
 		Properties prop = new Properties();
 		String configFilePath = getServletContext().getRealPath(configFile);
-		
 		try(FileReader fis = new FileReader(configFilePath)){
 			prop.load(fis);
 		}catch(Exception e){
@@ -35,16 +34,18 @@ public class ControllerUsingURI extends HttpServlet {
 		while(keyIter.hasNext()){
 			// KEY
 			String command = (String)keyIter.next();
-			System.out.println("key = " + command);
+
 			// VALUE
 			String handlerClassName = prop.getProperty(command);
-			System.out.println("handlerClassName = " + handlerClassName);
+
 			try{
 				// 문자열에 해당하는 부분을 CLASS화
 				Class<?> handlerClass = Class.forName(handlerClassName);
 				// NEW 후 Instance화 과정을 진행
-				
-				CommandHandler handlerInstance = (CommandHandler)handlerClass.newInstance();				
+
+				System.out.println(handlerClass);
+				CommandHandler handlerInstance = (CommandHandler)handlerClass.newInstance();
+
 				commandHandlerMap.put(command, handlerInstance);
 			}catch(Exception e){
 				throw new ServletException();
