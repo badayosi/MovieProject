@@ -7,8 +7,8 @@ public class NullHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		// TODO Auto-generated method stub
 		res.sendError(HttpServletResponse.SC_NOT_FOUND);
+		System.out.println("Null Handler");
 		return null;
 	}
 

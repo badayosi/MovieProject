@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,6 +108,7 @@ input:FOCUS {
 	background: #333333;
 	color: #fff;
 	border-radius: 5px;
+	margin-right:8px !important;
 	font-size: 13px !important;
 }
 
@@ -267,7 +266,7 @@ input:FOCUS {
 		$("#addrSearchBtn").click(function(){
 			$("#hiddenbg").css("display","block");
 			$("#searchWarp").css("display","block");
-			
+			$("#resultAddrWrap div").not("#zxc").remove();
 		})
 		 $("#searchWarp #search_cencel").click(function(){
 			$("#hiddenbg").css("display","none");
@@ -402,76 +401,78 @@ input:FOCUS {
 	<div id="hiddenbg"></div>
 	<div id="joinForm">
 		<h2>회원정보입력</h2>
-		<form action="join.do" method="post" id="jF">
-			<p>
-				<label>아이디</label> <input type="text" name="id" id="userId" placeholder="6자이상 영문/숫자를 입력하세요"> <input
-					type="button" value="중복체크" id="checkId">
-				<span id="id_check"></span>
-			</p>
-			<p>
-				<label>비밀번호</label> <input type="password" name="pw" placeholder="8자이상 영문/숫자를 입력하세요">
-				<span id="pw_check"></span>
-			</p>
-			<p>
-				<label>비밀번호 확인</label> <input type="password" name="pwch">
-				<span id="pwch_check"></span>
-			</p>
-			<p>
-				<label>이름</label> <input type="text" name="name">
-				<span id="name_check"></span>
-			</p>
-			<p>
-				<label>이메일주소</label> <input type="email" name="email">
-				<span id="email_check"></span>
-			</p>
-			<p>
-				<label>휴대폰 번호</label> <select name="tel1" id="telSelect">
-					<option>010</option>
-					<option>011</option>
-					<option>016</option>
-					<option>017</option>
-					<option>018</option>
-					<option>019</option>
-				</select> <input type="tel" name="tel2" class="telinput"> <input
-					type="tel" name="tel3" class="telinput">
-					<span id="tel_check"></span>
-			</p>
-			<p id="radioP">
-				<label>성별</label> <input type="radio" name="gender" value="여자"
-					class="radioBtn" id="radio1"><span id="span1">여자</span> <input
-					type="radio" name="gender" value="남자" class="radioBtn" id="radio2"><span
-					id="span2">남자</span>
-					<span id="gender_check"></span>
-			</p>
-
-			<p id="postWrap">
-				<label>주소</label><input type="button"
-					value="우편번호 검색" id="addrSearchBtn"><input type="tel"
-					name="zipcode" id="zipcode"> <input type="text" name="addr"
-					id="addr">
-					<span id="addr_check"></span>
-			</p>
-			<p id="btnWrap">
-				<input type="submit" value="회원가입" id="joinBtn"> <input type="button"
-					value="취소" id="cencelBtn">
-			</p>
-
-			<div id="searchWarp">
-				
+		<div id="joininputFrom">
+			<form action="join.do" method="post" id="jF">
 				<p>
-					<input type="text" placeholder="도로명입력" id="doro"> 
-					<input type="button" value="검색" id="doroSearchWrap">
-					<input type="button" id="search_cencel" value="취소">
+					<label>아이디</label> <input type="text" name="id" id="userId" placeholder="6자이상 영문/숫자를 입력하세요"> <input
+						type="button" value="중복체크" id="checkId">
+					<span id="id_check"></span>
 				</p>
-				<div id="resultAddrWrap">
-					<div class="searchResult" id="zxc">
-						<p class="seacrch_zipcode">우편번호</p>
-						<p class="seacrch_addr">주소명</p>
+				<p>
+					<label>비밀번호</label> <input type="password" name="pw" placeholder="8자이상 영문/숫자를 입력하세요">
+					<span id="pw_check"></span>
+				</p>
+				<p>
+					<label>비밀번호 확인</label> <input type="password" name="pwch">
+					<span id="pwch_check"></span>
+				</p>
+				<p>
+					<label>이름</label> <input type="text" name="name">
+					<span id="name_check"></span>
+				</p>
+				<p>
+					<label>이메일주소</label> <input type="email" name="email">
+					<span id="email_check"></span>
+				</p>
+				<p>
+					<label>휴대폰 번호</label> <select name="tel1" id="telSelect">
+						<option>010</option>
+						<option>011</option>
+						<option>016</option>
+						<option>017</option>
+						<option>018</option>
+						<option>019</option>
+					</select> <input type="tel" name="tel2" class="telinput"> <input
+						type="tel" name="tel3" class="telinput">
+						<span id="tel_check"></span>
+				</p>
+				<p id="radioP">
+					<label>성별</label> <input type="radio" name="gender" value="여자"
+						class="radioBtn" id="radio1"><span id="span1">여자</span> <input
+						type="radio" name="gender" value="남자" class="radioBtn" id="radio2"><span
+						id="span2">남자</span>
+						<span id="gender_check"></span>
+				</p>
+	
+				<p id="postWrap">
+					<label>주소</label><input type="button"
+						value="우편번호 검색" id="addrSearchBtn"><input type="tel"
+						name="zipcode" id="zipcode"> <input type="text" name="addr"
+						id="addr">
+						<span id="addr_check"></span>
+				</p>
+				<p id="btnWrap">
+					<input type="submit" value="회원가입" id="joinBtn"> <input type="button"
+						value="취소" id="cencelBtn">
+				</p>
+	
+				<div id="searchWarp">
+					
+					<p>
+						<input type="text" placeholder="도로명입력" id="doro"> 
+						<input type="button" value="검색" id="doroSearchWrap">
+						<input type="button" id="search_cencel" value="취소">
+					</p>
+					<div id="resultAddrWrap">
+						<div class="searchResult" id="zxc">
+							<p class="seacrch_zipcode">우편번호</p>
+							<p class="seacrch_addr">주소명</p>
+						</div>
 					</div>
 				</div>
-			</div>
-
-		</form>
+	
+			</form>
+		</div>
 	</div>
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>

@@ -18,7 +18,17 @@
 		<result property="actor" column="actor"/>
 		<result property="director" column="director"/>
 	</resultMap>
+	
 	<select id="selectAll" resultMap="movieResult">
-		select * from movie
+		select * from movie  
+	</select>
+	
+	<insert id="insert" parameterType="Movie">
+		insert into movie(movie_no, movie_name, director, actor, genre, rating, play_time, synopsis, open_date, close_date, path_poster, path_steelcut, path_video)
+			values(0, #{movieName}, #{director}, #{actor}, #{genre}, #{rating}, #{playTime}, #{synopsis}, #{openDate}, #{closeDate}, #{pathPoster}, #{pathSteelcut}, #{pathVideo})
+	</insert>
+	
+	<select id="selectById" resultMap="movieResult">
+		select * from movie where movie_no=#{movieNo} 
 	</select>
 </mapper>
