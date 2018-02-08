@@ -14,11 +14,11 @@ insert into `user` values('user6', '1234', 300, 'user6@test.com', 01012345678, '
 insert into `user` values('user7', '1234', 300, 'user7@test.com', 01012345678, '대구 남구 대명7동', '유저7', '여자', '일반등급');
 
 /* THEATER DUMP DATA */
-insert into theater values(null, '1관', 3, 200, 'J', 10, '2D');
-insert into theater values(null, '2관', 3, 200, 'J', 10, '2D');
-insert into theater values(null, '3관', 3, 200, 'J', 10, '2D');
-insert into theater values(null, '4관', 3, 200, 'J', 10, '2D');
-insert into theater values(null, '5관', 3, 200, 'J', 10, '2D');
+insert into theater values(null, '1관', 3, 200, 'J', 10, '2D', null);
+insert into theater values(null, '2관', 3, 200, 'J', 10, '2D', null);
+insert into theater values(null, '3관', 3, 200, 'J', 10, '2D', null);
+insert into theater values(null, '4관', 3, 200, 'J', 10, '2D', null);
+insert into theater values(null, '5관', 3, 200, 'J', 10, '2D', null);
 
 /* MOVIE DUMP DATA */
 insert into movie(movie_no, movie_name, rating) values(null, '부산행', 18);
