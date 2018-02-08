@@ -36,14 +36,17 @@ public class ManagerAddMovieHandler implements CommandHandler {
 				dir.mkdirs();// 폴더 만들기
 			}
 			System.out.println("uploadPath : " + uploadPath);
-
+			
 			int maxSize = 1024 * 1024 * 10;// 10M
-
+			//
+			
 			try {
 				// 업로로드 완료
 				MultipartRequest multi = new MultipartRequest(req, uploadPath, maxSize, "utf-8",
 						new DefaultFileRenamePolicy());
-
+				
+				System.out.println(req.getParameter("moviePoster"));
+				
 				HashMap<String, String> map = new HashMap<>();
 				String poster = "";
 				String originPoster = "";
@@ -54,16 +57,13 @@ public class ManagerAddMovieHandler implements CommandHandler {
 
 				Enumeration<String> e = multi.getFileNames(); 
 				System.out.println("이너머레이션"+multi.getFileNames().toString());
+				String[] aa=multi.getParameterValues("movieSteelCut[]");
+				System.out.println("-------------------------"+aa.length);
 				
-				for (int i = 0; i < 5; i++) {
-
-					if (e.hasMoreElements()) {
-
+				while(e.hasMoreElements()){
 						String name = (String) e.nextElement();
 						arrSteelCut.add(multi.getFilesystemName(name));
-						arrOriginSteelCut.add(multi.getOriginalFileName(name));
-
-					}
+						arrOriginSteelCut.add(multi.getOriginalFileName(name));					
 				}
 
 				

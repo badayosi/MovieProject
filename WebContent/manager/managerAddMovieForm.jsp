@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <style type="text/css">
 	#addDiv{
 		width:40%;
@@ -35,6 +36,19 @@
 		width:400px;
 	}
 </style>
+<script type="text/javascript">
+	$(function(){
+		$("#addForm").submit(function(){
+			
+			var steelcutStr = "";
+			for(var i =0; i< $("#a").get(0).files.length; i++){
+				steelcutStr += $("#a").get(0).files[i].name + ",";
+				alert($("#a").get(0).files[i].name);
+			}
+					
+		});
+	});
+</script>
 </head>
 <body> 
 <jsp:include page="../include/managerHeader.jsp"></jsp:include>
@@ -84,7 +98,7 @@
 			</tr>
 			<tr>
 				<th>스틸컷</th>
-				<td><input type="file" multiple="multiple" name="movieSteelCut[]"></td>
+				<td><input id="a" type="file" multiple name="movieSteelCut[]"></td>
 
 			</tr>
 			<tr>
