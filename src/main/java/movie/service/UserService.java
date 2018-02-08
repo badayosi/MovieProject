@@ -23,10 +23,26 @@ public class UserService{
 		return null;
 	}
 
-	
+	public User selectByIdCheckpass(User user){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		UserDao dao = session.getMapper(UserDao.class);
+		User u = null;
+		try{
+			u = dao.selectByIdCheckpass(user);
+			if(u == null){
+				return null;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return u;
+	}
 	public User selectById(String id) {
 		SqlSession session = null;
-		
 		session = MySqlSessionFactory.openSession();
 		UserDao dao = session.getMapper(UserDao.class);
 		User user = null;
@@ -42,6 +58,25 @@ public class UserService{
 			MySqlSessionFactory.closeSession(session);
 		}
 		return user;
+	}
+	
+	public int insertUser(User user){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		UserDao dao = session.getMapper(UserDao.class);
+		
+		try{
+			dao.insertUser(user);
+			session.commit();
+			return 0;
+		}catch(Exception e){
+			
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		
+		return -1;
 	}
 	
 }

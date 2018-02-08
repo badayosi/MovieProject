@@ -20,4 +20,10 @@
 	<select id="selectById" resultMap="uesrResult" parameterType="String">
 		select * from user where user_id= #{userId}
 	</select>
+	<select id="selectByIdCheckpass" resultMap="uesrResult" parameterType="User">
+		select * from user where user_id= #{userId} and password = password(#{password});
+	</select>
+	<insert id="insertUser"  parameterType="User">
+		insert into user values(#{userId},password(#{password}),#{point},#{email},#{phone},#{addr},#{gender},#{userRank},#{name});
+	</insert>
 </mapper>

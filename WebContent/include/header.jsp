@@ -56,12 +56,6 @@
 		
 	}
 </style>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script>
-	$(function(){
-		
-	})
-</script>
 <div id="headerWrap">
 	<h2>Hello 2018</h2>
 	<h1>DGV</h1>
@@ -72,7 +66,7 @@
 	</c:if>
 	<c:if test="${member == null}">
 		<a href="login.do" id="login">로그인</a>|
-		<a href="#">회원가입</a>
+		<a href="join.do">회원가입</a>
 	</c:if>
 	</p>
 </div>

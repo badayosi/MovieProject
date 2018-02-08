@@ -25,7 +25,7 @@ import mvc.util.MySqlSessionFactory;
 
 public class TestDao {
 
-	//@Test
+	/*//@Test
 	public void testSelectAll1(){
 		SqlSession session=null;
 		try {
@@ -36,14 +36,14 @@ public class TestDao {
 			if(list.size()>0){
 				for(Address address: list){
 					System.out.println(address);
-				}
-			}
+				} 
+			} 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			MySqlSessionFactory.closeSession(session);
 		}
-	}
+	}*/
 	
 	//@Test
 	public void testSelectAll2(){

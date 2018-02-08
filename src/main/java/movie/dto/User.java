@@ -1,30 +1,34 @@
 package movie.dto;
 
 public class User {
-	String userId;
-	String password;
-	int point;
-	String email;
+	private String userId;
+	private String password;
+	private int point;
+	private String email;
+	private String phone;
+	private String addr;
+	private String gender;
+	private String userRank;
+	private String name;
 	public String getName() {
 		return name;
+	}
+
+	public User(String userId, String password) {
+		this.userId = userId;
+		this.password = password;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	int phone;
-	String addr;
-	String gender;
-	String userRank;
-	String name;
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(String userId, String password, int point, String email, int phone, String addr, String gender,
-			String userRank) {
+	public User(String userId, String password, int point, String email, String phone, String addr, String gender,
+			String userRank, String name) {
 		super();
 		this.userId = userId;
 		this.password = password;
@@ -34,6 +38,7 @@ public class User {
 		this.addr = addr;
 		this.gender = gender;
 		this.userRank = userRank;
+		this.name = name;
 	}
 
 	public String getUserId() {
@@ -68,11 +73,11 @@ public class User {
 		this.email = email;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -103,7 +108,10 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", password=" + password + ", point=" + point + ", email=" + email
-				+ ", phone=" + phone + ", addr=" + addr + ", gender=" + gender + ", userRank=" + userRank + "]";
+				+ ", phone=" + phone + ", addr=" + addr + ", gender=" + gender + ", userRank=" + userRank + ", name="
+				+ name + "]";
 	}
+
+	
 
 }
