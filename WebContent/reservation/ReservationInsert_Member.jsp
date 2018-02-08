@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,11 +13,6 @@
 		min-height:600px;
 		margin:0 auto;
 		background:#F9F6EC;
-	}
-	
-	table, th, tr, td{
-		border:1px solid black;
-		border-collapse:collapse;
 	}
 	
 	/* 가로형 달력 CSS */
@@ -49,6 +46,8 @@
 		height:40px;
 	}
 	div#calendar_day tr#integer td p{
+		height:30px;
+		line-height:30px;
 		text-align:center;
 		padding:0;
 		margin:0 auto;
@@ -56,6 +55,7 @@
 	.today{
 		width:30px;
 		height:30px;
+		line-height:30px;
 		margin:0 auto;
 		padding:0px;
 		border:1px solid black;
@@ -66,6 +66,9 @@
 	
 	/* 예약 */
 	div#reservation_box{
+		border-top:5px solid black;
+		border-bottom:5px solid black;
+		margin-top:20px;
 		width:100%;
 	}
 	div#reservation_box span.title{
@@ -76,11 +79,23 @@
 		font-size:1em;
 		float:right;
 	}
+	div#reservation_box table, div#reservation_box tr, div#reservation_box td{
+		border-collapse:collapse;
+	}
 	div#reservation_box tr{
 		height:80px;
 	}
+	div#reservation_box tr:FIRST-CHILD td{
+		border-bottom:1px solid black;
+	}
+	div#reservation_box tr:NTH-CHILD(2) td{
+		border-bottom:1px solid black;
+	}
 	div#reservation_box td{
 		padding:10px;
+	}
+	div#reservation_box td:FIRST-CHILD{
+		border-right:1px solid black;
 	}
 	td.td_movie{
 		width:350px;
@@ -109,11 +124,53 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script type="text/javascript">
+	function makeCalendar(){
+		var todayDate = new Date();
+		var dateCount = 14;
+		var weekStr = new Array("일","월","화","수","목","금","토","일");
+		
+		var year = todayDate.getFullYear();
+		var month = todayDate.getMonth()+1;
+		var day = todayDate.getDate();
+		var weekday = todayDate.getDay();
+		
+		var makeStr = "";
+		makeStr += "<table>";
+		for(var row=0 ; row<2 ; row++){
+			if(row == 0)
+				makeStr += "<tr id='string'>";
+			else if(row == 1)
+				makeStr += "<tr id='integer'>";		
+			for(var col=weekday ; col<dateCount+weekday ; col++){
+				switch(row){
+					case 0:
+						makeStr += "<td>" + weekStr[col%7] + "</td>";
+						break;
+					case 1:
+						if(todayDate.getDate() == day)
+							makeStr += "<td><p class='today'>" + day + "</p></td>";
+						else
+							makeStr += "<td><p>" + day + "</p></td>";
+						day++;
+						break;
+				}
+			}
+			makeStr += "</tr>";
+		}
+		makeStr += "</table>";
+		$("#year").html(year);
+		$("#month").html(month);
+		$("#calendar_day").html(makeStr);
+	}
+
 	$(function(){
+		makeCalendar();
+		
 		$("#integer td").on("click",function(){
 			$("#integer td p").removeClass("today");
 			$(this).find("p").toggleClass("today");
 		});
+		
 	});
 </script>
 
@@ -124,40 +181,7 @@
 		<div id="horizontal_calendar">
 			<p><span id="month">2</span><span id="year">2018</span></p>
 			<div id="calendar_day">
-				<table>
-					<tr id="string">
-						<td>수</td>
-						<td>목</td>
-						<td>금</td>
-						<td>토</td>
-						<td>일</td>
-						<td>월</td>
-						<td>화</td>
-						<td>수</td>
-						<td>목</td>
-						<td>금</td>
-						<td>토</td>
-						<td>일</td>
-						<td>월</td>
-						<td>화</td>
-					</tr>
-					<tr id="integer">
-						<td><p>7</p></td>
-						<td><p>8</p></td>
-						<td><p>9</p></td>
-						<td><p>10</p></td>
-						<td><p>11</p></td>
-						<td><p>12</p></td>
-						<td><p class="today">13</p></td>
-						<td><p>14</p></td>
-						<td><p>15</p></td>
-						<td><p>16</p></td>
-						<td><p>17</p></td>
-						<td><p>18</p></td>
-						<td><p>19</p></td>
-						<td><p>20</p></td>
-					</tr>
-				</table>
+				
 			</div>
 		</div>
 		<div id="reservation_box">
@@ -177,7 +201,13 @@
 					<td rowspan="2" class="td_theater">상영관리스트</td>
 				</tr>
 				<tr>
-					<td id="movieList">영화목록 나올곳</td>
+					<td id="movieList">
+						<c:if test="${true}">
+							<ul>
+								<li></li>
+							</ul>
+						</c:if>
+					</td>
 				</tr>
 			</table>
 		</div>
