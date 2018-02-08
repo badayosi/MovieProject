@@ -1,18 +1,17 @@
 use movie;
 
 /* USER_RANK DUMP DATA */
-insert into user_rank values ('admin',0);
-insert into user_rank values ('A',0);
-insert into user_rank values ('B',1);
+insert into user_rank values ('관리자',0);
+insert into user_rank values ('일반등급',0);
 
 /* USER DUMP DATA */
-insert into `user` values('user1', '1234', 0, 'user1@test.com', 01012345678, '대구 남구 대명1동', '유저1', '남자', 'A');
-insert into `user` values('user2', '1234', 0, 'user2@test.com', 01012345678, '대구 남구 대명2동', '유저2', '남자', 'A');
-insert into `user` values('user3', '1234', 0, 'user3@test.com', 01012345678, '대구 남구 대명3동', '유저3', '남자', 'A');
-insert into `user` values('user4', '1234', 300, 'user4@test.com', 01012345678, '대구 남구 대명4동', '유저4', '남자', 'B');
-insert into `user` values('user5', '1234', 300, 'user5@test.com', 01012345678, '대구 남구 대명5동', '유저5', '남자', 'B');
-insert into `user` values('user6', '1234', 300, 'user6@test.com', 01012345678, '대구 남구 대명6동', '유저6', '여자', 'B');
-insert into `user` values('user7', '1234', 300, 'user7@test.com', 01012345678, '대구 남구 대명7동', '유저7', '여자', 'B');
+insert into `user` values('user1', '1234', 0, 'user1@test.com', 01012345678, '대구 남구 대명1동', '유저1', '남자', '관리자');
+insert into `user` values('user2', '1234', 0, 'user2@test.com', 01012345678, '대구 남구 대명2동', '유저2', '남자', '일반등급');
+insert into `user` values('user3', '1234', 0, 'user3@test.com', 01012345678, '대구 남구 대명3동', '유저3', '남자', '일반등급');
+insert into `user` values('user4', '1234', 300, 'user4@test.com', 01012345678, '대구 남구 대명4동', '유저4', '남자', '일반등급');
+insert into `user` values('user5', '1234', 300, 'user5@test.com', 01012345678, '대구 남구 대명5동', '유저5', '남자', '일반등급');
+insert into `user` values('user6', '1234', 300, 'user6@test.com', 01012345678, '대구 남구 대명6동', '유저6', '여자', '일반등급');
+insert into `user` values('user7', '1234', 300, 'user7@test.com', 01012345678, '대구 남구 대명7동', '유저7', '여자', '일반등급');
 
 /* THEATER DUMP DATA */
 insert into theater values(null, '1관', 3, 200, 'J', 10, '2D');
@@ -22,12 +21,12 @@ insert into theater values(null, '4관', 3, 200, 'J', 10, '2D');
 insert into theater values(null, '5관', 3, 200, 'J', 10, '2D');
 
 /* MOVIE DUMP DATA */
-insert into movie(movie_no, movie_name) values(null, '부산행');
-insert into movie(movie_no, movie_name) values(null, '염력');
-insert into movie(movie_no, movie_name) values(null, '조선명탐정');
-insert into movie(movie_no, movie_name) values(null, '흥부');
-insert into movie(movie_no, movie_name) values(null, '블랙 팬서');
-insert into movie(movie_no, movie_name) values(null, '그것만이 내 세상');
+insert into movie(movie_no, movie_name, rating) values(null, '부산행', 18);
+insert into movie(movie_no, movie_name, rating) values(null, '염력', 15);
+insert into movie(movie_no, movie_name, rating) values(null, '조선명탐정', 12);
+insert into movie(movie_no, movie_name, rating) values(null, '흥부', 18);
+insert into movie(movie_no, movie_name, rating) values(null, '블랙 팬서', 12);
+insert into movie(movie_no, movie_name, rating) values(null, '그것만이 내 세상', 15);
 
 /* TIMETABLE DUMP DATA */
 insert into timetable values(null, 1, 1, '2018/02/05 13:20:00', '2018/02/05 14:20:00');
