@@ -33,14 +33,15 @@ public class ControllerUsingURI extends HttpServlet {
 		while(keyIter.hasNext()){
 			// KEY
 			String command = (String)keyIter.next();
+			System.out.println(command);
 			// VALUE
 			String handlerClassName = prop.getProperty(command);
-		
+			System.out.println(handlerClassName);
 			try{
 				// 문자열에 해당하는 부분을 CLASS화
 				Class<?> handlerClass = Class.forName(handlerClassName);
 				// NEW 후 Instance화 과정을 진행
-				
+				System.out.println(handlerClass);
 				CommandHandler handlerInstance = (CommandHandler)handlerClass.newInstance();
 				commandHandlerMap.put(command, handlerInstance);
 			}catch(Exception e){

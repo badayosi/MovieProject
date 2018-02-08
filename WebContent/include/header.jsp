@@ -66,7 +66,7 @@
 	</c:if>
 	<c:if test="${member == null}">
 		<a href="login.do" id="login">로그인</a>|
-		<a href="#">회원가입</a>
+		<a href="join.do">회원가입</a>
 	</c:if>
 	</p>
 </div>

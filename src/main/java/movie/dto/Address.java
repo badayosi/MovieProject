@@ -14,7 +14,6 @@ public class Address {
 	}
 
 	public Address(String addrNo, String sido, String sigungu, String doro, int building1, int building2) {
-		super();
 		this.addrNo = addrNo;
 		this.sido = sido;
 		this.sigungu = sigungu;
@@ -73,8 +72,8 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "AddressDTO [addrNo=" + addrNo + ", sido=" + sido + ", sigungu=" + sigungu + ", doro=" + doro
-				+ ", building1=" + building1 + ", building2=" + building2 + "]";
+		return sido + " " + sigungu + " " + doro
+				+ " " + building1 +  building2;
 	}
 
 }
