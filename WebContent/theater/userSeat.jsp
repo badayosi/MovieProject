@@ -12,9 +12,16 @@
   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
   crossorigin="anonymous"></script>
   <style type="text/css">
+  
+  	/* 스크린 */
+  	#screenContent{
+  		background-image: url("../images/screen_bg.png");
+  		text-align: center;
+  		font-weight: 20px;
+  		margin-bottom: 10px;		
+  	}
   	/* 테이블 */
   	#tableContent{
-  		border: 1px solid black;
   		background: #f9f8f3;
   		color: #848484;
   		margin: 0 auto;
@@ -25,7 +32,7 @@
 		margin:auto;
 		text-align: center;
 	}
-	span{
+	.seat{
 		display: block;
 		width: 18px;
   		height: 18px;
@@ -35,7 +42,6 @@
 	}
 	.seat{
   		border: 2px solid black;
-  		
   		text-align: center;
   		padding: 10px;
   	}
@@ -46,7 +52,7 @@
   		display: none;
   	}
   	.tem{
-  		background: #000000;
+  		background: #000000 !important;
   		color: white;
   		font-weight: bold;
   	}
@@ -55,9 +61,7 @@
   	}
   	.displayHidden{
   		display: none;
-  	}
-  	
-  	
+  	}  	
   	/* 폼태그 */
 	label{
 		width: 100px;
@@ -76,20 +80,39 @@
 		padding-bottom:30px;
 		margin-bottom: 10px;
 	}
+	
+	
   </style>
 
 <script type="text/javascript">
 	$(function(){
-		
 		//저장버튼
-		$("form[name='f1']").submit(function(){
+		$("form[name='f2']").submit(function(){
+			var selected = $(".tem").length;
 			
+			if(selected == 0){
+				alert("인원 및 좌석을 선택해 주세요");
+				return false;
+			}
+			if(selected!=num){
+				alert(num-selected+"명 자리가 미 선택 되었습니다.인원 수정 또는 좌석을 추가로 선택해주세요.");
+				return false;
+			}else{
+				var seat ="";
+				$(".tem").each(function(i,obj){
+					var a = $(obj).prop("tagName");
+					seat += $(obj).html()+"/";
+					//alert(a + "!");
+				})
+				//alert(seat);
+				
+				$("#input1").val(seat);
+				
+			}
+			
+			return false;
 		})
-		
-		//좌석 선택 할때
-		$(document).on("click","span",function(){
-			$(this).toggleClass("tem");
-		})
+				
 		var num =0;
 		//인원선택
 		$("select").change(function(){
@@ -99,14 +122,34 @@
 			//alert(num);			
 		})
 		
+		/* $(".seat").hover(function(){
+			$(this).css("background","black");
+		},function(){
+			$(this).css("background","#848484");
+		}) */
+		
 		//좌석 선택 할때
-		$(document).on("click","span .seat",function(){
-			$(this).toggleClass("tem");
-			
-			var selected = $(".seat").length;
-		})
-		
-		
+		$(document).on("click",".seat",function(){
+			if(num<1){
+				alert("인원선택해주세요.");
+			}else{
+				$(this).toggleClass("tem");
+				
+				var selected = $(".tem").length;
+				
+				if(selected > num){
+					$(this).removeClass("tem");
+					alert("인원을 초과해서 선택할 수 없습니다.");
+				}
+				else if(selected < num){
+					$(".seat").css("background","#848484");
+					$(".tem").css("background","black");
+				}
+				else if(selected = num){
+					$(".seat").css("background","#D5D5D5");	
+				}
+			}
+		}) 
 		
 	})
 	
@@ -117,7 +160,7 @@
 	<p id="test"></p>
 	<div id="select">
 		<h1>인원/좌석 선택</h1>
-		<form action="userSeat.do" method="post">
+		<form action="userSeat.do" method="post" name="f2">
 			<label>성인</label>
 			<select name="adult">
 				<option value="0">0</option>
@@ -143,9 +186,12 @@
 				<option value="7">7</option>
 				<option value="8">8</option>
 			</select>
-			
+			<input type="text" id="input1">
 			<input type="submit" value="다음단계">
 		</form>
+	</div>
+	<div id="screenContent">
+		Screen
 	</div>
 	<div id="tableContent">
 		<c:if test="${item.theaterTable!=null }">
