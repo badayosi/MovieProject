@@ -21,7 +21,6 @@ public class ControllerUsingURI extends HttpServlet {
 		
 		Properties prop = new Properties();
 		String configFilePath = getServletContext().getRealPath(configFile);
-		
 		try(FileReader fis = new FileReader(configFilePath)){
 			prop.load(fis);
 		}catch(Exception e){
