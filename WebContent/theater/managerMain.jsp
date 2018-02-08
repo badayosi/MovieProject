@@ -35,7 +35,8 @@
 			<th>상영관 종류</th>
 			<th>수정</th>
 			<th>삭제</th>
-			<th>좌석배치</th>
+			<th>좌석배치 조정</th>
+			<th>회원입장 좌석배치</th>
 		</tr>
 		<c:forEach var="item" items="${list }">
 		<tr>
@@ -48,7 +49,8 @@
 			<td>${item.theaterType }</td>
 			<td><a href="modify.do?no=${item.theaterNo}">수정</a></td>
 			<td><a href="delete.do?no=${item.theaterNo}">삭제</a></td>
-			<td><a href="seat.do?no=${item.theaterNo}">좌석</a></td>
+			<td><a href="managerSeat.do?no=${item.theaterNo}">좌석조정</a></td>
+			<td><a href="userSeat.do?no=${item.theaterNo}">회원좌석</a></td>
 		</tr>
 		</c:forEach>
 	</table>

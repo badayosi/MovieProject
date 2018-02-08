@@ -42,6 +42,7 @@
   		border: 2px solid red;
   		text-align: center;
   		padding: 10px;
+  		display: none;
   	}
   	.tem{
   		background: #000000;
@@ -57,12 +58,11 @@
   	/* 폼태그 */
   	form{
 		width: 400px;		
-		float:left;
+		
 		margin-left: 100px;
 	}
 	label{
 		width: 100px;
-		float: left;
 		padding-left: 10px;
 		font-weight: bold;
 	}
@@ -101,11 +101,10 @@
 %>
 <script type="text/javascript">
 	$(function(){
-		//setTable();
 		
 		//저장버튼
 		$("form[name='f1']").submit(function(){
-			$("#input1").val($("#tableContent").html());
+			
 		})
 		
 		//좌석 선택 할때
@@ -113,93 +112,41 @@
 			$(this).toggleClass("tem");
 		})
 		
-		//재설정
-		$("#set").click(function(){
-			setTable();
-		})
 		
-		//좌석 추가
-		$("#add").click(function(){
-			$(".tem").addClass("seat");
-			$(".tem").removeClass("noSeat");
-			$(".tem").removeClass("tem");
-			$("input[name='maxcount']").val($(".seat").length);
-		})
-		//좌석 삭제
-		$("#del").click(function(){
-			$(".tem").addClass("noSeat");
-			$(".tem").removeClass("seat");
-			$(".tem").removeClass("tem");
-			$("input[name='maxcount']").val($(".seat").length);
-		})
-		//복도추가
-		$("#way").click(function(){
-			$(".tem").addClass("way");			
-			$(".tem").removeClass("tem");
-			$("input[name='maxcount']").val($(".seat").length);
-		})
-		//복도 삭제
-		$("#wayNo").click(function(){	
-			$(".way").removeClass("way");
-		})
 		
 	})
-	//기본 좌석 배치하기
-	function setTable(){
-		
-		$("#tableContent").empty();
-		var t = "<table class='seatTable'>";
-		
-		var col = <%=col%>;
-		var num = <%=num%>;
-		var row1 = "<%=row1 %>";
-		
-		
-		var row = row1.charCodeAt(0)-64;
-		
-		//alert(row);
-		
-		var num1 = 1;
-		
-		for(var i=65; i<row+65; i++){
-			t += "<tr>";
-			for( k =1; k<=col; k++){
-				var code = String.fromCharCode(i);
-				if(num1<=num){
-					t += "<td><span class='seat'>"+code+k+"</span></td>";
-					num1++;
-				}else{
-					t += "<td><span class='noSeat'>"+code+k+"</span></td>";
-					num1++;
-				}
-			}
-			
-			
-			t += "</tr>";	
-		}
-		t += "</table>";
-		
-		$("#tableContent").html(t);
-		//alert($("#tableContent").html());
-		
-	}
+	
 </script>
 </head>
 <body>
 	<div>
 		<h2>${item.theaterName }</h2>
 	</div>
-	
+	<div>
+		<h1>인원/좌석 선택</h1>
+		<form>
+			<label>성인</label>
+			<select>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+			</select>
+		</form>
+	</div>
 	<div id="tableContent">
 		<c:if test="${item.theaterTable!=null }">
 			${item.theaterTable }
 		</c:if>
+		<c:if test="${item.theaterTable==null ||item.theaterTable==''}">
+			<h1>좌석 설정이 되지 않은 상영관 입니다. 좌석 설정후 사용해 주세요.</h1>
+		</c:if>  
 	</div>
-	<c:if test="${item.theaterTable==null ||item.theaterTable==''}">
-		<script type="text/javascript">
-				setTable();
-		</script>
-	</c:if>  
+	
 
 	<div class='btns'>
 		<button id="set">재설정</button>
@@ -208,7 +155,7 @@
 		<button id="way">복도</button>
 		<button id="wayNo">복도 삭제</button>
 	</div>
-	<form action="managerSeat.do" method="post" name="f1">
+	<form action="seat.do" method="post" name="f1">
 		<p class="displayHidden">
 			<label>상영관번호</label>
 			<input type="text" name="number" value="${item.theaterNo}">

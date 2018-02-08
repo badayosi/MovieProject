@@ -7,7 +7,7 @@ import movie.dto.Theater;
 import movie.service.TheaterService;
 import mvc.controller.CommandHandler;
 
-public class TheaterSeatHandler implements CommandHandler {
+public class TheaterUserSeatHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -19,7 +19,7 @@ public class TheaterSeatHandler implements CommandHandler {
 			//System.out.println(theater);
 			req.setAttribute("item", theater);
 			
-			return "managerSeat.jsp";
+			return "userSeat.jsp";
 		}else if(req.getMethod().equalsIgnoreCase("post")){
 			req.setCharacterEncoding("utf-8");
 			String no1 = req.getParameter("number");

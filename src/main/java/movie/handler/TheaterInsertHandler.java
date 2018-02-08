@@ -33,8 +33,8 @@ public class TheaterInsertHandler implements CommandHandler {
 			if(result>0){
 				req.setAttribute("result", "성공");
 			}
-			
-			return "list.do";
+			res.sendRedirect("list.do");
+			return null;
 		}
 		return null;
 	}
