@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import movie.dto.Movie;
 import movie.dto.ReservationGuide;
+import movie.dto.Timetable;
 import movie.service.MovieService;
 import movie.service.ReservationGuideService;
 import movie.service.TheaterService;
@@ -30,32 +31,30 @@ public class ReservationHandler implements CommandHandler {
 			// MEMBER RESERVATION
 			// MOVIE LIST LOAD
 			movieService = MovieService.getInstance();
-			List<Movie> listMovie = movieService.selectAll();
-			req.setAttribute("listMovie", listMovie);
-			// SELECT MOVIE IF EXISTS 
+			List<Movie> allMovie = movieService.selectAll();
+			req.setAttribute("allMovie", allMovie);
+			// SELECT MOVIE IF EXISTS
 			if(req.getParameterValues("selectMovie").length > 0){
 				String[] selectMovie = req.getParameterValues("selectMovie");
 				timeTableService = TimeTableService.getInstance();
 				Movie movieResult = null;
+				List<Timetable> timetableResult = null;
 				for(int index=0 ; index<selectMovie.length ; index++){
 					movieResult = movieService.selectById(Integer.valueOf(selectMovie[index]));
-					timeTableService.selectByMovie(movieResult.getMovieNo());
-				}
+					timetableResult = timeTableService.selectByMovie(movieResult.getMovieNo());
+					String reqName = "listTimetable" +  index;
+					req.setAttribute(reqName, timetableResult);
+				}	
 			}
+			result = FORM_INSERT_MEMBER;
+			
 		}
 		
 		// REQUEST POST
+		// SELECT TIME IF EXISTS & SELECT MOVIE IF EXISTS
 		else if(req.getMethod().equalsIgnoreCase("post")){
-			// 전체예약현황 > 예약취소(관리자용)
-			if(req.getParameter("type").equals("예약취소")){
-				String[] check = req.getParameterValues("check");
-				cancleAdminReservation(check, req);
-				result = findAllReservation(req);
-				res.sendRedirect("reservationGuide.do");
-				return null;
-			}else if(req.getParameter("type").equals("예약수정")){
-				System.out.println("Reservation Guide 진입 수정");
-			}
+			
+			result = null;
 		}
 
 		return result;

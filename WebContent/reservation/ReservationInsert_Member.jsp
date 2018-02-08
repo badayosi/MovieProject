@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://cdn.rawgit.com/young-ha/webfont-archive/master/css/PureunJeonnam.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -88,7 +89,7 @@
 	div#reservation_box tr:FIRST-CHILD td{
 		border-bottom:1px solid black;
 	}
-	div#reservation_box tr:NTH-CHILD(2) td{
+	div#reservation_box tr:NTH-CHILD(2) td:FIRST-CHILD{
 		border-bottom:1px solid black;
 	}
 	div#reservation_box td{
@@ -119,6 +120,60 @@
 	}
 	td#movieList{
 		height:500px;
+		padding:0;
+	}
+	ul#movieZone{
+		width:95%;
+		height:100%;
+		margin:0 auto;
+		list-style:none;
+		padding:0;
+	}
+	ul#movieZone li{
+		width:100%;
+		height:30px;
+		margin-bottom:10px;
+	}
+	ul#movieZone li a{
+		display:block;
+		width:100%;
+		height:30px;
+		padding:0;
+		margin:0;
+		line-height:30px;
+	}
+	ul#movieZone li a div{
+		float:left;
+	}
+	ul#movieZone .rating{
+		width:30px;
+		height:30px;
+	}
+	ul#movieZone .age12{
+		background-repeat:no-repeat;
+		background-image:url("../images/rating_12.png");
+		background-position:center center;
+	}
+	ul#movieZone .age15{
+		background-repeat:no-repeat;
+		background-image:url("../images/rating_15.png");
+		background-position:center center;
+	}
+	ul#movieZone .age18{
+		background-repeat:no-repeat;
+		background-image:url("../images/rating_18.png");
+		background-position:center center;
+	}
+	ul#movieZone .ageall{
+		background-repeat:no-repeat;
+		background-image:url("../images/rating_all.png");
+		background-position:center center;
+	}
+	ul#movieZone .movieName{
+		color:black;
+	}
+	ul#movieZone .selectMovie{
+		font-weight: bold;
 	}
 </style>
 
@@ -162,15 +217,58 @@
 		$("#month").html(month);
 		$("#calendar_day").html(makeStr);
 	}
+	
+	function loadAllMovie(){
+		$.ajax({
+			url:"reservationAjax.do",
+			type:"get",
+			dataType:"json",
+			success:function(json){
+				
+				console.log(json);
+				var makeMovieList;
+				for(var index=0;index<json.length;index++){
+					makeMovieList = "";
+					makeMovieList += "<li>";
+					makeMovieList += "<a href='javascript:selectMovie(" + json[index].movieNo +")'>";
+					makeMovieList += "<div class='rating";
+					switch(json[index].rating){
+						case 12:
+							makeMovieList += " age12'>";
+							break;
+						case 15:
+							makeMovieList += " age15'>";
+							break;
+						case 18:
+							makeMovieList += " age18'>";
+							break;
+						default:
+							makeMovieList += " ageall'>";
+							break;
+					}
+					makeMovieList += "</div>";
+					makeMovieList += "<div class='movieName'>" + json[index].movieName + "</div>";
+					makeMovieList += "<input type='hidden' name='movieKey' value=" + json[index].movieNo +">";
+					makeMovieList += "</a>";
+					makeMovieList += "</li>";
+					$("#movieZone").append(makeMovieList);
+				}
+			}
+		});
+	}
+	
+	function selectMovie(no){
+		alert(no);
+	}
 
 	$(function(){
 		makeCalendar();
+		loadAllMovie();
 		
 		$("#integer td").on("click",function(){
 			$("#integer td p").removeClass("today");
 			$(this).find("p").toggleClass("today");
 		});
-		
 	});
 </script>
 
@@ -203,8 +301,8 @@
 				<tr>
 					<td id="movieList">
 						<c:if test="${true}">
-							<ul id="rangeList">
-								<li></li>
+							<ul id="movieZone">
+							
 							</ul>
 						</c:if>
 					</td>

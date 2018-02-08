@@ -4,9 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import movie.dao.ReservationGuideDao;
 import movie.dao.TimetableDao;
-import movie.dto.ReservationGuide;
+import movie.dto.Timetable;
 import mvc.util.MySqlSessionFactory;
 
 public class TimeTableService {
@@ -20,17 +19,16 @@ public class TimeTableService {
 		return INSTANCE;
 	}
 	
-	public List<ReservationGuide> selectByMovie(int no){
+	public List<Timetable> selectByMovie(int no){
 		SqlSession session = null;
 		
 		try{
 			session = MySqlSessionFactory.openSession();
 			TimetableDao dao = session.getMapper(TimetableDao.class);
 			
-			//List<ReservationGuide> result = dao.selectByMovie(no);
+			List<Timetable> result = dao.selectByMovie(no);
 			
-			//return result;
-			return null;
+			return result;
 		} finally {
 			MySqlSessionFactory.closeSession(session);
 		}		
