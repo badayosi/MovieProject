@@ -228,6 +228,32 @@ input:FOCUS {
 #postWrap{
 	margin-bottom: 0 !important;
 }
+#successWrap{
+		width:60%;
+		overflow: hidden;
+		margin-top:150px;
+	}
+	#successWrap #successWrap_imgWrap{
+		float:left;
+	}
+	#successWrap #successWrap_textWrap{
+		float:left;
+		margin-top:20px;
+		
+	}
+	#successWrap #successWrap_textWrap #bluetext{
+		color:#157efb;
+	}
+	#successWrap #successWrap_textWrap h2{
+		border:none !important;
+	}
+	#successWrap #successWrap_textWrap .loginBtn{
+		background: #333333;
+		color:#fff;
+		width:100px;
+		height: 40px;
+		font-size:14px;
+	}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
@@ -400,7 +426,7 @@ input:FOCUS {
 	<jsp:include page="../include/header.jsp"></jsp:include>
 	<div id="hiddenbg"></div>
 	<div id="joinForm">
-		<h2>회원정보입력</h2>
+		<h2 id="h2text">회원정보입력</h2>
 		<div id="joininputFrom">
 			<form action="join.do" method="post" id="jF">
 				<p>
@@ -473,6 +499,25 @@ input:FOCUS {
 	
 			</form>
 		</div>
+		<c:if test="${success !=null}">
+		<script type="text/javascript">
+			$("#h2text").text("회원가입완료");
+			$("#joininputFrom").empty();
+		</script>
+			<div id="successWrap">
+				<div id="successWrap_imgWrap">
+				<img src="images/img_icon_join.png">
+			</div>
+				<div id="successWrap_textWrap">
+				<h2><span id="bluetext">하홍범</span>님 환영합니다:)</h2>
+				<h2>서비스이용을 위해</h2>
+				<h2>다시 로그인을 해주세요.</h2>
+				<a href="login.do"><input type="button" value="로그인" class="loginBtn"></a>
+				<a href="index.jsp"><input type="button" value="홈 바로가기" class="loginBtn"></a>
+			</div>
+	</div>
+		</c:if>
+		
 	</div>
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>

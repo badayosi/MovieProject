@@ -37,7 +37,7 @@ public class JoinHandler implements CommandHandler {
 				req.setAttribute("error","회원가입에 실패하였습니다.");
 				return "login/JoinForm.jsp";
 			}else{
-				req.setAttribute("success","회원가입에 실패하였습니다.");
+				req.setAttribute("success","회원가입에 성공하였습니다.");
 				return "login/JoinForm.jsp";
 			}
 		}
