@@ -203,7 +203,7 @@
 				<tr>
 					<td id="movieList">
 						<c:if test="${true}">
-							<ul>
+							<ul id="rangeList">
 								<li></li>
 							</ul>
 						</c:if>
