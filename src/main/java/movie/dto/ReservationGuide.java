@@ -2,7 +2,7 @@ package movie.dto;
 
 import java.util.Date;
 
-public class ReservationMember {
+public class ReservationGuide {
 	private int reservationNo;
 	private String userId;
 	private String movieName;
@@ -14,12 +14,12 @@ public class ReservationMember {
 	private String seat;
 	private int price;
 
-	public ReservationMember() {
+	public ReservationGuide() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ReservationMember(int reservationNo, String userId, String movieName, int theaterFloor, String theaterName,
+	public ReservationGuide(int reservationNo, String userId, String movieName, int theaterFloor, String theaterName,
 			String theaterType, Date startTime, Date endTime, String seat, int price) {
 		super();
 		this.reservationNo = reservationNo;
@@ -113,7 +113,7 @@ public class ReservationMember {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "ReservationMember [reservationNo=" + reservationNo + ", userId=" + userId + ", movieName=" + movieName

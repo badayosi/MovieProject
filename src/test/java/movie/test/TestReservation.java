@@ -5,8 +5,8 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
-import movie.dao.ReservationMemberDao;
-import movie.dto.ReservationMember;
+import movie.dao.ReservationGuideDao;
+import movie.dto.ReservationGuide;
 import mvc.util.MySqlSessionFactory;
 
 public class TestReservation {
@@ -16,14 +16,30 @@ public class TestReservation {
 		SqlSession session=null;
 		try {
 			session=MySqlSessionFactory.openSession();
-			ReservationMemberDao dao = session.getMapper(ReservationMemberDao.class);
+			ReservationGuideDao dao = session.getMapper(ReservationGuideDao.class);
 			String id = "user2";
 			
-			List<ReservationMember> list = dao.selectById(id);
+			List<ReservationGuide> list = dao.selectById(id);
 			
-			for(ReservationMember member : list){
+			for(ReservationGuide member : list){
 				System.out.println(member.toString());
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			MySqlSessionFactory.closeSession(session);
+		}
+	}
+	
+	@Test
+	public void testDeleteById(){
+		SqlSession session=null;
+		try {
+			session=MySqlSessionFactory.openSession();
+			ReservationGuideDao dao = session.getMapper(ReservationGuideDao.class);
+			
+			dao.deleteByNo(6);
+			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {

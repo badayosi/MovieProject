@@ -69,9 +69,9 @@ public class ControllerUsingURI extends HttpServlet {
 		if(command.indexOf(contextPath) == 0){
 			command = command.substring(contextPath.length());
 		}
-		//System.out.println("command =" + command);
+		System.out.println("command =" + command);
 		CommandHandler handler = commandHandlerMap.get(command);
-		//System.out.println(handler);		
+		System.out.println(handler);		
 		// COMMAND를 제대로 가져오지 못하였을때 예외처리
 		if(handler == null){
 			handler = new NullHandler();
