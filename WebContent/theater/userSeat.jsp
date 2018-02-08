@@ -12,6 +12,7 @@
   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
   crossorigin="anonymous"></script>
   <style type="text/css">
+  	/* 테이블 */
   	#tableContent{
   		border: 1px solid black;
   		background: #f9f8f3;
@@ -55,50 +56,28 @@
   	.displayHidden{
   		display: none;
   	}
+  	
+  	
   	/* 폼태그 */
-  	form{
-		width: 400px;		
-		
-		margin-left: 100px;
-	}
 	label{
 		width: 100px;
 		padding-left: 10px;
 		font-weight: bold;
-	}
-	input[type='text']{
-		height: 22px;
-		border: 1px solid grey;
-	}
-	
-	p:LAST-CHILD {
-		text-align: center;
-	}
-	.btns{
-		float: right;
-		margin-right: 120px;
-	}
+	}	
 	.btns button, input[type='submit']{
 		background: #848484;
 		padding: 5px 10px;
 		font-weight: bold;
 		color: white;		
 	}
-	.btns button{
-		margin: 20px;
+
+	#select{
+		border:1px solid grey;
+		padding-bottom:30px;
+		margin-bottom: 10px;
 	}
-	
   </style>
-<%	
-	
-	Theater t = (Theater)request.getAttribute("item");
-	
-	int col = t.getCol();
-	int num = t.getTheaterMaxcount();
-	
-	String row1 = t.getRow();
-	
-%>
+
 <script type="text/javascript">
 	$(function(){
 		
@@ -111,6 +90,21 @@
 		$(document).on("click","span",function(){
 			$(this).toggleClass("tem");
 		})
+		var num =0;
+		//인원선택
+		$("select").change(function(){
+			var a = $("select[name='adult']").val();
+			var t = $("select[name='teen']").val();
+			num = parseInt(a)+parseInt(t);
+			//alert(num);			
+		})
+		
+		//좌석 선택 할때
+		$(document).on("click","span .seat",function(){
+			$(this).toggleClass("tem");
+			
+			var selected = $(".seat").length;
+		})
 		
 		
 		
@@ -119,14 +113,14 @@
 </script>
 </head>
 <body>
-	<div>
-		<h2>${item.theaterName }</h2>
-	</div>
-	<div>
+	<jsp:include page="../include/header.jsp"></jsp:include>
+	<p id="test"></p>
+	<div id="select">
 		<h1>인원/좌석 선택</h1>
-		<form>
+		<form action="userSeat.do" method="post">
 			<label>성인</label>
-			<select>
+			<select name="adult">
+				<option value="0">0</option>
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
@@ -136,6 +130,21 @@
 				<option value="7">7</option>
 				<option value="8">8</option>
 			</select>
+			
+			<label>청소년</label>
+			<select name="teen">
+				<option value="0">0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+			</select>
+			
+			<input type="submit" value="다음단계">
 		</form>
 	</div>
 	<div id="tableContent">
@@ -148,44 +157,10 @@
 	</div>
 	
 
-	<div class='btns'>
-		<button id="set">재설정</button>
-		<button id="add">좌석추가</button>
-		<button id="del">좌석삭제</button>
-		<button id="way">복도</button>
-		<button id="wayNo">복도 삭제</button>
-	</div>
-	<form action="seat.do" method="post" name="f1">
-		<p class="displayHidden">
-			<label>상영관번호</label>
-			<input type="text" name="number" value="${item.theaterNo}">
-		</p> 
-		
-		<!-- <p>
-		
-			<label>실제 좌석 인원</label>
-			<input type="text" name="count">
-		</p> -->
-		<p>
-			<label>수용인원</label>
-			<input type="text" name="maxcount" value="<%=num %>" readonly>
-		</p>
-		<p>
-			<label>행</label>
-			<input type="text" name="row" value="<%=row1 %>" readonly>
-		</p>
-		<p>
-			<label>열</label>
-			<input type="text" name="col" value="<%=col %>" readonly>
-		</p>
-		
-			<input type="text" name="table" id="input1" class="displayHidden">
-			
-		<p>
-			<input type="submit" value="저장">
-		</p>
-	</form>
+	
+	
 	<br>
 	
+	<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>
