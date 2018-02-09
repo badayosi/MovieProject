@@ -30,7 +30,7 @@ public class ManagerAddMovieHandler implements CommandHandler {
 			int lastNo=service.selectLastNo();
 			
 			// 서버안에 upload라는 폴더의 실제 경로를 받아온다.
-			String uploadPath = req.getRealPath("upload/"+lastNo);
+			String uploadPath = req.getRealPath("upload/"+(lastNo+1));
 
 			File dir = new File(uploadPath);
 			if (dir.exists() == false) {

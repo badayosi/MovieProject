@@ -101,4 +101,15 @@ public class MovieService {
 		}
 		return -1;
 	}
+	
+	public void delete(int no){
+		try(SqlSession session=MySqlSessionFactory.openSession();) {
+			MovieDao dao=session.getMapper(MovieDao.class);
+			dao.delete(no);
+			
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

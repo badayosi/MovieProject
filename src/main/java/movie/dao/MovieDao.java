@@ -18,4 +18,6 @@ public interface MovieDao {
 	public int updateWithFile(Movie movie);
 	
 	public int updateWithOutFile(Movie movie);
+	
+	public int delete(int no);
 }

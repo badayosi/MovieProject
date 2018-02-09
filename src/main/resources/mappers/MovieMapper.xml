@@ -43,13 +43,17 @@
 	</select>
 	
 	<update id="updateWithFile" parameterType="Movie">
-		update movie set movie_name=#{movieName}, director=#{director}, actor#{actor}, genre#{genre}, rating#{rating}, play_time#{playTime},
-			 synopsis=#{synopsis}, open_date=#{openDate}, close_date=#{closeDate}, path_poster=#{pathPoster}, path_steelcut=#{pathSteelcut}, path_video=#{pathVideo}
+		update movie set movie_name=#{movieName}, director=#{director}, actor=#{actor}, genre=#{genre}, rating=#{rating}, play_time=#{playTime},
+			 synopsis=#{synopsis}, open_date=#{openDate}, close_date=#{closeDate}, path_poster=#{pathPoster}, path_steelcut=#{pathSteelcut}, path_video=#{pathVideo} where movie_no=#{movieNo}
 	</update>
 	
 	<update id="updateWithOutFile" parameterType="Movie">
-		update movie set movie_name=#{movieName}, director=#{director}, actor#{actor}, genre#{genre}, rating#{rating}, play_time#{playTime},
-			 synopsis=#{synopsis}, open_date=#{openDate}, close_date=#{closeDate}
+		update movie set movie_name=#{movieName}, director=#{director}, actor=#{actor}, genre=#{genre}, rating=#{rating}, play_time=#{playTime},
+			 synopsis=#{synopsis}, open_date=#{openDate}, close_date=#{closeDate} where movie_no=#{movieNo}
 	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from movie where movie_no=#{movieNo}
+	</delete>
 	
 </mapper>

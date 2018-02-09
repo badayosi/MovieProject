@@ -38,10 +38,14 @@ public class ManagerUpdateMovieHandler implements CommandHandler {
 				int maxSize = 1024 * 1024 * 10;// 10M
 				int mNo=Integer.parseInt(req.getParameter("mNo"));
 				String uploadPath= service.selectFilePath(mNo);
+				
+				System.out.println(uploadPath);
+				
 				String delState=req.getParameter("yes");
 				if(delState=="1"){
 					File files[]=new File(uploadPath).listFiles();
 					for(int i=0;i<files.length;i++){
+						System.out.println("파일"+i+" : "+files[i].getName());
 						files[i].delete();
 					}
 					System.out.println("폴더 하위파일 삭제 완료");

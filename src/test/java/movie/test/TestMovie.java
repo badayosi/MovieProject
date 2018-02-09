@@ -97,5 +97,30 @@ public class TestMovie {
 		}
 		//return 0;
 	}
+	
+	//@Test
+	public void updateWithOutFile(){
+		try(SqlSession session=MySqlSessionFactory.openSession();) {
+			MovieDao dao=session.getMapper(MovieDao.class);
+			Movie movie=new Movie(13, "배재", 120, 12, new Date(), new Date(), "action", "apple", "홍길동", "배재진");
+			
+			dao.updateWithOutFile(movie);
+
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void delete(){
+		try(SqlSession session=MySqlSessionFactory.openSession();) {
+			MovieDao dao=session.getMapper(MovieDao.class);
+			dao.delete(8);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }
