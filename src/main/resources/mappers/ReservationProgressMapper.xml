@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="movie.dao.ReservationProgressDao">
+	<resultMap type="ReservationProgress" id="progressResult">
+		<result property="timeNo" column="table_no"/>
+		<result property="startTime" column="start_time"/>
+		<result property="theaterName" column="theater_name"/>
+		<result property="theaterType" column="theater_type"/>
+		<result property="maxSeat" column="theater_maxcount"/>
+	</resultMap>
+	<select id="selectByTimetable" parameterType="int" resultMap="progressResult">
+		select * from reservation_progress where table_no = #{tableNo}
+	</select>
+</mapper>
