@@ -7,12 +7,21 @@
 		<result property="boardNo" column="board_no"/>
 		<result property="userId" column="user_id"/>
 		<result property="movieNo" column="movie_no"/>
-		<result property="boardTitle" column="board_title"/>
+		<result property="userName" column="user_name"/>
 		<result property="boardContent" column="board_content"/>
 		<result property="regdate" column="regdate"/>
 		<result property="grade" column="grade"/>
 	</resultMap>
 	<select id="selectAll" resultMap="boardResult">
 		select * from Board
+	</select>
+	<insert id="insert_board">
+		insert into board (user_id,movie_no,board_content,regdate,grade,user_name)values (#{userId},#{movieNo},#{boardContent},#{regdate},#{grade},#{userName});
+	</insert>
+	<select id="selectTosize" resultType="int">
+		select count(*) from board;
+	</select>
+	<select id="selectLimit" resultMap="boardResult" parameterType="int">
+		select * from board order by board_no desc limit #{size},4;
 	</select>
 </mapper>

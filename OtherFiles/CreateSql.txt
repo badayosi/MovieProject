@@ -20,7 +20,6 @@ CREATE TABLE movie.board (
    board_no      INT(11)      NOT NULL COMMENT '게시판번호', -- 게시판번호
    user_id       VARCHAR(50)  NOT NULL COMMENT '회원id', -- 회원id
    movie_no      INT(11)      NOT NULL COMMENT '영화_no', -- 영화_no
-   board_title   VARCHAR(255) NOT NULL COMMENT '게시판제목', -- 게시판제목
    board_content TEXT         NULL     COMMENT '게시판내용', -- 게시판내용
    regdate       DATE         NOT NULL COMMENT '등록일', -- 등록일
    grade         INT(11)      NULL     COMMENT '개인별점' -- 개인별점
