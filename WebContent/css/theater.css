@@ -1,3 +1,8 @@
+	*{
+		margin:0 auto;
+		font-family: "나눔 고딕", 'Nanum Gothic', 'ng';
+		padding: 0;
+	}
 	form{
 		width: 400px;
 		border: 1px solid gray;
@@ -17,4 +22,13 @@
 		font-size: 12px;
 		display: none;
 	} 
+	.displayHidden{
+		display: none;
+	}
+	
+	
+	
+	
+	
+	
 	
