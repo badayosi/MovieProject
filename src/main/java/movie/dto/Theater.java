@@ -110,7 +110,7 @@ public class Theater {
 	public String toString() {
 		return "Theater [theaterNo=" + theaterNo + ", theaterName=" + theaterName + ", theaterFloor=" + theaterFloor
 				+ ", theaterMaxcount=" + theaterMaxcount + ", row=" + row + ", col=" + col + ", theaterType="
-				+ theaterType + "]";
+				+ theaterType + theaterTable + "]";
 	}
 
 	

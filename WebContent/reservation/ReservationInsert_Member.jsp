@@ -8,11 +8,9 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="reservation_common.css">
 <link rel="stylesheet" type="text/css" href="theater_progress.css">
+<link rel="stylesheet" type="text/css" href="theater_seat.css">
+<link rel="stylesheet" type="text/css" href="theater_menu.css">
 <style>
-	
-
-
-	
 	/* 가로형 달력 CSS */
 	div#horizontal_calendar{
 		width:100%;
@@ -267,8 +265,7 @@
 				for(var index=0;index<json.length;index++){
 					makeTheaterList = "";
 					makeTheaterList += "<div>";
-					makeTheaterList += "<a href='#'>";
-					makeTheaterList += "<input type='hidden' name='timeNo' value='" + json[index].timeNo + "'>";
+					makeTheaterList += "<a href='javascript:loadSeat(" + json[index].timeNo +")'>";
 					makeTheaterList += "<table>";
 					makeTheaterList += "<tr>";
 					makeTheaterList += "<td>" + formatChange(json[index].startTime) + "</td>";
@@ -285,6 +282,22 @@
 		});
 	}
 	
+	function loadSeat(timeNo){
+		$.ajax({
+			url:"reservationAjax.do?timeNo=" + timeNo,
+			type:"get",
+			dataType:"json",
+			success:function(json){
+				
+				console.log(json);
+				$("#draw_seat").html("");
+				$("#draw_seat").append("<div id='theater_screen'>SCREEN</div>");
+				$("#draw_seat").append(json.theaterTable);
+			}
+		});
+		$("#theater_progess").css("display","block");
+	}
+	
 	function formatChange(date){
 		var newDate = new Date(date);
 		
@@ -299,6 +312,19 @@
 			$("#integer td p").removeClass("today");
 			$(this).find("p").toggleClass("today");
 		});
+		
+		$("#progress_prev").on("click",function(){
+			$("#theater_progess").css("display","none");
+		})
+		
+		$("#progress_next").on("click",function(){
+			alert("결제완료 관련 작업 예정");
+		})
+		
+		$(document).on("click",".seat",function(){
+			alert("클릭");
+			$(this).toggleClass("tem");
+		})
 	});
 </script>
 
@@ -344,7 +370,46 @@
 		<div id="theater_progess">
 			<div id="progress_prev"><p>PREV</p></div>
 			<div id="theater_seat">
-				
+				<div id="theater_menu">
+					<div id="person_setting">
+						<label>총 인원</label>
+						<select>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+						</select>
+						<label>성인</label>
+						<input type="number" value="0">
+						<label>청소년</label>
+						<input type="number" value="0">
+						<label>시니어</label>
+						<input type="number" value="0">
+						<label>장애인</label>
+						<input type="number" value="0">
+					</div>
+					<div id="seat_setting">
+						<label>좌석 배치설정</label>
+						<input type="radio" name="seat_set" checked="checked">
+						<label>■</label>
+						<input type="radio" name="seat_set">
+						<label>■■</label>
+						<input type="radio" name="seat_set">
+						<label>■■■</label>
+						<input type="radio" name="seat_set">
+						<label>■■■■</label>
+					</div>
+					<div id="waring_info">
+						<p>만 15세 미만의 고객님(영,유아 포함)은 반드시 부모님 또는 성인 보호자의 동반하에 관람이 가능합니다.</p>
+					</div>
+					<div id="draw_seat">
+						
+					</div>
+				</div>
 			</div>
 			<div id="progress_next"><p>NEXT</p></div>
 		</div>

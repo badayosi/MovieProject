@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 
 #theater_progess{
+	display:none;
 	position:absolute;
 	width:100%;
 	height:100%;
@@ -10,7 +11,7 @@
 	z-index:99;
 }
 #progress_prev{
-	width:15%;
+	width:10%;
 	height:100%;
 	background:rgba(0,0,0,0.4);
 	position:absolute;
@@ -28,13 +29,13 @@
 	text-align:center;
 }
 #theater_seat{
-	width:70%;
+	width:80%;
 	height:100%;
 	background:white;
 	margin:0 auto;
 }
 #progress_next{
-	width:15%;
+	width:10%;
 	height:100%;
 	background:rgba(0,0,0,0.4);
 	position:absolute;

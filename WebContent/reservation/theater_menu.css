@@ -1,0 +1,58 @@
+@CHARSET "UTF-8";
+
+#person_setting{
+	width:100%;
+	height:30px;
+	padding-top:20px;
+	line-height:30px;
+}
+#person_setting label{
+	color:black;
+	font-size:14px;
+	font-weight:bold;
+}
+#person_setting label:first-child{
+	margin-left:30px;
+}
+#tperson_setting label:nth-child(2){
+	margin-left:50px;
+}
+#person_setting select{
+	width:50px;
+	margin-right:100px;
+	text-align:center;
+}
+#person_setting input{
+	width:50px;
+	text-align:center;
+}
+
+#seat_setting{
+	width:100%;
+	height:30px;
+	padding-top:10px;
+	line-height:30px;
+}
+#seat_setting label{
+	color:black;
+	font-size:20px;
+	font-weight:bold;
+}
+#seat_setting label:first-child{
+	margin-left:30px;
+	margin-right:10px;
+	font-size:14px;
+}
+#seat_setting input{
+	margin:0px 0px 0px 20px;	
+}
+
+#waring_info{
+	width:100%;
+	height:30px;
+	line-height:30px;
+}
+#waring_info p{
+	font-size:12px;
+	margin:0px 0px 0px 30px;
+}
