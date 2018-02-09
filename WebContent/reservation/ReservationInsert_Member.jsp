@@ -4,21 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="https://cdn.rawgit.com/young-ha/webfont-archive/master/css/PureunJeonnam.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<link rel="stylesheet" type="text/css" href="reservation_common.css">
+<link rel="stylesheet" type="text/css" href="theater_progress.css">
 <style>
-	body{
-		position:relative;
-	}
+	
 
-	div#container{
-		width:1024px;
-		min-height:600px;
-		margin:0 auto;
-		background:#F9F6EC;
-	}
+
 	
 	/* 가로형 달력 CSS */
 	div#horizontal_calendar{
@@ -179,19 +172,6 @@
 	ul#movieZone .selectMovie{
 		font-weight: bold;
 	}
-	
-	/* 예매현황판 */
-	div#nav_condition{
-		width:500px;
-		min-height:300px;
-		position:absolute;
-		top:300px;
-		right:10px;
-		background:gray;
-	}
-	div#nav_condition ul{
-		list-style:none;
-	}
 </style>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
@@ -287,6 +267,7 @@
 				for(var index=0;index<json.length;index++){
 					makeTheaterList = "";
 					makeTheaterList += "<div>";
+					makeTheaterList += "<a href='#'>";
 					makeTheaterList += "<input type='hidden' name='timeNo' value='" + json[index].timeNo + "'>";
 					makeTheaterList += "<table>";
 					makeTheaterList += "<tr>";
@@ -296,6 +277,7 @@
 					makeTheaterList += "<td>" + json[index].restSeat + " / " + json[index].maxSeat + "</td>";
 					makeTheaterList += "</tr>";
 					makeTheaterList += "</table>";
+					makeTheaterList += "</a>";
 					makeTheaterList += "</div>";
 					$("#theaterList").append(makeTheaterList); 
 				}
@@ -359,15 +341,12 @@
 				</tr>
 			</table>
 		</div>
-		<div id="nav_condition">
-			<ul>
-				<li id="nav_title"></li>
-				<li id="nav_date"></li>
-				<li id="nav_time"></li>
-				<li id="nav_theater"></li>
-				<li id="nav_seat"></li>
-				<li id="nav_price"></li>				
-			</ul>
+		<div id="theater_progess">
+			<div id="progress_prev"><p>PREV</p></div>
+			<div id="theater_seat">
+				
+			</div>
+			<div id="progress_next"><p>NEXT</p></div>
 		</div>
 	</div>
 	<jsp:include page="../include/footer.jsp"></jsp:include>

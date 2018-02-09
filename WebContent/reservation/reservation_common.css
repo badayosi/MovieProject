@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+
+div#container{
+	width:1024px;
+	min-height:600px;
+	margin:0 auto;
+	background:#F9F6EC;
+	position:relative;
+}
