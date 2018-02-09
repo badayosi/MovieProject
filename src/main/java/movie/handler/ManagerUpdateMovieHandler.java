@@ -72,17 +72,18 @@ public class ManagerUpdateMovieHandler implements CommandHandler {
 					movie=new  Movie(mNo, name, playTime, rating, openDate, closeDate, genre, synopsis, actor, director);
 					service.updateWithOutFile(movie);
 					System.out.println("새로운 파일이 없어 파일 빼고 업데이트 완료 하였습니다.");
+					return "managerReadMovie.do?no="+mNo;
 				}else{
 					movie=new Movie(mNo, name, poster, playTime, rating, openDate, closeDate, genre, steelCut, video, synopsis, actor, director, uploadPath);
 					service.updateWithFile(movie);
 					System.out.println("새로운 파일이 있으므로 파일도 함께 업데이트 완료하였습니다.");
+					return "managerReadMovie.do?no="+mNo;
 				}
 				
-				return "managerReadMovie.do?no="+mNo;
+				//return "managerReadMovie.do?no="+mNo;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
 		}
 		return null;
 	}
