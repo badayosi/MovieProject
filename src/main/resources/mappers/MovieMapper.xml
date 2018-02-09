@@ -17,6 +17,8 @@
 		<result property="synopsis" column="synopsis"/>
 		<result property="actor" column="actor"/>
 		<result property="director" column="director"/>
+		<result property="filePath" column="filePath"/>
+		
 	</resultMap>
 	
 	<select id="selectAll" resultMap="movieResult">
@@ -24,11 +26,30 @@
 	</select>
 	
 	<insert id="insert" parameterType="Movie">
-		insert into movie(movie_no, movie_name, director, actor, genre, rating, play_time, synopsis, open_date, close_date, path_poster, path_steelcut, path_video)
-			values(0, #{movieName}, #{director}, #{actor}, #{genre}, #{rating}, #{playTime}, #{synopsis}, #{openDate}, #{closeDate}, #{pathPoster}, #{pathSteelcut}, #{pathVideo})
+		insert into movie(movie_no, movie_name, director, actor, genre, rating, play_time, synopsis, open_date, close_date, path_poster, path_steelcut, path_video, filePath)
+			values(0, #{movieName}, #{director}, #{actor}, #{genre}, #{rating}, #{playTime}, #{synopsis}, #{openDate}, #{closeDate}, #{pathPoster}, #{pathSteelcut}, #{pathVideo}, #{filePath})
 	</insert>
 	
 	<select id="selectById" resultMap="movieResult">
 		select * from movie where movie_no=#{movieNo} 
 	</select>
+	
+	<select id="selectLastNo" resultType="int">
+		select max(movie_no) from movie
+	</select>
+	
+	<select id="selectFilePath" resultType="String" parameterType="int">
+		select filePath from movie where movie_no=#{movieNo}
+	</select>
+	
+	<update id="updateWithFile" parameterType="Movie">
+		update movie set movie_name=#{movieName}, director=#{director}, actor#{actor}, genre#{genre}, rating#{rating}, play_time#{playTime},
+			 synopsis=#{synopsis}, open_date=#{openDate}, close_date=#{closeDate}, path_poster=#{pathPoster}, path_steelcut=#{pathSteelcut}, path_video=#{pathVideo}
+	</update>
+	
+	<update id="updateWithOutFile" parameterType="Movie">
+		update movie set movie_name=#{movieName}, director=#{director}, actor#{actor}, genre#{genre}, rating#{rating}, play_time#{playTime},
+			 synopsis=#{synopsis}, open_date=#{openDate}, close_date=#{closeDate}
+	</update>
+	
 </mapper>

@@ -5,13 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <style type="text/css">
-	#addDiv{
+	#updateDiv{
 		width:40%;
 		margin:0 auto;
 		text-align: center;
 	}
-	#addDiv #addForm{
+	#updateDiv #updateForm{
 		width:100%;
 		margin:0 auto;
 		text-align: center;
@@ -35,12 +36,33 @@
 		width:400px;
 	}
 </style>
+<script type="text/javascript">
+	$(function(){
+		$("#updateForm").submit(function(){
+			var formAction=$("#updateForm").attr("action");
+			var poster=$("input[name='moviePoster']").val();
+			var video=$("input[name='movieVideo']").val();
+			
+			var steelcutStr = "";
+			for(var i =0; i< $("#steelcut").get(0).files.length; i++){
+				steelcutStr += $("#steelcut").get(0).files[i].name + ",";
+			}
+			$("input[type='hidden']").val(steelcutStr);
+			
+			alert(formAction);
+			if(poster!=null||video!=null||steelcutStr!=null){
+				$("#updateForm").attr("action", formAction+"&yes=1");
+			}
+		});
+		
+	});
+</script>
 </head>
 <body>
    <jsp:include page="../include/managerHeader.jsp"></jsp:include>
 
-<div id="addDiv">
-	<form id="addForm" method="post" action="managerAddMovie.do">
+<div id="updateDiv">
+	<form id="updateForm" method="post" action="managerUpdateMovie.do?mNo=${movie.movieNo}" enctype="multipart/form-data">
 		<table id="infoTable">
 			<tr>
 				<th>영화제목</th>
@@ -80,7 +102,7 @@
 			</tr>
 			<tr>
 				<th></th>
-				<td></td>
+				<td>※수정할 파일이 없을 시 선택하지 말고 그대로 저장해주세요※<br>파일 수정을 하려면 모든파일을 새로 올려야 합니다. 파일 하나만 수정은 안됩니다.</td>
 			</tr>
 			<tr>
 				<th>포스터</th>
@@ -88,14 +110,15 @@
 			</tr>
 			<tr>
 				<th>스틸컷</th>
-				<td><input type="file" multiple="multiple" name="movieSteelCut"  value="${movie.pathSteelcut }"></td>
+				<td><input type="file" id="steelcut" multiple name="movieSteelCut[]" value="${movie.pathSteelcut }"></td>
 			</tr>
 			<tr>
 				<th>동영상</th>
-				<td><input type="file" name="movieVideo"  value="${movie.pathVideo }"></td>
+				<td><input type="file" name="movieVideo"  value="${movie.pathVideo }"></td> 
 			</tr>
 		</table>
 		<hr>
+		<input type="hidden" name="movieSteelCut" value="">
 		<input type="submit" value="수정">
 		<a href="managerReadMovie.do"><input type="button" value="취소"></a>
 	</form>	
