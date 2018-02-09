@@ -9,6 +9,10 @@
 <title>Insert title here</title>
 
 <style>
+	body{
+		position:relative;
+	}
+
 	div#container{
 		width:1024px;
 		min-height:600px;
@@ -175,6 +179,19 @@
 	ul#movieZone .selectMovie{
 		font-weight: bold;
 	}
+	
+	/* 예매현황판 */
+	div#nav_condition{
+		width:500px;
+		min-height:300px;
+		position:absolute;
+		top:300px;
+		right:10px;
+		background:gray;
+	}
+	div#nav_condition ul{
+		list-style:none;
+	}
 </style>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
@@ -258,7 +275,38 @@
 	}
 	
 	function selectMovie(no){
-		alert(no);
+		$.ajax({
+			url:"reservationAjax.do?no=" + no,
+			type:"get",
+			dataType:"json",
+			success:function(json){
+				
+				console.log(json);
+				$("#theaterList").html("");
+				var makeTheaterList;
+				for(var index=0;index<json.length;index++){
+					makeTheaterList = "";
+					makeTheaterList += "<div>";
+					makeTheaterList += "<input type='hidden' name='timeNo' value='" + json[index].timeNo + "'>";
+					makeTheaterList += "<table>";
+					makeTheaterList += "<tr>";
+					makeTheaterList += "<td>" + formatChange(json[index].startTime) + "</td>";
+					makeTheaterList += "<td>" + json[index].theaterName + "</td>";
+					makeTheaterList += "<td>(" + json[index].theaterType + ")</td>";
+					makeTheaterList += "<td>" + json[index].restSeat + " / " + json[index].maxSeat + "</td>";
+					makeTheaterList += "</tr>";
+					makeTheaterList += "</table>";
+					makeTheaterList += "</div>";
+					$("#theaterList").append(makeTheaterList); 
+				}
+			}
+		});
+	}
+	
+	function formatChange(date){
+		var newDate = new Date(date);
+		
+		return newDate.getHours() + ":" + newDate.getMinutes();
 	}
 
 	$(function(){
@@ -296,18 +344,30 @@
 							<li>가나다순</li>
 						</ul>
 					</td>
-					<td rowspan="2" class="td_theater">상영관리스트</td>
+					<td rowspan="2" id="theaterList">
+					
+					</td>
 				</tr>
 				<tr>
 					<td id="movieList">
 						<c:if test="${true}">
 							<ul id="movieZone">
-							
+								
 							</ul>
 						</c:if>
 					</td>
 				</tr>
 			</table>
+		</div>
+		<div id="nav_condition">
+			<ul>
+				<li id="nav_title"></li>
+				<li id="nav_date"></li>
+				<li id="nav_time"></li>
+				<li id="nav_theater"></li>
+				<li id="nav_seat"></li>
+				<li id="nav_price"></li>				
+			</ul>
 		</div>
 	</div>
 	<jsp:include page="../include/footer.jsp"></jsp:include>
