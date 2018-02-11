@@ -10,9 +10,9 @@ import mvc.util.MySqlSessionFactory;
 
 public class UserService{
 	private static final UserService INSTANCE = new UserService();
+	
 	private UserService() {}
 
-	
 	public static UserService getInstance() {
 		return INSTANCE;
 	}

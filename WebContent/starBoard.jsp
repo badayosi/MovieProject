@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -179,58 +180,85 @@
 				}
 			})
 		})
-		boardListView(1);
+		boardListView(0);
 	})
-function boardListView(asd){
-	
+function boardListView(boardNo){
+		
 	$.ajax({
 		url:"starboard.do",
 		type:"get",
-		data:{"size":size},
+		data:{"size":boardNo},
 		dataType:"json",
 		success:function(json){
 			console.log(json);
-			var div_userStartBoard =  "<div class='userStarBoard'>";
-			var div_userStartBoard_left = "<div class='userStarBoard_left'>";
-			var div_user_star_board = "<div class='user_star_board'>";
-			var span_relaview= "<span class='realview'>실관람객</span>";
-			var img = "";
-			var size = json[j].grade;
-			var halfSize =  parseInt(size / 2);
-			for(var i =0; i <5; i ++){
-				if(size % 2 ==0){
-					if(halfSize > i){
-						img += "<img src='images/star-on.png'>";
-					}else{
-						img += "<img src='images/star-off.png'>";
+			if(json.length!=0){
+				for(var j=0; j < json.length; j++){
+
+					var div_userStartBoard =  "<div class='userStarBoard'>";
+					var div_userStartBoard_left = "<div class='userStarBoard_left'>";
+					var div_user_star_board = "<div class='user_star_board'>";
+					var span_relaview= "<span class='realview'>실관람객</span>";
+					var img = "";
+					var size = json[j].grade;
+					var halfSize =  parseInt(size / 2);
+					for(var i =0; i <5; i ++){
+						if(size % 2 ==0){
+							if(halfSize > i){
+								img += "<img src='images/star-on.png'>";
+							}else{
+								img += "<img src='images/star-off.png'>";
+							}
+						}else if(size %2 != 0){
+							if(halfSize > i){
+								img += "<img src='images/star-on.png'>";
+							}else if(halfSize == i){
+								img += "<img src='images/star-half.png'>";
+							}else{
+								img += "<img src='images/star-off.png'>";
+							}
+						}
 					}
-				}else if(size %2 != 0){
-					if(halfSize > i){
-						img += "<img src='images/star-on.png'>";
-					}else if(halfSize == i){
-						img += "<img src='images/star-half.png'>";
-					}else{
-						img += "<img src='images/star-off.png'>";
-					}
+					var span_user_star_board_socre = "<span class ='user_star_board_socre'>"+json[j].grade+"</span></div>";
+					div_userStartBoard += div_userStartBoard_left+div_userStartBoard_left+div_user_star_board +span_relaview + img +span_user_star_board_socre;
+						
+					var div_user_star_content = "<div class='user_star_content'>";
+					var contentP = "<p>"+ json[j].boardContent + "</p></div>";
+					var div_user_star_date =  "<div class='user_star_date'>";
+					
+					var date = new Date(json[j].regDate);
+					
+					var regDateP = "<p>"+date+"</p></div></div>";
+					
+					div_userStartBoard += div_user_star_content + contentP + div_user_star_date + regDateP;
+					
+					var userStarBoard_right = "<div class='userStarBoard_right'>";
+					var userNameString = json[j].userName;
+					var hiddName = userNameString.replace(userNameString.substr(1,1),"*");
+					
+					var spanName = "<span class='userStarBoard_userId'>"+hiddName+"</span></div></div>";
+					
+					div_userStartBoard += userStarBoard_right +spanName;
+					$("#userStarBoardView").append(div_userStartBoard);
+					
+				}
+				var fullSize = Number($("#boardSize").text());
+				
+				for(var boardSize; boardSize < fullSize; boardSize++){
+					var pageNo = "<span class='page_number'>"+(boardSize+1)+"</span>"
+					$("#countBtn").append(pageNo);
 				}
 			}
-			var span_user_star_board_socre = "<span class ='user_star_board_socre'>10</span>"
-			
 		}
 	})
-	var img= "";
-	var size =0;
-	var halfSize = parseInt(size / 2);
-	alert(halfSize);
-	
 }
 </script>
 <title>Insert title here</title>
 </head>
 <body>
 	<div id="starBorad">
+		<p  id="boardSize">${boardIndex }</p>
 		<h2>평점 및 영화 리뷰</h2>
-		<div id="boradWrap">http://localhost:8080/MovieProject/images/star-off.png
+		<div id="boradWrap">
 			<div id="starScore">
 				<h4>평점</h4>
 				<span class="star-input" id="star-input">
@@ -257,92 +285,20 @@ function boardListView(asd){
 			</div>
 		</div>
 		<hr>
-		<div class="userStarBoard">
-			<div class="userStarBoard_left">
-				<div class="user_star_board">
-					<span class="realview">실관람객</span>
-					<img src="images/star-on.png">
-					<img src="images/star-on.png">
-					<img src="images/star-on.png">
-					<img src="images/star-on.png">
-					<img src="images/star-on.png" class="last_img">
-					<span class ="user_star_board_socre">10</span>
-				</div>
-				<div class="user_star_content">
-					<p>
-						지루하지 않게, 오달수님!! 좋아합니다용^^
-					</p>
-				</div>
-				<div class="user_star_date">
-					<p>
-						2018.02.09
-					</p>
-				</div>
-			</div>
-			<div class="userStarBoard_right">
-				<span class="userStarBoard_userId">이*숙</span>
-			</div>
-		</div>
-		<div class="userStarBoard">
-			<div class="userStarBoard_left">
-				<div class="user_star_board">
-					<span class="realview">실관람객</span>
-					<img src="images/star-on.png">
-					<img src="images/star-on.png">
-					<img src="images/star-on.png">
-					<img src="images/star-on.png">
-					<img src="images/star-on.png" class="last_img">
-					<span class ="user_star_board_socre">10</span>
-				</div>
-				<div class="user_star_content">
-					<p>
-						지루하지 않게, 오달수님!! 좋아합니다용^^
-					</p>
-				</div>
-				<div class="user_star_date">
-					<p>
-						2018.02.09
-					</p>
-				</div>
-			</div>
-			<div class="userStarBoard_right">
-				<span class="userStarBoard_userId">이*숙</span>
-			</div>
-		</div>
-		<div class="userStarBoard">
-			<div class="userStarBoard_left">
-				<div class="user_star_board">
-					<span class="realview">실관람객</span>
-					<img src="images/star-on.png">
-					<img src="images/star-on.png">
-					<img src="images/star-on.png">
-					<img src="images/star-half.png">
-					<img src="images/star-off.png" class="last_img">
-					<span class ="user_star_board_socre">10</span>
-				</div>
-				<div class="user_star_content">
-					<p>
-						지루하지 않게, 오달수님!! 좋아합니다용^^
-					</p>
-				</div>
-				<div class="user_star_date">
-					<p>
-						2018.02.09
-					</p>
-				</div>
-			</div>
-			<div class="userStarBoard_right">
-				<span class="userStarBoard_userId">이*숙</span>
-			</div>
-		</div>
-		<div id="countBtn">
-				<span class="page_number">1</span>
-				<span class="page_number">2</span>
-				<span class="page_number">3</span>
-		</div>
-	</div>
-	<div id="testStar">
+		<div id="userStarBoardView">
 		
+		</div>
+		
+		<div id="countBtn">
+				
+		</div>
+		<c:if test="${boardIndex!=null }">
+			들어옴 ${boardIndex }
+		</c:if>
+		<c:if test="${boardIndex==null }">
+			안들어옴
+		</c:if>
 	</div>
+	
 </body>
 </html>

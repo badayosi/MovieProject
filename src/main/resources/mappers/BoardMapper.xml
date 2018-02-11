@@ -24,4 +24,5 @@
 	<select id="selectLimit" resultMap="boardResult" parameterType="int">
 		select * from board order by board_no desc limit #{size},4;
 	</select>
+	
 </mapper>
