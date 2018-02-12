@@ -69,7 +69,7 @@
 		<a href="/MovieProject/login/JoinForm.jsp">회원가입</a>
 	</c:if>
 	</p>
-</div>
+</div> 
 <div id="menubarWarp">
 	<ul id="menubar">
 		<li><a href="#">HOME</a></li>
