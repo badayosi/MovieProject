@@ -406,6 +406,22 @@ input:FOCUS {
 				$("#userPw").nextAll(".checkimg").css("display","inline-block");
 				$("#userPw").nextAll(".checkimg").attr("src",trueImgsrc);
 			}
+			 /*  var reg =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
+		      var password = $("input[name='pw']").val();
+		      var noNum = true;
+		      
+		      if(/(\w)\1\1\1/.test(password)){
+		         noNum=false;
+		      }
+		      
+		      if(reg.test(password)&&noNum){
+		         $("#pw_reg").css("display","inline");
+		         $("#pw_reg_error").css("display","none");
+		         
+		      }else{
+		         $("#pw_reg").css("display","none");
+		         $("#pw_reg_error").css("display","inline");
+		      } */
 		})
 		$("input[name='pwch']").keyup(function(){
 			if($(this).val() != $("input[name='pw']").val()){
@@ -440,12 +456,16 @@ input:FOCUS {
 		$("input[name='tel2'],input[name='tel3']").keyup(function(){
 			var regTel1 = /^[0-9]{3,4}$/;
 			var regTel2 = /^[0-9]{4}$/;
+			if($("input[name='tel2']").val().length==4){
+				$("#userTel").nextAll("input").focus();
+			}
 			if(!regTel1.test($("input[name='tel2']").val()) || !regTel2.test($("input[name='tel3']").val())){
 				$("#userTel").nextAll(".checkimg").css("display","inline-block");
 				$("#userTel").nextAll(".checkimg").attr("src",falseImgsrc);
 			}else{
 				$("#userTel").nextAll(".checkimg").css("display","inline-block");
 				$("#userTel").nextAll(".checkimg").attr("src",trueImgsrc);
+				
 			}
 		})
 		$("input[name='gender']").click(function(){

@@ -18,30 +18,32 @@ public class StarBoardHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		BoardService service = BoardService.getInstance();
-		int size = service.selectTosize();
-		HashMap<String,Integer> map = new HashMap<>();
+		int size = service.selectTosize() /4;
+		HashMap<String,Object> map = new HashMap<>();
 		
 		map.put("size",size);
 		if(req.getParameter("size").equalsIgnoreCase("0")){
 			
 			int boardsize = 0;
 			List<Board> list = service.selectLimit(boardsize);
+			map.put("list", list);
 			ObjectMapper om = new ObjectMapper();
-			String json = om.writeValueAsString(list); //json 형태의 String으로 변환
-			String json2 = om.writeValueAsString(map);
+			//String json = om.writeValueAsString(list); //json 형태의 String으로 변환
+			String json = om.writeValueAsString(map);
 			res.setContentType("application/json;charset=utf-8");
 			PrintWriter pw = res.getWriter();
-			pw.print(json);
+			pw.print(json);			
 			pw.flush();
 			
 		
 		}else if(!req.getParameter("size").equalsIgnoreCase("0")){
 			
 			int boardsize = Integer.parseInt(req.getParameter("size"))*4;
+			System.out.println(boardsize);
 			List<Board> list = service.selectLimit(boardsize);
 			ObjectMapper om = new ObjectMapper();
-			String json = om.writeValueAsString(list); //json 형태의 String으로 변환
-			String json2 = om.writeValueAsString(map);
+			map.put("list", list);
+			String json = om.writeValueAsString(map); //json 형태의 String으로 변환
 			res.setContentType("application/json;charset=utf-8");
 			PrintWriter pw = res.getWriter();
 			pw.print(json);
