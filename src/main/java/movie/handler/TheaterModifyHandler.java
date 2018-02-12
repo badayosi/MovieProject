@@ -20,6 +20,7 @@ public class TheaterModifyHandler implements CommandHandler {
 			req.setAttribute("item", theater);
 			
 			return "managerModify.jsp";
+			
 		}else if(req.getMethod().equalsIgnoreCase("post")){
 			req.setCharacterEncoding("utf-8");
 			String no1 = req.getParameter("number");
@@ -31,12 +32,12 @@ public class TheaterModifyHandler implements CommandHandler {
 							req.getParameter("row"), 
 							Integer.parseInt(req.getParameter("col")), 
 							req.getParameter("type"));
-			
+			theater.setTheaterTable(req.getParameter("table")); 
 			//System.out.println(theater.toString());
 			//System.out.println(no);
 			TheaterService service = TheaterService.getInstance();
 			int result = service.updateTheater(theater);
-			
+			int result1 = service.updateTheaterTable(theater);
 			if(result<0){
 				req.setAttribute("result", "에러");
 			}

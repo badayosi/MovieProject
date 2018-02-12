@@ -14,6 +14,7 @@
   	<typeAlias type="movie.dto.User" alias="User"/>
   	<typeAlias type="movie.dto.UserRank" alias="UserRank"/>
   	<typeAlias type="movie.dto.ReservationGuide" alias="ReservationGuide"/>
+  	<typeAlias type="movie.dto.ReservationProgress" alias="ReservationProgress"/>
   	<typeAlias type="movie.dto.ServiceBoard" alias="ServiceBoard"/>
   </typeAliases>
    <environments default="development">
@@ -53,6 +54,7 @@
   	<mapper resource="mappers/UserMapper.xml"/>
   	<mapper resource="mappers/UserRankMapper.xml"/>
   	<mapper resource="mappers/ReservationGuideMapper.xml"/>
+  	<mapper resource="mappers/ReservationProgressMapper.xml"/>
   	<mapper resource="mappers/ServiceBoardMapper.xml"/>
   </mappers>
 </configuration>

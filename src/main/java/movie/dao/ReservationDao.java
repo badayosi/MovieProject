@@ -6,4 +6,5 @@ import movie.dto.Reservation;
 
 public interface ReservationDao {
 	public List<Reservation> selectAll();
+	public List<Reservation> selectByTimeTable(int no);
 }

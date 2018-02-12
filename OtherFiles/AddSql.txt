@@ -1,6 +1,6 @@
 use movie;
 
-/* RESERVATION VIEW */
+/* RESERVATION_GUIDE VIEW */
 create view reservation_guide as
 select reservation.`no`, user.user_id, movie.movie_name, theater.theater_floor, theater.theater_name, theater.theater_type, timetable.start_time, timetable.end_time, reservation.seat, reservation.price  
 from reservation, timetable, theater, movie, user
@@ -8,6 +8,12 @@ where reservation.user_id = user.user_id
 	and reservation.timetable_no = timetable.table_no
 	and timetable.movie_no = movie.movie_no
 	and timetable.theater_no = theater.theater_no;
+	
+/* RESERVATION_PROGRESS VIEW */
+create view reservation_progress as
+select table_no, start_time, theater_name, theater_type, theater_maxcount
+from timetable, theater
+where timetable.table_no = theater.theater_no;
 
 /* ADDRESS */	
 load data local infile 'D:/workspace_bigdata/post_search/DataFiles/DAEGU.txt'
