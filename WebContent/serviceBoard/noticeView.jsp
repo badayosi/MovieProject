@@ -41,10 +41,11 @@
 	#tablewrap #notice_table{
 		width:100%;
 		text-align: center;
+		border-collapse: collapse;
 	}
 	#header_table{
-		border-top:5px solid black;
-		border-bottom: 5px solid black;
+		border-top:1px solid black;
+		border-bottom: 1px solid black;
 	}
 </style>
 </head>
