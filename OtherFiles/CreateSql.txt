@@ -1,4 +1,4 @@
- -- movie
+-- movie
 DROP SCHEMA IF EXISTS movie;
 
 -- movie
@@ -6,24 +6,23 @@ CREATE SCHEMA movie;
 
 -- address
 CREATE TABLE movie.address (
-   addrNo    CHAR(5)     NULL COMMENT '우편번호', -- 우편번호
-   sido      VARCHAR(20) NULL COMMENT '시도', -- 시도
-   sigungu   VARCHAR(20) NULL COMMENT '시군구', -- 시군구
-   doro      VARCHAR(20) NULL COMMENT '도로', -- 도로
-   building1 INT(5)      NULL COMMENT '건물번호1', -- 건물번호1
-   building2 INT(5)      NULL COMMENT '건물번호2' -- 건물번호2
+   addrNo    CHAR(5)     NULL COMMENT '�슦�렪踰덊샇', -- �슦�렪踰덊샇
+   sido      VARCHAR(20) NULL COMMENT '�떆�룄', -- �떆�룄
+   sigungu   VARCHAR(20) NULL COMMENT '�떆援곌뎄', -- �떆援곌뎄
+   doro      VARCHAR(20) NULL COMMENT '�룄濡�', -- �룄濡�
+   building1 INT(5)      NULL COMMENT '嫄대Ъ踰덊샇1', -- 嫄대Ъ踰덊샇1
+   building2 INT(5)      NULL COMMENT '嫄대Ъ踰덊샇2' -- 嫄대Ъ踰덊샇2
 )
 COMMENT 'address';
 
 -- board
 CREATE TABLE movie.board (
-   board_no      INT(11)      NOT NULL COMMENT '게시판번호', -- 게시판번호
-   user_id       VARCHAR(50)  NOT NULL COMMENT '회원id', -- 회원id
-   movie_no      INT(11)      NOT NULL COMMENT '영화_no', -- 영화_no
-   board_title   VARCHAR(255) NOT NULL COMMENT '게시판제목', -- 게시판제목
-   board_content TEXT         NULL     COMMENT '게시판내용', -- 게시판내용
-   regdate       DATE         NOT NULL COMMENT '등록일', -- 등록일
-   grade         INT(11)      NULL     COMMENT '개인별점' -- 개인별점
+   board_no      INT(11)      NOT NULL COMMENT '寃뚯떆�뙋踰덊샇', -- 寃뚯떆�뙋踰덊샇
+   user_id       VARCHAR(50)  NOT NULL COMMENT '�쉶�썝id', -- �쉶�썝id
+   movie_no      INT(11)      NOT NULL COMMENT '�쁺�솕_no', -- �쁺�솕_no
+   board_content TEXT         NULL     COMMENT '寃뚯떆�뙋�궡�슜', -- 寃뚯떆�뙋�궡�슜
+   regdate       DATE         NOT NULL COMMENT '�벑濡앹씪', -- �벑濡앹씪
+   grade         INT(11)      NULL     COMMENT '媛쒖씤蹂꾩젏' -- 媛쒖씤蹂꾩젏
 )
 COMMENT 'board';
 
@@ -31,28 +30,28 @@ COMMENT 'board';
 ALTER TABLE movie.board
    ADD CONSTRAINT
       PRIMARY KEY (
-         board_no -- 게시판번호
+         board_no -- 寃뚯떆�뙋踰덊샇
       );
 
 ALTER TABLE movie.board
-   MODIFY COLUMN board_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '게시판번호';
+   MODIFY COLUMN board_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '寃뚯떆�뙋踰덊샇';
 
 -- movie
 CREATE TABLE movie.movie (
-   movie_no      INT(11)      NOT NULL COMMENT '영화_no', -- 영화_no
-   movie_name    VARCHAR(50)  NOT NULL COMMENT '영화이름', -- 영화이름
-   path_poster   VARCHAR(255) NULL     COMMENT '포스터', -- 포스터
-   play_time     INT(11)      NULL     COMMENT '상영시간', -- 상영시간
-   rating        INT(11)      NULL     COMMENT '등급', -- 등급
-   grade         DOUBLE       NULL     COMMENT '총평점', -- 총평점
-   open_date     DATE         NULL     COMMENT '개봉일', -- 개봉일
-   close_date    DATE         NULL     COMMENT '종료일', -- 종료일
-   genre         VARCHAR(255) NULL     COMMENT '장르', -- 장르
-   path_steelcut VARCHAR(255) NULL     COMMENT '스틸컷', -- 스틸컷
-   path_video    VARCHAR(255) NULL     COMMENT '동영상', -- 동영상
-   synopsis      TEXT         NULL     COMMENT '줄거리', -- 줄거리
-   actor         VARCHAR(255) NULL     COMMENT '배우', -- 배우
-   director      VARCHAR(255) NULL     COMMENT '감독' -- 감독
+   movie_no      INT(11)      NOT NULL COMMENT '�쁺�솕_no', -- �쁺�솕_no
+   movie_name    VARCHAR(50)  NOT NULL COMMENT '�쁺�솕�씠由�', -- �쁺�솕�씠由�
+   path_poster   VARCHAR(255) NULL     COMMENT '�룷�뒪�꽣', -- �룷�뒪�꽣
+   play_time     INT(11)      NULL     COMMENT '�긽�쁺�떆媛�', -- �긽�쁺�떆媛�
+   rating        INT(11)      NULL     COMMENT '�벑湲�', -- �벑湲�
+   grade         DOUBLE       NULL     COMMENT '珥앺룊�젏', -- 珥앺룊�젏
+   open_date     DATE         NULL     COMMENT '媛쒕큺�씪', -- 媛쒕큺�씪
+   close_date    DATE         NULL     COMMENT '醫낅즺�씪', -- 醫낅즺�씪
+   genre         VARCHAR(255) NULL     COMMENT '�옣瑜�', -- �옣瑜�
+   path_steelcut VARCHAR(255) NULL     COMMENT '�뒪�떥而�', -- �뒪�떥而�
+   path_video    VARCHAR(255) NULL     COMMENT '�룞�쁺�긽', -- �룞�쁺�긽
+   synopsis      TEXT         NULL     COMMENT '以꾧굅由�', -- 以꾧굅由�
+   actor         VARCHAR(255) NULL     COMMENT '諛곗슦', -- 諛곗슦
+   director      VARCHAR(255) NULL     COMMENT '媛먮룆' -- 媛먮룆
 )
 COMMENT 'movie';
 
@@ -60,11 +59,11 @@ COMMENT 'movie';
 ALTER TABLE movie.movie
    ADD CONSTRAINT
       PRIMARY KEY (
-         movie_no -- 영화_no
+         movie_no -- �쁺�솕_no
       );
 
 ALTER TABLE movie.movie
-   MODIFY COLUMN movie_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '영화_no';
+   MODIFY COLUMN movie_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '�쁺�솕_no';
 
 -- reservation
 CREATE TABLE movie.reservation (
@@ -81,22 +80,22 @@ COMMENT 'reservation';
 ALTER TABLE movie.reservation
    ADD CONSTRAINT
       PRIMARY KEY (
-         no -- 예약번호
+         no -- �삁�빟踰덊샇
       );
 
 ALTER TABLE movie.reservation
-   MODIFY COLUMN no INT(11) NOT NULL AUTO_INCREMENT COMMENT '예약번호';
+   MODIFY COLUMN no INT(11) NOT NULL AUTO_INCREMENT COMMENT '�삁�빟踰덊샇';
 
 -- theater
 CREATE TABLE movie.theater (
    theater_no       INT(11)      NOT NULL COMMENT 'theater_no', -- theater_no
-   theater_name     VARCHAR(255) NOT NULL COMMENT '이름', -- 이름
-   theater_floor    INT(11)      NOT NULL COMMENT '층수', -- 층수
-   theater_maxcount INT(11)      NOT NULL COMMENT '인원', -- 인원
-   theater_row      VARCHAR(2)   NOT NULL COMMENT '배치', -- 행
-   theater_col      INT(11)      NULL     COMMENT '열', -- 열
-   theater_type     VARCHAR(255) NOT NULL COMMENT '상영관종류', -- 상영관종류
-   theater_table    TEXT         NULL     COMMENT '좌석배치도' -- 좌석배치도
+   theater_name     VARCHAR(255) NOT NULL COMMENT '�씠由�', -- �씠由�
+   theater_floor    INT(11)      NOT NULL COMMENT '痢듭닔', -- 痢듭닔
+   theater_maxcount INT(11)      NOT NULL COMMENT '�씤�썝', -- �씤�썝
+   theater_row      VARCHAR(2)   NOT NULL COMMENT '諛곗튂', -- �뻾
+   theater_col      INT(11)      NULL     COMMENT '�뿴', -- �뿴
+   theater_type     VARCHAR(255) NOT NULL COMMENT '�긽�쁺愿�醫낅쪟', -- �긽�쁺愿�醫낅쪟
+   theater_table    TEXT         NULL     COMMENT '醫뚯꽍諛곗튂�룄' -- 醫뚯꽍諛곗튂�룄
 )
 COMMENT 'theater';
 
@@ -112,11 +111,11 @@ ALTER TABLE movie.theater
 
 -- timetable
 CREATE TABLE movie.timetable (
-   table_no   INT(11) NOT NULL COMMENT '시간표no', -- 시간표no
-   movie_no   INT(11) NOT NULL COMMENT '영화_no', -- 영화_no
-   theater_no INT(11) NOT NULL COMMENT '상영관_no', -- 상영관_no
-   start_time DATETIME    NOT NULL COMMENT '방영시작시간', -- 방영시작시간
-   end_time   DATETIME    NOT NULL COMMENT '방영종료시간' -- 방영종료시간
+   table_no   INT(11) NOT NULL COMMENT '�떆媛꾪몴no', -- �떆媛꾪몴no
+   movie_no   INT(11) NOT NULL COMMENT '�쁺�솕_no', -- �쁺�솕_no
+   theater_no INT(11) NOT NULL COMMENT '�긽�쁺愿�_no', -- �긽�쁺愿�_no
+   start_time DATETIME    NOT NULL COMMENT '諛⑹쁺�떆�옉�떆媛�', -- 諛⑹쁺�떆�옉�떆媛�
+   end_time   DATETIME    NOT NULL COMMENT '諛⑹쁺醫낅즺�떆媛�' -- 諛⑹쁺醫낅즺�떆媛�
 )
 COMMENT 'timetable';
 
@@ -124,23 +123,23 @@ COMMENT 'timetable';
 ALTER TABLE movie.timetable
    ADD CONSTRAINT
       PRIMARY KEY (
-         table_no -- 시간표no
+         table_no -- �떆媛꾪몴no
       );
 
 ALTER TABLE movie.timetable
-   MODIFY COLUMN table_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '시간표no';
+   MODIFY COLUMN table_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '�떆媛꾪몴no';
 
 -- user
 CREATE TABLE movie.user (
-   user_id   VARCHAR(50)  NOT NULL COMMENT '회원id', -- 회원id
-   password  VARCHAR(50)  NOT NULL COMMENT '비밀번호', -- 비밀번호
-   point     INT(11)      NULL     COMMENT '포인트', -- 포인트
+   user_id   VARCHAR(50)  NOT NULL COMMENT '�쉶�썝id', -- �쉶�썝id
+   password  VARCHAR(50)  NOT NULL COMMENT '鍮꾨�踰덊샇', -- 鍮꾨�踰덊샇
+   point     INT(11)      NULL     COMMENT '�룷�씤�듃', -- �룷�씤�듃
    email     VARCHAR(50)  NOT NULL COMMENT 'email', -- email
-   phone     VARCHAR(50)      NOT NULL COMMENT '전화번호', -- 전화번호
-   addr      VARCHAR(255) NOT NULL COMMENT '주소', -- 주소
-   name       VARCHAR(255) NOT NULL COMMENT '이름', -- 이름
-   gender    VARCHAR(50)  NOT NULL COMMENT '성별', -- 성별
-   user_rank VARCHAR(50)  NULL     COMMENT '회원등급' -- 회원등급
+   phone     VARCHAR(50)      NOT NULL COMMENT '�쟾�솕踰덊샇', -- �쟾�솕踰덊샇
+   addr      VARCHAR(255) NOT NULL COMMENT '二쇱냼', -- 二쇱냼
+   name       VARCHAR(255) NOT NULL COMMENT '�씠由�', -- �씠由�
+   gender    VARCHAR(50)  NOT NULL COMMENT '�꽦蹂�', -- �꽦蹂�
+   user_rank VARCHAR(50)  NULL     COMMENT '�쉶�썝�벑湲�' -- �쉶�썝�벑湲�
 )
 COMMENT 'user';
 
@@ -148,7 +147,7 @@ COMMENT 'user';
 ALTER TABLE movie.user
    ADD CONSTRAINT
       PRIMARY KEY (
-         user_id -- 회원id
+         user_id -- �쉶�썝id
       );
 
 -- user_rank
@@ -169,89 +168,89 @@ ALTER TABLE movie.user_rank
 ALTER TABLE movie.board
    ADD CONSTRAINT FK_movie_TO_board -- FK_movie_TO_board
       FOREIGN KEY (
-         movie_no -- 영화_no
+         movie_no -- �쁺�솕_no
       )
       REFERENCES movie.movie ( -- movie
-         movie_no -- 영화_no
+         movie_no -- �쁺�솕_no
       ),
    ADD INDEX FK_movie_TO_board (
-      movie_no -- 영화_no
+      movie_no -- �쁺�솕_no
    );
 
 -- board
 ALTER TABLE movie.board
    ADD CONSTRAINT FK_user_TO_board -- FK_user_TO_board
       FOREIGN KEY (
-         user_id -- 회원id
+         user_id -- �쉶�썝id
       )
       REFERENCES movie.user ( -- user
-         user_id -- 회원id
+         user_id -- �쉶�썝id
       ),
    ADD INDEX FK_user_TO_board (
-      user_id -- 회원id
+      user_id -- �쉶�썝id
    );
 
 -- reservation
 ALTER TABLE movie.reservation
    ADD CONSTRAINT FK_timetable_TO_reservation -- FK_timetable_TO_reservation
       FOREIGN KEY (
-         timetable_no -- 상영시간표_no
+         timetable_no -- �긽�쁺�떆媛꾪몴_no
       )
       REFERENCES movie.timetable ( -- timetable
-         table_no -- 시간표no
+         table_no -- �떆媛꾪몴no
       ),
    ADD INDEX FK_timetable_TO_reservation (
-      timetable_no -- 상영시간표_no
+      timetable_no -- �긽�쁺�떆媛꾪몴_no
    );
 
 -- reservation
 ALTER TABLE movie.reservation
    ADD CONSTRAINT FK_user_TO_reservation -- FK_user_TO_reservation
       FOREIGN KEY (
-         user_id -- 회원id
+         user_id -- �쉶�썝id
       )
       REFERENCES movie.user ( -- user
-         user_id -- 회원id
+         user_id -- �쉶�썝id
       ),
    ADD INDEX FK_user_TO_reservation (
-      user_id -- 회원id
+      user_id -- �쉶�썝id
    );
 
 -- timetable
 ALTER TABLE movie.timetable
    ADD CONSTRAINT FK_movie_TO_timetable -- FK_movie_TO_timetable
       FOREIGN KEY (
-         movie_no -- 영화_no
+         movie_no -- �쁺�솕_no
       )
       REFERENCES movie.movie ( -- movie
-         movie_no -- 영화_no
+         movie_no -- �쁺�솕_no
       ),
    ADD INDEX FK_movie_TO_timetable (
-      movie_no -- 영화_no
+      movie_no -- �쁺�솕_no
    );
 
 -- timetable
 ALTER TABLE movie.timetable
    ADD CONSTRAINT FK_theater_TO_timetable -- FK_theater_TO_timetable
       FOREIGN KEY (
-         theater_no -- 상영관_no
+         theater_no -- �긽�쁺愿�_no
       )
       REFERENCES movie.theater ( -- theater
          theater_no -- theater_no
       ),
    ADD INDEX FK_theater_TO_timetable (
-      theater_no -- 상영관_no
+      theater_no -- �긽�쁺愿�_no
    );
 
 -- user
 ALTER TABLE movie.user
    ADD CONSTRAINT FK_user_rank_TO_user -- FK_user_rank_TO_user
       FOREIGN KEY (
-         user_rank -- 회원등급
+         user_rank -- �쉶�썝�벑湲�
       )
       REFERENCES movie.user_rank ( -- user_rank
          name -- name
       ),
    ADD INDEX FK_user_rank_TO_user (
-      user_rank -- 회원등급
+      user_rank -- �쉶�썝�벑湲�
    );

@@ -6,33 +6,41 @@ public class Board {
 	int boardNo;
 	String userId;
 	int movieNo;
-	String boardTitle;
 	String boardContent;
 	Date regdate;
 	int grade;
+	private String userName;
 	
-	
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
+
+	public Board(String userId, int movieNo, String boardContent, Date regdate, int grade,
+			String userName) {
+		super();
+		this.userId = userId;
+		this.movieNo = movieNo;
+		this.boardContent = boardContent;
+		this.regdate = regdate;
+		this.grade = grade;
+		this.userName = userName;
+	}
+
+
 
 	public Board() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-
-	public Board(int boardNo, String userId, int movieNo, String boardTitle, String boardContent, Date regdate,
-			int grade) {
-		super();
-		this.boardNo = boardNo;
-		this.userId = userId;
-		this.movieNo = movieNo;
-		this.boardTitle = boardTitle;
-		this.boardContent = boardContent;
-		this.regdate = regdate;
-		this.grade = grade;
-	}
-
-
 
 	public int getBoardNo() {
 		return boardNo;
@@ -56,14 +64,6 @@ public class Board {
 
 	public void setMovieNo(int movieNo) {
 		this.movieNo = movieNo;
-	}
-
-	public String getBoardTitle() {
-		return boardTitle;
-	}
-
-	public void setBoardTitle(String boardTitle) {
-		this.boardTitle = boardTitle;
 	}
 
 	public String getBoardContent() {
@@ -92,8 +92,7 @@ public class Board {
 
 	@Override
 	public String toString() {
-		return "Board [boardNo=" + boardNo + ", userId=" + userId + ", movieNo=" + movieNo + ", boardTitle="
-				+ boardTitle + ", boardContent=" + boardContent + ", regdate=" + regdate + ", grade=" + grade + "]";
+		return "Board [boardNo=" + boardNo + ", userId=" + userId + ", movieNo=" + movieNo + ", boardContent=" + boardContent + ", regdate=" + regdate + ", grade=" + grade + "]";
 	}
 
 }

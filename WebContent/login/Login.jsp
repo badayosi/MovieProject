@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="theme.css">
 <style>
 #loginContainer {
 	min-height: 600px;
@@ -48,7 +47,7 @@
 
 #loginBtn {
 	clear: left;
-	background: url("images/loginImg.PNG") no-repeat;
+	background: url("../images/loginImg.PNG") no-repeat;
 	width: 125px;
 	height: 110px;
 	position: absolute;
@@ -61,18 +60,18 @@
 }
 
 #p1 {
-	top: 50px;
+	top: 25px;
 	left: 50px;
 }
 
 #p2 {
-	top: 90px;
+	top: 65px;
 	left: 50px;
 }
 
 #searchWrap {
-	top: 140px;
-	left: 140px;
+	top: 120px;
+	left: 180px;
 }
 
 #searchWrap a {
@@ -141,7 +140,7 @@
 					</p>
 					<input type="submit" id="loginBtn">
 					<p id="searchWrap">
-						<a href="#">아이디 찾기></a> <a href="#">비밀번호 찾기></a>
+						<a href="#">아이디/비밀번호 찾기</a>
 					</p>
 					<c:if test="${error !=null}">
 						<p>${error }</p>
@@ -152,7 +151,7 @@
 				</div>
 			</div>
 			<div id="imgWrap">
-				<img src="images/loginImg2.PNG">
+				<img src="../images/loginImg2.PNG">
 			</div>
 
 		</div>

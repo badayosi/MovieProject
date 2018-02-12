@@ -12,6 +12,7 @@ public class JoinHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		if(req.getMethod().equalsIgnoreCase("get")){
+			System.out.println("getJoin");
 			return "login/JoinForm.jsp";
 		}else if(req.getMethod().equalsIgnoreCase("post")){
 			String id = req.getParameter("id");

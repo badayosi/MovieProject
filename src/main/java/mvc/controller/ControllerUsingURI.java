@@ -43,7 +43,7 @@ public class ControllerUsingURI extends HttpServlet {
 				Class<?> handlerClass = Class.forName(handlerClassName);
 				// NEW 후 Instance화 과정을 진행
 
-				System.out.println(handlerClass);
+				
 				CommandHandler handlerInstance = (CommandHandler)handlerClass.newInstance();
 
 				commandHandlerMap.put(command, handlerInstance);
@@ -70,9 +70,9 @@ public class ControllerUsingURI extends HttpServlet {
 		if(command.indexOf(contextPath) == 0){
 			command = command.substring(contextPath.length());
 		}
-		System.out.println("command =" + command);
+		
 		CommandHandler handler = commandHandlerMap.get(command);
-		System.out.println(handler);		
+			
 		// COMMAND를 제대로 가져오지 못하였을때 예외처리
 		if(handler == null){
 			handler = new NullHandler();
