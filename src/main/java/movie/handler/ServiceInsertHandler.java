@@ -53,6 +53,7 @@ public class ServiceInsertHandler implements CommandHandler {
 				return "ServiceUserBoardSuccess.jsp";
 			}else{
 				System.out.println("파일잇음");
+				String filePath = req.getContextPath() + "/upload";
 				originFileName = multi.getOriginalFileName("file1"); //원래 파일명
 				String userId = multi.getParameter("userId");
 				String consulting = multi.getParameter("consulting");
@@ -64,7 +65,7 @@ public class ServiceInsertHandler implements CommandHandler {
 				
 				ServiceBoardService service = ServiceBoardService.getInstance();
 				
-				ServiceBoard sb = new ServiceBoard(userId, consulting, classification, title, content, regdate,answer,filename,uploadPath);		
+				ServiceBoard sb = new ServiceBoard(userId, consulting, classification, title, content, regdate,answer,filename,filePath);		
 				System.out.println(sb);
 				int result = service.insertFile(sb);		
 				return "ServiceUserBoardSuccess.jsp";

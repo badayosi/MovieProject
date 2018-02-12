@@ -33,7 +33,6 @@
 		background: #231f20;
 		color:white;
 		font-weight:bold;
-		
 	}
 	#tablewrap{
 		width:100%;
@@ -48,6 +47,12 @@
 		border-bottom: 1px solid black;
 	}
 </style>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+	
+	})
+</script>
 </head>
 <body>
 	<div id="search_wrap">
@@ -67,12 +72,6 @@
 					<th>제목</th>
 					<th>등록일</th>
 					<th>조회수</th>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>제목1</td>
-					<td>2018-02-11</td>
-					<td>1</td>
 				</tr>
 			</table>
 		</div>

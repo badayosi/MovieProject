@@ -16,6 +16,7 @@
   	<typeAlias type="movie.dto.ReservationGuide" alias="ReservationGuide"/>
   	<typeAlias type="movie.dto.ReservationProgress" alias="ReservationProgress"/>
   	<typeAlias type="movie.dto.ServiceBoard" alias="ServiceBoard"/>
+  	<typeAlias type="movie.dto.Notice" alias="Notice"/>
   </typeAliases>
    <environments default="development">
     <environment id="development">
@@ -56,5 +57,6 @@
   	<mapper resource="mappers/ReservationGuideMapper.xml"/>
   	<mapper resource="mappers/ReservationProgressMapper.xml"/>
   	<mapper resource="mappers/ServiceBoardMapper.xml"/>
+   	<mapper resource="mappers/NoticeMapper.xml"/>
   </mappers>
 </configuration>
