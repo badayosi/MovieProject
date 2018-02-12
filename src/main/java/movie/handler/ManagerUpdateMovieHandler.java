@@ -39,7 +39,7 @@ public class ManagerUpdateMovieHandler implements CommandHandler {
 			try {
 				int maxSize = 1024 * 1024 * 10;// 10M
 				int mNo = Integer.parseInt(req.getParameter("mNo"));
-				String uploadPath = service.selectFilePath(mNo);
+				String uploadPath = service.selectFilePath(mNo); 
 
 				System.out.println(uploadPath);
 
