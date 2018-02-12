@@ -11,39 +11,15 @@
   src="https://code.jquery.com/jquery-1.12.4.min.js"
   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
   crossorigin="anonymous"></script> 
- <link rel="stylesheet" type="text/css" href="../css/theater.css">
+ <link rel="stylesheet" type="text/css" href="../css/theater.css?ver=1">
  <script src="../js/theater.js"></script>
- <style type="text/css">
- 	form{
-		width: 400px;
-		border: 1px solid gray;
-	}
-	label{
-		width: 100px;
-		float: left;
-		padding-left: 10px;
-	}
-	p:LAST-CHILD {
-		text-align: center;
-	}
-	.error, .error2, .error3, .error4, .error5, .error6{
-		color: red;
-		padding: 0;
-		margin: 0 0 0 90px;
-		font-size: 12px;
-		display: none;
-	} 
-	.displayHidden{
-		display: none;
-	}
- </style>
+
  <%
  	Theater theater = (Theater)request.getAttribute("item");
  	int max = theater.getTheaterMaxcount();
  	String row = theater.getRow();
  	int col = theater.getCol();
  	String table = theater.getTheaterTable(); 
- 	
  %>
  <script type="text/javascript">
  	$(function(){

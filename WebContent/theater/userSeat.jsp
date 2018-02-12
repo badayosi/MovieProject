@@ -1,14 +1,16 @@
 <%@page import="movie.dto.Theater"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>       
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+       
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="../js/jquery-animate-css-rotate-scale.js"></script>   
+<script type="text/javascript" src="../js/jquery-animate-css-rotate-scale.js"></script> 
+
   <style type="text/css">
   
   	/* 스크린 */
@@ -84,8 +86,8 @@
 		position: fixed;
 		z-index: 10;
 		top: 200px;
-		right: 0px;
-		/* right: -500px; */
+		/* right: 0px; */
+		right: -500px;
 	}
 	#nav_condition{
 		width: 500px;
@@ -183,7 +185,7 @@
 		})
 		
 		//퀵메뉴
-		/* var qi = 0;
+		var qi = 0;
 		$("#open").on("click",function(){
 			 if(qi==0){
 				 
@@ -199,7 +201,9 @@
 			  	  },300);
 				 qi=0;
 			}
-		}) */
+		})
+		
+		
 		
 		var num =0;
 		//인원선택
