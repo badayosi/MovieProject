@@ -15,6 +15,7 @@
   	<typeAlias type="movie.dto.UserRank" alias="UserRank"/>
   	<typeAlias type="movie.dto.ReservationGuide" alias="ReservationGuide"/>
   	<typeAlias type="movie.dto.ReservationProgress" alias="ReservationProgress"/>
+  	<typeAlias type="movie.dto.ServiceBoard" alias="ServiceBoard"/>
   </typeAliases>
    <environments default="development">
     <environment id="development">
