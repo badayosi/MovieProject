@@ -30,8 +30,6 @@
 	background: #848484;
 	color: white;
 	font-size: 13px;
-}
-.seat{
 	border: 2px solid black;
 	text-align: center;
 	padding: 10px;
@@ -42,9 +40,51 @@
 	padding: 10px;
 	display: none;
 }
-.tem{
-	background: #000000 !important;
+.selectSeat{
+	display: block;
+	width: 18px;
+	height: 18px;
+	background: skyblue;
 	color: white;
+	font-size: 13px;
+	border: 2px solid black;
+	text-align: center;
+	padding: 10px;
+	font-weight: bold;
+}
+.overSeat{
+	display: block;
+	width: 18px;
+	height: 18px;
+	background: orange;
+	color: white;
+	font-size: 13px;
+	border: 2px solid black;
+	text-align: center;
+	padding: 10px;
+}
+.reserveSeat{
+	display: block;
+	width: 18px;
+	height: 18px;
+	background: #000000;
+	color: white;
+	font-size: 13px;
+	border: 2px solid black;
+	text-align: center;
+	padding: 10px;
+	font-weight: bold;
+}
+.blockSeat{
+	display: block;
+	width: 18px;
+	height: 18px;
+	background: #848484;
+	color: #848484;
+	font-size: 13px;
+	border: 2px solid black;
+	text-align: center;
+	padding: 10px;
 	font-weight: bold;
 }
 .way{

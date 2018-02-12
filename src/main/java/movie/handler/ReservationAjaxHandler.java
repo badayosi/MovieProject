@@ -2,7 +2,10 @@ package movie.handler;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -73,11 +76,25 @@ public class ReservationAjaxHandler implements CommandHandler {
 				pwJson.print(jsonTime);
 			}
 			
-			// SELECT MOVIE & SELECT TIME
-			if(req.getParameter("timeNo") != null){
+			// SELECT MOVIE & SELECT TIME = RESULT THEATER
+			if(req.getParameter("timeNo") != null && req.getParameter("search") == null){
 				int loadTheater = Integer.valueOf(req.getParameter("timeNo"));
 				theaterService = TheaterService.getInstance();
 				Theater result = theaterService.selectById(loadTheater);
+				
+				String jsonTime = om.writeValueAsString(result); //json 형태의 String으로 변환
+				pwJson.print(jsonTime);
+			}
+			
+			// SELECT MOVIE & SELECT TIME = RESULT RESERVATION USER
+			if(req.getParameter("timeNo") != null && req.getParameter("search") != null){
+				int loadReserve = Integer.valueOf(req.getParameter("timeNo"));
+				reservationService = ReservationService.getInstance();
+				List<Reservation> resultReserve = reservationService.selectByTimeTable(loadReserve);
+				ArrayList<String> result = new ArrayList<String>();
+				for(Reservation reserveSeat : resultReserve){
+					result.add(reserveSeat.getSeat());
+				}
 				
 				String jsonTime = om.writeValueAsString(result); //json 형태의 String으로 변환
 				pwJson.print(jsonTime);
