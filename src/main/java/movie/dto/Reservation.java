@@ -5,20 +5,21 @@ public class Reservation {
 	String userId;
 	int timetableNo;
 	int price;
-	String seatRank;
+	String seat;
+	int progress;
 
 	public Reservation() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Reservation(int no, String userId, int timetableNo, int price, String seatRank) {
+	public Reservation(int no, String userId, int timetableNo, int price, String seat) {
 		super();
 		this.no = no;
 		this.userId = userId;
 		this.timetableNo = timetableNo;
 		this.price = price;
-		this.seatRank = seatRank;
+		this.seat = seat;
 	}
 
 	public int getNo() {
@@ -53,18 +54,26 @@ public class Reservation {
 		this.price = price;
 	}
 
-	public String getSeatRank() {
-		return seatRank;
+	public String getSeat() {
+		return seat;
 	}
 
-	public void setSeatRank(String seatRank) {
-		this.seatRank = seatRank;
+	public void setSeat(String seat) {
+		this.seat = seat;
+	}
+	
+	public int getProgress() {
+		return progress;
+	}
+
+	public void setProgress(int progress) {
+		this.progress = progress;
 	}
 
 	@Override
 	public String toString() {
 		return "Reservation [no=" + no + ", userId=" + userId + ", timetableNo=" + timetableNo + ", price=" + price
-				+ ", seatRank=" + seatRank + "]";
+				+ ", seatRank=" + seat + "]";
 	}
 
 }

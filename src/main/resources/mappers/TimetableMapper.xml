@@ -13,4 +13,7 @@
 	<select id="selectAll" resultMap="TimetableResult">
 		select * from Timetable
 	</select>
+	<select id="selectByMovie" parameterType="int" resultMap="TimetableResult">
+		select * from Timetable where movie_no=#{no}
+	</select>
 </mapper>
