@@ -98,7 +98,7 @@ $(function() {
 		$("#movieListBtn ul a li").removeClass("selectList");
 		$(this).find("li").addClass("selectList");
 		var date=new Date();
-		var nowDate=date.getTime();
+		var nowDate=date.getTime(); 
 		var listTag="";
 		
 		if($(this).index()==0){
