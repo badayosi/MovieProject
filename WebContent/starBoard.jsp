@@ -241,7 +241,7 @@ function boardListView(boardNo){
 					$("#userStarBoardView").append(div_userStartBoard);
 					
 				}
-				var fullSize = Number($("#boardSize").text());
+				var fullSize = json2.size;
 				
 				for(var boardSize; boardSize < fullSize; boardSize++){
 					var pageNo = "<span class='page_number'>"+(boardSize+1)+"</span>"
@@ -292,12 +292,6 @@ function boardListView(boardNo){
 		<div id="countBtn">
 				
 		</div>
-		<c:if test="${boardIndex!=null }">
-			들어옴 ${boardIndex }
-		</c:if>
-		<c:if test="${boardIndex==null }">
-			안들어옴
-		</c:if>
 	</div>
 	
 </body>
