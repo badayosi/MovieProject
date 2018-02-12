@@ -86,8 +86,8 @@
 		position: fixed;
 		z-index: 10;
 		top: 200px;
-		right: 0px;
-		/* right: -500px; */
+		/* right: 0px; */
+		right: -500px;
 	}
 	#nav_condition{
 		width: 500px;
@@ -185,7 +185,7 @@
 		})
 		
 		//퀵메뉴
-		/* var qi = 0;
+		var qi = 0;
 		$("#open").on("click",function(){
 			 if(qi==0){
 				 
@@ -201,7 +201,9 @@
 			  	  },300);
 				 qi=0;
 			}
-		}) */
+		})
+		
+		
 		
 		var num =0;
 		//인원선택

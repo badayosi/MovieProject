@@ -5,13 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>메인</title>
-<link rel="stylesheet" type="text/css" href="css/main.css?ver=3">
+<link rel="stylesheet" type="text/css" href="css/common.css">
 <link rel="stylesheet" href="css/swiper.min.css">
  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="js/swiper.min.js"></script>
 <style type="text/css">
-	*{
+ 	*{
  		position:relative;
  		margin:0 auto;
 		font-family: "나눔 고딕", 'Nanum Gothic', 'ng';
@@ -22,7 +22,18 @@
  		width:1024px;
  		margin:0 auto;
  	}
+ 	#top_left{
+ 		
+ 	}
+ 	#top_middle{
+ 		
+ 	}
+ 	#top_right{
  	
+ 	
+ 	}
+ 	#top{
+ 	}
  	/* 메인 큰화면 */
  	.swiper-container {
       width: 100%;
@@ -46,31 +57,31 @@
       -ms-flex-align: center;
       -webkit-align-items: center;
       align-items: center;
+      
     }
-     #top_left{
+     .swiper-slide:nth-child(1n){
      	width: 1115px;
      	width: 60%;
      	align-items: right;
      	flex-shrink:1;
      }
-    #top_middle{
-	    align-items: center;  
-	    width:20%;
-	    width: 315px !important; 
-	    height:645px; 
+    .swiper-slide:nth-child(2n) {
+	     width: 20%;
+	     align-items: center;  
+	    /*  width: 315px;  */  
 	   	flex-shrink:1;
     }
-    #top_right {
+    .swiper-slide:nth-child(3n) {
    		 width: 60%; 
    		 flex-shrink:1;
     }
     
     /* 메인 포스터 */
-    #top{
+    #top .swiper-container1 {
       width: 100%;
       height: 100%;
     }
-    #top_left,#top_right,#top_middle{
+    .swiper-slide1 {
       text-align: center;
       /* Center slide text vertically */
       display: -webkit-box;
@@ -86,7 +97,6 @@
       -webkit-align-items: center;
       align-items: center;
     }
-    /* 큰 포스터 */
     #poster{
       width: 1115px;
       height:645px;
@@ -110,80 +120,45 @@
       -webkit-align-items: center;
       align-items: center;
     }
-	/* 작은 포스터 */
-	#poster_middle {
-      width: 1224px;
-      margin:70px auto;
-      height: 274px;
-    }
     
-    #poster_middle .swiper-slide {
-      text-align: center;
-      /* Center slide text vertically */
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-box-pack: center;
-      -ms-flex-pack: center;
-      -webkit-justify-content: center;
-      justify-content: center;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      -webkit-align-items: center;
-      align-items: center;
-    }     
+
 </style>
 <script type="text/javascript">
 	$(function(){
 		
 		//제일 윗부분 화면
-		var swiper = new Swiper('#top',
+		var swiper = new Swiper('.swiper-container',
 				{
 				slidesPerView: 'auto',
 			    spaceBetween: 20,
 			    centeredSlides: false,
-			    simulateTouch:false,
-			    navigation: {
+			    pagination: {
+			      el: '.swiper-pagination',
+			      clickable: true,
+			    },navigation: {
 			        nextEl: '.swiper-button-next',
 			        prevEl: '.swiper-button-prev',
 			     },
 			  });
-		
+		/* 
 		 var swiper = new Swiper('#poster', {
-			  loop: true,
 		      pagination: {
 		        el: '.swiper-pagination',
-		        clickable: true,
-		      },autoplay: {
-		    	    delay: 5000,
 		      },
-		    }); 
+		    }); */
 		
-		 var swiper = new Swiper('#poster_middle', {
-		      slidesPerView: 5,
-		      spaceBetween: -47,
-		      slidesPerGroup: 5,
-		      loop: true,
-		      loopFillGroupWithBlank: true,
-		      navigation: {
-		        nextEl: '.swiper-button-next',
-		        prevEl: '.swiper-button-prev',
-		      },
-		    });
+		
+		
 	})
-	
-	
 </script>
 </head>
 <body>
 	<jsp:include page="include/header.jsp"></jsp:include>
 	
-	
 	<div id="top" class="swiper-container" dir="rtl">
 		<div class="swiper-wrapper">
-			<div class="swiper-slide" id="top_left">
-				<div id="poster"  class="swiper-container">
+			<div class="swiper-slide" id="top_left" class="swiper-container1">
+				<div id="poster">
 				    <div class="swiper-wrapper">
 				      <div class="swiper-slide">
 				      	<img src="images/post1.png">
@@ -198,38 +173,23 @@
 				    <!-- Add Pagination -->
 				    <div class="swiper-pagination"></div>
 			 	 </div>
-			 	 
 			</div>
 			
-			<div class="swiper-slide" id="top_middle" width="315px">				
-				<jsp:include page="boxoffice.jsp"></jsp:include>
+			<div class="swiper-slide" id="top_middle">
+				<img alt="event" src="images/test1.png">
 			</div>
 			
 			<div class="swiper-slide" id="top_right">
-				<img src="images/event.jpg">
+				<img alt="event" src="images/event.jpg">
 			</div>	
+					
 		</div>
 		<div class="swiper-button-next"></div>
    		<div class="swiper-button-prev"></div>
 	</div>
-	
-	<div class="swiper-container" id="poster_middle">
-	    <div class="swiper-wrapper">
-	      <div class="swiper-slide"><img src="images/poster1.jpg"></div>
-	      <div class="swiper-slide"><img src="images/poster1.jpg"></div>
-	      <div class="swiper-slide"><img src="images/poster1.jpg"></div>
-	      <div class="swiper-slide"><img src="images/poster1.jpg"></div>
-	      <div class="swiper-slide"><img src="images/poster1.jpg"></div>
-	      <div class="swiper-slide"><img src="images/poster2.jpg"></div>
-	      <div class="swiper-slide"><img src="images/poster2.jpg"></div>
-	      <div class="swiper-slide"><img src="images/poster2.jpg"></div>
-	      <div class="swiper-slide"><img src="images/poster2.jpg"></div>
-	      <div class="swiper-slide"><img src="images/poster2.jpg"></div>
-	    </div>
-	    <div class="swiper-button-next"></div>
-	    <div class="swiper-button-prev"></div>
+	<div id="poster">
+		
 	</div>
-	 
 	<div id="event">
 		<img src="images/card_event.jpg">
 	</div>
