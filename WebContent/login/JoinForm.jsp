@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="../css/common.css">
 <title>Insert title here</title>
 <style>
 #joinForm {
@@ -265,13 +265,17 @@ input:FOCUS {
 #radioCheckImg{
 	display: inline-block;
 }
+#addrUser{
+	margin-left:258px;
+	width:461px !important
+}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		var idCk = 0;
-		var falseImgsrc = "images/join_else_icon.png";
-		var trueImgsrc = "images/join_icon.png";
+		var falseImgsrc = "../images/join_else_icon.png";
+		var trueImgsrc = "../images/join_icon.png";
 		$("#joinForm #jF p").each(function(i, obj) {
 			$(obj).hover(function() {
 				$(this).find("label").css("color", "black");
@@ -330,7 +334,7 @@ input:FOCUS {
 					data:{"doro":doro},
 					dataType:"json",
 					success:function(json){
-						
+						console.log(json)
 						if(json.length==0){
 							var div = "<div class='searchResult hoverResult'>";
 							var zipcode = "<p class='seacrch_zipcode'></p>";
@@ -476,27 +480,27 @@ input:FOCUS {
 					<label>아이디</label> 
 					<input type="text" name="id" id="userId" placeholder="6자이상 영문/숫자를 입력하세요"> 
 					<input type="button" value="중복체크" id="checkId">
-					<img src="images/join_icon.png" class="checkimg">
+					<img src="../images/join_icon.png" class="checkimg">
 				</p>
 				<p>
 					<label>비밀번호</label> <input type="password" name="pw" placeholder="8자이상 영문/숫자를 입력하세요" id="userPw">
 					
-					<img src="images/join_icon.png" class="checkimg">
+					<img src="../images/join_icon.png" class="checkimg">
 				</p>
 				<p>
 					<label>비밀번호 확인</label> <input type="password" name="pwch" id="userPwch">
 					
-					<img src="images/join_icon.png" class="checkimg">
+					<img src="../images/join_icon.png" class="checkimg">
 				</p>
 				<p>
 					<label>이름</label> <input type="text" name="name" id="userName">
 					
-					<img src="images/join_icon.png" class="checkimg">
+					<img src="../images/join_icon.png" class="checkimg">
 				</p>
 				<p>
 					<label>이메일주소</label> <input type="email" name="email" id="userEmail">
 					
-					<img src="images/join_icon.png" class="checkimg">
+					<img src="../images/join_icon.png" class="checkimg">
 				</p>
 				<p>
 					<label>휴대폰 번호</label> <select name="tel1" id="telSelect">
@@ -508,7 +512,7 @@ input:FOCUS {
 						<option>019</option>
 					</select> <input type="tel" name="tel2" class="telinput" id="userTel"> <input
 						type="tel" name="tel3" class="telinput">
-						<img src="images/join_icon.png" class="checkimg">
+						<img src="../images/join_icon.png" class="checkimg">
 						
 				</p>
 				<p id="radioP">
@@ -516,7 +520,7 @@ input:FOCUS {
 						class="radioBtn" id="radio1"><span id="span1">여자</span> <input
 						type="radio" name="gender" value="남자" class="radioBtn" id="radio2"><span
 						id="span2">남자</span>
-						<img src="images/join_else_icon.png" class="checkimg" id="radioCheckImg">
+						<img src="../images/join_else_icon.png" class="checkimg" id="radioCheckImg">
 				</p>
 	
 				<p id="postWrap">
@@ -524,7 +528,8 @@ input:FOCUS {
 						value="우편번호 검색" id="addrSearchBtn"><input type="tel"
 						name="zipcode" id="zipcode"> <input type="text" name="addr"
 						id="addr" id="userAddr">
-						<img src="images/join_icon.png" class="checkimg">
+						<input type="text" name="addrUser" id="addrUser">
+						<img src="../images/join_icon.png" class="checkimg">
 				</p>
 				<p id="btnWrap">
 					<input type="submit" value="회원가입" id="joinBtn"> <input type="button"
@@ -532,12 +537,10 @@ input:FOCUS {
 				</p>
 	
 				<div id="searchWarp">
-					
 					<p>
 						<input type="text" placeholder="도로명입력" id="doro"> 
 						<input type="button" value="검색" id="doroSearchWrap">
 						<input type="button" id="search_cencel" value="취소">
-						
 					</p>
 					<div id="resultAddrWrap">
 						<div class="searchResult" id="zxc">

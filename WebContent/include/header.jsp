@@ -65,8 +65,8 @@
 		<a href="logout.do?path=<%=request.getRequestURI() %>" id="logout">로그아웃 </a>
 	</c:if>
 	<c:if test="${member == null}">
-		<a href="login.do" id="login">로그인</a>|
-		<a href="join.do">회원가입</a>
+		<a href="/MovieProject/login/Login.jsp" id="login">로그인</a>|
+		<a href="/MovieProject/login/JoinForm.jsp">회원가입</a>
 	</c:if>
 	</p>
 </div>

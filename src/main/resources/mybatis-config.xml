@@ -54,5 +54,6 @@
   	<mapper resource="mappers/UserRankMapper.xml"/>
   	<mapper resource="mappers/ReservationGuideMapper.xml"/>
   	<mapper resource="mappers/ReservationProgressMapper.xml"/>
+  	<mapper resource="mappers/ServiceBoardMapper.xml"/>
   </mappers>
 </configuration>
