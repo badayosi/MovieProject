@@ -2,11 +2,7 @@ package movie.handler;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +13,6 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import movie.dto.Movie;
 import movie.service.MovieService;
 import mvc.controller.CommandHandler;
-import mvc.util.MySqlSessionFactory;
 
 public class ManagerAddMovieHandler implements CommandHandler {
 

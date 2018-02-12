@@ -49,9 +49,11 @@
 			}
 			$("input[type='hidden']").val(steelcutStr);
 			
-			alert(formAction);
-			if(poster!=null||video!=null||steelcutStr!=null){
+			alert(poster);
+			if(poster!=""||video!=""||steelcutStr!=""){
 				$("#updateForm").attr("action", formAction+"&yes=1");
+			}else{
+				$("#updateForm").attr("action", formAction+"&yes=0");
 			}
 		});
 		
