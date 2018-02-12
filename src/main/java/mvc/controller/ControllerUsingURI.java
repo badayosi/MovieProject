@@ -43,11 +43,12 @@ public class ControllerUsingURI extends HttpServlet {
 				Class<?> handlerClass = Class.forName(handlerClassName);
 				// NEW 후 Instance화 과정을 진행
 
-				
 				CommandHandler handlerInstance = (CommandHandler)handlerClass.newInstance();
 
 				commandHandlerMap.put(command, handlerInstance);
+
 			}catch(Exception e){
+				e.printStackTrace();
 				throw new ServletException();
 			}
 		}

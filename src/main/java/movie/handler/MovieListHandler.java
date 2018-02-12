@@ -13,7 +13,7 @@ import movie.service.MovieService;
 import mvc.controller.CommandHandler;
 
 public class MovieListHandler implements CommandHandler {
-
+	//유저화면에서 현재 상영작, 상영 예정작을 나타내기 위한 handler입니다.
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		MovieService service=MovieService.getInstance();
