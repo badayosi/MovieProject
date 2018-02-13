@@ -17,6 +17,8 @@
 </style>
 </head>
 <body>
+	<jsp:include page="../include/adminHeader.jsp"></jsp:include>
+	
 	<c:if test="${list==null }">
 			<%response.sendRedirect("list.do"); %>
 	</c:if>
