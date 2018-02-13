@@ -166,3 +166,40 @@ function splitString(str, type){
 	
 	return tempArr;
 }
+
+// 예외처리 : PERSON SETTING 총인원 초과금지
+function checkPersonSetting(){
+	var allCount = 0;
+	
+	$("#person_setting").find("input").each(function(index,obj){
+		allCount += Number($(obj).val());
+	});
+	
+	if($("#person_setting").find("select").val() < allCount){
+		alert("해당 설정은 총 인원을 초과할 수 없습니다.");
+		$("#person_setting").find("input").each(function(index,obj){
+			$(obj).val(0);
+		});
+		return false;
+	}
+	
+	return true;
+}
+
+// QUICK MENU PERSON TYPE & TOTAL PAYMENT APPLY
+function applyPayment(){
+	var arrPerson = new Array();
+	var allCount = 0;
+	
+	// 각 항목별 인원 합산
+	$("#person_setting").find("input").each(function(index,obj){
+		if(index == 3)
+			arrPerson[index-1] += Number($(obj).val());
+		else
+			arrPerson[index] += Number($(obj).val());
+		allCount += Number($(obj).val());
+	});
+	if($("#person_setting").find("select").val() > allCount){
+		
+	}
+}

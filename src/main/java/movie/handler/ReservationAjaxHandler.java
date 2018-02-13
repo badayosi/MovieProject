@@ -2,10 +2,8 @@ package movie.handler;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
-import java.util.ListIterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,9 +37,6 @@ public class ReservationAjaxHandler implements CommandHandler {
 		om = new ObjectMapper();
 		// REQUEST GET
 		if(req.getMethod().equalsIgnoreCase("get")){
-			System.out.println("no parameter : " + req.getParameter("no"));
-			System.out.println("time parameter : " + req.getParameter("timeNo"));
-			
 			// MEMBER RESERVATION
 			// MOVIE LIST LOAD
 			if(req.getParameter("no") == null && req.getParameter("timeNo") == null){
@@ -55,9 +50,14 @@ public class ReservationAjaxHandler implements CommandHandler {
 			
 			// SELECT MOVIE IF EXISTS
 			if(req.getParameter("no") != null){
+				HashMap<String, Object> jsonResult = new HashMap<>();
+				
 				String selectMovie = req.getParameter("no");
 				timeTableService = TimeTableService.getInstance();
 				Movie movieResult = movieService.selectById(Integer.valueOf(selectMovie));
+				// POSTER DATA LOAD
+				jsonResult.put("movie", movieResult);
+				// TIMETABLE DATA LOAD
 				List<Timetable> timetableResult = timeTableService.selectByMovie(movieResult.getMovieNo());
 				progressService = ReservationProgressService.getInstance();
 				reservationService = ReservationService.getInstance();
@@ -70,10 +70,9 @@ public class ReservationAjaxHandler implements CommandHandler {
 					progressResult.setRestSeat(progressResult.getRestSeat()-reservationResult.size());
 					result.add(progressResult);
 				}
-				
-					
-				String jsonTime = om.writeValueAsString(result); //json 형태의 String으로 변환
-				pwJson.print(jsonTime);
+				jsonResult.put("time", result);
+				String json = om.writeValueAsString(jsonResult);
+				pwJson.print(json);
 			}
 			
 			// SELECT MOVIE & SELECT TIME = RESULT THEATER
