@@ -138,7 +138,8 @@
 				makeMovieList = "";
 				makeMovieList += "<li>";
 				makeMovieList += "<a href='javascript:selectMovie(" + json[index].movieNo +")'>";
-				makeMovieList += "<div class='rating";
+				
+				makeMovieList += "<div class='rating";				
 				switch(json[index].rating){
 					case 12:
 						makeMovieList += " age12'>";
@@ -156,7 +157,10 @@
 				makeMovieList += "</div>";
 				makeMovieList += "<div class='movieName'>" + json[index].movieName + "</div>";
 				makeMovieList += "<input type='hidden' name='movieKey' value=" + json[index].movieNo +">";
+				/* makeMovieList +=  "."+ ++index;
+				--index; */
 				makeMovieList += "</a>";
+				
 				makeMovieList += "</li>";
 				$("#movieZone").append(makeMovieList);
 			}
