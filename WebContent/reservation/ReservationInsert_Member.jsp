@@ -8,15 +8,16 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="reservation_common.css">
 <link rel="stylesheet" type="text/css" href="theater_progress.css">
-<link rel="stylesheet" type="text/css" href="theater_seat.css?var=4">
+<link rel="stylesheet" type="text/css" href="theater_seat.css">
 <link rel="stylesheet" type="text/css" href="theater_menu.css">
-<link rel="stylesheet" type="text/css" href="theater_quick.css">
+<link rel="stylesheet" type="text/css" href="theater_quick.css?var=4">
 <link rel="stylesheet" type="text/css" href="theater_list.css">
 <!-- API JS -->
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="../js/jquery-animate-css-rotate-scale.js"></script>
 <!-- CUSTOM JS -->
-<script type="text/javascript" src="reservation_seat.js?var=5"></script>
+<script type="text/javascript" src="reservation_seat.js?var=6"></script>
+<script type="text/javascript" src="reservation_quick.js"></script>
 <style>
 	/* 가로형 달력 CSS */
 	div#horizontal_calendar{
@@ -257,7 +258,7 @@
 		});
 	}
 	
-	function selectMovie(no){
+	function selectMovie(no){		
 		$.ajax({
 			url:"reservationAjax.do?no=" + no,
 			type:"get",
@@ -265,29 +266,40 @@
 			success:function(json){
 				
 				console.log(json);
+				
+				// 선택영화 상영시간표 정보 LOAD
 				$("#theaterList").html("");
 				var makeTheaterList;
-				for(var index=0;index<json.length;index++){
+				for(var index=0 ; index<json.time.length ; index++){
 					makeTheaterList = "";
 					makeTheaterList += "<div>";
-					makeTheaterList += "<a href='javascript:loadSeat(" + json[index].timeNo +")'>";
+					makeTheaterList += "<a href='javascript:loadSeat(" + json.time[index].timeNo +","+ json.time[index].startTime +")'>";
 					makeTheaterList += "<table>";
 					makeTheaterList += "<tr>";
-					makeTheaterList += "<td>" + formatChange(json[index].startTime) + "</td>";
-					makeTheaterList += "<td>" + json[index].theaterName + "</td>";
-					makeTheaterList += "<td>(" + json[index].theaterType + ")</td>";
-					makeTheaterList += "<td>" + json[index].restSeat + " / " + json[index].maxSeat + "</td>";
+					makeTheaterList += "<td>" + formatChange(json.time[index].startTime, "time") + "</td>";
+					makeTheaterList += "<td>" + json.time[index].theaterName + "</td>";
+					makeTheaterList += "<td>(" + json.time[index].theaterType + ")</td>";
+					makeTheaterList += "<td>" + json.time[index].restSeat + " / " + json.time[index].maxSeat + "</td>";
 					makeTheaterList += "</tr>";
 					makeTheaterList += "</table>";
 					makeTheaterList += "</a>";
 					makeTheaterList += "</div>";
 					$("#theaterList").append(makeTheaterList); 
 				}
+				
+				// 영화 선택시  QUICK 반영
+				// 경고문구 제거
+				$("#warning_noMovie").css("display","none");
+				// 임시코드_ QUICK POSTER 변경
+				$("#select_info").find("#img").css("background","url('../images/bongi.jpg");
+				// QUICK TITLE 변경
+				$("#nav_title").html(json.movie.movieName);
 			}
 		});
 	}
 	
-	function loadSeat(timeNo){
+	function loadSeat(timeNo, startTime){
+		// 비동기호출_상영관로드 후 좌석생성
 		$.ajax({
 			url:"reservationAjax.do?timeNo=" + timeNo,
 			type:"get",
@@ -298,9 +310,14 @@
 				$("#draw_seat").html("");
 				$("#draw_seat").append("<div id='theater_screen'>SCREEN</div>");
 				$("#draw_seat").append(json.theaterTable);
+				
+				// 시간 선택시  QUICK 반영
+				// QUICK THEATER 변경
+				$("#select_info table").find(".nav_data").eq(2).html(json.theaterName + "(" + json.theaterFloor + "층)");
 			}
 		});
 		
+		// 비동기호출_예약좌석 반영
 		$.ajax({
 			url:"reservationAjax.do?timeNo=" + timeNo + "&search=true",
 			type:"get",
@@ -317,12 +334,37 @@
 			}
 		});
 		$("#theater_progess").css("display","block");
+		
+		// 시간 선택시  QUICK 반영
+		// QUICK DATE 변경
+		$("#select_info table").find(".nav_data").eq(0).html(formatChange(startTime, "date"));
+		// QUICK TIME 변경
+		$("#select_info table").find(".nav_data").eq(1).html(formatChange(startTime, "time"));
 	}
 	
-	function formatChange(date){
+	function formatChange(date, type){
 		var newDate = new Date(date);
 		
-		return newDate.getHours() + ":" + newDate.getMinutes();
+		if(type=="time")
+			return newDate.getHours() + ":" + newDate.getMinutes();
+		if(type=="date"){
+			var dateStr = "";
+			
+			dateStr += newDate.getFullYear();
+			dateStr += "-";
+			if((newDate.getMonth()+1) < 10)
+				dateStr += "0"+(newDate.getMonth()+1);
+			else
+				dateStr += (newDate.getMonth()+1);
+			dateStr += "-";
+			if(newDate.getDate() < 10)
+				dateStr += "0"+newDate.getDate();
+			else
+				dateStr += newDate.getDate();			
+			
+			return dateStr;
+		}
+		return "Type Miss Error";
 	}
 
 	$(function(){
@@ -344,7 +386,10 @@
 		
 		// 상영관예약_좌석클릭 시
 		$(document).on("click",".seat",function(){
-			selectSeat($(this));
+			if($("#person_setting").find("select").val() == 0)
+				alert("총 인원을 설정해주세요.");
+			else
+				selectSeat($(this));
 		})
 		// 상영관예약_예약좌석클릭 시
 		$(document).on("click",".selectSeat",function(){
@@ -372,8 +417,15 @@
 					&& $("#person_setting").find("select").val()-setCount()!=0)
 				$(this).toggleClass("overSeat");
 		});
+		// 상영관예약_인원타입설정 시
+		$(document).on("change","#person_setting input",function(){
+			// 인원초과 예외처리
+			if(checkPersonSetting()){
+					
+			}
+		});
 		
-		//퀵메뉴
+		// 퀵메뉴
 		$("#open_btn").on("click",function(){
 			if($("#quick-menu").css("right") == "-500px"){
 				$("#open_btn").rotate("180deg");
@@ -435,6 +487,7 @@
 					<div id="person_setting">
 						<label>총 인원</label>
 						<select>
+							<option>0</option>
 							<option>1</option>
 							<option>2</option>
 							<option>3</option>
@@ -445,13 +498,13 @@
 							<option>8</option>
 						</select>
 						<label>성인</label>
-						<input type="number" value="0">
+						<input type="number" value="0" min="0" max="8">
 						<label>청소년</label>
-						<input type="number" value="0">
+						<input type="number" value="0" min="0" max="8">
 						<label>시니어</label>
-						<input type="number" value="0">
+						<input type="number" value="0" min="0" max="8">
 						<label>장애인</label>
-						<input type="number" value="0">
+						<input type="number" value="0" min="0" max="8">
 					</div>
 					<div id="seat_setting">
 						<label>좌석 배치설정</label>
@@ -478,53 +531,58 @@
 			<img src="../images/nav_condition_open.png" id="open_btn">
 			<div id="nav_condition">
 				<div id="select_info">
-					<div id="img"></div>
+					<div id="img">
+						<p id="warning_noMovie">
+							선택하신 영화가 없습니다.<br>
+							영화를 선택해주세요.
+						</p>
+					</div>
 					<table>
 						<tr>
-							<td id="nav_title" colspan="2">봉이 김선달</td>
+							<td id="nav_title" colspan="2">영화를 선택하세요</td>
 						</tr>
 						<tr>
 							<td class="nav_info">상영일</td>
-							<td class="nav_data" id="nav_date">2018-01-01</td>
+							<td class="nav_data" id="nav_date">상영날짜</td>
 						</tr>
 						<tr>
 							<td class="nav_info">상영시간</td>
-							<td class="nav_data" id="nav_time">14:00</td>
+							<td class="nav_data" id="nav_time">상영시간</td>
 						</tr>
 						<tr>
 							<td class="nav_info">상영관</td>
-							<td class="nav_data" id="nav_theater">1관(2D)</td>
+							<td class="nav_data" id="nav_theater">상영관(층)</td>
 						</tr>
 						<tr>
 							<td class="nav_info">선택좌석</td>
-							<td class="nav_data"></td>
+							<td class="nav_data">선택좌석</td>
 						</tr>
 					</table>
 				</div>
 				<table id="nav_seat">
 					<tr>
 						<td class="nav_info">성인</td>
-						<td class="nav_info">1명</td>
-						<td class="nav_data">9,000</td>
+						<td class="nav_count">0</td>
+						<td class="nav_data">0</td>
 					</tr>
 					<tr>
 						<td class="nav_info">청소년</td>
-						<td class="nav_info">1명</td>
-						<td class="nav_data">8,000</td>
+						<td class="nav_count">0</td>
+						<td class="nav_data">0</td>
 					</tr>
 					<tr>
 						<td class="nav_info">시니어/장애인</td>
-						<td class="nav_info">1명</td>
-						<td class="nav_data">5,000</td>
+						<td class="nav_count">0</td>
+						<td class="nav_data">0</td>
 					</tr>
 					<tr id="total_payment">
 						<td class="nav_info">총 결제금액</td>
-						<td class="nav_data" colspan="2">22,000</td>
+						<td class="nav_data" colspan="2">0</td>
 					</tr>
 				</table>
 				<div id="nav_control">
+					<div id="nav_cancle">PREV</div>
 					<div id="nav_ok">NEXT</div>
-					<div id="nav_cancle">CANCEL</div>
 				</div>
 			</div>
 		</div>
