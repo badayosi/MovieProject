@@ -39,21 +39,15 @@ public class Notice {
 	public void setReadcount(int readcount) {
 		this.readcount = readcount;
 	}
-	public Notice(int boardNo, String title, String content, Date regdate, int readcount) {
-		this.boardNo = boardNo;
-		this.title = title;
-		this.content = content;
-		this.regdate = regdate;
-		this.readcount = readcount;
-	}
-	public Notice() {
-	}
 	public Notice(String title, String content, Date regdate, int readcount) {
 		this.title = title;
 		this.content = content;
 		this.regdate = regdate;
 		this.readcount = readcount;
-	}	
+	}
+	
+	public Notice() {
+	}
 	@Override
 	public String toString() {
 		return "Notice [boardNo=" + boardNo + ", title=" + title + ", content=" + content + ", regdate=" + regdate
