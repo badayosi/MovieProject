@@ -37,6 +37,16 @@ insert into timetable values(null, 5, 5, '2018/02/05 13:20:00', '2018/02/05 14:2
 
 /* RESERVATION DUMP DATA */
 insert into reservation values(null, 'user1', 1, 10000, 'A1', 1);
+insert into reservation values(null, 'user1', 1, 10000, 'A2', 1);
+insert into reservation values(null, 'user1', 1, 10000, 'A3', 1);
+insert into reservation values(null, 'user1', 1, 10000, 'C7', 1);
+insert into reservation values(null, 'user2', 1, 10000, 'C8', 1);
+insert into reservation values(null, 'user2', 1, 10000, 'D7', 1);
+insert into reservation values(null, 'user2', 1, 10000, 'D8', 1);
+insert into reservation values(null, 'user3', 1, 10000, 'E9', 1);
+insert into reservation values(null, 'user3', 1, 10000, 'E10', 1);
+insert into reservation values(null, 'user4', 1, 10000, 'F13', 1);
+insert into reservation values(null, 'user5', 1, 10000, 'F14', 1);
 insert into reservation values(null, 'user2', 2, 10000, 'A2', 1);
 insert into reservation values(null, 'user3', 3, 10000, 'A3', 1);
 insert into reservation values(null, 'user4', 4, 10000, 'A4', 1);
