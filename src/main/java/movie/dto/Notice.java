@@ -45,7 +45,6 @@ public class Notice {
 		this.regdate = regdate;
 		this.readcount = readcount;
 	}
-	
 	public Notice() {
 	}
 	@Override
@@ -53,7 +52,5 @@ public class Notice {
 		return "Notice [boardNo=" + boardNo + ", title=" + title + ", content=" + content + ", regdate=" + regdate
 				+ ", readcount=" + readcount + "]";
 	}
-	
-	
 }
 

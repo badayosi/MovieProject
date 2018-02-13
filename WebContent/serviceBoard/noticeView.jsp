@@ -10,7 +10,6 @@
 	width: 1024px;
 	min-height: 600px;
 	margin: 0 auto;
-	display: none;
 }
 
 #search_wrap #search_top_div {
@@ -114,6 +113,7 @@
 #selectNoticeWrap {
 	width: 1024px;
 	margin: 0 auto;
+	display: none;
 }
 
 #selectHeader {
@@ -222,7 +222,7 @@
 			var size = Number($(this).text()) - 1;
 			listview(size);
 		})
-
+		
 	})
 	function listview(size) {
 		$("tr").not("#header_table").remove();
@@ -239,8 +239,7 @@
 				for (var i = 0; i < json.list.length; i++) {
 					var tr = "<tr>"
 					var noTd = "<td>" + json.list[i].boardNo + "</td>";
-					var titleTd = "<td><a href='noticeselectno.do?no="
-							+ json.list[i].boardNo + "'>" + json.list[i].title
+					var titleTd = "<td><a href='#' class='selectNo'>" + json.list[i].title
 							+ "</a></td>";
 					var date = new Date(json.list[i].regdate);
 					var regDateTd = "<td>" + date.toLocaleDateString()
@@ -284,9 +283,10 @@
 			<p id="numberP"></p>
 		</div>
 	</div>
+	
 	<div id="selectNoticeWrap">
 			<div id="selectHeader">
-				<h4>시스템 점검안내</h4>
+				<h4 id="title_h4">시스템 점검안내</h4>
 				<ul id="notice_ul">
 					<li id="regdate_Li"><b>등록일 :</b> 2018-02-06 <span
 						id="linespan"></span></li>
@@ -300,11 +300,11 @@
 				<ul id="chage_page_ul">
 					<li><b>다음글</b><img src="../images/sort-up.png">
 						<div>
-							<a href="#">L.pay 시스템 점검안내</a>
+							<a href="#" id="nextTitle">L.pay 시스템 점검안내</a>
 						</div></li>
 					<li><b>이전글</b><img src="../images/caret-down.png">
 						<div>
-							<a href="#">시스템 점검 안내</a>
+							<a href="#" id="prevTitle">시스템 점검 안내</a>
 						</div></li>
 				</ul>
 			</div>

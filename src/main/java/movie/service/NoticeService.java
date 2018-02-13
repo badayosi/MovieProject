@@ -27,7 +27,7 @@ public class NoticeService {
 		try{
 			list = dao.selectLimit(size);
 			for(Notice n : list){
-				System.out.println(n);
+				
 			}
 			return list;
 		}catch(Exception e){
@@ -61,7 +61,7 @@ public class NoticeService {
 		NoticeDao dao = session.getMapper(NoticeDao.class);
 		
 		try{
-			dao.updateByreadCoutn(notice);
+			dao.updateByreadCount(notice);
 			session.commit();
 			return 0;
 		}catch(Exception e){
@@ -86,19 +86,19 @@ public class NoticeService {
 		}
 		return -1;
 	}
-	public Notice selectByNo(int boardNo){
+	public List<Notice> selectByNo(int boardNo){
 		SqlSession session = null;
 		session = MySqlSessionFactory.openSession();
 		NoticeDao dao = session.getMapper(NoticeDao.class);
-		Notice notice = null;
+		List<Notice> list = null;
 		try{
-			notice = dao.selectByNo(boardNo);
+			list = dao.selectByNo(boardNo);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
 			MySqlSessionFactory.closeSession(session);
 		}
 		
-		return notice;
+		return list;
 	}
 }

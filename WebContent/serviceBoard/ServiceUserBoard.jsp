@@ -176,13 +176,36 @@
 			}
 		})
 		$("#serviceMenu ul li").click(function(){
+			$("#sss").empty();
 			if($(this).text()=="공지사항"){
 				$("#sss").load("noticeView.jsp");
 			}else{
-				$("#sss").load("ServiceUserBoardView.jsp");	
+				$("#sss").load("ServiceUserBoardView.jsp");
 			}
-			
-			
+		})
+		$(document).on("click","a.selectNo",function(){
+			var no = $(this).parent().prev().text();
+			$.ajax({
+					url:"noticeselectno.do",
+					type:"get",
+					data:{"no":no},
+					dataType:"json",
+					success:function(json){
+						console.log(json);	
+						$("#title_h4").text(json[1].title);
+						var date = new Date(json[1].regdate);
+						$("#regdate_Li").text(date.toLocaleDateString());
+						$("#readcount_li").text(json[1].readcount);
+						$("#selectContent p").text(json[1].content);
+						
+						if(json.size >)
+						$("#nextTitle").text(json[2].title);
+						$("#prevTitle").text(json[0].title);
+						
+						$("#search_wrap").css("display","none");
+						$("#selectNoticeWrap").css("display","block");
+					}
+			})
 		})
 	})
 </script>
