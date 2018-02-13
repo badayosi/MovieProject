@@ -8,13 +8,9 @@ import mvc.controller.CommandHandler;
 public class LogoutHandler implements CommandHandler {
 
 	@Override
-	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		
-		String path = req.getParameter("path");
-		String path2 = path.substring(path.lastIndexOf("/")+1, path.length());
-		
+	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {	
 		req.getSession().removeAttribute("member");
-		return path2;
+		return "/index.jsp";
 	}
 
 }

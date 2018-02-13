@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -117,7 +118,6 @@ function listview(size){
 					tr += noTd + titleTd + regDateTd + readcountTd;
 					$("#notice_table").append(tr);
 				}
-				
 				for(var i=1; i<=json.size; i++){
 					var aTag = "<a href='#'>"+i+"</a>";
 					$("#numberP").append(aTag);
@@ -128,29 +128,33 @@ function listview(size){
 </script>
 </head>
 <body>
+	
 	<div id="search_wrap">
-		<div id="search_top_div">
-			<select name="search_val" id="search_val">
-				<option selected="selected">제목</option>
-				<option selected="selected">내용</option>
-				<option selected="selected">제목+내용</option>
-			</select>
-			<input type="text" id="search">
-			<a href="#"><input type="button" id="search_btn" value="검색"></a>
-		</div> 
-		<div id="tablewrap">
-			<table id="notice_table">
-				<tr id="header_table">
-					<th id="th1">번호</th>
-					<th id="th2">제목</th>
-					<th id="th3">등록일</th>
-					<th id="th4">조회수</th>
-				</tr>
-			</table>
-		</div>
-		<div id="numberpage">
-			<p id="numberP"></p>
-		</div>
+		<c:if test="${notice ==null }">
+			<div id="search_top_div">
+				<select name="search_val" id="search_val">
+					<option selected="selected">제목</option>
+					<option selected="selected">내용</option>
+					<option selected="selected">제목+내용</option>
+				</select>
+				<input type="text" id="search">
+				<a href="#"><input type="button" id="search_btn" value="검색"></a>
+			</div> 
+			<div id="tablewrap">
+				<table id="notice_table">
+					<tr id="header_table">
+						<th id="th1">번호</th>
+						<th id="th2">제목</th>
+						<th id="th3">등록일</th>
+						<th id="th4">조회수</th>
+					</tr>
+				</table>
+			</div>
+			<div id="numberpage">
+				<p id="numberP"></p>
+			</div>
+		</c:if>
 	</div>
+	
 </body>
 </html>
