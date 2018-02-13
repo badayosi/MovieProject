@@ -89,7 +89,7 @@ $(function() {
 			listTag+="</tr></table>";
 			$("#listArea").append(listTag);
 		}
-	})
+	}) 
 	
 	$("#movieListBtn ul a:first-child li").addClass("selectList");
 	
