@@ -17,6 +17,8 @@
 	#movieListBtn{
 		width:100%;
 		text-align: center;
+		margin-top:40px;
+		margin-bottom:20px;
 	}
 	#movieListBtn ul li{
 		display:inline-block;
@@ -39,7 +41,6 @@
 	#listArea{
 		width:70%;
 		margin:0 auto;
-		/* border:1px solid black; */
 		text-align: center;
 	}
 	#listArea table{
@@ -47,15 +48,25 @@
 		margin:0 auto;
 		
 	}
+	#listArea table tr td{
+		
+	}
 	#listArea table tr td .listDiv{
-		/* border:1px solid black; */
 		text-align: center;
 	}
 	.mPoster{
 		width:250px;
 		height:350px;
+		position: relative;
 	}
-	
+	#listArea table tr td .hiddenText{
+		width:100%;
+		background:#ff0000;
+		opacity:0.8;
+		position: absolute;
+		left: 0;
+		top:0;
+	}
 </style>
 <script type="text/javascript">
 $(function() {
@@ -80,7 +91,9 @@ $(function() {
 			
 			$(json).each(function(i,obj){
 				if(obj.openDate<nowDate && obj.closeDate>nowDate){
-					listTag+="<td><div class='listDiv'><a href='userReadMovie.do?no="+obj.movieNo+"'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'><p>"+obj.movieName+"</p></a></div></td>";
+					listTag+="<td><div class='listDiv'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'>"
+								+"<a href='userReadMovie.do?no="+obj.movieNo+"'><p>"+obj.movieName+"</p></a></div>"
+								+"<div class='hiddenText'><a href='#'>예매하기</a><a href='#'>상세보기</a></div></td>";
 				}
 				if((i+1)%4==0){
 					listTag+="<tr>";
@@ -113,7 +126,10 @@ $(function() {
 					
 					$(json).each(function(i,obj){
 						if(obj.openDate<nowDate && obj.closeDate>nowDate){
-							listTag+="<td><div class='listDiv'><a href='userReadMovie.do?no="+obj.movieNo+"'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'><p>"+obj.movieName+"</p></a></div></td>";
+							listTag+="<td><div class='listDiv'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'>"
+										+"<a href='userReadMovie.do?no="+obj.movieNo+"'><p>"+obj.movieName+"</p></a></div>"
+										+"<div class='hiddenText'><a href='#'>예매하기</a><a href='#'>상세보기</a></div></td>";
+							
 						}
 						if((i+1)%4==0){
 							listTag+="<tr>";
@@ -138,7 +154,9 @@ $(function() {
 					$(json).each(function(i,obj){
 						if(obj.openDate>nowDate){
 							
-							listTag+="<td><div class='listDiv'><a href='user/userReadMovie.do?no="+obj.movieNo+"'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'><p>"+obj.movieName+"</p></a></div></td>";
+							listTag+="<td><div class='listDiv'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'>"
+									+"<a href='userReadMovie.do?no="+obj.movieNo+"'><p>"+obj.movieName+"</p></a></div>"
+									+"<div class='hiddenText'><a href='#'>예매하기</a><a href='#'>상세보기</a></div></td>";
 							
 							if((i+1)%4==0){
 								listTag+="</tr><tr>";
@@ -177,7 +195,7 @@ $(function() {
    	</div>
    	
    	<div id="listArea">
-
+		
    	</div>
    <jsp:include page="../include/footer.jsp"></jsp:include>
 </body>

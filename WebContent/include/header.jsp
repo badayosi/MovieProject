@@ -27,7 +27,7 @@
 <div id="menubarWarp">
 	<ul id="menubar">
 		<li><a href="/MovieProject/index.jsp">HOME</a></li>
-		<li><a href="/MovieProject/user/listMovie.do">영화</a></li>
+		<li><a href="/MovieProject/user/userMovie.jsp">영화</a></li>
 		<li><a href="/MovieProject/reservation/ReservationInsert_Member.jsp">예매</a></li>
 		<li><a href="#">상영관</a></li>
 		<li><a href="/MovieProject/serviceBoard/ServiceUserBoard.jsp">고객센터</a></li>

@@ -20,7 +20,7 @@
 			  asNavFor: '.imgList'
 			});
 		$('.imgList').slick({
-		  slidesToShow: 6,
+		  slidesToShow: 5,
 		  slidesToScroll: 1,
 		  asNavFor: '.bigImg',
 		  dots: false,
@@ -31,11 +31,7 @@
 </script>
 <style type="text/css">
 	.bigImg{
-		border:1px solid red;
 		margin-bottom:10px;
-	}
-	.imgList{
-		border:1px solid blue;
 	}
 	#bigImgWrap{
 		width:100%;
@@ -62,6 +58,13 @@
 		width:800px;
 		margin:0 auto;
 	}
+	.bigImg h3{
+		/* text-align: center; */
+	}
+	.bigImg h3 video{
+		width:900px;
+		margin:0 auto;
+	}
 	#container #imgListDiv{
 		width:950px;
 		height:120px;
@@ -72,11 +75,14 @@
 		width:150px;
 		margin:10px auto;
 	}
+	#container #imgListDiv .imgList h3 video{
+		width:150px;
+		margin:10px auto;
+	}
 	#movieInfo{
 		width:990px;
 		height:400px;
 		margin:0 auto;
-		border:1px solid black;
 	}
 	#movieInfo #moviePoster{
 		width:229px;
@@ -96,43 +102,38 @@
 	}
 	#textInfo{
 		width:710px;
-		border:1px solid black;
 		padding-left:20px;
 		padding-top:5px;
 		float:left;
 	}
 	#textInfo h1{
-		margin-bottom:20px;
+		margin-bottom:30px;
 	}
-	#textInfo h3{
-		float:left;
+	#textInfo span h3{
+		display: inline;
 	}
-	#textInfo .info1{
-		float:left;
-		padding-left:15px;
-	}
-	#textInfo h3:nth-child(3){
+	#textInfo span{
+		margin-right:40px;
 		margin-left:30px;
 	}
-	#textInfo .info2{
-		float:left;
-		clear:both;
+	#textInfo table{
+		margin-left:30px;
+		margin-top:15px;
 	}
-	#textInfo h3:nth-child(3){
-		
-		float:left;
-	}
-	#aaa{
-		clear:both;
+	#synopsis{
+		width:990px;
+		margin:0 auto;
+		margin-top:20px;
+		margin-bottom:50px;
 	}
 </style>
 </head>
 <body>
    <jsp:include page="../include/header.jsp"></jsp:include>  
-   <div id="bigImgWrap">
+   <div id="bigImgWrap"> 
 	   	<div class="bigImg">
-	   		<%-- <h3><img src="/MovieProject/upload/${movie.movieNo}/${movie.pathVideo}"></h3> --%>
-			<c:forEach var="item" items="${steelcut}">
+	   		<h3><video src="/MovieProject/upload/${movie.movieNo}/${movie.pathVideo}" poster="/MovieProject/upload/${movie.movieNo}/${steelcut[0] }" controls></video></h3>
+			<c:forEach var="item" items="${steelcut}" begin="2">
 				<h3><img src="/MovieProject/upload/${movie.movieNo}/${item}"></h3>
 			</c:forEach>
 	   	</div>
@@ -141,9 +142,10 @@
    	<div id="container">
    		<div id="imgListDiv">
    			<div class="imgList">
-				<%-- <h3><img src="/MovieProject/upload/${movie.movieNo}/${movie.pathVideo}"></h3> --%>
-				<c:forEach var="item" items="${steelcut}">
-					<h3><img src="/MovieProject/upload/${movie.movieNo}/${item}"></h3>
+				<h3><video src="/MovieProject/upload/${movie.movieNo}/${movie.pathVideo}"poster="/MovieProject/upload/${movie.movieNo}/${steelcut[0] }"></video></h3>
+				<c:forEach var="item" items="${steelcut}" begin="2">
+					
+					<h3><img src="/MovieProject/upload/${movie.movieNo}/${item}"></h3> 
 				</c:forEach>
 			</div>
    		</div>
@@ -157,16 +159,39 @@
    				<h1>${movie.movieName}</h1>
    				<span class="info1"><h3>관람평점 </h3>${movie.grade }점</span>
    				<span class="info2"><h3>등급 </h3>${movie.rating }세 미만 관람 불가</span>
+   				<br>
    				<span class="info3"><h3>개봉일 </h3>${openDate}</span>
    				<span class="info4"><h3>방영시간 </h3>${movie.playTime }분</span>
-   				
+   				<br>
+   				<br>
+   				<br>
+   				<span class="info5"><h3>스페셜관 상영정보 </h3></span>
+   				<br>
+   				<table>
+   					<tr>
+   						<td><img src="../images/img_sinfo_01_off.jpg"></td>
+   						<td><img src="../images/img_sinfo_02_off.jpg"></td>
+   						<td><img src="../images/img_sinfo_03_off.jpg"></td>
+   						<td><img src="../images/img_sinfo_06_on.jpg"></td>
+   					</tr>
+   					<tr>
+   						<td><img src="../images/img_sinfo_08_off.jpg"></td>
+   						<td><img src="../images/img_sinfo_09_on.jpg"></td>
+   						<td><img src="../images/img_sinfo_10_on.jpg"></td>
+   						<td><img src="../images/img_sinfo_13_on.jpg"></td>
+   					</tr>
+   				</table>
    			</div>
    			
    		</div>
 	</div>
-	<div id="aaa">
-	
+	<div id="synopsis">
+		<h1>시놉시스</h1>
+		${movie.synopsis}   				
 	</div>
+	
+
+	<%-- <jsp:include page="../starBoard.jsp"></jsp:include> --%>
    <jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>
