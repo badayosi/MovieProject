@@ -59,7 +59,7 @@ ALTER TABLE movie.board
    ADD CONSTRAINT
       PRIMARY KEY (
          board_no -- 寃뚯떆�뙋踰덊샇
-      );
+);
 
 ALTER TABLE movie.board
    MODIFY COLUMN board_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '寃뚯떆�뙋踰덊샇';
