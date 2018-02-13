@@ -20,6 +20,7 @@
 
 </head>
 <body>
+	<jsp:include page="../include/adminHeader.jsp"></jsp:include>
 	<div id="container">
 				
 		<c:if test="${result!=null}">

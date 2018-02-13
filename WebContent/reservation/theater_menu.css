@@ -47,12 +47,14 @@
 	margin:0px 0px 0px 20px;	
 }
 
-#waring_info{
+#warning_info{
 	width:100%;
-	height:30px;
-	line-height:30px;
+	height:40px;
+	line-height:20px;
+	margin-top:10px;
+	margin-bottom:10px;	
 }
-#waring_info p{
+#warning_info p{
 	font-size:12px;
 	margin:0px 0px 0px 30px;
 }

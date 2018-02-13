@@ -9,8 +9,8 @@
 <link rel="stylesheet" type="text/css" href="reservation_common.css">
 <link rel="stylesheet" type="text/css" href="theater_progress.css">
 <link rel="stylesheet" type="text/css" href="theater_seat.css">
-<link rel="stylesheet" type="text/css" href="theater_menu.css">
-<link rel="stylesheet" type="text/css" href="theater_quick.css?var=4">
+<link rel="stylesheet" type="text/css" href="theater_menu.css?var=4">
+<link rel="stylesheet" type="text/css" href="theater_quick.css?var=2">
 <link rel="stylesheet" type="text/css" href="theater_list.css">
 <!-- API JS -->
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
@@ -421,7 +421,7 @@
 		$(document).on("change","#person_setting input",function(){
 			// 인원초과 예외처리
 			if(checkPersonSetting()){
-					
+				applyPayment();	
 			}
 		});
 		
@@ -510,14 +510,15 @@
 						<label>좌석 배치설정</label>
 						<input type="radio" name="seat_set" checked="checked" value="1">
 						<label>■</label>
-						<input type="radio" name="seat_set" value="2" disabled="">
+						<input type="radio" name="seat_set" value="2" disabled="disabled">
 						<label>■■</label>
 						<input type="radio" name="seat_set" value="3" disabled="disabled">
 						<label>■■■</label>
 						<input type="radio" name="seat_set" value="4" disabled="disabled">
 						<label>■■■■</label>
 					</div>
-					<div id="waring_info">
+					<div id="warning_info">
+						<p>청소년/시니어/장애인은 연령설정을 해주시기 바랍니다. 인원세부설정을 하지않을 경우 성인요금으로 계산됩니다.</p>
 						<p>만 15세 미만의 고객님(영,유아 포함)은 반드시 부모님 또는 성인 보호자의 동반하에 관람이 가능합니다.</p>
 					</div>
 					<div id="draw_seat">
@@ -555,7 +556,7 @@
 						</tr>
 						<tr>
 							<td class="nav_info">선택좌석</td>
-							<td class="nav_data">선택좌석</td>
+							<td id="nav_data_seat" class="nav_data">선택좌석</td>
 						</tr>
 					</table>
 				</div>

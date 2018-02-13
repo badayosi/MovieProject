@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -162,7 +163,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$("#service_form").submit(function(){
+		$(document).on("submit","#service_form",function(){
 			if($("select[name='classification']").val() =="분류 선택"){
 				alert("분류를 선택하세요");
 				return false;
@@ -176,7 +177,7 @@
 		})
 		$("#serviceMenu ul li").click(function(){
 			if($(this).text()=="공지사항"){
-				$("#sss").load("noticeView.jsp");	
+				$("#sss").load("noticeView.jsp");
 			}else{
 				$("#sss").load("ServiceUserBoardView.jsp");	
 			}
@@ -197,6 +198,7 @@
 			</ul>
 		</div>
 		<div id="sss"></div>
+		
 	</div>
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>

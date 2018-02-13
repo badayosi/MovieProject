@@ -27,10 +27,19 @@
 		text-align: left;
 		width:400px;
 	}
+	#insert{
+		margin-top: 20px;
+	}
+	#insert input[type="button"]{
+		font-size: 15px;
+		background: #EFEBDB;
+		padding: 5px 10px;
+		color: black;
+	}
 </style>
 </head>
 <body>
-   <jsp:include page="../include/managerHeader.jsp"></jsp:include>
+	<jsp:include page="../include/adminHeader.jsp"></jsp:include>
 
 	<div id="addDiv">
 		<table id="infoTable">
@@ -84,8 +93,10 @@
 			</tr>
 		</table>
 		<hr>
-		<a href="managerUpdateMovie.do?no=${movie.movieNo }"><input type="button" value="수정"></a>
-		<a href="managerDeleteMovie.do?no=${movie.movieNo }"><input type="button" value="삭제"></a>
+		<p id="insert">
+			<a href="managerUpdateMovie.do?no=${movie.movieNo }"><input type="button" value="수정"></a>
+			<a href="managerDeleteMovie.do?no=${movie.movieNo }"><input type="button" value="삭제"></a>
+		</p>
 	</div>
    
 <jsp:include page="../include/footer.jsp"></jsp:include>

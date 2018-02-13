@@ -260,7 +260,6 @@ input:FOCUS {
 		font-size:14px;
 	}
 .checkimg{
-	display:none;
 }
 #radioCheckImg{
 	display: inline-block;
@@ -280,7 +279,6 @@ input:FOCUS {
 			$(obj).hover(function() {
 				$(this).find("label").css("color", "black");
 				$(this).find("input").css("border-color", "black");
-				$(this).find("input").focus();
 			}, function() {
 				$(this).find("label").css("color", "#cccccc");
 				$(this).find("input").css("border-color", "#cccccc");
@@ -312,7 +310,6 @@ input:FOCUS {
 			$("#resultAddrWrap div").not("#zxc").remove();
 			$("#zipcode").nextAll(".checkimg").css("display","inline-block");
 			$("#zipcode").nextAll(".checkimg").attr("src",trueImgsrc);
-			
 		})
 		 $("#searchWarp #search_cencel").click(function(){
 			$("#hiddenbg").css("display","none");
@@ -320,41 +317,16 @@ input:FOCUS {
 			$("#doro").val("");
 			$("#zipcode").nextAll(".checkimg").attr("src",falseImgsrc);
 		 })
-		 $("#doroSearchWrap").click(function(){
-			 var doro = $("#doro").val();
-			 if(doro ==""){
-				 alert("도로명을 입력해주세요");
-				 return false;
-			 }
-			 $("#resultAddrWrap div").not("#zxc").remove();
-			
-			 $.ajax({
-					url:"joinaddr.do",
-					type:"get",
-					data:{"doro":doro},
-					dataType:"json",
-					success:function(json){
-						console.log(json)
-						if(json.length==0){
-							var div = "<div class='searchResult hoverResult'>";
-							var zipcode = "<p class='seacrch_zipcode'></p>";
-							var addr ="<p class='seacrch_addr'>검색 결과가 없습니다.</p>";
-							div += zipcode+addr +"</div>";
-							$("#resultAddrWrap").append(div);
-							return;
-						}
-						for(var i=0; i<json.length; i++){
-							var div = "<div class='searchResult hoverResult'>";
-							var zipcode = "<p class='seacrch_zipcode'>"+json[i].addrNo+"</p>";
-							var addr ="<p class='seacrch_addr'>"+json[i].sido+" "+json[i].sigungu+" "+json[i].doro
-									+" "+json[i].building1+json[i].building2+"</p>";
-							div += zipcode + addr +"</div>";
-							$("#resultAddrWrap").append(div);
-						}
-					}
-					
-			})
+		$("#doroSearchWrap").click(function(){
+			 searchDoro();
 		 })
+		$("#doro").keydown(function(e){
+			if(e.keyCode==13){
+				searchDoro();
+				e.preventDefault();
+				
+			}
+		})
 		$(document).on("mouseover",".hoverResult",function(){
 			$(this).css("background","#D7FFF1")
 		})
@@ -380,58 +352,35 @@ input:FOCUS {
 					data:{"id":id},
 					dataType:"json",
 					success:function(json){
+						console.log(json);
 						if(json == "false"){
-							$("#userId").nextAll(".checkimg").css("display","inline-block");
+							alert("중복된 아이이디입니다.");
 							$("#userId").nextAll(".checkimg").attr("src",falseImgsrc);
 						}else if(json =="true"){
-							$("#userId").nextAll(".checkimg").css("display","inline-block");
-							$("#userId").nextAll(".checkimg").attr("src",trueImgsrc);
+							var reg =/^(?=.*[A-Za-z])[A-Za-z0-9]{6,12}$/;
+						    var reg2 = /^[A-Za-z]{6,12}$/;
+							if(reg.test(id) || reg2.test(id)){
+								$("#userId").nextAll(".checkimg").attr("src",trueImgsrc);
+							}else{
+								alert("6자이상 영문/숫자를 입력해주세요");
+							}
 						}
 					}
 			})
 		})
-		$("input[name='id']").keyup(function(){
-			var regId = /^[0-9A-Za-z]{6,14}$/;
-			if(!regId.test($(this).val())){
-				$("#userId").nextAll(".checkimg").css("display","inline-block");
-				$("#userId").nextAll(".checkimg").attr("src",falseImgsrc);
-			}
-			/* var reg =/^(?=.*[A-Za-z])[A-Za-z0-9]{5,12}$/;
-		    var reg2 = /^[A-Za-z]{5,12}$/ */
-			
-		})
 		$("input[name='pw']").keyup(function(){
-			var regPw = /^[0-9A-Za-z]{8,16}$/;
-			if(!regPw.test($(this).val())){
-				$("#userPw").nextAll(".checkimg").css("display","inline-block");
-				$("#userPw").nextAll(".checkimg").attr("src",falseImgsrc);
-			}else{
-				$("#userPw").nextAll(".checkimg").css("display","inline-block");
+			var reg =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
+			
+			if(reg.test($(this).val())){
 				$("#userPw").nextAll(".checkimg").attr("src",trueImgsrc);
+			}else{
+				$("#userPw").nextAll(".checkimg").attr("src",falseImgsrc);
 			}
-			 /*  var reg =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
-		      var password = $("input[name='pw']").val();
-		      var noNum = true;
-		      
-		      if(/(\w)\1\1\1/.test(password)){
-		         noNum=false;
-		      }
-		      
-		      if(reg.test(password)&&noNum){
-		         $("#pw_reg").css("display","inline");
-		         $("#pw_reg_error").css("display","none");
-		         
-		      }else{
-		         $("#pw_reg").css("display","none");
-		         $("#pw_reg_error").css("display","inline");
-		      } */
 		})
 		$("input[name='pwch']").keyup(function(){
 			if($(this).val() != $("input[name='pw']").val()){
-				$("#userPwch").nextAll(".checkimg").css("display","inline-block");
 				$("#userPwch").nextAll(".checkimg").attr("src",falseImgsrc);
 			}else{
-				$("#userPwch").nextAll(".checkimg").css("display","inline-block");
 				$("#userPwch").nextAll(".checkimg").attr("src",trueImgsrc);
 			}
 		})
@@ -456,19 +405,16 @@ input:FOCUS {
 			}
 		})
 		
-		$("input[name='tel2'],input[name='tel3']").keyup(function(){
+		$("input[name='tel2'],input[name='tel3']").keyup(function(e){
 			var regTel1 = /^[0-9]{3,4}$/;
 			var regTel2 = /^[0-9]{4}$/;
 			if($("input[name='tel2']").val().length==4){
 				$("#userTel").nextAll("input").focus();
 			}
 			if(!regTel1.test($("input[name='tel2']").val()) || !regTel2.test($("input[name='tel3']").val())){
-				$("#userTel").nextAll(".checkimg").css("display","inline-block");
 				$("#userTel").nextAll(".checkimg").attr("src",falseImgsrc);
 			}else{
-				$("#userTel").nextAll(".checkimg").css("display","inline-block");
 				$("#userTel").nextAll(".checkimg").attr("src",trueImgsrc);
-				
 			}
 		})
 		$("input[name='gender']").click(function(){
@@ -490,6 +436,41 @@ input:FOCUS {
 			}
 		})
 	})
+function searchDoro(){
+		var doro = $("#doro").val();
+		 if(doro ==""){
+			 alert("도로명을 입력해주세요");
+			 return false;
+		 }
+		 $("#resultAddrWrap div").not("#zxc").remove();
+		 
+		 $.ajax({
+				url:"joinaddr.do",
+				type:"get",
+				data:{"doro":doro},
+				dataType:"json",
+				success:function(json){
+					console.log(json)
+					if(json.length==0){
+						var div = "<div class='searchResult hoverResult'>";
+						var zipcode = "<p class='seacrch_zipcode'></p>";
+						var addr ="<p class='seacrch_addr'>검색 결과가 없습니다.</p>";
+						div += zipcode+addr +"</div>";
+						$("#resultAddrWrap").append(div);
+						return;
+					}
+					for(var i=0; i<json.length; i++){
+						var div = "<div class='searchResult hoverResult'>";
+						var zipcode = "<p class='seacrch_zipcode'>"+json[i].addrNo+"</p>";
+						var addr ="<p class='seacrch_addr'>"+json[i].sido+" "+json[i].sigungu+" "+json[i].doro
+								+" "+json[i].building1+json[i].building2+"</p>";
+						div += zipcode + addr +"</div>";
+						$("#resultAddrWrap").append(div);
+					}
+				}
+				
+		})
+}
 </script>
 </head>
 <body>
@@ -501,29 +482,29 @@ input:FOCUS {
 			<form action="join.do" method="post" id="jF">
 				<p>
 					<label>아이디</label> 
-					<input type="text" name="id" id="userId" placeholder="6자이상 영문/숫자를 입력하세요"> 
+					<input type="text" name="id" id="userId" placeholder="6자이상 영문/숫자를 입력하세요" onkeyup="this.value=this.value.replace(/[^A-Za-z0-9]/g,'');"> 
 					<input type="button" value="중복체크" id="checkId">
-					<img src="../images/join_icon.png" class="checkimg">
+					<img src="../images/join_else_icon.png" class="checkimg">
 				</p>
 				<p>
-					<label>비밀번호</label> <input type="password" name="pw" placeholder="8자이상 영문/숫자를 입력하세요" id="userPw">
+					<label>비밀번호</label> <input type="password" name="pw" placeholder="8자이상 영문/숫자/특수문자를 조합하세요" id="userPw">
 					
-					<img src="../images/join_icon.png" class="checkimg">
+					<img src="../images/join_else_icon.png" class="checkimg">
 				</p>
 				<p>
 					<label>비밀번호 확인</label> <input type="password" name="pwch" id="userPwch">
 					
-					<img src="../images/join_icon.png" class="checkimg">
+					<img src="../images/join_else_icon.png" class="checkimg">
 				</p>
 				<p>
-					<label>이름</label> <input type="text" name="name" id="userName">
+					<label>이름</label> <input type="text" name="name" id="userName" onkeyup="this.value=this.value.replace(/[^가-힣]/g,'');">
 					
-					<img src="../images/join_icon.png" class="checkimg">
+					<img src="../images/join_else_icon.png" class="checkimg">
 				</p>
 				<p>
 					<label>이메일주소</label> <input type="email" name="email" id="userEmail">
 					
-					<img src="../images/join_icon.png" class="checkimg">
+					<img src="../images/join_else_icon.png" class="checkimg">
 				</p>
 				<p>
 					<label>휴대폰 번호</label> <select name="tel1" id="telSelect">
@@ -533,9 +514,9 @@ input:FOCUS {
 						<option>017</option>
 						<option>018</option>
 						<option>019</option>
-					</select> <input type="tel" name="tel2" class="telinput" id="userTel"> <input
-						type="tel" name="tel3" class="telinput">
-						<img src="../images/join_icon.png" class="checkimg">
+					</select> <input type="tel" name="tel2" class="telinput" id="userTel" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"> <input
+						type="tel" name="tel3" class="telinput" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+						<img src="../images/join_else_icon.png" class="checkimg">
 						
 				</p>
 				<p id="radioP">
@@ -552,7 +533,7 @@ input:FOCUS {
 						name="zipcode" id="zipcode"> <input type="text" name="addr"
 						id="addr" id="userAddr">
 						<input type="text" name="addrUser" id="addrUser">
-						<img src="../images/join_icon.png" class="checkimg">
+						<img src="../images/join_else_icon.png" class="checkimg">+
 				</p>
 				<p id="btnWrap">
 					<input type="submit" value="회원가입" id="joinBtn"> <input type="button"
