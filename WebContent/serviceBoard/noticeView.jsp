@@ -33,7 +33,6 @@
 		background: #231f20;
 		color:white;
 		font-weight:bold;
-		
 	}
 	#tablewrap{
 		width:100%;
@@ -42,12 +41,64 @@
 		width:100%;
 		text-align: center;
 		border-collapse: collapse;
+		
 	}
 	#header_table{
-		border-top:1px solid black;
-		border-bottom: 1px solid black;
+		border-top:2px solid #c0c0c0;
+		border-bottom: 2px solid #c0c0c0 !important;
+		padding:10px;
+	
+	}
+	#header_table th{
+		
+	}
+	#tablewrap #notice_table tr{
+		border-bottom:1px solid #c0c0c0;
+		height:45px;
+	}
+	#tablewrap #notice_table td{
+		padding:5px;
+	}
+	#th1{
+		width:10%;
+	}
+	#th2{
+		width:50%;
+	}
+	#th3{
+		width:20%;
+	}
+	#th4{
+		width:20%;
 	}
 </style>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		 listview(0);
+	})
+function listview(size){
+		$.ajax({
+			url:"noticelist.do",
+			type:"get",
+			data:{"size":size},
+			dataType:"json",
+			success:function(json){
+				console.log(json);
+				for(var i=0; i<json.list.length; i++){
+					var tr = "<tr>"
+					var noTd = "<td>"+json.list[i].boardNo+"</td>";
+					var titleTd = "<td><a href='#'>"+json.list[i].title+"</a></td>";
+					var date = new Date(json.list[i].regdate);
+					var regDateTd = "<td>"+date.toLocaleDateString()+"</td>";
+					var readcountTd = "<td>"+json.list[i].readcount+"</td></tr>";
+					tr += noTd + titleTd + regDateTd + readcountTd;
+					$("#notice_table").append(tr);
+				}
+			}
+	 	})
+}
+</script>
 </head>
 <body>
 	<div id="search_wrap">
@@ -59,20 +110,14 @@
 			</select>
 			<input type="text" id="search">
 			<a href="#"><input type="button" id="search_btn" value="검색"></a>
-		</div>
+		</div> 
 		<div id="tablewrap">
 			<table id="notice_table">
 				<tr id="header_table">
-					<th>번호</th>
-					<th>제목</th>
-					<th>등록일</th>
-					<th>조회수</th>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>제목1</td>
-					<td>2018-02-11</td>
-					<td>1</td>
+					<th id="th1">번호</th>
+					<th id="th2">제목</th>
+					<th id="th3">등록일</th>
+					<th id="th4">조회수</th>
 				</tr>
 			</table>
 		</div>

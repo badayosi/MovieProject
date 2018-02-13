@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -169,7 +170,8 @@
 			$("#asdasd").text($("#user_star_content").val());
 		})
 		$(document).on("click",".page_number",function(){
-			var size = $(this).text();
+			alert("이벤트 발생")
+			var size = Number($(this).text()) -1;
 			$.ajax({
 				url:"starboard.do",
 				type:"get",
@@ -177,13 +179,15 @@
 				dataType:"json",
 				success:function(json){
 					console.log(json);
+					boardListView(size);
 				}
 			})
 		})
 		boardListView(0);
 	})
 function boardListView(boardNo){
-		
+	$("#userStarBoardView").empty();
+	$("#countBtn").empty();
 	$.ajax({
 		url:"starboard.do",
 		type:"get",
@@ -191,15 +195,15 @@ function boardListView(boardNo){
 		dataType:"json",
 		success:function(json){
 			console.log(json);
-			if(json.length!=0){
-				for(var j=0; j < json.length; j++){
+			if(json.list.length!=0){
+				for(var j=0; j < json.list.length; j++){
 
 					var div_userStartBoard =  "<div class='userStarBoard'>";
 					var div_userStartBoard_left = "<div class='userStarBoard_left'>";
 					var div_user_star_board = "<div class='user_star_board'>";
 					var span_relaview= "<span class='realview'>실관람객</span>";
 					var img = "";
-					var size = json[j].grade;
+					var size = json.list[j].grade;
 					var halfSize =  parseInt(size / 2);
 					for(var i =0; i <5; i ++){
 						if(size % 2 ==0){
@@ -218,32 +222,30 @@ function boardListView(boardNo){
 							}
 						}
 					}
-					var span_user_star_board_socre = "<span class ='user_star_board_socre'>"+json[j].grade+"</span></div>";
-					div_userStartBoard += div_userStartBoard_left+div_userStartBoard_left+div_user_star_board +span_relaview + img +span_user_star_board_socre;
+					var span_user_star_board_socre = "<span class ='user_star_board_socre'>"+json.list[j].grade+"</span></div>";
+					div_userStartBoard += div_userStartBoard_left+div_user_star_board +span_relaview + img +span_user_star_board_socre;
 						
 					var div_user_star_content = "<div class='user_star_content'>";
-					var contentP = "<p>"+ json[j].boardContent + "</p></div>";
+					var contentP = "<p>"+ json.list[j].boardContent + "</p></div>";
 					var div_user_star_date =  "<div class='user_star_date'>";
 					
-					var date = new Date(json[j].regDate);
+					var date = new Date(json.list[j].regdate);
 					
-					var regDateP = "<p>"+date+"</p></div></div>";
+					var regDateP = "<p>"+date.toLocaleDateString()+"</p></div></div>";
 					
 					div_userStartBoard += div_user_star_content + contentP + div_user_star_date + regDateP;
 					
 					var userStarBoard_right = "<div class='userStarBoard_right'>";
-					var userNameString = json[j].userName;
-					var hiddName = userNameString.replace(userNameString.substr(1,1),"*");
-					
+					var userNameString = json.list[j].userName;
+					var hiddName = userNameString.substr(0, 1)+"*"+userNameString.substr(2, userNameString.length);
 					var spanName = "<span class='userStarBoard_userId'>"+hiddName+"</span></div></div>";
 					
 					div_userStartBoard += userStarBoard_right +spanName;
 					$("#userStarBoardView").append(div_userStartBoard);
 					
 				}
-				var fullSize = Number($("#boardSize").text());
-				
-				for(var boardSize; boardSize < fullSize; boardSize++){
+				var fullSize = json.size;
+				for(var boardSize =0; boardSize <= fullSize; boardSize++){
 					var pageNo = "<span class='page_number'>"+(boardSize+1)+"</span>"
 					$("#countBtn").append(pageNo);
 				}
@@ -256,6 +258,7 @@ function boardListView(boardNo){
 </head>
 <body>
 	<div id="starBorad">
+
 		<p  id="boardSize">${boardIndex }</p>
 		<h2>평점 및 영화 리뷰</h2>
 		<div id="boradWrap">
@@ -292,12 +295,6 @@ function boardListView(boardNo){
 		<div id="countBtn">
 				
 		</div>
-		<c:if test="${boardIndex!=null }">
-			들어옴 ${boardIndex }
-		</c:if>
-		<c:if test="${boardIndex==null }">
-			안들어옴
-		</c:if>
 	</div>
 	
 </body>

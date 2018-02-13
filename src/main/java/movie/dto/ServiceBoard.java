@@ -12,6 +12,21 @@ public class ServiceBoard {
 	private Date regdate;
 	private boolean answer;
 	private String answerContent;
+	private String filename;
+	private String filepath;
+	
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	public String getFilepath() {
+		return filepath;
+	}
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
+	}
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -66,6 +81,7 @@ public class ServiceBoard {
 	public void setAnswerContent(String answerContent) {
 		this.answerContent = answerContent;
 	}
+	
 	public ServiceBoard(int boardNo, String userId, String consulting, String classification, String title,
 			String content, Date regdate, boolean answer, String answerContent) {
 		super();
@@ -79,7 +95,6 @@ public class ServiceBoard {
 		this.answer = answer;
 		this.answerContent = answerContent;
 	}
-	
 	public ServiceBoard(String userId, String consulting, String classification, String title,
 			String content, Date regdate, boolean answer) {
 		this.userId = userId;
@@ -90,8 +105,7 @@ public class ServiceBoard {
 		this.regdate = regdate;
 		this.answer = answer;
 	}
-	
-	
+
 	public ServiceBoard(int boardNo, Date regdate, boolean answer, String answerContent) {
 		super();
 		this.boardNo = boardNo;
@@ -99,10 +113,26 @@ public class ServiceBoard {
 		this.answer = answer;
 		this.answerContent = answerContent;
 	}
+	
 	@Override
 	public String toString() {
 		return "ServiceBoard [boardNo=" + boardNo + ", userId=" + userId + ", consulting=" + consulting
 				+ ", classification=" + classification + ", title=" + title + ", content=" + content + ", regdate="
-				+ regdate + ", answer=" + answer + ", answerContent=" + answerContent + "]";
+				+ regdate + ", answer=" + answer + ", answerContent=" + answerContent + ", filename=" + filename
+				+ ", filepath=" + filepath + "]";
 	}
+	public ServiceBoard(String userId, String consulting, String classification, String title,
+			String content, Date regdate, boolean answer, String filename, String filepath) {
+		super();
+		this.userId = userId;
+		this.consulting = consulting;
+		this.classification = classification;
+		this.title = title;
+		this.content = content;
+		this.regdate = regdate;
+		this.answer = answer;
+		this.filename = filename;
+		this.filepath = filepath;
+	}
+	
 }

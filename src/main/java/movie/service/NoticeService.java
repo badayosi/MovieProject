@@ -4,27 +4,32 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import movie.dao.NoticeDao;
 import movie.dao.ServiceBoardDao;
-import movie.dao.UserDao;
+import movie.dto.Notice;
 import movie.dto.ServiceBoard;
 import mvc.util.MySqlSessionFactory;
 
-public class ServiceBoardService {
-	private static final ServiceBoardService INSTANCE = new ServiceBoardService();
-	
-	private ServiceBoardService(){}
-	
-	public static ServiceBoardService getInstance() {
+public class NoticeService {
+	private static final NoticeService INSTANCE = new NoticeService();
+
+	public static NoticeService getInstance() {
 		return INSTANCE;
 	}
+
+	private NoticeService() {}
 	
-	public List<ServiceBoard> selectByAll(int size){
+	public List<Notice> selectByAll(int size){
 		SqlSession session = null;
 		session = MySqlSessionFactory.openSession();
-		ServiceBoardDao dao = session.getMapper(ServiceBoardDao.class);
-		List<ServiceBoard> list = null;
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		List<Notice> list = null;
 		try{
-			list = dao.selectByall(size);
+			list = dao.selectLimit(size);
+			for(Notice n : list){
+				System.out.println(n);
+			}
+			return list;
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
@@ -33,13 +38,13 @@ public class ServiceBoardService {
 		return list;
 	}
 	
-	public int insert(ServiceBoard sb){
+	public int insert(Notice notice){
 		SqlSession session = null;
 		session = MySqlSessionFactory.openSession();
-		ServiceBoardDao dao = session.getMapper(ServiceBoardDao.class);
+		NoticeDao dao = session.getMapper(NoticeDao.class);
 		
 		try{
-			dao.insert(sb);
+			dao.insert(notice);
 			session.commit();
 			return 0;
 		}catch(Exception e){
@@ -50,13 +55,13 @@ public class ServiceBoardService {
 		return -1;
 	}
 	
-	public int update(ServiceBoard sb){
+	public int update(Notice notice){
 		SqlSession session = null;
 		session = MySqlSessionFactory.openSession();
-		ServiceBoardDao dao = session.getMapper(ServiceBoardDao.class);
+		NoticeDao dao = session.getMapper(NoticeDao.class);
 		
 		try{
-			dao.update(sb);
+			dao.updateByreadCoutn(notice);
 			session.commit();
 			return 0;
 		}catch(Exception e){
@@ -70,28 +75,10 @@ public class ServiceBoardService {
 	public int selectTosize(){
 		SqlSession session = null;
 		session = MySqlSessionFactory.openSession();
-		ServiceBoardDao dao = session.getMapper(ServiceBoardDao.class);
+		NoticeDao dao = session.getMapper(NoticeDao.class);
 		
 		try{
 			return dao.selectTosize();
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			MySqlSessionFactory.closeSession(session);
-		}
-		return -1;
-	}
-	
-	public int insertFile(ServiceBoard sb){
-		SqlSession session = null;
-		session = MySqlSessionFactory.openSession();
-		ServiceBoardDao dao = session.getMapper(ServiceBoardDao.class);
-		System.out.println(sb.getFilename());
-		System.out.println(sb.getFilepath());
-		try{
-			dao.insertFile(sb);
-			session.commit();
-			return 0;
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

@@ -10,4 +10,5 @@ public interface ServiceBoardDao {
 	public void update(ServiceBoard sb);
 	public int selectTosize();
 	public ServiceBoard selectById(int boardNo);
+	public void insertFile(ServiceBoard sb);
 }
