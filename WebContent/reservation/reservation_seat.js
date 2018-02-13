@@ -199,7 +199,31 @@ function applyPayment(){
 			arrPerson[index] += Number($(obj).val());
 		allCount += Number($(obj).val());
 	});
-	if($("#person_setting").find("select").val() > allCount){
+	
+	// 총 인원과 세부인원 총 합계가 미 일치시 성인으로 카운터 정산
+	if($("#person_setting").find("select").val() > allCount)
+		arrPerson[0] += $("#person_setting").find("select").val()-allCount;
 		
-	}
+	// QUICK 인원 반영
+	$("#nav_seat").find(".nav_count").each(function(index,obj){
+		$(obj).html(arrPerson[index]);
+	})
+	
+	// QUICK 금액 계산
+	$("#nav_seat").find(".nav_data").each(function(index,obj){
+		switch (index) {
+		case 0:
+			$(obj).html(arrPerson[index]*9000);
+			break;
+		case 1:
+			$(obj).html(arrPerson[index]*8000);
+			break;
+		case 2:
+			$(obj).html(arrPerson[index]*5000);
+			break;
+		case 3:
+			$(obj).html(arrPerson[index]*5000);
+			break;
+		}
+	});
 }
