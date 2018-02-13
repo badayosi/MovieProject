@@ -69,13 +69,13 @@
 		<a href="/MovieProject/login/JoinForm.jsp">회원가입</a>
 	</c:if>
 	</p>
-</div>
+</div> 
 <div id="menubarWarp">
 	<ul id="menubar">
 		<li><a href="#">HOME</a></li>
 		<li><a href="#">영화</a></li>
 		<li><a href="#">예매</a></li>
 		<li><a href="#">상영관</a></li>
-		<li><a href="#">게시판</a></li>
+		<li><a href="/MovieProject/serviceBoard/ServiceUserBoard.jsp">고객센터</a></li>
 	</ul>
 </div>

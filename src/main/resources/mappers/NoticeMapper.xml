@@ -13,22 +13,22 @@
 	<select id="selectTosize" resultType="int">
 		select count(*) from notice;
 	</select>
-	<select id="selectLimit" resultMap="noticeResult" parameterType="int">
-		select * from notice order by board_no desc limit #{size},10;
-	</select>
-	<select id="selectByTitle" resultMap="noticeResult" parameterType="int">
+	<select id="selectByTitle" resultMap="noticeResult" parameterType="Notice">
 		select * from notice where title like #{title} order by board_no desc limit #{size},10;
 	</select>
-	<select id="selectByContent" resultMap="noticeResult" parameterType="int">
+	<select id="selectByContent" resultMap="noticeResult" parameterType="Notice">
 		select * from notice where content like #{content} order by board_no desc limit #{size},10;
 	</select>
-	<select id="selectByContentTitle" resultMap="noticeResult" parameterType="int">
+	<select id="selectByContentTitle" resultMap="noticeResult" parameterType="Notice">
 		select * from notice where content like #{content} and title like #{title} order by board_no desc limit #{size},10;
 	</select>
 	<insert id="insert" parameterType="Notice">
-		insert into notice (title,content,regdate,readcount)values (#{title},#{content},#{regdate},#{readcount})
+		insert into notice (title,content,regdate,readcount) values(#{title},#{content},#{regdate},#{readcount})
 	</insert>
-	<update id="updateByreadCount">
+	<update id="updateByreadCount" parameterType="Notice">
 		update notice set readcount = #{readcount} where board_no = #{boardNo}
 	</update>
+	<select id="selectLimit" resultMap="noticeResult" parameterType="int">
+		select * from notice order by board_no desc limit #{size},10;
+	</select>
 </mapper>

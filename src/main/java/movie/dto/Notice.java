@@ -8,6 +8,7 @@ public class Notice {
 	private String content;
 	private Date regdate;
 	private int readcount;
+	
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -43,6 +44,9 @@ public class Notice {
 		this.content = content;
 		this.regdate = regdate;
 		this.readcount = readcount;
+	}
+	
+	public Notice() {
 	}
 	@Override
 	public String toString() {
