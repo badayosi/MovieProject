@@ -56,7 +56,7 @@ public class ManagerAddMovieHandler implements CommandHandler {
 				Movie movie = new Movie(0, name, poster, playTime, rating, 0, openDate, closeDate, genre,
 						steelCut, video, synopsis, actor, director,filePath);
 
-				service.insert(movie);
+				service.insert(movie); 
 
 				res.sendRedirect("managerListMovie.do");
 
