@@ -40,7 +40,10 @@
 	#bigImgWrap{
 		width:100%;
 		margin:0 auto;
-		background: #353535;		
+		background: #353535;
+		padding-top:30px;
+		padding-bottom:30px;
+			
 	}
 	#bigImgWrap .bigImg{
 		width:55%;
@@ -51,7 +54,6 @@
     font-size: 150px;
     line-height: 0;
 
-    opacity: .75;
     color: white !important;
 
 }
@@ -60,27 +62,25 @@
 		margin:0 auto;
 	}
 	.bigImg h3 img{
-		width:400px;
+		width:800px;
 		margin:0 auto;
 	}
 	#container #imgListDiv{
-		width:800px;
+		width:900px;
 		height:200px;
 		margin:0 auto;
 	} 
 	#container #imgListDiv .imgList h3 img{
-		width:100px;
+		width:200px;
 		margin:0 auto;
 	}
-	.
 </style>
 </head>
 <body>
    <jsp:include page="../include/header.jsp"></jsp:include>  
    <div id="bigImgWrap">
 	   	<div class="bigImg">
-	   		<h3><img src="/MovieProject/upload/${movie.movieNo}/${movie.pathVideo}"></h3>
-	   		<h3><img src="/MovieProject/upload/${movie.movieNo}/${movie.pathPoster}"></h3>
+	   		<%-- <h3><img src="/MovieProject/upload/${movie.movieNo}/${movie.pathVideo}"></h3> --%>
 			<c:forEach var="item" items="${steelcut}">
 				<h3><img src="/MovieProject/upload/${movie.movieNo}/${item}"></h3>
 			</c:forEach>
@@ -89,8 +89,7 @@
    	<div id="container">
    		<div id="imgListDiv">
    			<div class="imgList">
-				<h3><img src="/MovieProject/upload/${movie.movieNo}/${movie.pathVideo}"></h3>
-				<h3><img src="/MovieProject/upload/${movie.movieNo}/${movie.pathPoster}"></h3>
+				<%-- <h3><img src="/MovieProject/upload/${movie.movieNo}/${movie.pathVideo}"></h3> --%>
 				<c:forEach var="item" items="${steelcut}">
 					<h3><img src="/MovieProject/upload/${movie.movieNo}/${item}"></h3>
 				</c:forEach>
