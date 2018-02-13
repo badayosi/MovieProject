@@ -84,7 +84,8 @@
 			</tr>
 		</table>
 		<hr>
-		<a href="managerUpdateMovie.do?no=${movie.movieNo }"><input type="button" value="수정"></a>	
+		<a href="managerUpdateMovie.do?no=${movie.movieNo }"><input type="button" value="수정"></a>
+		<a href="managerDeleteMovie.do?no=${movie.movieNo }"><input type="button" value="삭제"></a>
 	</div>
    
 <jsp:include page="../include/footer.jsp"></jsp:include>

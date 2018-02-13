@@ -4,22 +4,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="https://cdn.rawgit.com/young-ha/webfont-archive/master/css/PureunJeonnam.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<link rel="stylesheet" type="text/css" href="reservation_common.css">
+<link rel="stylesheet" type="text/css" href="theater_progress.css">
+<link rel="stylesheet" type="text/css" href="theater_seat.css?var=4">
+<link rel="stylesheet" type="text/css" href="theater_menu.css">
+<link rel="stylesheet" type="text/css" href="theater_quick.css">
+<link rel="stylesheet" type="text/css" href="theater_list.css">
+<!-- API JS -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="../js/jquery-animate-css-rotate-scale.js"></script>
+<!-- CUSTOM JS -->
+<script type="text/javascript" src="reservation_seat.js?var=5"></script>
 <style>
-	body{
-		position:relative;
-	}
-
-	div#container{
-		width:1024px;
-		min-height:600px;
-		margin:0 auto;
-		background:#F9F6EC;
-	}
-	
 	/* 가로형 달력 CSS */
 	div#horizontal_calendar{
 		width:100%;
@@ -179,22 +177,7 @@
 	ul#movieZone .selectMovie{
 		font-weight: bold;
 	}
-	
-	/* 예매현황판 */
-	div#nav_condition{
-		width:500px;
-		min-height:300px;
-		position:absolute;
-		top:300px;
-		right:10px;
-		background:gray;
-	}
-	div#nav_condition ul{
-		list-style:none;
-	}
 </style>
-
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script type="text/javascript">
 	function makeCalendar(){
 		var todayDate = new Date();
@@ -287,7 +270,7 @@
 				for(var index=0;index<json.length;index++){
 					makeTheaterList = "";
 					makeTheaterList += "<div>";
-					makeTheaterList += "<input type='hidden' name='timeNo' value='" + json[index].timeNo + "'>";
+					makeTheaterList += "<a href='javascript:loadSeat(" + json[index].timeNo +")'>";
 					makeTheaterList += "<table>";
 					makeTheaterList += "<tr>";
 					makeTheaterList += "<td>" + formatChange(json[index].startTime) + "</td>";
@@ -296,11 +279,44 @@
 					makeTheaterList += "<td>" + json[index].restSeat + " / " + json[index].maxSeat + "</td>";
 					makeTheaterList += "</tr>";
 					makeTheaterList += "</table>";
+					makeTheaterList += "</a>";
 					makeTheaterList += "</div>";
 					$("#theaterList").append(makeTheaterList); 
 				}
 			}
 		});
+	}
+	
+	function loadSeat(timeNo){
+		$.ajax({
+			url:"reservationAjax.do?timeNo=" + timeNo,
+			type:"get",
+			dataType:"json",
+			success:function(json){
+				
+				console.log(json);
+				$("#draw_seat").html("");
+				$("#draw_seat").append("<div id='theater_screen'>SCREEN</div>");
+				$("#draw_seat").append(json.theaterTable);
+			}
+		});
+		
+		$.ajax({
+			url:"reservationAjax.do?timeNo=" + timeNo + "&search=true",
+			type:"get",
+			dataType:"json",
+			success:function(json){
+				$(".seatTable").find("span").each(function(index, obj){
+					for(var idx=0 ; idx<json.length ; idx++){
+						if(json[idx] == $(this).html()){
+							$(this).removeClass("seat");
+							$(this).addClass("reserveSeat");
+						}
+					}
+				});
+			}
+		});
+		$("#theater_progess").css("display","block");
 	}
 	
 	function formatChange(date){
@@ -317,6 +333,59 @@
 			$("#integer td p").removeClass("today");
 			$(this).find("p").toggleClass("today");
 		});
+		
+		$("#progress_prev").on("click",function(){
+			$("#theater_progess").css("display","none");
+		})
+		
+		$("#progress_next").on("click",function(){
+			alert("결제완료 관련 작업 예정");
+		})
+		
+		// 상영관예약_좌석클릭 시
+		$(document).on("click",".seat",function(){
+			selectSeat($(this));
+		})
+		// 상영관예약_예약좌석클릭 시
+		$(document).on("click",".selectSeat",function(){
+			selectSeat($(this));
+		})
+		// 상영관예약_인원클릭 시
+		$(document).on("change","#person_setting select",function(){
+			settingChange();
+		})
+		// 상영관예약_좌석배치설정 시
+		$(document).on("click","#seat_setting input",function(){
+			settingChoice($(this).val());
+		})
+		// 상영관예약_마우스오버
+		$(document).on("mouseover",".seat",function(){
+			if(!$(this).hasClass("selectSeat")
+					&& !$(this).hasClass("reserveSeat")
+					&& $("#person_setting").find("select").val()-setCount()!=0)
+				$(this).toggleClass("overSeat");
+		});
+		// 상영관예약_마우스아웃
+		$(document).on("mouseout",".seat",function(){
+			if(!$(this).hasClass("selectSeat")
+					&& !$(this).hasClass("reserveSeat")
+					&& $("#person_setting").find("select").val()-setCount()!=0)
+				$(this).toggleClass("overSeat");
+		});
+		
+		//퀵메뉴
+		$("#open_btn").on("click",function(){
+			if($("#quick-menu").css("right") == "-500px"){
+				$("#open_btn").rotate("180deg");
+				$("#quick-menu").animate({"right":"0px"},300);
+				qi=1;
+			}else{
+				$("#open_btn").rotate("0deg");
+				$("#quick-menu").animate({"right":"-500px"},300);
+				qi=0;
+			}
+		})
+		
 	});
 </script>
 
@@ -359,15 +428,105 @@
 				</tr>
 			</table>
 		</div>
-		<div id="nav_condition">
-			<ul>
-				<li id="nav_title"></li>
-				<li id="nav_date"></li>
-				<li id="nav_time"></li>
-				<li id="nav_theater"></li>
-				<li id="nav_seat"></li>
-				<li id="nav_price"></li>				
-			</ul>
+		<div id="theater_progess">
+			<div id="progress_prev"><p>PREV</p></div>
+			<div id="theater_seat">
+				<div id="theater_menu">
+					<div id="person_setting">
+						<label>총 인원</label>
+						<select>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+						</select>
+						<label>성인</label>
+						<input type="number" value="0">
+						<label>청소년</label>
+						<input type="number" value="0">
+						<label>시니어</label>
+						<input type="number" value="0">
+						<label>장애인</label>
+						<input type="number" value="0">
+					</div>
+					<div id="seat_setting">
+						<label>좌석 배치설정</label>
+						<input type="radio" name="seat_set" checked="checked" value="1">
+						<label>■</label>
+						<input type="radio" name="seat_set" value="2" disabled="">
+						<label>■■</label>
+						<input type="radio" name="seat_set" value="3" disabled="disabled">
+						<label>■■■</label>
+						<input type="radio" name="seat_set" value="4" disabled="disabled">
+						<label>■■■■</label>
+					</div>
+					<div id="waring_info">
+						<p>만 15세 미만의 고객님(영,유아 포함)은 반드시 부모님 또는 성인 보호자의 동반하에 관람이 가능합니다.</p>
+					</div>
+					<div id="draw_seat">
+						
+					</div>
+				</div>
+			</div>
+			<div id="progress_next"><p>NEXT</p></div>
+		</div>
+		<div id="quick-menu">
+			<img src="../images/nav_condition_open.png" id="open_btn">
+			<div id="nav_condition">
+				<div id="select_info">
+					<div id="img"></div>
+					<table>
+						<tr>
+							<td id="nav_title" colspan="2">봉이 김선달</td>
+						</tr>
+						<tr>
+							<td class="nav_info">상영일</td>
+							<td class="nav_data" id="nav_date">2018-01-01</td>
+						</tr>
+						<tr>
+							<td class="nav_info">상영시간</td>
+							<td class="nav_data" id="nav_time">14:00</td>
+						</tr>
+						<tr>
+							<td class="nav_info">상영관</td>
+							<td class="nav_data" id="nav_theater">1관(2D)</td>
+						</tr>
+						<tr>
+							<td class="nav_info">선택좌석</td>
+							<td class="nav_data"></td>
+						</tr>
+					</table>
+				</div>
+				<table id="nav_seat">
+					<tr>
+						<td class="nav_info">성인</td>
+						<td class="nav_info">1명</td>
+						<td class="nav_data">9,000</td>
+					</tr>
+					<tr>
+						<td class="nav_info">청소년</td>
+						<td class="nav_info">1명</td>
+						<td class="nav_data">8,000</td>
+					</tr>
+					<tr>
+						<td class="nav_info">시니어/장애인</td>
+						<td class="nav_info">1명</td>
+						<td class="nav_data">5,000</td>
+					</tr>
+					<tr id="total_payment">
+						<td class="nav_info">총 결제금액</td>
+						<td class="nav_data" colspan="2">22,000</td>
+					</tr>
+				</table>
+				<div id="nav_control">
+					<div id="nav_ok">NEXT</div>
+					<div id="nav_cancle">CANCEL</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<jsp:include page="../include/footer.jsp"></jsp:include>

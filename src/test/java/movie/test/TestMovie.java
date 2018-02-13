@@ -51,7 +51,7 @@ public class TestMovie {
 		try {
 			session=MySqlSessionFactory.openSession();
 			MovieDao dao=session.getMapper(MovieDao.class);
-			Movie movie=new Movie(0, "홍길동", "posterImg.jpg", 120, 19, 0, new Date(), new Date(), "action", "img1.jpg, img2.jpg, img3.jpg", "video.mp4", "줄거리~~ 아빠~~~", "홍길동 외1 명", "배재진");
+			Movie movie=new Movie(0, "홍길동", "posterImg.jpg", 120, 19, 0, new Date(), new Date(), "action", "img1.jpg, img2.jpg, img3.jpg", "video.mp4", "줄거리~~ 아빠~~~", "홍길동 외1 명", "배재진","df");
 			dao.insert(movie);
 			session.commit();
 			//return 1;
@@ -77,9 +77,50 @@ public class TestMovie {
 			e.printStackTrace();
 		}finally {
 			MySqlSessionFactory.closeSession(session);
+		}	
+	}
+	
+	//@Test
+	public void selectLastNo(){
+		SqlSession session=null;
+		try {
+			session=MySqlSessionFactory.openSession();
+			MovieDao dao=session.getMapper(MovieDao.class);
+			
+			int lastNo=dao.selectLastNo();
+			System.out.println(lastNo);
+			//return 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			MySqlSessionFactory.closeSession(session);
 		}
-		
-		
+		//return 0;
+	}
+	
+	//@Test
+	public void updateWithOutFile(){
+		try(SqlSession session=MySqlSessionFactory.openSession();) {
+			MovieDao dao=session.getMapper(MovieDao.class);
+			Movie movie=new Movie(13, "배재", 120, 12, new Date(), new Date(), "action", "apple", "홍길동", "배재진");
+			
+			dao.updateWithOutFile(movie);
+
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void delete(){
+		try(SqlSession session=MySqlSessionFactory.openSession();) {
+			MovieDao dao=session.getMapper(MovieDao.class);
+			dao.delete(8);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -71,8 +71,9 @@ CREATE TABLE movie.reservation (
    user_id      VARCHAR(50)  NOT NULL COMMENT '회원id', -- 회원id
    timetable_no INT(11)      NOT NULL COMMENT '상영시간표_no', -- 상영시간표_no
    price        INT(11)      NOT NULL COMMENT '가격', -- 가격
-   seat         VARCHAR(255) NOT NULL COMMENT '좌석등급' -- 좌석번호
+   seat         VARCHAR(255) NOT NULL COMMENT '좌석등급', -- 좌석번호
    progress     INT(11)      NOT NULL COMMENT '진행여부' -- 진행상태
+
 )
 COMMENT 'reservation';
 

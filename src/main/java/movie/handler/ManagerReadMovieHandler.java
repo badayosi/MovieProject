@@ -14,7 +14,7 @@ public class ManagerReadMovieHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		if(req.getMethod().equalsIgnoreCase("get")){
+		//if(req.getMethod().equalsIgnoreCase("get")){
 			
 			MovieService service=MovieService.getInstance();
 			Movie movie=service.selectById(Integer.parseInt(req.getParameter("no")));
@@ -28,8 +28,8 @@ public class ManagerReadMovieHandler implements CommandHandler {
 			req.setAttribute("closeDate", closeDate);
 
 			return "managerReadMovieForm.jsp";
-		}
-		return null;
+		//}
+		//return null;
 	}
 
 }
