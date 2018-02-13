@@ -4,6 +4,8 @@ DROP SCHEMA IF EXISTS movie;
 -- movie
 CREATE SCHEMA movie;
 
+use movie;
+
 -- address
 CREATE TABLE movie.address (
    addrNo    CHAR(5)     NULL COMMENT '�슦�렪踰덊샇', -- �슦�렪踰덊샇
@@ -94,7 +96,6 @@ CREATE TABLE movie.reservation (
    price        INT(11)      NOT NULL COMMENT '가격', -- 가격
    seat         VARCHAR(255) NOT NULL COMMENT '좌석등급', -- 좌석번호
    progress     INT(11)      NOT NULL COMMENT '진행여부' -- 진행상태
-
 )
 COMMENT 'reservation';
 
@@ -277,5 +278,31 @@ ALTER TABLE movie.user
       user_rank -- �쉶�썝�벑湲�
    );
 
--- movie filePath추가   
 alter table movie add column filePath varchar(255);
+
+ create table notice(
+   board_no integer primary key auto_increment,
+   title varchar(50) not null,
+   content text not null,
+   regdate date not null,
+   readcount integer
+);
+
+--serviceBoard
+create table serviceBoard(
+    board_no integer,
+    user_id VARCHAR(50),
+    consulting varchar(50),
+    classification varchar(50),
+    title varchar(50),
+    filename varchar(255),
+    filepath text,
+    content text,
+    regdate date,
+    answer boolean,
+    answer_content text
+);
+
+ALTER TABLE serviceBoard ADD constraint PRIMARY KEY (board_no);
+ALTER TABLE serviceBoard MODIFY COLUMN board_no integer NOT NULL AUTO_INCREMENT;
+

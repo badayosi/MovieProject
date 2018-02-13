@@ -20,7 +20,7 @@
 		<br>
 		<a href="reservationGuide.do?id=user1">유저별 예약현황[user1]</a>
 		<br>
-		<a href="reservation.do">유저별 예약하기[user2]</a>
+		<a href="ReservationInsert_Member.jsp">예약페이지이동</a>
 	</div>
 	
 	
