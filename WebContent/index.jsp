@@ -132,7 +132,10 @@
       -ms-flex-align: center;
       -webkit-align-items: center;
       align-items: center;
-    }     
+    }
+    #sliderBottom .swiper-slide a img{
+    	height:274px;
+    }
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -160,20 +163,38 @@
 		      },
 		    }); 
 		
-		 var swiper = new Swiper('#poster_middle', {
-		      slidesPerView: 5,
-		      spaceBetween: -47,
-		      slidesPerGroup: 5,
-		      loop: true,
-		      loopFillGroupWithBlank: true,
-		      navigation: {
-		        nextEl: '.swiper-button-next',
-		        prevEl: '.swiper-button-prev',
-		      },
-		    });
+		
+		 
+		 $.ajax({
+				url:"user/listMovie.do",
+				type:"get",
+				dataType:"json",
+				success:function(json){
+					console.log(json);
+					var date=new Date();
+					var nowDate=date.getTime();
+					
+					var listTag="";
+					
+					$(json).each(function(i,obj){
+						listTag+="<div class='swiper-slide'><a href='userReadMovie.do?no="+obj.movieNo+"'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"' title='"+obj.movieName+"'></a></div>";
+					})
+					$("#sliderBottom").append(listTag);
+					
+					 var swiper = new Swiper('#poster_middle', {
+					      slidesPerView: 5,
+					      spaceBetween: -47,
+					      slidesPerGroup: 5,
+					      loop: true,
+					      loopFillGroupWithBlank: true,
+					      navigation: {
+					        nextEl: '.swiper-button-next',
+					        prevEl: '.swiper-button-prev',
+					      },
+					    });
+				}
+			})
 	})
-	
-	
 </script>
 </head>
 <body>
@@ -214,17 +235,8 @@
 	</div>
 	
 	<div class="swiper-container" id="poster_middle">
-	    <div class="swiper-wrapper">
-	      <div class="swiper-slide"><img src="images/poster1.jpg"></div>
-	      <div class="swiper-slide"><img src="images/poster1.jpg"></div>
-	      <div class="swiper-slide"><img src="images/poster1.jpg"></div>
-	      <div class="swiper-slide"><img src="images/poster1.jpg"></div>
-	      <div class="swiper-slide"><img src="images/poster1.jpg"></div>
-	      <div class="swiper-slide"><img src="images/poster2.jpg"></div>
-	      <div class="swiper-slide"><img src="images/poster2.jpg"></div>
-	      <div class="swiper-slide"><img src="images/poster2.jpg"></div>
-	      <div class="swiper-slide"><img src="images/poster2.jpg"></div>
-	      <div class="swiper-slide"><img src="images/poster2.jpg"></div>
+	    <div class="swiper-wrapper" id="sliderBottom">
+
 	    </div>
 	    <div class="swiper-button-next"></div>
 	    <div class="swiper-button-prev"></div>
