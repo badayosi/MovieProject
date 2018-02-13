@@ -277,5 +277,5 @@ ALTER TABLE movie.user
       user_rank -- �쉶�썝�벑湲�
    );
 
--- movie filePath 추가   
+-- movie filePath추가   
 alter table movie add column filePath varchar(255);
