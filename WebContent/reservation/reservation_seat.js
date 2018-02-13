@@ -189,14 +189,17 @@ function checkPersonSetting(){
 // QUICK MENU PERSON TYPE & TOTAL PAYMENT APPLY
 function applyPayment(){
 	var arrPerson = new Array();
+	var arrPay = new Array();
 	var allCount = 0;
 	
 	// 각 항목별 인원 합산
 	$("#person_setting").find("input").each(function(index,obj){
-		if(index == 3)
+		if(index == 3){
 			arrPerson[index-1] += Number($(obj).val());
-		else
-			arrPerson[index] += Number($(obj).val());
+		}
+		else{
+			arrPerson[index] = Number($(obj).val());
+		}
 		allCount += Number($(obj).val());
 	});
 	
@@ -204,26 +207,35 @@ function applyPayment(){
 	if($("#person_setting").find("select").val() > allCount)
 		arrPerson[0] += $("#person_setting").find("select").val()-allCount;
 		
-	// QUICK 인원 반영
+	// QUICK 인원 반영 및 계산
 	$("#nav_seat").find(".nav_count").each(function(index,obj){
 		$(obj).html(arrPerson[index]);
+		switch (index) {
+			case 0:
+				arrPay[index] = arrPerson[index]*9000;
+				break;
+			case 1:
+				arrPay[index] = arrPerson[index]*8000;
+				break;
+			case 2:
+				arrPay[index] = arrPerson[index]*5000;
+				break;
+		}
+		
 	})
 	
-	// QUICK 금액 계산
+	// QUICK 금액 반영
 	$("#nav_seat").find(".nav_data").each(function(index,obj){
-		switch (index) {
-		case 0:
-			$(obj).html(arrPerson[index]*9000);
-			break;
-		case 1:
-			$(obj).html(arrPerson[index]*8000);
-			break;
-		case 2:
-			$(obj).html(arrPerson[index]*5000);
-			break;
-		case 3:
-			$(obj).html(arrPerson[index]*5000);
-			break;
-		}
+		if(index != 3)
+			$(obj).html()
 	});
+	
+	var total = 0;
+	// QUICK 총 금액 반영
+	$("#nav_seat").find(".nav_data").each(function(index,obj){
+		if(index != 3)
+			total += Number($(obj).html());
+		else
+			$(obj).html(total);
+	})
 }
