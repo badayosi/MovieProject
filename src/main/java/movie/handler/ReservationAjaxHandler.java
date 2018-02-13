@@ -39,7 +39,9 @@ public class ReservationAjaxHandler implements CommandHandler {
 		if(req.getMethod().equalsIgnoreCase("get")){
 			// MEMBER RESERVATION
 			// MOVIE LIST LOAD
-			if(req.getParameter("no") == null && req.getParameter("timeNo") == null){
+			if(req.getParameter("no") == null
+					&& req.getParameter("timeNo") == null
+					&& req.getParameter("seat") == null){
 				movieService = MovieService.getInstance();
 				
 				List<Movie> allMovie = movieService.selectAll();
@@ -98,6 +100,28 @@ public class ReservationAjaxHandler implements CommandHandler {
 				String jsonTime = om.writeValueAsString(result); //json 형태의 String으로 변환
 				pwJson.print(jsonTime);
 			}
+			
+			// RESERVATION.PROGRESS INSERT&UPDATE
+			if(req.getParameter("seat") != null){
+				String seat = String.valueOf(req.getParameter("seat"));
+				int timetableNo = Integer.valueOf(req.getParameter("timetableNo"));
+				
+				reservationService = ReservationService.getInstance();
+				
+				// 02/13 오후 09:30 진행상황
+				// 회원가입해서 새로운유저로만 테스트 진행할 수 있다.
+				// 좌석을 클릭해서 selectSeat로 변경시에
+				// reservationService에 회원ID와 상영시간표를 기준으로 검색해서
+				// 조건이 일치하는 예약이 있는경우 좌석컬럼의 정보를 변경
+				// 일치하지 않는경우 새로운 예약을 생성해서 정보를 저장
+				// progress컬럼은 예약이 진행되고 있는 경우 1, 결제까지 완료된 경우는 2로 설정한다.
+				
+				// 그리고 세션정보를 여기서도 확인가능한지 알아봐야할거같다.
+				
+				String jsonTime = om.writeValueAsString(seat);
+				pwJson.print(jsonTime);
+			}
+			
 			pwJson.flush();
 		}
 		return null;

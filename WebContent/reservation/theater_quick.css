@@ -4,7 +4,7 @@
 	position:fixed;
 	z-index: 99;
 	top: 200px;
-	right: 0px;
+	right: -500px;
 }
 #open_btn{
 	width:50px;
@@ -97,6 +97,7 @@
 	line-height:50px;
 	background:skyblue;
 	color:white;
+	display:none;
 }
 #nav_cancle{
 	float:left;
@@ -106,6 +107,7 @@
 	line-height:50px;
 	background:orange;
 	color:white;
+	display:none;
 }
 #warning_noMovie{
 	width:100%;

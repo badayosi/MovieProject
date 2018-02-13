@@ -16,8 +16,8 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="../js/jquery-animate-css-rotate-scale.js"></script>
 <!-- CUSTOM JS -->
-<script type="text/javascript" src="reservation_seat.js?var=6"></script>
-<script type="text/javascript" src="reservation_quick.js"></script>
+<script type="text/javascript" src="reservation_seat.js?var=7"></script>
+<script type="text/javascript" src="reservation_approval.js?var=1"></script>
 <style>
 	/* 가로형 달력 CSS */
 	div#horizontal_calendar{
@@ -314,9 +314,21 @@
 				// 시간 선택시  QUICK 반영
 				// QUICK THEATER 변경
 				$("#select_info table").find(".nav_data").eq(2).html(json.theaterName + "(" + json.theaterFloor + "층)");
+				loadReserve(timeNo);
 			}
 		});
 		
+		// 시간 선택시  QUICK 반영
+		// QUICK DATE 변경 + Hidden Type TimeTable 번호보유
+		$("#select_info table").find(".nav_data").eq(0).html(formatChange(startTime, "date") + "<input type='hidden' id='timeNo'name='timeNo' value='" + timeNo + "''>");
+		// QUICK TIME 변경
+		$("#select_info table").find(".nav_data").eq(1).html(formatChange(startTime, "time"));
+		// QUICK CONTROL BUTTON 변경
+		$("#nav_cancle").css("display","block");
+		$("#nav_ok").css("display","block");
+	}
+	
+	function loadReserve(timeNo){
 		// 비동기호출_예약좌석 반영
 		$.ajax({
 			url:"reservationAjax.do?timeNo=" + timeNo + "&search=true",
@@ -334,12 +346,6 @@
 			}
 		});
 		$("#theater_progess").css("display","block");
-		
-		// 시간 선택시  QUICK 반영
-		// QUICK DATE 변경
-		$("#select_info table").find(".nav_data").eq(0).html(formatChange(startTime, "date"));
-		// QUICK TIME 변경
-		$("#select_info table").find(".nav_data").eq(1).html(formatChange(startTime, "time"));
 	}
 	
 	function formatChange(date, type){
@@ -366,6 +372,18 @@
 		}
 		return "Type Miss Error";
 	}
+	
+	// 유저세션 확인
+	function checkSession(){
+		<%
+			String id = "";
+			if(session.getAttribute("member") != null)
+				id = String.valueOf(session.getAttribute("member"));
+			else
+				id = "Session 확인불가";
+		%>
+		alert("<%=id%>");
+	}
 
 	$(function(){
 		makeCalendar();
@@ -381,15 +399,17 @@
 		})
 		
 		$("#progress_next").on("click",function(){
-			alert("결제완료 관련 작업 예정");
+			checkSeat();
 		})
 		
 		// 상영관예약_좌석클릭 시
 		$(document).on("click",".seat",function(){
 			if($("#person_setting").find("select").val() == 0)
 				alert("총 인원을 설정해주세요.");
-			else
+			else{
+				
 				selectSeat($(this));
+			}
 		})
 		// 상영관예약_예약좌석클릭 시
 		$(document).on("click",".selectSeat",function(){
@@ -425,18 +445,31 @@
 			}
 		});
 		
-		// 퀵메뉴
-		$("#open_btn").on("click",function(){
+		// 퀵메뉴_OPEN
+		$("#open_btn").on("mouseover",function(){
 			if($("#quick-menu").css("right") == "-500px"){
 				$("#open_btn").rotate("180deg");
 				$("#quick-menu").animate({"right":"0px"},300);
-				qi=1;
-			}else{
-				$("#open_btn").rotate("0deg");
-				$("#quick-menu").animate({"right":"-500px"},300);
-				qi=0;
 			}
 		})
+		// 퀵메뉴_CLOSE
+		$("#open_btn").on("click",function(){
+			if($("#quick-menu").css("right") == "0px"){
+				$("#open_btn").rotate("0deg");
+				$("#quick-menu").animate({"right":"-500px"},300);
+			}
+		})
+		// 퀵메뉴 PREV버튼 클릭 시
+		$("#nav_cancle").on("click",function(){
+			$("#nav_cancle").css("display","none");
+			$("#theater_progess").css("display","none");
+			$("#open_btn").rotate("0deg");
+			$("#quick-menu").animate({"right":"-500px"},300);
+		});
+		// 퀵메뉴 NEXT버튼 클릭 시
+		$("#nav_ok").on("click",function(){
+			checkSeat();
+		});
 		
 	});
 </script>
@@ -508,7 +541,7 @@
 					</div>
 					<div id="seat_setting">
 						<label>좌석 배치설정</label>
-						<input type="radio" name="seat_set" checked="checked" value="1">
+						<input type="radio" name="seat_set" checked="checked" value="1" disabled="disabled">
 						<label>■</label>
 						<input type="radio" name="seat_set" value="2" disabled="disabled">
 						<label>■■</label>
@@ -588,6 +621,7 @@
 			</div>
 		</div>
 	</div>
+	<button onclick="checkSession()">세션확인</button>
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>
