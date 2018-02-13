@@ -162,7 +162,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$("#service_form").submit(function(){
+		$(document).on("submit","#service_form",function(){
 			if($("select[name='classification']").val() =="분류 선택"){
 				alert("분류를 선택하세요");
 				return false;
