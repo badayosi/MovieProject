@@ -7,55 +7,77 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	table, tr, th, td{
+	#content{
+		width: 1024px;
+		margin: 0 auto;
+	}
+	#content table{
+		width: 1024px;
+	}
+	#content table, tr, th, td{
 		border: 1px solid grey;
 		border-collapse: collapse;
+		text-align: center;
 	}
-	th, td{
+	#content th, #content td{
 		padding: 10px;
+	}
+	#insert{		
+		text-align:right;
+
+	}
+	#insert button{
+		font-size: 15px;
+		background: #848484;
+		padding: 5px 10px;
+		font-weight: bold;
+		color: white;
 	}
 </style>
 </head>
 <body>
 	<jsp:include page="../include/adminHeader.jsp"></jsp:include>
-	
-	<c:if test="${list==null }">
-			<%response.sendRedirect("list.do"); %>
-	</c:if>
-	<a href="list.do">리스트</a><br>
-	<a href="insert.do">추가</a>
-	<br>
-	<br>
-	<table>
-		<tr>
-			<th>번호</th>
-			<th>이름</th>
-			<th>층</th>
-			<th>인원</th>
-			<th>행</th>
-			<th>열</th>
-			<th>상영관 종류</th>
-			<th>수정</th>
-			<th>삭제</th>
-			<th>좌석배치 조정</th>
-			<th>회원입장 좌석배치</th>
-		</tr>
-		<c:forEach var="item" items="${list }">
-		<tr>
-			<td>${item.theaterNo }</td>
-			<td>${item.theaterName}</td>
-			<td>${item.theaterFloor }</td>
-			<td>${item.theaterMaxcount }</td>
-			<td>${item.row }</td>
-			<td>${item.col }</td>
-			<td>${item.theaterType }</td>
-			<td><a href="modify.do?no=${item.theaterNo}">수정</a></td>
-			<td><a href="delete.do?no=${item.theaterNo}">삭제</a></td>
-			<td><a href="managerSeat.do?no=${item.theaterNo}">좌석조정</a></td>
-			<td><a href="userSeat.do?no=${item.theaterNo}">회원좌석</a></td>
-		</tr>
-		</c:forEach>
-	</table>
-	
+	<div id="content">
+		<c:if test="${list==null }">
+				<%response.sendRedirect("list.do"); %>
+		</c:if>
+		
+		
+		
+		<table>
+			<tr>
+				<th>번호</th>
+				<th>이름</th>
+				<th>층</th>
+				<th>인원</th>
+				<th>행</th>
+				<th>열</th>
+				<th>상영관 종류</th>
+				<th>수정</th>
+				<th>삭제</th>
+				<th>좌석배치 조정</th>
+				<th>회원입장 좌석배치</th>
+			</tr>
+			<c:forEach var="item" items="${list }">
+			<tr>
+				<td>${item.theaterNo }</td>
+				<td>${item.theaterName}</td>
+				<td>${item.theaterFloor }</td>
+				<td>${item.theaterMaxcount }</td>
+				<td>${item.row }</td>
+				<td>${item.col }</td>
+				<td>${item.theaterType }</td>
+				<td><a href="modify.do?no=${item.theaterNo}">수정</a></td>
+				<td><a href="delete.do?no=${item.theaterNo}">삭제</a></td>
+				<td><a href="managerSeat.do?no=${item.theaterNo}">좌석조정</a></td>
+				<td><a href="userSeat.do?no=${item.theaterNo}">회원좌석</a></td>
+			</tr>
+			</c:forEach>
+		</table>
+		
+		<p id="insert">
+			<a href="insert.do"><button>상영관 추가</button></a>
+		</p>
+	</div>
 </body>
 </html>

@@ -35,6 +35,15 @@
 	input[type='text']{
 		width:400px;
 	}
+	#insert{
+		margin-top: 20px;
+	}
+	#insert input[type="submit"],#insert input[type="button"]{
+		font-size: 15px;
+		background: #EFEBDB;
+		padding: 5px 10px;
+		color: black;
+	}
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -51,8 +60,7 @@
 </script>
 </head>
 <body> 
-<jsp:include page="../include/managerHeader.jsp"></jsp:include>
-
+	<jsp:include page="../include/adminHeader.jsp"></jsp:include>
 <div id="addDiv">
 	<form id="addForm" method="post" action="managerAddMovie.do" enctype="multipart/form-data">
 		<table id="infoTable">
@@ -106,9 +114,11 @@
 			</tr>
 		</table>
 		<hr>
+		<p id="insert">
 		<input type="hidden" name="movieSteelCut" value="">
 		<input type="submit" value="등록">
 		<a href="managerListMovie.do"><input type="button" value="취소"></a>
+		</p>
 	</form>	
 </div>
    
