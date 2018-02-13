@@ -11,5 +11,6 @@ public interface NoticeDao {
 	public List<Notice> selectByContentTitle(Notice notice);
 	public void insert(Notice notice);
 	public void updateByreadCoutn(Notice notice);
+	public Notice selectByNo(int boardNo);
 
 }

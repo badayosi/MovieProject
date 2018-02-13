@@ -31,4 +31,7 @@
 	<select id="selectLimit" resultMap="noticeResult" parameterType="int">
 		select * from notice order by board_no desc limit #{size},10;
 	</select>
+	<select id="selectByNo" resultMap="noticeResult" parameterType="int">
+		select * from notice where board_no = #{boardNo}
+	</select>
 </mapper>
