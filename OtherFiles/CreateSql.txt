@@ -18,6 +18,7 @@ CREATE TABLE movie.address (
 COMMENT 'address';
 
 -- board
+
 CREATE TABLE movie.board (
    board_no      INT(11)      NOT NULL COMMENT '寃뚯떆�뙋踰덊샇', -- 寃뚯떆�뙋踰덊샇
    user_id       VARCHAR(50)  NOT NULL COMMENT '�쉶�썝id', -- �쉶�썝id
@@ -166,9 +167,9 @@ CREATE TABLE movie.user (
    email     VARCHAR(50)  NOT NULL COMMENT 'email', -- email
    phone     VARCHAR(50)      NOT NULL COMMENT '�쟾�솕踰덊샇', -- �쟾�솕踰덊샇
    addr      VARCHAR(255) NOT NULL COMMENT '二쇱냼', -- 二쇱냼
-   name       VARCHAR(255) NOT NULL COMMENT '�씠由�', -- �씠由�
    gender    VARCHAR(50)  NOT NULL COMMENT '�꽦蹂�', -- �꽦蹂�
-   user_rank VARCHAR(50)  NULL     COMMENT '�쉶�썝�벑湲�' -- �쉶�썝�벑湲�
+   user_rank VARCHAR(50)  NULL     COMMENT '�쉶�썝�벑湲�', -- �쉶�썝�벑湲�
+   name       VARCHAR(255) NOT NULL COMMENT '�씠由�' -- �씠由�
 )
 COMMENT 'user';
 
@@ -283,3 +284,8 @@ ALTER TABLE movie.user
    ADD INDEX FK_user_rank_TO_user (
       user_rank -- �쉶�썝�벑湲�
    );
+   
+   
+insert into user_rank values('일반등급',3);
+select * from user_rank;
+select * from user;
