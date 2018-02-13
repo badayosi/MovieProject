@@ -5,7 +5,7 @@
 	#headerWrap{
 		width:100%;
 		hegiht:200px;
-		background:#f9f6ec;
+		background:white;
 		margin: 0 auto;
 	}
 	#headerWrap h1{
@@ -13,27 +13,31 @@
 		color:red;
 		margin:0;
 	}
-	#headerWrap h2{
-		text-align:center;
-		margin:0;
-	}
-	#headerWrap p{
-		text-align: right;
-		margin-right:180px;
-		padding: 10px;
-	}
-	#headerWrap p a{
+	#headerWrap #login{
+		padding: 8px 0px;
 		
-		color:black;
+		width: 100%;
+		background: #EFEBDB;
+		text-align: right;
+	}
+	#headerWrap #login a{
+		color:#555;
+		font-size:12px;
 		text-decoration: none;
 		padding: 5px;
-		
+		padding-right:20px;
+	}
+	#menubarWarp{
+		width: 100%;
+		border-top:2px solid #CDC197;
+		border-bottom:1px solid #CDC197;
+		margin-bottom: 20px;
 	}
 	#menubarWarp #menubar{
 		width:1024px;
 		margin:0 auto;
 		overflow: hidden;
-		height: 45px;
+		padding: 20px 0;
 		text-align:center;
 	}
 	#menubarWarp #menubar li{
@@ -52,23 +56,26 @@
 		text-decoration: none;
 		color: black;
 		font-weight: bold;
-		
-		
 	}
+	
 </style>
 <div id="headerWrap">
-	<h2>Hello 2018</h2>
-	<h1>DGV</h1>
-	<p>
-	<c:if test="${member != null}">
-		${member.name }님 환영합니다. |
-		<a href="logout.do?path=<%=request.getRequestURI() %>" id="logout">로그아웃 </a>
-	</c:if>
-	<c:if test="${member == null}">
-		<a href="/MovieProject/login/Login.jsp" id="login">로그인</a>|
-		<a href="/MovieProject/login/JoinForm.jsp">회원가입</a>
-	</c:if>
-	</p>
+	<div id="login">
+		<c:if test="${member != null}">
+			<a>${member.name }님 환영합니다.</a>
+			<a href="logout.do?path=<%=request.getRequestURI() %>" id="logout">로그아웃 </a>
+			<a href="/MovieProject/login/myPage.jsp">마이시네마</a>
+		</c:if>
+		<c:if test="${member == null}">
+			<a href="/MovieProject/login/Login.jsp" id="login">로그인</a>
+			
+			<a href="/MovieProject/login/JoinForm.jsp">회원가입</a>
+			<a href="/MovieProject/login/myPage.jsp">마이시네마</a>
+		</c:if>
+	</div>
+	
+	<h1><img src="/MovieProject/images/main_logo.gif"></h1>
+
 </div> 
 <div id="menubarWarp">
 	<ul id="menubar">

@@ -47,7 +47,7 @@
 
 </head>
 <body>
-	<jsp:include page="../include/header.jsp"></jsp:include>
+	<jsp:include page="../include/adminHeader.jsp"></jsp:include>
 	<div id="container">		
 		<c:if test="${result!=null}">
 			<p>조건별 검색(임시)</p>
