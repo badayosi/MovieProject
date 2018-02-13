@@ -1,0 +1,95 @@
+@CHARSET "UTF-8";
+
+#theater_seat{
+	background: #f9f8f3;
+	color:#848484;
+	margin:0 auto;
+	padding:0;
+}
+#theater_screen{
+	width:95%;
+	height:50px;
+	color:white;
+	text-align:center;
+	line-height:50px;
+	background:#848484;
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom:100px;
+	font-weight:bold;
+}
+.seatTable{
+	border-spacing:3px;
+	margin:auto;
+	text-align: center;
+}
+.seat{
+	display: block;
+	width: 18px;
+	height: 18px;
+	background: #848484;
+	color: white;
+	font-size: 13px;
+	border: 2px solid black;
+	text-align: center;
+	padding: 10px;
+}
+.noSeat{
+	border: 2px solid red;
+	text-align: center;
+	padding: 10px;
+	display: none;
+}
+.selectSeat{
+	display: block;
+	width: 18px;
+	height: 18px;
+	background: skyblue;
+	color: white;
+	font-size: 13px;
+	border: 2px solid black;
+	text-align: center;
+	padding: 10px;
+	font-weight: bold;
+}
+.overSeat{
+	display: block;
+	width: 18px;
+	height: 18px;
+	background: orange;
+	color: white;
+	font-size: 13px;
+	border: 2px solid black;
+	text-align: center;
+	padding: 10px;
+}
+.reserveSeat{
+	display: block;
+	width: 18px;
+	height: 18px;
+	background: #000000;
+	color: white;
+	font-size: 13px;
+	border: 2px solid black;
+	text-align: center;
+	padding: 10px;
+	font-weight: bold;
+}
+.blockSeat{
+	display: block;
+	width: 18px;
+	height: 18px;
+	background: #848484;
+	color: #848484;
+	font-size: 13px;
+	border: 2px solid black;
+	text-align: center;
+	padding: 10px;
+	font-weight: bold;
+}
+.way{
+	margin-right:30px; 
+}
+.displayHidden{
+	display: none;
+}
