@@ -39,7 +39,7 @@ public class ManagerAddMovieHandler implements CommandHandler {
 				// 업로로드 완료
 				MultipartRequest multi = new MultipartRequest(req, uploadPath, maxSize, "utf-8", new DefaultFileRenamePolicy());
 				
-				String name = multi.getParameter("movieName");
+				String name = multi.getParameter("movieName"); 
 				String director = multi.getParameter("movieDirector");
 				String actor = multi.getParameter("movieActor");
 				String genre = multi.getParameter("movieGenre");
