@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="movie.dao.ServiceBoardDao">
+	<resultMap type="ServiceBoard" id="serviceBoardResult">
+	    <result property="boardNo" column="board_no"/>
+	    <result property="userId" column="user_id"/>
+	    <result property="consulting" column="consulting"/>
+	    <result property="classification" column="classification"/>
+	    <result property="title" column="title"/>
+	    <result property="content" column="content"/>
+	    <result property="regdate" column="regdate"/>
+	    <result property="filename" column="filename"/>
+	    <result property="filepath" column="filepath"/>
+	    <result property="answer" column="answer"/>
+	    <result property="answerContent" column="answer_content"/>
+	</resultMap>
+	<select id="selectTosize" resultType="int">
+		select count(*) from serviceBoard;
+	</select>
+	<select id="selectByall" resultMap="serviceBoardResult" parameterType="int">
+	    select * from serviceBoard #{size},4;
+	</select>
+	<insert id="insert" parameterType="ServiceBoard">
+	    insert into serviceBoard (user_id,consulting,classification,title,content,regdate,answer) values(#{userId},#{consulting},#{classification},#{title},#{content},#{regdate},#{answer})
+	</insert>
+	
+	<insert id="insertFile" parameterType="ServiceBoard">
+	    insert into serviceBoard (user_id,consulting,classification,title,content,regdate,answer,filename,filepath) values(#{userId},#{consulting},#{classification},#{title},#{content},#{regdate},#{answer},#{filename},#{filepath})
+	</insert>
+	
+	<update id="update" parameterType="ServiceBoard">
+	    update serviceBoard set answer=#{answer}, answerContent =#{answercontent} where boardNo = #{boardNo}
+	</update>
+	<select id="selectById" resultMap="serviceBoardResult" parameterType="int">
+	    select * from serviceBoard where board_no = #{boardNo}
+	</select>
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="movie.dao.NoticeDao">
+	<resultMap type="Notice" id="noticeResult">
+		<result property="boardNo" column="board_no"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="regdate" column="regdate"/>
+		<result property="readcount" column="readcount"/>
+	</resultMap>
+	<select id="selectTosize" resultType="int">
+		select count(*) from notice;
+	</select>
+	<select id="selectByTitle" resultMap="noticeResult" parameterType="Notice">
+		select * from notice where title like #{title} order by board_no desc limit #{size},10;
+	</select>
+	<select id="selectByContent" resultMap="noticeResult" parameterType="Notice">
+		select * from notice where content like #{content} order by board_no desc limit #{size},10;
+	</select>
+	<select id="selectByContentTitle" resultMap="noticeResult" parameterType="Notice">
+		select * from notice where content like #{content} and title like #{title} order by board_no desc limit #{size},10;
+	</select>
+	<insert id="insert" parameterType="Notice">
+		insert into notice (title,content,regdate,readcount) values(#{title},#{content},#{regdate},#{readcount})
+	</insert>
+	<update id="updateByreadCount" parameterType="Notice">
+		update notice set readcount = #{readcount} where board_no = #{boardNo}
+	</update>
+	<select id="selectLimit" resultMap="noticeResult" parameterType="int">
+		select * from notice order by board_no desc limit #{size},10;
+	</select>
+</mapper>

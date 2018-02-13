@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="../css/common.css">
 <title>Insert title here</title>
 <style>
 #joinForm {
@@ -43,7 +43,6 @@
 	font-size: 20px;
 	border: 2px solid #ccc;
 }
-
 .radioBtn {
 	width: 25px !important;
 	position: absolute;
@@ -211,8 +210,13 @@ input:FOCUS {
 }
 #gender_check{
 	position: absolute;
-	top: 5px;
-	left: 340px;
+	
+}
+#radioCheckImg{
+	position: absolute;
+	top: 0px;
+	left: 330px;
+	
 }
 #joinBtn,#cencelBtn{
 	width:100px !important;
@@ -228,6 +232,7 @@ input:FOCUS {
 #postWrap{
 	margin-bottom: 0 !important;
 }
+
 #successWrap{
 		width:60%;
 		overflow: hidden;
@@ -254,11 +259,23 @@ input:FOCUS {
 		height: 40px;
 		font-size:14px;
 	}
+.checkimg{
+	display:none;
+}
+#radioCheckImg{
+	display: inline-block;
+}
+#addrUser{
+	margin-left:258px;
+	width:461px !important
+}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		var idCk = 0;
+		var falseImgsrc = "../images/join_else_icon.png";
+		var trueImgsrc = "../images/join_icon.png";
 		$("#joinForm #jF p").each(function(i, obj) {
 			$(obj).hover(function() {
 				$(this).find("label").css("color", "black");
@@ -293,11 +310,15 @@ input:FOCUS {
 			$("#hiddenbg").css("display","block");
 			$("#searchWarp").css("display","block");
 			$("#resultAddrWrap div").not("#zxc").remove();
+			$("#zipcode").nextAll(".checkimg").css("display","inline-block");
+			$("#zipcode").nextAll(".checkimg").attr("src",trueImgsrc);
+			
 		})
 		 $("#searchWarp #search_cencel").click(function(){
 			$("#hiddenbg").css("display","none");
 			$("#searchWarp").css("display","none");
 			$("#doro").val("");
+			$("#zipcode").nextAll(".checkimg").attr("src",falseImgsrc);
 		 })
 		 $("#doroSearchWrap").click(function(){
 			 var doro = $("#doro").val();
@@ -313,7 +334,7 @@ input:FOCUS {
 					data:{"doro":doro},
 					dataType:"json",
 					success:function(json){
-						
+						console.log(json)
 						if(json.length==0){
 							var div = "<div class='searchResult hoverResult'>";
 							var zipcode = "<p class='seacrch_zipcode'></p>";
@@ -360,62 +381,111 @@ input:FOCUS {
 					dataType:"json",
 					success:function(json){
 						if(json == "false"){
-							$("#id_check").text("이미 등록된 ID입니다.");
-							$("#id_check").css("color","red");
+							$("#userId").nextAll(".checkimg").css("display","inline-block");
+							$("#userId").nextAll(".checkimg").attr("src",falseImgsrc);
 						}else if(json =="true"){
-							$("#id_check").text("사용 가능한 ID입니다.");
-							$("#id_check").css("color","green");
-							idCk = 1;
+							$("#userId").nextAll(".checkimg").css("display","inline-block");
+							$("#userId").nextAll(".checkimg").attr("src",trueImgsrc);
 						}
-						
 					}
-					
 			})
 		})
-		
-		$("#jF").submit(function(){
+		$("input[name='id']").keyup(function(){
 			var regId = /^[0-9A-Za-z]{6,14}$/;
+			if(!regId.test($(this).val())){
+				$("#userId").nextAll(".checkimg").css("display","inline-block");
+				$("#userId").nextAll(".checkimg").attr("src",falseImgsrc);
+			}
+			/* var reg =/^(?=.*[A-Za-z])[A-Za-z0-9]{5,12}$/;
+		    var reg2 = /^[A-Za-z]{5,12}$/ */
+			
+		})
+		$("input[name='pw']").keyup(function(){
 			var regPw = /^[0-9A-Za-z]{8,16}$/;
-			var regName = /^[가-힣]{2,6}$/;
+			if(!regPw.test($(this).val())){
+				$("#userPw").nextAll(".checkimg").css("display","inline-block");
+				$("#userPw").nextAll(".checkimg").attr("src",falseImgsrc);
+			}else{
+				$("#userPw").nextAll(".checkimg").css("display","inline-block");
+				$("#userPw").nextAll(".checkimg").attr("src",trueImgsrc);
+			}
+			 /*  var reg =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
+		      var password = $("input[name='pw']").val();
+		      var noNum = true;
+		      
+		      if(/(\w)\1\1\1/.test(password)){
+		         noNum=false;
+		      }
+		      
+		      if(reg.test(password)&&noNum){
+		         $("#pw_reg").css("display","inline");
+		         $("#pw_reg_error").css("display","none");
+		         
+		      }else{
+		         $("#pw_reg").css("display","none");
+		         $("#pw_reg_error").css("display","inline");
+		      } */
+		})
+		$("input[name='pwch']").keyup(function(){
+			if($(this).val() != $("input[name='pw']").val()){
+				$("#userPwch").nextAll(".checkimg").css("display","inline-block");
+				$("#userPwch").nextAll(".checkimg").attr("src",falseImgsrc);
+			}else{
+				$("#userPwch").nextAll(".checkimg").css("display","inline-block");
+				$("#userPwch").nextAll(".checkimg").attr("src",trueImgsrc);
+			}
+		})
+		$("input[name='name']").keyup(function(){
+			var regName =/^[가-힣]{2,10}$/;
+			if(!regName.test($(this).val())){
+				$("#userName").nextAll(".checkimg").css("display","inline-block");
+				$("#userName").nextAll(".checkimg").attr("src",falseImgsrc);
+			}else{
+				$("#userName").nextAll(".checkimg").css("display","inline-block");
+				$("#userName").nextAll(".checkimg").attr("src",trueImgsrc);
+			}
+		})
+		$("input[name='email']").keyup(function(){
 			var regEmail = /^\w{4,12}@[a-z]{2,10}[\.]?(com|or.kr|net)$/;
+			if(!regEmail.test($(this).val())){
+				$("#userEmail").nextAll(".checkimg").css("display","inline-block");
+				$("#userEmail").nextAll(".checkimg").attr("src",falseImgsrc);
+			}else{
+				$("#userEmail").nextAll(".checkimg").css("display","inline-block");
+				$("#userEmail").nextAll(".checkimg").attr("src",trueImgsrc);
+			}
+		})
+		
+		$("input[name='tel2'],input[name='tel3']").keyup(function(){
 			var regTel1 = /^[0-9]{3,4}$/;
 			var regTel2 = /^[0-9]{4}$/;
-			
-			if(!regId.test($("input[name='id']").val()) || $("input[name='id']").val() ==""){
-				$("#id_check").text("아이디를 잘못입력하셨습니다.");
-				$("#id_check").css("color","red");
-				return false;
-			}else if(!regPw.test($("input[name='pw']").val()) || $("input[name='pw']").val() ==""){
-				$("#pw_check").text("비밀번호를 잘못입력하셨습니다.");
-				$("#pw_check").css("color","red");
-				return false;
-			}else if($("input[name='pwch']").val() =="" || $("input[name='pwch']").val() != $("input[name='pw']").val()){
-				$("#pwch_check").text("비밀번호가 일치하지 않습니다.");
-				$("#pwch_check").css("color","red");
-				return false;
-			}else if(!regName.test($("input[name='name']").val()) || $("input[name='name']").val() ==""){
-				$("#name_check").text("이름를 잘못입력하셨습니다.");
-				$("#name_check").css("color","red");
-				return false;
-			}else if(!regEmail.test($("input[name='email']").val()) || $("input[name='email']").val() ==""){
-				$("#email_check").text("이메일을 잘못입력하셨습니다.");
-				$("#email_check").css("color","red");
-				return false;
-			}else if(!regTel1.test($("input[name='tel2']").val()) || $("input[name='tel2']").val() ==""){
-				$("#tel_check").text("휴대폰 번호를 잘못입력하셨습니다.");
-				$("#tel_check").css("color","red");
-				return false;
-			}else if(!regTel2.test($("input[name='tel3']").val()) || $("input[name='tel3']").val() ==""){
-				$("#tel_check").text("휴대폰 번호를 잘못입력하셨습니다.");
-				$("#tel_check").css("color","red");
-				return false;
-			}else if($("input[name='zipcode']").val() == ""|| $("input[name='addr']").val()== ""){
-				$("#addr_check").text("주소를 입력하세요");
-				$("#addr_check").css("color","red");
-				return false;
-			}else if(!$("input[name='gender']").is(":checked")){
-				$("#gender_check").text("성별을 선택하세요");
-				$("#gender_check").css("color","red");
+			if($("input[name='tel2']").val().length==4){
+				$("#userTel").nextAll("input").focus();
+			}
+			if(!regTel1.test($("input[name='tel2']").val()) || !regTel2.test($("input[name='tel3']").val())){
+				$("#userTel").nextAll(".checkimg").css("display","inline-block");
+				$("#userTel").nextAll(".checkimg").attr("src",falseImgsrc);
+			}else{
+				$("#userTel").nextAll(".checkimg").css("display","inline-block");
+				$("#userTel").nextAll(".checkimg").attr("src",trueImgsrc);
+				
+			}
+		})
+		$("input[name='gender']").click(function(){
+			$("#radio2").nextAll(".checkimg").attr("src",trueImgsrc);
+		})
+		
+		
+		$("#jF").submit(function(){	
+			var bl = true;
+			$(".checkimg").each(function(i, obj) {
+				if($(obj).attr("src") == falseImgsrc){
+					$(obj).siblings('input').focus();
+					bl = false;
+				}
+			})
+			if(!bl){
+				alert("x표시를 다시 입력하세요");
 				return false;
 			}
 		})
@@ -430,25 +500,30 @@ input:FOCUS {
 		<div id="joininputFrom">
 			<form action="join.do" method="post" id="jF">
 				<p>
-					<label>아이디</label> <input type="text" name="id" id="userId" placeholder="6자이상 영문/숫자를 입력하세요"> <input
-						type="button" value="중복체크" id="checkId">
-					<span id="id_check"></span>
+					<label>아이디</label> 
+					<input type="text" name="id" id="userId" placeholder="6자이상 영문/숫자를 입력하세요"> 
+					<input type="button" value="중복체크" id="checkId">
+					<img src="../images/join_icon.png" class="checkimg">
 				</p>
 				<p>
-					<label>비밀번호</label> <input type="password" name="pw" placeholder="8자이상 영문/숫자를 입력하세요">
-					<span id="pw_check"></span>
+					<label>비밀번호</label> <input type="password" name="pw" placeholder="8자이상 영문/숫자를 입력하세요" id="userPw">
+					
+					<img src="../images/join_icon.png" class="checkimg">
 				</p>
 				<p>
-					<label>비밀번호 확인</label> <input type="password" name="pwch">
-					<span id="pwch_check"></span>
+					<label>비밀번호 확인</label> <input type="password" name="pwch" id="userPwch">
+					
+					<img src="../images/join_icon.png" class="checkimg">
 				</p>
 				<p>
-					<label>이름</label> <input type="text" name="name">
-					<span id="name_check"></span>
+					<label>이름</label> <input type="text" name="name" id="userName">
+					
+					<img src="../images/join_icon.png" class="checkimg">
 				</p>
 				<p>
-					<label>이메일주소</label> <input type="email" name="email">
-					<span id="email_check"></span>
+					<label>이메일주소</label> <input type="email" name="email" id="userEmail">
+					
+					<img src="../images/join_icon.png" class="checkimg">
 				</p>
 				<p>
 					<label>휴대폰 번호</label> <select name="tel1" id="telSelect">
@@ -458,24 +533,26 @@ input:FOCUS {
 						<option>017</option>
 						<option>018</option>
 						<option>019</option>
-					</select> <input type="tel" name="tel2" class="telinput"> <input
+					</select> <input type="tel" name="tel2" class="telinput" id="userTel"> <input
 						type="tel" name="tel3" class="telinput">
-						<span id="tel_check"></span>
+						<img src="../images/join_icon.png" class="checkimg">
+						
 				</p>
 				<p id="radioP">
 					<label>성별</label> <input type="radio" name="gender" value="여자"
 						class="radioBtn" id="radio1"><span id="span1">여자</span> <input
 						type="radio" name="gender" value="남자" class="radioBtn" id="radio2"><span
 						id="span2">남자</span>
-						<span id="gender_check"></span>
+						<img src="../images/join_else_icon.png" class="checkimg" id="radioCheckImg">
 				</p>
 	
 				<p id="postWrap">
 					<label>주소</label><input type="button"
 						value="우편번호 검색" id="addrSearchBtn"><input type="tel"
 						name="zipcode" id="zipcode"> <input type="text" name="addr"
-						id="addr">
-						<span id="addr_check"></span>
+						id="addr" id="userAddr">
+						<input type="text" name="addrUser" id="addrUser">
+						<img src="../images/join_icon.png" class="checkimg">
 				</p>
 				<p id="btnWrap">
 					<input type="submit" value="회원가입" id="joinBtn"> <input type="button"
@@ -483,7 +560,6 @@ input:FOCUS {
 				</p>
 	
 				<div id="searchWarp">
-					
 					<p>
 						<input type="text" placeholder="도로명입력" id="doro"> 
 						<input type="button" value="검색" id="doroSearchWrap">
@@ -500,24 +576,23 @@ input:FOCUS {
 			</form>
 		</div>
 		<c:if test="${success !=null}">
-		<script type="text/javascript">
-			$("#h2text").text("회원가입완료");
-			$("#joininputFrom").empty();
-		</script>
+			<script type="text/javascript">
+				$("#h2text").text("회원가입완료");
+				$("#joininputFrom").empty();
+			</script>
 			<div id="successWrap">
 				<div id="successWrap_imgWrap">
 				<img src="images/img_icon_join.png">
 			</div>
 				<div id="successWrap_textWrap">
-				<h2><span id="bluetext">하홍범</span>님 환영합니다:)</h2>
+				<h2><span id="bluetext">${name }</span>님 환영합니다:)</h2>
 				<h2>서비스이용을 위해</h2>
 				<h2>다시 로그인을 해주세요.</h2>
 				<a href="login.do"><input type="button" value="로그인" class="loginBtn"></a>
 				<a href="index.jsp"><input type="button" value="홈 바로가기" class="loginBtn"></a>
 			</div>
-	</div>
+			</div>
 		</c:if>
-		
 	</div>
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
