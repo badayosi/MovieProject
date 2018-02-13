@@ -255,3 +255,6 @@ ALTER TABLE movie.user
    ADD INDEX FK_user_rank_TO_user (
       user_rank -- �쉶�썝�벑湲�
    );
+
+-- movie filePath 추가   
+alter table movie add column filePath varchar(255);
