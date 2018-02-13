@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <style type="text/css">
 	#addDiv{
 		width:40%;
@@ -18,11 +19,11 @@
 	}
 	#infoTable{
 		width:100%;
-		/* border-collapse:collapse; */
+		border-collapse:collapse;
 		font-size: 1.1em;
 	}
 	#infoTable th,td{
-		/* border:1px solid black; */
+		border:1px solid black;
 		padding: 10px;
 	}
 	#infoTable th{
@@ -35,12 +36,25 @@
 		width:400px;
 	}
 </style>
+<script type="text/javascript">
+	$(function(){
+		$("#addForm").submit(function(){
+			
+			var steelcutStr = "";
+			for(var i =0; i< $("#a").get(0).files.length; i++){
+				steelcutStr += $("#a").get(0).files[i].name + ",";
+			}
+			$("input[type='hidden']").val(steelcutStr);
+			alert($("input[type='hidden']").val());	
+		});
+	});
+</script>
 </head>
 <body> 
 <jsp:include page="../include/managerHeader.jsp"></jsp:include>
 
 <div id="addDiv">
-	<form id="addForm" method="post" action="managerAddMovie.do">
+	<form id="addForm" method="post" action="managerAddMovie.do" enctype="multipart/form-data">
 		<table id="infoTable">
 			<tr>
 				<th>영화제목</th>
@@ -84,7 +98,7 @@
 			</tr>
 			<tr>
 				<th>스틸컷</th>
-				<td><input type="file" multiple="multiple" name="movieSteelCut"></td>
+				<td><input id="a" type="file" multiple name="movieSteelCut[]"></td>
 			</tr>
 			<tr>
 				<th>동영상</th>
@@ -92,6 +106,7 @@
 			</tr>
 		</table>
 		<hr>
+		<input type="hidden" name="movieSteelCut" value="">
 		<input type="submit" value="등록">
 		<a href="managerListMovie.do"><input type="button" value="취소"></a>
 	</form>	

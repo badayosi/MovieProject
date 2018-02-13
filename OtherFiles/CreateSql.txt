@@ -4,6 +4,8 @@ DROP SCHEMA IF EXISTS movie;
 -- movie
 CREATE SCHEMA movie;
 
+use movie;
+
 -- address
 CREATE TABLE movie.address (
    addrNo    CHAR(5)     NULL COMMENT '�슦�렪踰덊샇', -- �슦�렪踰덊샇
@@ -25,7 +27,28 @@ CREATE TABLE movie.board (
    grade         INT(11)      NULL     COMMENT '媛쒖씤蹂꾩젏' -- 媛쒖씤蹂꾩젏
 )
 COMMENT 'board';
-
+create table notice(
+	board_no integer primary key auto_increment,
+	title varchar(50) not null,
+	content text not null,
+	regdate date not null,
+	readcount integer
+);
+create table serviceBoard(
+	 board_no integer,
+	 user_id VARCHAR(50),
+	 consulting varchar(50),
+	 classification varchar(50),
+	 title varchar(50),
+	 filename varchar(255),
+	 filepath text,
+	 content text,
+	 regdate date,
+	 answer boolean,
+	 answer_content text
+);
+ALTER TABLE serviceBoard ADD constraint PRIMARY KEY (board_no);
+ALTER TABLE serviceBoard MODIFY COLUMN board_no integer NOT NULL AUTO_INCREMENT;
 -- board
 ALTER TABLE movie.board
    ADD CONSTRAINT
@@ -64,14 +87,14 @@ ALTER TABLE movie.movie
 
 ALTER TABLE movie.movie
    MODIFY COLUMN movie_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '�쁺�솕_no';
-
+alter table movie add column filePath varchar(255);
 -- reservation
 CREATE TABLE movie.reservation (
    no           INT(11)      NOT NULL COMMENT '예약번호', -- 예약번호
    user_id      VARCHAR(50)  NOT NULL COMMENT '회원id', -- 회원id
    timetable_no INT(11)      NOT NULL COMMENT '상영시간표_no', -- 상영시간표_no
    price        INT(11)      NOT NULL COMMENT '가격', -- 가격
-   seat         VARCHAR(255) NOT NULL COMMENT '좌석등급' -- 좌석번호
+   seat         VARCHAR(255) NOT NULL COMMENT '좌석등급', -- 좌석번호
    progress     INT(11)      NOT NULL COMMENT '진행여부' -- 진행상태
 )
 COMMENT 'reservation';
@@ -254,3 +277,29 @@ ALTER TABLE movie.user
    ADD INDEX FK_user_rank_TO_user (
       user_rank -- �쉶�썝�벑湲�
    );
+   
+ create table notice(
+   board_no integer primary key auto_increment,
+   title varchar(50) not null,
+   content text not null,
+   regdate date not null,
+   readcount integer
+);
+
+--serviceBoard
+create table serviceBoard(
+    board_no integer,
+    user_id VARCHAR(50),
+    consulting varchar(50),
+    classification varchar(50),
+    title varchar(50),
+    filename varchar(255),
+    filepath text,
+    content text,
+    regdate date,
+    answer boolean,
+    answer_content text
+);
+
+ALTER TABLE serviceBoard ADD constraint PRIMARY KEY (board_no);
+ALTER TABLE serviceBoard MODIFY COLUMN board_no integer NOT NULL AUTO_INCREMENT;

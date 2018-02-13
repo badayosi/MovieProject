@@ -17,6 +17,7 @@ public class Movie {
 	String synopsis;
 	String actor;
 	String director;
+	String filePath;
 
 	public Movie() {
 		super();
@@ -25,7 +26,7 @@ public class Movie {
 
 	public Movie(int movieNo, String movieName, String pathPoster, int playTime, int rating, double grade,
 			Date openDate, Date closeDate, String genre, String pathSteelcut, String pathVideo, String synopsis,
-			String actor, String director) {
+			String actor, String director, String filePath) {
 		super();
 		this.movieNo = movieNo;
 		this.movieName = movieName;
@@ -38,6 +39,46 @@ public class Movie {
 		this.genre = genre;
 		this.pathSteelcut = pathSteelcut;
 		this.pathVideo = pathVideo;
+		this.synopsis = synopsis;
+		this.actor = actor;
+		this.director = director;
+		this.filePath=filePath;
+	}
+
+	
+	
+	public Movie(int movieNo, String movieName, String pathPoster, int playTime, int rating, Date openDate,
+			Date closeDate, String genre, String pathSteelcut, String pathVideo, String synopsis, String actor,
+			String director, String filePath) {
+		super();
+		this.movieNo = movieNo;
+		this.movieName = movieName;
+		this.pathPoster = pathPoster;
+		this.playTime = playTime;
+		this.rating = rating;
+		this.openDate = openDate;
+		this.closeDate = closeDate;
+		this.genre = genre;
+		this.pathSteelcut = pathSteelcut;
+		this.pathVideo = pathVideo;
+		this.synopsis = synopsis;
+		this.actor = actor;
+		this.director = director;
+		this.filePath = filePath;
+	}
+	
+	
+
+	public Movie(int movieNo, String movieName, int playTime, int rating, Date openDate, Date closeDate, String genre,
+			String synopsis, String actor, String director) {
+		super();
+		this.movieNo = movieNo;
+		this.movieName = movieName;
+		this.playTime = playTime;
+		this.rating = rating;
+		this.openDate = openDate;
+		this.closeDate = closeDate;
+		this.genre = genre;
 		this.synopsis = synopsis;
 		this.actor = actor;
 		this.director = director;
@@ -155,12 +196,23 @@ public class Movie {
 		this.director = director;
 	}
 
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
 	@Override
 	public String toString() {
 		return "Movie [movieNo=" + movieNo + ", movieName=" + movieName + ", pathPoster=" + pathPoster + ", playTime="
 				+ playTime + ", rating=" + rating + ", grade=" + grade + ", openDate=" + openDate + ", closeDate="
 				+ closeDate + ", genre=" + genre + ", pathSteelcut=" + pathSteelcut + ", pathVideo=" + pathVideo
-				+ ", synopsis=" + synopsis + ", actor=" + actor + ", director=" + director + "]";
+				+ ", synopsis=" + synopsis + ", actor=" + actor + ", director=" + director + ", filePath=" + filePath
+				+ "]";
 	}
+
+
 
 }
