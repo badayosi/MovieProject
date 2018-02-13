@@ -71,13 +71,35 @@
 	#th4{
 		width:20%;
 	}
+	#numberpage{
+		width:100%;
+	}
+	#numberpage p{
+		text-align: center;
+	}
+	#numberpage p a{
+		padding:3px;
+		color:black;
+		text-decoration:none
+	}
+	#notice_table tr td a{
+		color:black;
+		text-decoration:none
+	}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function(){
 		 listview(0);
+		 $(document).on("click","#numberP a",function(){
+			 var size = Number($(this).text()) -1;
+			 listview(size);
+		 })
+		
 	})
 function listview(size){
+		$("tr").not("#header_table").remove();
+		$("#numberP").text("");
 		$.ajax({
 			url:"noticelist.do",
 			type:"get",
@@ -88,12 +110,17 @@ function listview(size){
 				for(var i=0; i<json.list.length; i++){
 					var tr = "<tr>"
 					var noTd = "<td>"+json.list[i].boardNo+"</td>";
-					var titleTd = "<td><a href='#'>"+json.list[i].title+"</a></td>";
+					var titleTd = "<td><a href='noticeselectno.do?no="+json.list[i].boardNo+"'>"+json.list[i].title+"</a></td>";
 					var date = new Date(json.list[i].regdate);
 					var regDateTd = "<td>"+date.toLocaleDateString()+"</td>";
 					var readcountTd = "<td>"+json.list[i].readcount+"</td></tr>";
 					tr += noTd + titleTd + regDateTd + readcountTd;
 					$("#notice_table").append(tr);
+				}
+				
+				for(var i=1; i<=json.size; i++){
+					var aTag = "<a href='#'>"+i+"</a>";
+					$("#numberP").append(aTag);
 				}
 			}
 	 	})
@@ -120,6 +147,9 @@ function listview(size){
 					<th id="th4">조회수</th>
 				</tr>
 			</table>
+		</div>
+		<div id="numberpage">
+			<p id="numberP"></p>
 		</div>
 	</div>
 </body>

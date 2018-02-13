@@ -582,7 +582,7 @@ input:FOCUS {
 			</script>
 			<div id="successWrap">
 				<div id="successWrap_imgWrap">
-				<img src="images/img_icon_join.png">
+				<img src="../images/img_icon_join.png">
 			</div>
 				<div id="successWrap_textWrap">
 				<h2><span id="bluetext">${name }</span>님 환영합니다:)</h2>

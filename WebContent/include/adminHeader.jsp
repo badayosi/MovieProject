@@ -58,7 +58,7 @@
 </style>
 <div id="headerWrap">
 	<h2>Hello 2018</h2>
-	<h1>DGV</h1>
+	<h1>관리자 로그인</h1>
 	<p>
 	<c:if test="${member != null}">
 		${member.name }님 환영합니다. |
@@ -73,9 +73,9 @@
 <div id="menubarWarp">
 	<ul id="menubar">
 		<li><a href="/MovieProject/index.jsp">HOME</a></li>
-		<li><a href="/MovieProject/admin/listMovie.do">영화</a></li>
-		<li><a href="/MovieProject/reservation/ReservationInsert_Member.jsp">예매</a></li>
-		<li><a href="#">상영관</a></li>
+		<li><a href="/MovieProject/manager/managerListMovie.do">영화관리</a></li>
+		<li><a href="#">예매관리</a></li>
+		<li><a href="/MovieProject/theater/list.do">상영관 관리</a></li>
 		<li><a href="/MovieProject/serviceBoard/ServiceUserBoard.jsp">고객센터</a></li>
 	</ul>
 </div>

@@ -4,6 +4,8 @@ DROP SCHEMA IF EXISTS movie;
 -- movie
 CREATE SCHEMA movie;
 
+use movie;
+
 -- address
 CREATE TABLE movie.address (
    addrNo    CHAR(5)     NULL COMMENT '�슦�렪踰덊샇', -- �슦�렪踰덊샇
@@ -25,28 +27,33 @@ CREATE TABLE movie.board (
    grade         INT(11)      NULL     COMMENT '媛쒖씤蹂꾩젏' -- 媛쒖씤蹂꾩젏
 )
 COMMENT 'board';
-create table notice(
+
+create table movie.notice(
 	board_no integer primary key auto_increment,
 	title varchar(50) not null,
 	content text not null,
 	regdate date not null,
 	readcount integer
 );
-create table serviceBoard(
-	 board_no integer,
-	 user_id VARCHAR(50),
-	 consulting varchar(50),
-	 classification varchar(50),
-	 title varchar(50),
-	 filename varchar(255),
-	 filepath text,
-	 content text,
-	 regdate date,
-	 answer boolean,
-	 answer_content text
+
+-- serviceBoard
+create table movie.serviceBoard(
+    board_no integer,
+    user_id VARCHAR(50),
+    consulting varchar(50),
+    classification varchar(50),
+    title varchar(50),
+    filename varchar(255),
+    filepath text,
+    content text,
+    regdate date,
+    answer boolean,
+    answer_content text
 );
+
 ALTER TABLE serviceBoard ADD constraint PRIMARY KEY (board_no);
 ALTER TABLE serviceBoard MODIFY COLUMN board_no integer NOT NULL AUTO_INCREMENT;
+
 -- board
 ALTER TABLE movie.board
    ADD CONSTRAINT
@@ -72,7 +79,8 @@ CREATE TABLE movie.movie (
    path_video    VARCHAR(255) NULL     COMMENT '�룞�쁺�긽', -- �룞�쁺�긽
    synopsis      TEXT         NULL     COMMENT '以꾧굅由�', -- 以꾧굅由�
    actor         VARCHAR(255) NULL     COMMENT '諛곗슦', -- 諛곗슦
-   director      VARCHAR(255) NULL     COMMENT '媛먮룆' -- 媛먮룆
+   director      VARCHAR(255) NULL     COMMENT '媛먮룆', -- 媛먮룆
+   filePath      varchar(255) null     COMMENT '파일경로' -- 파일경로;
 )
 COMMENT 'movie';
 
@@ -85,7 +93,7 @@ ALTER TABLE movie.movie
 
 ALTER TABLE movie.movie
    MODIFY COLUMN movie_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '�쁺�솕_no';
-alter table movie add column filePath varchar(255);
+   
 -- reservation
 CREATE TABLE movie.reservation (
    no           INT(11)      NOT NULL COMMENT '예약번호', -- 예약번호
@@ -94,7 +102,6 @@ CREATE TABLE movie.reservation (
    price        INT(11)      NOT NULL COMMENT '가격', -- 가격
    seat         VARCHAR(255) NOT NULL COMMENT '좌석등급', -- 좌석번호
    progress     INT(11)      NOT NULL COMMENT '진행여부' -- 진행상태
-
 )
 COMMENT 'reservation';
 
@@ -276,6 +283,3 @@ ALTER TABLE movie.user
    ADD INDEX FK_user_rank_TO_user (
       user_rank -- �쉶�썝�벑湲�
    );
-
--- movie filePath추가   
-alter table movie add column filePath varchar(255);
