@@ -177,7 +177,7 @@
 					var listTag="";
 					
 					$(json).each(function(i,obj){
-						listTag+="<div class='swiper-slide'><a href='userReadMovie.do?no="+obj.movieNo+"'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"' title='"+obj.movieName+"'></a></div>";
+						listTag+="<div class='swiper-slide'><a href='user/userReadMovie.do?no="+obj.movieNo+"'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"' title='"+obj.movieName+"'></a></div>";
 					})
 					$("#sliderBottom").append(listTag);
 					

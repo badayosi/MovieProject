@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="../css/slick.css" />
+<link rel="stylesheet" type="text/css" href="../css/slick-theme.css" />
 <script src="../js/jquery-1.12.4.min.js"></script>
 <script src="../js/slick.js"></script>
 <script type="text/javascript">
@@ -14,18 +15,18 @@
 		$('.bigImg').slick({
 			  slidesToShow: 1,
 			  slidesToScroll: 1,
-			  arrows: false,
+			  arrows: true, 
 			  fade: true,
 			  asNavFor: '.imgList'
 			});
 			$('.imgList').slick({
-			  slidesToShow: 3,
+			  slidesToShow: 6,
 			  slidesToScroll: 1,
 			  asNavFor: '.bigImg',
-			  dots: true,
-			  centerMode: true,
+			  dots: false,
+			  arrows:true,
 			  focusOnSelect: true
-			});
+			}); 			
 	});
 </script>
 <style type="text/css">
@@ -36,33 +37,67 @@
 	.imgList{
 		border:1px solid blue;
 	}
+	#bigImgWrap{
+		width:100%;
+		margin:0 auto;
+		background: #353535;		
+	}
+	#bigImgWrap .bigImg{
+		width:55%;
+		margin:0 auto;
+	}
+	#bigImgWrap .bigImg .slick-prev:before, .slick-next:before{
+    font-family: 'slick';
+    font-size: 150px;
+    line-height: 0;
+
+    opacity: .75;
+    color: white !important;
+
+}
+	#container{
+		width:70%;
+		margin:0 auto;
+	}
+	.bigImg h3 img{
+		width:400px;
+		margin:0 auto;
+	}
+	#container #imgListDiv{
+		width:800px;
+		height:200px;
+		margin:0 auto;
+	} 
+	#container #imgListDiv .imgList h3 img{
+		width:100px;
+		margin:0 auto;
+	}
+	.
 </style>
 </head>
 <body>
    <jsp:include page="../include/header.jsp"></jsp:include>  
-   	<div class="bigImg">
-		<h3>1</h3>
-   		<h3>2</h3>
-   		<h3>3</h3>
-   		<h3>4</h3>
-   		<h3>5</h3>
-   		<h3>6</h3>
-   		<h3>7</h3>
-   		<h3>8</h3>
-   		<h3>9</h3>
+   <div id="bigImgWrap">
+	   	<div class="bigImg">
+	   		<h3><img src="/MovieProject/upload/${movie.movieNo}/${movie.pathVideo}"></h3>
+	   		<h3><img src="/MovieProject/upload/${movie.movieNo}/${movie.pathPoster}"></h3>
+			<c:forEach var="item" items="${steelcut}">
+				<h3><img src="/MovieProject/upload/${movie.movieNo}/${item}"></h3>
+			</c:forEach>
+	   	</div>
    	</div>
-   	
-   	<div class="imgList">
-   		<h3>1</h3>
-   		<h3>2</h3>
-   		<h3>3</h3>
-   		<h3>4</h3>
-   		<h3>5</h3>
-   		<h3>6</h3>
-   		<h3>7</h3>
-   		<h3>8</h3>
-   		<h3>9</h3>
-   	</div>
+   	<div id="container">
+   		<div id="imgListDiv">
+   			<div class="imgList">
+				<h3><img src="/MovieProject/upload/${movie.movieNo}/${movie.pathVideo}"></h3>
+				<h3><img src="/MovieProject/upload/${movie.movieNo}/${movie.pathPoster}"></h3>
+				<c:forEach var="item" items="${steelcut}">
+					<h3><img src="/MovieProject/upload/${movie.movieNo}/${item}"></h3>
+				</c:forEach>
+			</div>
+   		</div>
+   		
+	</div>
    <jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>

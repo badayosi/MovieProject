@@ -33,7 +33,7 @@ public class ManagerAddMovieHandler implements CommandHandler {
 			}
 			System.out.println("uploadPath : " + uploadPath);
 
-			int maxSize = 1024 * 1024 * 10;// 10M
+			int maxSize = 1024 * 1024 * 200;// 200M
 
 			try {
 				// 업로로드 완료

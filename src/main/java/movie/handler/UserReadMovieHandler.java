@@ -21,12 +21,9 @@ public class UserReadMovieHandler implements CommandHandler {
 			
 			String steelcut=movie.getPathSteelcut().trim();
 			String[] arrSteelcut=steelcut.split(",");
-			
-			/*for(int i=0; i<arrSteelcut.length;i++){
-				System.out.println(arrSteelcut[i]);
-			}*/
+
 			req.setAttribute("movie", movie);
-			//req.setAttribute(arg0, arg1);
+			req.setAttribute("steelcut", arrSteelcut);
 			return "userReadMovie.jsp";
 		}
 		return null;

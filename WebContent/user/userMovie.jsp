@@ -138,7 +138,7 @@ $(function() {
 					$(json).each(function(i,obj){
 						if(obj.openDate>nowDate){
 							
-							listTag+="<td><div class='listDiv'><a href='userReadMovie.do?no="+obj.movieNo+"'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'><p>"+obj.movieName+"</p></a></div></td>";
+							listTag+="<td><div class='listDiv'><a href='user/userReadMovie.do?no="+obj.movieNo+"'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'><p>"+obj.movieName+"</p></a></div></td>";
 							
 							if((i+1)%4==0){
 								listTag+="</tr><tr>";
