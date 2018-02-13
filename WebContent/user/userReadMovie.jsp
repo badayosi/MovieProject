@@ -46,7 +46,7 @@
 			
 	}
 	#bigImgWrap .bigImg{
-		width:55%;
+		width:900px;
 		margin:0 auto;
 	}
 	#bigImgWrap .bigImg .slick-prev:before, .slick-next:before{
@@ -56,7 +56,7 @@
 
     color: white !important;
 
-}
+	}
 	#container{
 		width:70%;
 		margin:0 auto;
