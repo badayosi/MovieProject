@@ -31,7 +31,7 @@ public class LoginHandler implements CommandHandler {
 			}			
 			
 			req.getSession().setAttribute("member",user1);
-			return "index.jsp";
+			return "/index.jsp";
 			
 		}
 		return null;
