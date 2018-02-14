@@ -90,15 +90,15 @@ public class NoticeService {
 		SqlSession session = null;
 		session = MySqlSessionFactory.openSession();
 		NoticeDao dao = session.getMapper(NoticeDao.class);
-		List<Notice> list = null;
+		List<Notice> notice = null;
 		try{
-			list = dao.selectByNo(boardNo);
+			notice = dao.selectByNo(boardNo);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
 			MySqlSessionFactory.closeSession(session);
 		}
 		
-		return list;
+		return notice;
 	}
 }

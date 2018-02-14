@@ -37,6 +37,7 @@
 	float:right;
 	text-align:center;
 	font-size:20px;
+	table-layout:fixed;
 }
 #select_info table tr{
 	height:45px;
@@ -50,10 +51,17 @@
 	text-overflow:ellipsis;
 }
 .nav_info{
+	width:115px;
 	color:gray;
 }
 .nav_data{
+	width:170px;
 	color:white;
+}
+#nav_data_seat{
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
 }
 .nav_count{
 	color:gray;
