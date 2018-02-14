@@ -61,7 +61,9 @@
 		에러
 	</c:if>
 	<c:if test="${success !=null }">
-		성공     
+		<script type="text/javascript">
+			
+		</script>
 	</c:if>
 </body>
 </html>
