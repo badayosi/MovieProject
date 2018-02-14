@@ -53,19 +53,33 @@
 	}
 	#listArea table tr td .listDiv{
 		text-align: center;
+		width:250px;
+		position: relative;
 	}
 	.mPoster{
 		width:250px;
 		height:350px;
-		position: relative;
 	}
 	#listArea table tr td .hiddenText{
-		width:100%;
-		background:#ff0000;
-		opacity:0.8;
+		width:100%; 
+		height:350px;
+		background:black;
+		opacity:0.7;
 		position: absolute;
 		left: 0;
 		top:0;
+		display: none;
+	}
+	#listArea table tr td .hiddenText a{
+		width:100px;
+		height:100px;
+		border:1px solid #B2A980;
+		color:#B2A980;
+		line-height: 300px;
+		padding:15px;
+		font-weight: bold;
+		font-size: 1.1em;
+		text-decoration: none;
 	}
 </style>
 <script type="text/javascript">
@@ -92,8 +106,8 @@ $(function() {
 			$(json).each(function(i,obj){
 				if(obj.openDate<nowDate && obj.closeDate>nowDate){
 					listTag+="<td><div class='listDiv'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'>"
-								+"<a href='userReadMovie.do?no="+obj.movieNo+"'><p>"+obj.movieName+"</p></a></div>"
-								+"<div class='hiddenText'><a href='#'>예매하기</a><a href='#'>상세보기</a></div></td>";
+								+"<a href='userReadMovie.do?no="+obj.movieNo+"'><p>"+obj.movieName+"</p></a>"
+								+"<div class='hiddenText'><a href='#'>예매하기</a><a href='userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div></div></td>";
 				}
 				if((i+1)%4==0){
 					listTag+="<tr>";
@@ -128,7 +142,7 @@ $(function() {
 						if(obj.openDate<nowDate && obj.closeDate>nowDate){
 							listTag+="<td><div class='listDiv'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'>"
 										+"<a href='userReadMovie.do?no="+obj.movieNo+"'><p>"+obj.movieName+"</p></a></div>"
-										+"<div class='hiddenText'><a href='#'>예매하기</a><a href='#'>상세보기</a></div></td>";
+										+"<div class='hiddenText'><a href='#'>예매하기</a><a href='userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div></td>";
 							
 						}
 						if((i+1)%4==0){
@@ -156,7 +170,7 @@ $(function() {
 							
 							listTag+="<td><div class='listDiv'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'>"
 									+"<a href='userReadMovie.do?no="+obj.movieNo+"'><p>"+obj.movieName+"</p></a></div>"
-									+"<div class='hiddenText'><a href='#'>예매하기</a><a href='#'>상세보기</a></div></td>";
+									+"<div class='hiddenText'><a href='#'>예매하기</a><a href='userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div></td>";
 							
 							if((i+1)%4==0){
 								listTag+="</tr><tr>";
@@ -170,8 +184,13 @@ $(function() {
 		}
 	});
 	
+	$(document).on("mouseover", "td .listDiv",function(){
+		$(this).find(".hiddenText").css("display", "block");
+	})
 	
-	
+	$(document).on("mouseout","td .listDiv",function(){
+		$(".hiddenText").css("display","none");
+	});
 });
 </script>
 </head>
