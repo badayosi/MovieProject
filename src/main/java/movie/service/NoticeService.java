@@ -86,11 +86,11 @@ public class NoticeService {
 		}
 		return -1;
 	}
-	public Notice selectByNo(int boardNo){
+	public List<Notice> selectByNo(int boardNo){
 		SqlSession session = null;
 		session = MySqlSessionFactory.openSession();
 		NoticeDao dao = session.getMapper(NoticeDao.class);
-		Notice notice = null;
+		List<Notice> notice = null;
 		try{
 			notice = dao.selectByNo(boardNo);
 		}catch(Exception e){
