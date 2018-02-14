@@ -67,6 +67,11 @@ function setProgress(){
 		success:function(json){
 			console.log("setProgress success");
 			console.log(json);
+			
+			if(json.error != null){
+				alert(json.error);
+				location.replace(json.solution);
+			}
 		}
 	});
 }

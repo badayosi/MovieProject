@@ -16,7 +16,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="../js/jquery-animate-css-rotate-scale.js"></script>
 <!-- CUSTOM JS -->
-<script type="text/javascript" src="reservation_seat.js?var=8"></script>
+<script type="text/javascript" src="reservation_seat.js?var=2"></script>
 <script type="text/javascript" src="reservation_approval.js?var=1"></script>
 <style>
 	/* 가로형 달력 CSS */
@@ -334,10 +334,22 @@
 			url:"reservationAjax.do?timeNo=" + timeNo + "&search=true",
 			type:"get",
 			dataType:"json",
-			success:function(json){
+			success:function(json){	
+				// 예약석 배열화
+				var arrResult = new Array();
+				var targetIdx = 0;
+				for(var i=0 ; i<json.length ; i++){
+					var temp = json[i].split("/");
+					for(var j=0 ; j<temp.length ; j++){
+						arrResult[targetIdx] = temp[j];
+						targetIdx++;
+					}
+				}
+				
+				// 예약석 CSS 적용
 				$(".seatTable").find("span").each(function(index, obj){
-					for(var idx=0 ; idx<json.length ; idx++){
-						if(json[idx] == $(this).html()){
+					for(var idx=0 ; idx<arrResult.length ; idx++){
+						if(arrResult[idx] == $(this).html()){
 							$(this).removeClass("seat");
 							$(this).addClass("reserveSeat");
 						}

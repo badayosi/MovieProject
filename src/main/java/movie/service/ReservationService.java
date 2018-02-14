@@ -49,7 +49,7 @@ public class ReservationService {
 		}
 	}
 	
-	public List<Reservation> selectByUserAndTime(String id, int timeNo){
+	public Reservation selectByUserAndTime(String id, int timeNo){
 		SqlSession session = null;
 		
 		try{
@@ -60,9 +60,24 @@ public class ReservationService {
 			reservation.setUserId(id);
 			reservation.setTimetableNo(timeNo);
 			
-			List<Reservation> result = dao.selectByUserAndTime(reservation);
+			Reservation result = dao.selectByUserAndTime(reservation);
 			
 			return result;
+		} finally {
+			MySqlSessionFactory.closeSession(session);
+		}
+	}
+	
+	public void updateReservation(Reservation reservation){
+		SqlSession session = null;
+		
+		try{
+			session = MySqlSessionFactory.openSession();
+			ReservationDao dao = session.getMapper(ReservationDao.class);
+			
+			dao.updateReservation(reservation);
+			
+			session.commit();
 		} finally {
 			MySqlSessionFactory.closeSession(session);
 		}
