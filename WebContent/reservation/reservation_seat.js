@@ -40,6 +40,7 @@ function selectSeat(target){
 		// 좌석배치설정 갱신_INPUT DISABLE
 		settingDisable($("#person_setting").find("select").val() - setCount());
 		// TABLE RESERVATION SET PROGRESS
+		setProgress();
 	}
 }
 

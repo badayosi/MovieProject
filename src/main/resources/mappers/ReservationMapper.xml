@@ -17,4 +17,7 @@
 	<select id="selectByTimeTable" parameterType="int" resultMap="ReservationResult">
 		select * from Reservation where timetable_no = #{no}
 	</select>
+	<select id="selectByUserAndTime" parameterType="Reservation" resultMap="ReservationResult">
+		select * from Reservation where user_id = #{userId} and timetable_no = #{timetableNo}
+	</select>
 </mapper>

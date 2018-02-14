@@ -16,7 +16,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="../js/jquery-animate-css-rotate-scale.js"></script>
 <!-- CUSTOM JS -->
-<script type="text/javascript" src="reservation_seat.js?var=7"></script>
+<script type="text/javascript" src="reservation_seat.js?var=8"></script>
 <script type="text/javascript" src="reservation_approval.js?var=1"></script>
 <style>
 	/* 가로형 달력 CSS */
