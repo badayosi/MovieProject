@@ -101,4 +101,105 @@ public class NoticeService {
 		
 		return notice;
 	}
+	public List<Notice> selectByOne(int boardNo){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		List<Notice> notice = null;
+		try{
+			notice = dao.selectByOne(boardNo);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		
+		return notice;
+	}
+	public List<Notice> selectByTitle(Notice notice){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		List<Notice> list = null;
+		try{
+			list = dao.selectByTitle(notice);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return list;
+	}
+	public List<Notice> selectByContent(Notice notice){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		List<Notice> list = null;
+		try{
+			list = dao.selectByContent(notice);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return list;
+	}
+	public List<Notice> selectByContentTitle(Notice notice){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		List<Notice> list = null;
+		try{
+			list = dao.selectByContentTitle(notice);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return list;
+	}
+	public int selectTosizeTitle(String search){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		
+		try{
+			return dao.selectTosizeTitle(search);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return -1;
+	}
+	
+	public int selectTosizeContent(String search){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		
+		try{
+			return dao.selectTosizeContent(search);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return -1;
+	}
+	
+	public int selectTosizeTitleContent(String search){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		
+		try{
+			return dao.selectTosizeTitleContent(search);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return -1;
+	}
 }

@@ -16,12 +16,22 @@ public class NoticeSelectNoHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		
 		int no = Integer.parseInt(req.getParameter("no")) -1;
+		
 		NoticeService service = NoticeService.getInstance();
-		List<Notice> list = service.selectByNo(no);
-		Notice notice = list.get(1);
-		notice.setReadcount(notice.getReadcount()+1);
-		service.update(notice);
+		List<Notice> list = null;
+		if(no >0){
+			list = service.selectByNo(no);
+			Notice notice = list.get(1);
+			notice.setReadcount(notice.getReadcount()+1);
+			service.update(notice);
+		}else{
+			list = service.selectByOne(no);
+			Notice notice = list.get(0);
+			notice.setReadcount(notice.getReadcount()+1);
+			service.update(notice);
+		}	
 		ObjectMapper om = new ObjectMapper();
 		
 		String json = om.writeValueAsString(list);

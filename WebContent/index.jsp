@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>메인</title>
-<link rel="stylesheet" type="text/css" href="css/main.css?ver=3">
-<link rel="stylesheet" href="css/swiper.min.css">
+<!-- <link rel="stylesheet" type="text/css" href="css/main.css?ver=3">
+<link rel="stylesheet" href="css/swiper.min.css"> -->
  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="js/swiper.min.js"></script>
+<!-- <script src="js/swiper.min.js"></script> -->
 <style type="text/css">
 	*{
  		position:relative;
@@ -138,7 +138,7 @@
     }
 </style>
 <script type="text/javascript">
-	$(function(){
+	/* $(function(){
 		
 		//제일 윗부분 화면
 		var swiper = new Swiper('#top',
@@ -194,14 +194,14 @@
 					    });
 				}
 			})
-	})
+	}) */
 </script>
 </head>
 <body>
 	<jsp:include page="include/header.jsp"></jsp:include>
 	
 	
-	<div id="top" class="swiper-container" dir="rtl">
+	<%-- <div id="top" class="swiper-container" dir="rtl">
 		<div class="swiper-wrapper">
 			<div class="swiper-slide" id="top_left">
 				<div id="poster"  class="swiper-container">
@@ -244,7 +244,7 @@
 	 
 	<div id="event">
 		<img src="images/card_event.jpg">
-	</div>
+	</div> --%>
 
 	<jsp:include page="include/footer.jsp"></jsp:include>
 

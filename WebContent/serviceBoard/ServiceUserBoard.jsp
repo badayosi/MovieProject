@@ -35,9 +35,6 @@
 		font-size:14px;
 		color:#777;
 	}
-	#gartSpan{
-		
-	}
 	#boldSpan{
 		font-weight: bold;
 		color:black;
@@ -159,6 +156,9 @@
 		padding:5px;
 		
 	}
+	.hidden_span{
+		display:none;
+	}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
@@ -183,31 +183,116 @@
 				$("#sss").load("ServiceUserBoardView.jsp");
 			}
 		})
+		$(document).on("click","#nextTitle, #prevTitle",function(){
+			if($(this).text()=="다음 게시글이 없습니다." ||$(this).text()=="이전 게시글이 없습니다." ){
+				return;
+			}
+			var no = $(this).find(".hidden_span").text();
+			noticeSelect(no);
+		})
+		$(document).on("click","#chage_page_ul li img",function(){
+			if($(this).next().find("a").text()=="다음 게시글이 없습니다." ||$(this).next().find("a").text()=="이전 게시글이 없습니다." ){
+				return;
+			}
+			var no = $(this).next().find(".hidden_span").text();
+			noticeSelect(no);
+		})
 		$(document).on("click","a.selectNo",function(){
 			var no = $(this).parent().prev().text();
-			$.ajax({
-					url:"noticeselectno.do",
-					type:"get",
-					data:{"no":no},
-					dataType:"json",
-					success:function(json){
-						console.log(json);	
-						$("#title_h4").text(json[1].title);
-						var date = new Date(json[1].regdate);
-						$("#regdate_Li").text(date.toLocaleDateString());
-						$("#readcount_li").text(json[1].readcount);
-						$("#selectContent p").text(json[1].content);
-						
-						if(json.size >)
-						$("#nextTitle").text(json[2].title);
-						$("#prevTitle").text(json[0].title);
-						
-						$("#search_wrap").css("display","none");
-						$("#selectNoticeWrap").css("display","block");
-					}
-			})
+			noticeSelect(no);
+		})
+		$(document).on("click","#listBtn",function(){
+			$("#sss").load("noticeView.jsp");
+		})
+		$(document).on("click","#search_btn",function(){
+			var searchText = $("#search").val();
+			if(searchText == ""){
+				alert("검색어를 입력해주세요.");
+				return;
+			}
+			
+			searchSelect(0);
+		})
+		$(document).on("click", "#numberP a.searchlist", function() {
+			var size = Number($(this).text()) - 1;
+			searchSelect(size);
 		})
 	})
+function searchSelect(no){
+		
+		var selectText = $("#search_val").val();
+		var searchText = $("#search").val();
+		$("tr").not("#header_table").remove();
+		$("#numberP").text("");
+		$.ajax({
+			url:"noticeseach.do",
+			type:"get",
+			data:{"selectText":selectText,
+				"searchText":searchText,
+				"no":no},
+			success:function(json){
+				for (var i = 0; i < json.list.length; i++) {
+					var tr = "<tr>"
+					var noTd = "<td>" + json.list[i].boardNo + "</td>";
+					var titleTd = "<td><a href='#' class='selectNo'>" + json.list[i].title
+							+ "</a></td>";
+					var date = new Date(json.list[i].regdate);
+					var regDateTd = "<td>" + date.toLocaleDateString()
+							+ "</td>";
+					var readcountTd = "<td>" + json.list[i].readcount
+							+ "</td></tr>";
+					tr += noTd + titleTd + regDateTd + readcountTd;
+					$("#notice_table").append(tr);
+				}
+				for (var i = 1; i <= json.size; i++) {
+					var aTag = "<a href='#' class='searchlist'>" + i + "</a>";
+					$("#numberP").append(aTag);
+				}
+				
+			}
+		})
+	}
+function noticeSelect(no){
+		$.ajax({
+			url:"noticeselectno.do",
+			type:"get",
+			data:{"no":no},
+			dataType:"json",
+			success:function(json){
+				console.log(json);
+				if(json.length == 3){
+					$("#title_h4").text(json[1].title);
+					var date = new Date(json[1].regdate);
+					$("#regdate_Li").html("<b>등록일 :</b>"+date.toLocaleDateString()+"<span id='linespan'></span>");
+					$("#readcount_li").html("<b>조회수 :</b>"+json[1].readcount);
+					$("#selectContent p").text(json[1].content);
+				
+					$("#nextTitle").html(json[2].title+"<span class='hidden_span'>"+json[2].boardNo+"</span>");
+					$("#prevTitle").html(json[0].title+"<span class='hidden_span'>"+json[0].boardNo+"</span>");
+				}else{
+					if(json[0].boardNo=="1"){
+						$("#title_h4").text(json[0].title);
+						var date = new Date(json[0].regdate);
+						$("#regdate_Li").html("<b>등록일 :</b>"+date.toLocaleDateString()+"<span id='linespan'></span>");
+						$("#readcount_li").html("<b>조회수 :</b>"+json[0].readcount);
+						$("#selectContent p").text(json[0].content);
+						$("#nextTitle").html(json[1].title+"<span class='hidden_span'>"+json[1].boardNo+"</span>");
+						$("#prevTitle").text("이전 게시글이 없습니다.");
+					}else{
+						$("#title_h4").text(json[1].title);
+						var date = new Date(json[1].regdate);
+						$("#regdate_Li").html("<b>등록일 :</b>"+date.toLocaleDateString()+"<span id='linespan'></span>");
+						$("#readcount_li").html("<b>조회수 :</b>"+json[1].readcount);
+						$("#selectContent p").text(json[1].content);
+						$("#nextTitle").text("다음 게시글이 없습니다.");
+						$("#prevTitle").html(json[0].title+"<span class='hidden_span'>"+json[0].boardNo+"</span>");
+					}
+				}
+				$("#search_wrap").css("display","none");
+				$("#selectNoticeWrap").css("display","block");
+			}
+	})
+}
 </script>
 </head>
 <body>
@@ -221,7 +306,6 @@
 			</ul>
 		</div>
 		<div id="sss"></div>
-		
 	</div>
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>

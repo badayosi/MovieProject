@@ -41,9 +41,7 @@
 		<c:if test="${list==null }">
 				<%response.sendRedirect("list.do"); %>
 		</c:if>
-		
-		
-		
+
 		<table>
 			<tr>
 				<th>번호</th>

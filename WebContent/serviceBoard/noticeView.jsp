@@ -213,12 +213,26 @@
 	color: black;
 	text-decoration: none;
 }
+#listBtnWrap{
+	margin:0 auto;
+	text-align: center;
+}
+#listBtnWrap #listBtn{
+	margin-top:15px;
+	width:100px;
+	height:50px;
+	font-size:16px;
+	color:#cdc197;
+	background: #231f20;
+	border:1px solid #231f20;
+	cursor: pointer;
+}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		listview(0);
-		$(document).on("click", "#numberP a", function() {
+		$(document).on("click", "#numberP a.allselect", function() {
 			var size = Number($(this).text()) - 1;
 			listview(size);
 		})
@@ -250,7 +264,7 @@
 					$("#notice_table").append(tr);
 				}
 				for (var i = 1; i <= json.size; i++) {
-					var aTag = "<a href='#'>" + i + "</a>";
+					var aTag = "<a href='#' class='allselect'>" + i + "</a>";
 					$("#numberP").append(aTag);
 				}
 			}
@@ -266,8 +280,8 @@
 				<option selected="selected">제목</option>
 				<option selected="selected">내용</option>
 				<option selected="selected">제목+내용</option>
-			</select> <input type="text" id="search"> <a href="#"><input
-				type="button" id="search_btn" value="검색"></a>
+			</select> <input type="text" id="search"> <input
+				type="button" id="search_btn" value="검색">
 		</div>
 		<div id="tablewrap">
 			<table id="notice_table">
@@ -288,8 +302,7 @@
 			<div id="selectHeader">
 				<h4 id="title_h4">시스템 점검안내</h4>
 				<ul id="notice_ul">
-					<li id="regdate_Li"><b>등록일 :</b> 2018-02-06 <span
-						id="linespan"></span></li>
+					<li id="regdate_Li"><b>등록일 :</b> 2018-02-06 <span id="linespan"></span></li>
 					<li id="readcount_li"><b>조회수 :</b> 55</li>
 				</ul>
 			</div>
@@ -307,6 +320,9 @@
 							<a href="#" id="prevTitle">시스템 점검 안내</a>
 						</div></li>
 				</ul>
+			</div>
+			<div id="listBtnWrap">
+				<button id="listBtn">목록</button>
 			</div>
 		</div>
 
