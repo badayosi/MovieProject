@@ -159,10 +159,16 @@
 	.hidden_span{
 		display:none;
 	}
+	.select_menu{
+		background: #231f20 !important;
+    	color: #cdc197 !important;
+	}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function(){
+		$("#li2").addClass("select_menu");
+		$("#sss").load("ServiceUserBoardView.jsp");
 		$(document).on("submit","#service_form",function(){
 			if($("select[name='classification']").val() =="분류 선택"){
 				alert("분류를 선택하세요");
@@ -179,8 +185,12 @@
 			$("#sss").empty();
 			if($(this).text()=="공지사항"){
 				$("#sss").load("noticeView.jsp");
+				$("#li2").removeClass("select_menu");
+				$("#li1").addClass("select_menu");
 			}else{
 				$("#sss").load("ServiceUserBoardView.jsp");
+				$("#li2").addClass("select_menu");
+				$("#li1").removeClass("select_menu");
 			}
 		})
 		$(document).on("click","#nextTitle, #prevTitle",function(){
@@ -210,12 +220,22 @@
 				alert("검색어를 입력해주세요.");
 				return;
 			}
-			
 			searchSelect(0);
 		})
 		$(document).on("click", "#numberP a.searchlist", function() {
 			var size = Number($(this).text()) - 1;
 			searchSelect(size);
+		})
+		$(document).on("click","#deleteBtn",function(){
+			if(confirm("공지사항을 삭제하시겠습니까?")){
+				var no = $("#regdate_Li").find(".hidden_span").text();
+				location.href="managernoticedelete.do?no="+no;
+			}
+		})
+		$(document).on("click","#updateBtn",function(){
+
+			var no = $("#regdate_Li").find(".hidden_span").text();
+			$("#sss").load("managernoticeupdate.do?no="+no);
 		})
 	})
 function searchSelect(no){
@@ -263,7 +283,7 @@ function noticeSelect(no){
 				if(json.length == 3){
 					$("#title_h4").text(json[1].title);
 					var date = new Date(json[1].regdate);
-					$("#regdate_Li").html("<b>등록일 :</b>"+date.toLocaleDateString()+"<span id='linespan'></span>");
+					$("#regdate_Li").html("<b>등록일 :</b>"+date.toLocaleDateString()+"<span id='linespan'></span>"+"<span class='hidden_span'>"+json[1].boardNo+"</span>");
 					$("#readcount_li").html("<b>조회수 :</b>"+json[1].readcount);
 					$("#selectContent p").text(json[1].content);
 				
@@ -273,7 +293,7 @@ function noticeSelect(no){
 					if(json[0].boardNo=="1"){
 						$("#title_h4").text(json[0].title);
 						var date = new Date(json[0].regdate);
-						$("#regdate_Li").html("<b>등록일 :</b>"+date.toLocaleDateString()+"<span id='linespan'></span>");
+						$("#regdate_Li").html("<b>등록일 :</b>"+date.toLocaleDateString()+"<span id='linespan'></span>"+"<span class='hidden_span'>"+json[0].boardNo+"</span>");
 						$("#readcount_li").html("<b>조회수 :</b>"+json[0].readcount);
 						$("#selectContent p").text(json[0].content);
 						$("#nextTitle").html(json[1].title+"<span class='hidden_span'>"+json[1].boardNo+"</span>");
@@ -281,7 +301,7 @@ function noticeSelect(no){
 					}else{
 						$("#title_h4").text(json[1].title);
 						var date = new Date(json[1].regdate);
-						$("#regdate_Li").html("<b>등록일 :</b>"+date.toLocaleDateString()+"<span id='linespan'></span>");
+						$("#regdate_Li").html("<b>등록일 :</b>"+date.toLocaleDateString()+"<span id='linespan'></span>"+"<span class='hidden_span'>"+json[1].boardNo+"</span>");
 						$("#readcount_li").html("<b>조회수 :</b>"+json[1].readcount);
 						$("#selectContent p").text(json[1].content);
 						$("#nextTitle").text("다음 게시글이 없습니다.");
@@ -301,12 +321,18 @@ function noticeSelect(no){
 		<h2 id="h2text">고객센터</h2>
 		<div id="serviceMenu">
 			<ul>
-				<li>공지사항</li>
-				<li>1:1문의</li>
+				<li id="li1">공지사항</li>
+				<li id="li2">1:1문의</li>
 			</ul>
 		</div>
 		<div id="sss"></div>
 	</div>
+	<c:if test="${updateNo !=null }">
+		<script>
+			$("#sss").load("noticeView.jsp");
+			noticeSelect("${updateNo }");
+		</script>
+	</c:if>
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>

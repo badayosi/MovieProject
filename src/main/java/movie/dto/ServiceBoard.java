@@ -134,5 +134,8 @@ public class ServiceBoard {
 		this.filename = filename;
 		this.filepath = filepath;
 	}
+	public ServiceBoard() {
+		super();
+	}
 	
 }

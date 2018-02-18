@@ -114,12 +114,13 @@
 	width: 1024px;
 	margin: 0 auto;
 	display: none;
+	overflow: hidden;
 }
 
 #selectHeader {
-	margin-top: 20px;
+	margin-top: 30px;
 	border-top: 2px solid #ccc;
-	width: 1024px;
+	width: 962px;
 	padding:31px 30px 0px 30px;
 }
 #selectHeader h4{
@@ -227,6 +228,21 @@
 	border:1px solid #231f20;
 	cursor: pointer;
 }
+#manager_btn_wrap{
+	float:right;
+	width:30%;
+	text-align:right;
+	margin-bottom:30px;
+}
+#manager_btn_wrap p input{
+	width:50px;
+	height:25px;
+	background: #231f20;
+	color:#cdc197;
+	padding:5px;
+	border:none;
+	line-height:20px;
+}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
@@ -299,6 +315,14 @@
 	</div>
 	
 	<div id="selectNoticeWrap">
+			<c:if test="${member.userRank == '관리자' }">
+				<div id="manager_btn_wrap">
+					<p>
+						<input type="button" value="수정" id="updateBtn">
+						<input type="button" value="삭제" id="deleteBtn">
+					</p>
+				</div>
+			</c:if>
 			<div id="selectHeader">
 				<h4 id="title_h4">시스템 점검안내</h4>
 				<ul id="notice_ul">

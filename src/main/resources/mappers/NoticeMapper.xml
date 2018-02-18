@@ -46,5 +46,14 @@
 	<select id="selectByOne" resultMap="noticeResult" parameterType="int">
 		select * from notice where board_no >= #{boardNo} limit 0,2;
 	</select>
+	<delete id="deleteNotice" parameterType="int">
+	   	delete from notice where board_no = #{boardNo};
+	</delete>
+	<update id="updateNotice" parameterType="Notice">
+	    update notice set title=#{title}, content=#{content}, regdate=#{regdate} where board_no = #{boardNo};
+	</update>
+	<select id="selectByNoOne" resultMap="noticeResult">
+	   	select * from notice where board_no = #{boardNo};
+	</select>
 	
 </mapper>

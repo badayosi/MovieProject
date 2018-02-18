@@ -202,4 +202,53 @@ public class NoticeService {
 		}
 		return -1;
 	}
+	
+	public int deleteNotice(int boardNo){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		
+		try{
+			dao.deleteNotice(boardNo);
+			session.commit();
+			return 0;
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return -1;
+	}
+	
+	public int updateNotice(Notice notice){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		
+		try{
+			dao.updateNotice(notice);
+			session.commit();
+			return 0;
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return -1;
+	}
+	
+	public Notice selectByNoOne(int boardNo){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		
+		try{
+			return dao.selectByNoOne(boardNo);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return null;
+	}
 }

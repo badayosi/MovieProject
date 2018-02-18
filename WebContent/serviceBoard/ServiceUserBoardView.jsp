@@ -46,4 +46,5 @@
 				<input type="button" value="취소" id="cencelBtn">
 				<input type="submit" value="확인" id="submitBtn">
 			</p>
+			<input type="hidden" name="userId" value="${member.userId }">
 		</form>

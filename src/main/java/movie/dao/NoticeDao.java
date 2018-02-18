@@ -16,5 +16,7 @@ public interface NoticeDao {
 	public void updateByreadCount(Notice notice);
 	public List<Notice> selectByNo(int boardNo);
 	public List<Notice> selectByOne(int boardNo);
-	
+	public void deleteNotice(int boardNo);
+	public void updateNotice(Notice notice);
+	public Notice selectByNoOne(int boardNo);
 }
