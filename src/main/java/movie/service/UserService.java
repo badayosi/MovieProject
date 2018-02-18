@@ -20,7 +20,24 @@ public class UserService{
 
 	public List<User> selectAll() {
 		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		List<User> list = null;
+		
+		try {
+			session=MySqlSessionFactory.openSession();
+			UserDao dao=session.getMapper(UserDao.class);
+			
+			list=dao.selectAll();
+			
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			MySqlSessionFactory.closeSession(session);
+		}
+		return list;
+		
 	}
 
 	public User selectByIdCheckpass(User user){
