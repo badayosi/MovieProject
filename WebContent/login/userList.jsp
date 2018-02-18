@@ -66,7 +66,7 @@
 				<td>${item.addr }</td>
 				<td>${item.gender }</td>
 				<td>${item.userRank }</td>
-				<td><a href="userModify.do?no=${item.userId}">수정</a></td>
+				<td><a href="userUpdate.do?no=${item.userId}">수정</a></td>
 			</tr>
 			</c:forEach>
 			<tr>

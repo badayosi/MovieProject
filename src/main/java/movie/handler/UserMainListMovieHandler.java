@@ -17,11 +17,11 @@ public class UserMainListMovieHandler implements CommandHandler {
 		UserService service  = UserService.getInstance();
 		List<User> list = service.selectAll();
 
-		if(list.size()>0){
+		/*if(list.size()>0){
 			for(User t :list){
 				System.out.println(t.toString());
 			}
-		}
+		}*/
 		
 		req.setAttribute("list", list);
 		

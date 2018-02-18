@@ -58,6 +58,7 @@ public class UserService{
 		}
 		return u;
 	}
+	
 	public User selectById(String id) {
 		SqlSession session = null;
 		session = MySqlSessionFactory.openSession();
@@ -93,6 +94,26 @@ public class UserService{
 			MySqlSessionFactory.closeSession(session);
 		}
 		
+		return -1;
+	}
+	
+
+	public int updateUser(User user){
+		SqlSession session = null;
+		
+		try {
+			session = MySqlSessionFactory.openSession();
+			UserDao dao=session.getMapper(UserDao.class);
+			
+			dao.update(user);
+			session.commit();
+			
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
 		return -1;
 	}
 	

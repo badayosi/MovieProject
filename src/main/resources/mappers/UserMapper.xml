@@ -26,4 +26,12 @@
 	<insert id="insertUser"  parameterType="User">
 		insert into user(user_id, password, point, email, phone, addr, gender, user_rank, name) values(#{userId},password(#{password}),#{point},#{email},#{phone},#{addr},#{gender},#{userRank},#{name});
 	</insert>
+	
+	<update id="update" parameterType="User">
+		update user set 
+		password=#{password},point=#{point},
+		email=#{email},phone=#{phone},name=#{name},addr=#{addr},gender=#{gender},user_rank=#{userRank}
+		where user_id= #{userId}
+	</update>
+	
 </mapper>
