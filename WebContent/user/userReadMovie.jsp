@@ -191,7 +191,7 @@
 	</div>
 	
 
-	<%-- <jsp:include page="../starBoard.jsp"></jsp:include> --%>
-   <jsp:include page="../include/footer.jsp"></jsp:include>
+	<jsp:include page="starBoard.jsp"></jsp:include>
+	<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>
