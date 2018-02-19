@@ -12,31 +12,26 @@
 		margin:0 auto;
 	}
 	#myNotice_header{
-		width:100%;
 		margin:0 auto;
-	}
-	#myNotice_header form{
 		width: 974px;
 		background: #f5f5f5;
 		margin:0 auto;
 		padding:20px 0 20px 50px;
 		margin-bottom:20px;
-	}
-	#myNotice_header form p{
 		overflow: hidden;
-		
 	}
-	#myNotice_header form p label{
+
+	#myNotice_header p label{
 		width:70px;
 		float:left;
 	}
-	#myNotice_header form p #mynotice_title{
+	#myNotice_header p #mynotice_title{
 		height:35px;
 		width:300px;
 		border:none;
 		padding-left:10px;
 	}
-	#myNotice_header form p #mynotice_submit{
+	#myNotice_header p #mynotice_submit{
 		width:50px;
 		height:35px;
 		padding:5px;
@@ -94,6 +89,7 @@
 		width: 1024px;
 		margin: 0 auto;
 		overflow: hidden;
+		display: none;
 	}
 
 	#selectHeader {
@@ -140,9 +136,23 @@
 	
 	#selectContent {
 		width: 100%;
+		
 	}
 	
 	#selectContent p {
+		padding: 50px 30px;
+		background: #f5f5f5;
+		font-size: 12px;
+		border-top: 1px solid #c0c0c0;
+		border-bottom: 1px solid #c0c0c0;
+		margin-bottom:20px;
+	}
+	#answer_wrap {
+		width: 100%;
+		display:none;
+	}
+	
+	#answer_wrap p {
 		padding: 50px 30px;
 		background: #f5f5f5;
 		font-size: 12px;
@@ -163,6 +173,9 @@
 		border:1px solid #231f20;
 		cursor: pointer;
 	}
+	#answer_wrap_h4{
+		margin-bottom:15px;
+	}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
@@ -174,7 +187,8 @@
 			data:{"userId":userId},
 			dataType:"json",
 			success:function(json){
-				$("#notice_table").not("#header_table").remove("tr");
+				$("#notice_table tr").not("#header_table").remove("tr");
+				
 				if(json.length==0){
 					var nodata = "<tr><td colspan='5'>등록된 문의가 없습니다.</td></tr>";
 					$("#notice_table").append(nodata);
@@ -197,21 +211,25 @@
 					}
 				}
 			}
-		})
+		});
+		$("#listBtn").click(function(){
+			$("#selectNoticeWrap").css("display","none"); 
+			$("#myNotice_wrap").css("display","block");
+		});
 	})
 </script>
+
 </head>
 <body>
 	<div id="myNotice_wrap">
 		<input type="hidden" value="${member.userId }" id="userId">
 		<div id="myNotice_header">
-			<form action="myselectlist.do">
+			
 				<p>
 					<label>검색</label>
 					<input type="text" name="title" placeholder="제목을 입력하세요" id="mynotice_title">
-					<input type="submit" value="검색" id="mynotice_submit">
+					<input type="button" value="검색" id="mynotice_submit">
 				</p>
-			</form>
 		</div>
 		<div id="table_wrap">
 			<table id="notice_table">
@@ -231,11 +249,14 @@
 				<h4 id="title_h4">시스템 점검안내</h4>
 				<ul id="notice_ul">
 					<li id="regdate_Li"><b>등록일 :</b> 2018-02-06 <span id="linespan"></span></li>
-					<li id="readcount_li"><b>조회수 :</b> 55</li>
 				</ul>
 			</div>
 			<div id="selectContent">
 				<p>콘텐츠</p>
+			</div>
+			<div id="answer_wrap">
+				<h4 id='answer_wrap_h4'>답변</h4>
+				<p></p>
 			</div>
 			<div id="listBtnWrap">
 				<button id="listBtn">목록</button>

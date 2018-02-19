@@ -78,7 +78,71 @@
 		});
 		$(document).on("click",".table_title",function(){
 			
+			var no = $(this).parent().find(".boardNo").text();
+			$.ajax({
+				url:"mynoticeselect.do",
+				type:"get",
+				data:{"no":no},  
+				dataType:"json",
+				success:function(json){
+					console.log(json);
+					
+					$("#selectNoticeWrap").css("display","block"); 
+					$("#myNotice_wrap").css("display","none");
+					
+					$("#title_h4").text(json.title);
+					var date = new Date(json.regdate);
+					$("#regdate_Li").html("<b> 등록일 :</br>"+date.toLocaleDateString()+"<span id='linespan'></span>");
+					$("#selectContent p").html(json.content);
+					if(json.answer){
+						$("#answer_wrap").css("display","block");
+						 $("#answer_wrap p").html(json.answerContent); 
+					}
+					
+				}
+			})
 		});
+		$(document).on("click","#mynotice_submit",function(){
+			var title = $("#mynotice_title").val();
+			var userId = $("#userId").val();
+			if(title != ""){
+				$.ajax({
+					url:"mynoticetitle.do",
+					type:"get",
+					data:{"title":title,
+						"userId":userId},  
+					dataType:"json",
+					success:function(json){
+						
+						if(json.length==0){
+							alert("검색결과가 없습니다.");
+						}else{
+							$("#notice_table tr").not("#header_table").remove("tr");
+							for(var i=0; i<json.length; i++){
+								var tr = "<tr>";
+								var tdNo = "<td class='boardNo'>"+json[i].boardNo+"</<td>";
+								var tdclassification = "<td>"+json[i].classification+"</<td>";
+								var tdtitle = "<td class='table_title'>"+json[i].title+"</<td>";
+								var date = new Date(json[i].regdate);
+								var tdregdate = "<td>"+date.toLocaleDateString()+"</<td>";
+								var tdanswer = "";
+								if(json[i].answer){
+									tdanswer = "<td>O</td>"
+								}else{
+									tdanswer = "<td>X</td>"
+								}
+								tr += tdNo + tdclassification +tdtitle + tdregdate + tdanswer;
+								$("#notice_table").append(tr);
+							}
+						}
+						
+					}
+				})
+			}else{
+				alert("제목을 입력해주세요");
+				$("#mynotice_title").focus();
+			}
+		})
 	})
 </script>
 </head>

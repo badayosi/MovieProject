@@ -16,10 +16,12 @@
 		resize:none;
 	}
 </style>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$("#answer_update").submit(function(){
-			$("textarea[name='answerContent']").text().replace(/(?:\r\n|\r|\n)/g, '<br />');
+		$(document).on("submit","#answer_update",function(){
+			$("#answerContent").val($("#answerContent").val().replace(/(?:\r\n|\r|\n)/g, '<br />'));
+			alert($("#answerContent").val());
 		})
 	})
 </script>
@@ -40,13 +42,12 @@
 			<input type="hidden" value="${sb.boardNo}" name="no">
 			<p>
 				<label>답글 </label>
-				<textarea rows="" cols="" name="answerContent"></textarea>
+				<textarea rows="" cols="" name="answerContent" id="answerContent"></textarea>
 			</p>
 			<p>
 				<input type="reset" value="취소">
 				<input type="submit" value="전송">
 			</p>
-			
 		</form>
 	</div>
 </body>
