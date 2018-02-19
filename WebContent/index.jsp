@@ -211,13 +211,15 @@
 					var nowDate=date.getTime();
 					
 					var listTag="";
-					
 					$(json).each(function(i,obj){
-						listTag+="<div class='swiper-slide'><a href='user/userReadMovie.do?no="+obj.movieNo+"'>"+
-								"<img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"' title='"+obj.movieName+"'></a>"+
-								"<div class='hiddenText'><a href='#'>예매하기</a><a href='user/userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div>"+
-								"</div>";
-								
+						if(obj.closeDate<nowDate){
+							
+						}else{
+							listTag+="<div class='swiper-slide'><a href='user/userReadMovie.do?no="+obj.movieNo+"'>"+
+							"<img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"' title='"+obj.movieName+"'></a>"+
+							"<div class='hiddenText'><a href='#'>예매하기</a><a href='user/userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div>"+
+							"</div>";
+						}								
 					})
 					
 					
