@@ -19,6 +19,7 @@
  	
 	#myPage{
 		width: 1024px;
+		min-height:600px;
 		margin: 0 auto;
 	}
 	#name{
@@ -66,14 +67,57 @@
 		background: #231f20 !important;
     	color: #cdc197 !important;
 	}
+	#checkpwWrap{
+		position: absolute;
+		top:30%;
+		left:28%;
+		display: none;
+	}
+	#checkpwWrap form{
+		width:500px;
+		height:150px !important;
+		position: relative;
+		background: #EFEBDB;
+	}
+	#checkpwWrap form p#p1 {
+		position: absolute;
+		top:45px;
+		left:50px;
+		padding:10px;
+		font-size:20px;
+		
+	}
+	#checkpwWrap form p#p1 input{
+		padding:5px;
+		font-size:17px;
+	}
+	#checkpwWrap form p#p2 {
+		position: absolute;
+		top:55px;
+		left:350px;
+	}
+	#checkpwWrap form p#p2 input{
+		width:60px;
+		height:37px;
+		padding: 5px;
+		background: #231f20;
+		border:none;
+		color:#cdc197;
+	}
+	
+	
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function(){
 		$("#myNav ul li").click(function(){
+			$("#myNav ul li").not($(this)).removeClass("select_menu");
+			$(this).addClass("select_menu");
 			if($(this).text()=="나의 문의 내역"){
-				$(this).addClass("select_menu");
 				$("#selectMenu").load("myNotice.jsp");
+			}else if($(this).text()=="나의 정보 관리"){
+				$("#selectMenu").empty();
+				$("#checkpwWrap").css("display","block");
 			}
 		});
 		$(document).on("click",".table_title",function(){
@@ -98,10 +142,20 @@
 						$("#answer_wrap").css("display","block");
 						 $("#answer_wrap p").html(json.answerContent); 
 					}
-					
 				}
 			})
 		});
+		$(document).on("click","#addrSearchBtn",function(){
+			$("#searchWarp").css("display","block");
+			$("#resultAddrWrap div").not("#zxc").remove();
+		})
+		$(document).on("click","#searchWarp #search_cencel",function(){
+			$("#searchWarp").css("display","none");
+			$("#doro").val("");
+		 })
+		$(document).on("click","#doroSearchWrap",function(){
+			 searchDoro();
+		 })
 		$(document).on("click","#mynotice_submit",function(){
 			var title = $("#mynotice_title").val();
 			var userId = $("#userId").val();
@@ -144,6 +198,41 @@
 			}
 		})
 	})
+function searchDoro(){
+		var doro = $("#doro").val();
+		 if(doro ==""){
+			 alert("도로명을 입력해주세요");
+			 return false;
+		 }
+		 $("#resultAddrWrap div").not("#zxc").remove();
+		 
+		 $.ajax({
+				url:"joinaddr.do",
+				type:"get",
+				data:{"doro":doro},
+				dataType:"json",
+				success:function(json){
+					console.log(json)
+					if(json.length==0){
+						var div = "<div class='searchResult hoverResult'>";
+						var zipcode = "<p class='seacrch_zipcode'></p>";
+						var addr ="<p class='seacrch_addr'>검색 결과가 없습니다.</p>";
+						div += zipcode+addr +"</div>";
+						$("#resultAddrWrap").append(div);
+						return;
+					} 
+					for(var i=0; i<json.length; i++){
+						var div = "<div class='searchResult hoverResult'>";
+						var zipcode = "<p class='seacrch_zipcode'>"+json[i].addrNo+"</p>";
+						var addr ="<p class='seacrch_addr'>"+json[i].sido+" "+json[i].sigungu+" "+json[i].doro
+								+" "+json[i].building1+json[i].building2+"</p>";
+						div += zipcode + addr +"</div>";
+						$("#resultAddrWrap").append(div);
+					}
+				}
+				
+		})
+}
 </script>
 </head>
 <body>
@@ -165,6 +254,17 @@
 		</div>
 		<div id="selectMenu">
 			
+		</div>
+		<div id="checkpwWrap">
+			<form>
+				<p id="p1">
+					<label>비밀번호 </label>
+					<input type="text" name="password">
+				</p>
+				<p id="p2">
+					<input type="submit" value="확인">
+				</p>
+			</form>
 		</div>
 	</div>
 	<jsp:include page="../include/footer.jsp"></jsp:include>

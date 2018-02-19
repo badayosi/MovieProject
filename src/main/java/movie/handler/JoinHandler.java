@@ -26,7 +26,7 @@ public class JoinHandler implements CommandHandler {
 			String addr = req.getParameter("addr");
 			String zipcode = req.getParameter("zipcode");
 			String addrUser = req.getParameter("addrUser");
-			String address = "("+zipcode+")"+addr+" "+addrUser;
+			String address = "("+zipcode+")"+addr+"/"+addrUser;
 			String gender = req.getParameter("gender");
 			String userRank = "일반등급";
 			int point = 0;
