@@ -22,7 +22,7 @@
  		width:1024px;
  		margin:0 auto;
  	}
- 	
+ 	 
  	/* 메인 큰화면 */
  	.swiper-container {
       width: 100%;
