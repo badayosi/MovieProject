@@ -158,7 +158,7 @@
 					"grade":grade},
 				dataType:"json",
 				success:function(json){
-					console.log(json);
+					boardListView(0);
 				}
 			})
 		})
@@ -185,14 +185,15 @@
 function boardListView(boardNo){
 	$("#userStarBoardView").empty();
 	$("#countBtn").empty();
+	var movieNo=$("#movieNo").val();
 	$.ajax({
 		url:"starboard.do",
 		type:"get",
-		data:{"size":boardNo},
+		data:{"size":boardNo, "movieNo":movieNo},
 		dataType:"json",
 		success:function(json){
 			console.log(json);
-			if(json.list.length!=0){
+			if(json.list !=null){
 				for(var j=0; j < json.list.length; j++){
 
 					var div_userStartBoard =  "<div class='userStarBoard'>";
@@ -246,6 +247,8 @@ function boardListView(boardNo){
 					var pageNo = "<span class='page_number'>"+(boardSize+1)+"</span>"
 					$("#countBtn").append(pageNo);
 				}
+			}else{
+				$("#userStarBoardView").text("현재 등록된 평점이 없습니다.");
 			}
 		}
 	})
@@ -291,6 +294,6 @@ function boardListView(boardNo){
 				
 		</div>
 		<input type="hidden" id="userId" value="${member.userId }">
-		<input type="hidden" id="userName" value="${member.userName }">
+		<input type="hidden" id="userName" value="${member.name }">
 		<input type="hidden" id="movieNo" value="${movie.movieNo }">
 	</div>

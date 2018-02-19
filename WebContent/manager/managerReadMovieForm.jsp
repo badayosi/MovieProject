@@ -16,6 +16,7 @@
 		width:100%;
 		border-collapse:collapse;
 		font-size: 1.1em;
+		table-layout:fixed;
 	}
 	#infoTable th{
 		width: 100px;
@@ -27,7 +28,12 @@
 	#infoTable tr td{
 		text-align: left;
 		width:400px;
-	} 
+	}
+	#steelcut_wrap{
+		overflow:hidden;
+		white-space:nowrap;
+		text-overflow:ellipsis;
+	}
 	#insert{
 		margin-top: 20px;
 	}
@@ -93,7 +99,7 @@
 			</tr>
 			<tr>
 				<th>스틸컷</th>
-				<td>${movie.pathSteelcut }</td>
+				<td><p id="steelcut_wrap">${movie.pathSteelcut }</p></td>
 			</tr>
 			<tr>
 				<th>동영상</th>

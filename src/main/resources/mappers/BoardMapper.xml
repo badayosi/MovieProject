@@ -21,8 +21,8 @@
 	<select id="selectTosize" resultType="int">
 		select count(*) from board where movie_no=#{movieNo};
 	</select>
-	<select id="selectLimit" resultMap="boardResult" parameterType="int">
-		select * from board movie_no=#{movieNo} order by board_no desc limit #{size},4;
+	<select id="selectLimit" resultMap="boardResult" parameterType="Board">
+		select * from board where movie_no=#{boardNo} order by board_no desc limit #{grade},4;
 	</select>
 	
 </mapper>
