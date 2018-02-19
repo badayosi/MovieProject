@@ -11,4 +11,5 @@ public interface ServiceBoardDao {
 	public int selectTosize();
 	public ServiceBoard selectById(int boardNo);
 	public void insertFile(ServiceBoard sb);
+	public List<ServiceBoard> selectByUserlist(String userid);
 }

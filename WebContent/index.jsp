@@ -200,8 +200,8 @@
 <body>
 	<jsp:include page="include/header.jsp"></jsp:include>
 	
-	
-	<%-- <div id="top" class="swiper-container" dir="rtl">
+	<%-- 
+	<div id="top" class="swiper-container" dir="rtl">
 		<div class="swiper-wrapper">
 			<div class="swiper-slide" id="top_left">
 				<div id="poster"  class="swiper-container">
@@ -244,8 +244,8 @@
 	 
 	<div id="event">
 		<img src="images/card_event.jpg">
-	</div> --%>
-
+	</div>
+ --%>
 	<jsp:include page="include/footer.jsp"></jsp:include>
 
 </body>

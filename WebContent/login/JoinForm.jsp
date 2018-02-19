@@ -564,7 +564,7 @@ function searchDoro(){
 			<div id="successWrap">
 				<div id="successWrap_imgWrap">
 				<img src="../images/img_icon_join.png">
-			</div>
+				</div>
 				<div id="successWrap_textWrap">
 				<h2><span id="bluetext">${name }</span>님 환영합니다:)</h2>
 				<h2>서비스이용을 위해</h2>

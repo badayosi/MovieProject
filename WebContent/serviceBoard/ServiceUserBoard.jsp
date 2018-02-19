@@ -333,6 +333,14 @@ function noticeSelect(no){
 			noticeSelect("${updateNo }");
 		</script>
 	</c:if>
+	<c:if test="${insertService !=null }">
+		<script>
+			
+			$("#sss").load("ServiceUserBoardSuccess.jsp");
+			$("#li2").addClass("select_menu");
+			$("#li1").removeClass("select_menu");
+		</script>
+	</c:if>
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>

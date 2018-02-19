@@ -59,6 +59,10 @@
 				$("#li1").removeClass("select_menu");
 			}
 		})
+		$(document).on("click",".titleClick",function(){
+			var no = $(this).find(".hidden_span").text();
+			location.href ="managerserviceboardupdate.do?no="+no;
+		})
 	})
 </script>
 </head>

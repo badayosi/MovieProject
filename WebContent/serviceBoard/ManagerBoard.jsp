@@ -55,17 +55,11 @@
 						tr += tdConsulting + tdClassification + tdUserId + tdTitle + tdRegdate +tdAnswer+ "</tr>";
 						$("#list_board_table").append(tr);
 					}
-					
 				}
-				
 			}
 		})
 		
-		$(document).on("click",".titleClick",function(){
-			alert("클릭");
-			var no = $(this).find(".hidden_span").text();
-			location.href ="managerserviceboardupdate.do?no="+no;
-		})
+		
 
 
 	})
