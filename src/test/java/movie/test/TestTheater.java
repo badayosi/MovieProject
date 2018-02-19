@@ -126,5 +126,24 @@ public class TestTheater {
 			MySqlSessionFactory.closeSession(session);
 		}
 	}
+	
+	//@Test
+	public void testUpdate1(){
+		SqlSession session=null;
+		try {
+			session=MySqlSessionFactory.openSession();
+			UserDao dao=session.getMapper(UserDao.class);
+			
+			User u = new User("user2", "12345", 300, "user10@test.com", "0101235789", "대구 동구", "여자", "관리자", "이름");
+					
+			dao.update(u);
+			session.commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			MySqlSessionFactory.closeSession(session);
+		}
+	}
 
 }
