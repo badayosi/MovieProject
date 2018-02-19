@@ -64,6 +64,7 @@
 			var no = $(this).find(".hidden_span").text();
 			location.href ="managerserviceboardupdate.do?no="+no;
 		})
+		
 	})
 </script>
 </head>

@@ -210,7 +210,7 @@
 					var nowDate=date.getTime();
 					
 					var listTag="";
-					$(json).each(function(i,obj){
+					$(json).each(function(i,obj){ 
 						if(obj.closeDate<nowDate){
 							
 						}else{

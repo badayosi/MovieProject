@@ -50,7 +50,7 @@
 <script>
 	$(function(){
 		$("#update_from").submit(function(){
-			$("input[name='content']").val($("input[name='content']").val().replace(/(?:\r\n|\r|\n)/g, '<br />'));
+			$("textarea[name='content']").val($("textarea[name='content']").val().replace(/(?:\r\n|\r|\n)/g, '<br />'));
 		})
 	})
 </script>

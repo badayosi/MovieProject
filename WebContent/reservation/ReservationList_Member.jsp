@@ -10,7 +10,8 @@
 <link rel="stylesheet" type="text/css" href="/MovieProject/css/manager.css"> 
 <style>
 	@import url("/MovieProject/css/common.css");
-	/* div#container{
+	
+	#container{
 		width:1024px;
 		min-height:600px;
 		margin:0 auto;
@@ -18,7 +19,10 @@
 	table, tr, th, td{
 		border:1px solid black;
 		border-collapse:collapse;
-	} */
+	}
+	table{
+		margin-bottom: 50px;
+	}
 </style>
 
 </head>
@@ -34,9 +38,8 @@
 			
 			%>
 			<h2><%=id %> 예약 보기</h2>
-			
-			<table>
-				<c:forEach var="member" items="${result}">
+			<c:forEach var="member" items="${result}">
+				<table>
 					<tr>
 						<th>예약번호</th>
 						<td>${member.reservationNo}</td>
@@ -61,8 +64,9 @@
 						<th>결제금액</th>
 						<td>${member.price}</td>
 					</tr>
-				</c:forEach>
-			</table>
+				</table>
+			</c:forEach>
+			
 		</c:if>
 		<c:if test="${result == null}">
 			<p>예약된 영화가 없습니다!</p>
