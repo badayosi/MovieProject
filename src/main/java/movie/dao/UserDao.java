@@ -10,4 +10,5 @@ public interface UserDao {
 	public User selectByIdCheckpass(User user);
 	public void insertUser(User user);
 	public void update(User user);
+	public void deleteUser(String id);
 }

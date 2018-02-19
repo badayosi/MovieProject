@@ -170,6 +170,8 @@
 		$("#li2").addClass("select_menu");
 		$("#sss").load("ServiceUserBoardView.jsp");
 		$(document).on("submit","#service_form",function(){
+			$("#content_ta").val($("#content_ta").val().replace(/(?:\r\n|\r|\n)/g, '<br />'));
+			
 			if($("select[name='classification']").val() =="분류 선택"){
 				alert("분류를 선택하세요");
 				return false;

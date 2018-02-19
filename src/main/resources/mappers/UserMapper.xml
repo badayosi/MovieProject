@@ -33,5 +33,7 @@
 		email=#{email},phone=#{phone},name=#{name},addr=#{addr},gender=#{gender},user_rank=#{userRank}
 		where user_id= #{userId}
 	</update>
-	
+	<delete id="deleteUser">
+		delete from user where user_id= #{userId}
+	</delete>
 </mapper>
