@@ -12,7 +12,7 @@
 <script type="text/javascript" src="../js/jquery-animate-css-rotate-scale.js"></script> 
 
   <style type="text/css">
-  
+  	@import url("/MovieProject/css/common.css");
   	/* 스크린 */
   	#screenContent{
   		background-image: url("../images/screen_bg.png");

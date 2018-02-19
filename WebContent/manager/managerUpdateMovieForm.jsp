@@ -8,7 +8,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <style type="text/css">
 	#updateDiv{
-		width:40%;
+		width:1024px;
 		margin:0 auto;
 		text-align: center;
 	}
@@ -33,7 +33,8 @@
 		text-align: left;
 	}
 	input[type='text']{
-		width:400px;
+		width:700px;
+		height: 20px;
 	}
 	
 	#insert{
@@ -74,6 +75,9 @@
    <jsp:include page="../include/adminHeader.jsp"></jsp:include>
    
 <div id="updateDiv">
+
+	<h2>영화 수정</h2>
+	<br>
 	<form id="updateForm" method="post" action="managerUpdateMovie.do?mNo=${movie.movieNo}" enctype="multipart/form-data">
 		<table id="infoTable">
 			<tr>
@@ -102,7 +106,7 @@
 			</tr>
 			<tr>
 				<th>줄거리</th>
-				<td><textarea rows="15" cols="55" name="movieSynopsis">${movie.synopsis }</textarea></td>
+				<td><textarea rows="15" cols="98" name="movieSynopsis">${movie.synopsis }</textarea></td>
 			</tr>
 			<tr>
 				<th>개봉일</th>
@@ -129,6 +133,7 @@
 				<td><input type="file" name="movieVideo"  value="${movie.pathVideo }"></td> 
 			</tr>
 		</table>
+		<br>
 		<hr>
 		<p id="insert">
 			<input type="hidden" name="movieSteelCut" value="">

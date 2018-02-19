@@ -12,6 +12,7 @@
   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
   crossorigin="anonymous"></script>
   <style type="text/css">
+  	@import url("/MovieProject/css/common.css");
   	#tableContent{
   		border: 1px solid black;
   		background: #f9f8f3;
