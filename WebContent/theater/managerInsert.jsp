@@ -100,6 +100,9 @@
 	}
  } 
  </script>
+ <style type="text/css">
+ 	@import url("/MovieProject/css/common.css");
+ </style>
 </head>
 <body>
 	<form action="insert.do" method="post" name="f1">

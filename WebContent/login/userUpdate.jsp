@@ -19,6 +19,7 @@
 	String gender = user.getGender();
 %>
 <style>
+@import url("/MovieProject/css/common.css");
 #joinForm {
 	width: 1024px;
 	min-height: 600px;

@@ -6,6 +6,7 @@
 <title>Insert title here</title>
 
 <style>
+	@import url("/MovieProject/css/common.css");
 	#content{
 		width:1024px;
 		margin:0 auto;

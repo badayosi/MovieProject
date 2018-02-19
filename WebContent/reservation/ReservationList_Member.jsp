@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/MovieProject/css/manager.css"> 
 <style>
+	@import url("/MovieProject/css/common.css");
 	/* div#container{
 		width:1024px;
 		min-height:600px;
