@@ -22,7 +22,7 @@
 		select count(*) from board;
 	</select>
 	<select id="selectLimit" resultMap="boardResult" parameterType="int">
-		select * from board order by board_no desc limit #{size},4;
+		select * from board where order by board_no desc limit #{size},4;
 	</select>
 	
 </mapper>
