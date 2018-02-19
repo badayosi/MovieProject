@@ -26,7 +26,6 @@
 	<insert id="insertUser"  parameterType="User">
 		insert into user(user_id, password, point, email, phone, addr, gender, user_rank, name) values(#{userId},password(#{password}),#{point},#{email},#{phone},#{addr},#{gender},#{userRank},#{name});
 	</insert>
-	
 	<update id="update" parameterType="User">
 		update user set 
 		point=#{point},
@@ -36,4 +35,11 @@
 	<delete id="deleteUser">
 		delete from user where user_id= #{userId}
 	</delete>
+	<select id="findId" resultMap="uesrResult" parameterType="User">
+		select * from user where name=#{name} and email=#{email}
+	</select>
+	<update id="updatePw" parameterType="User">
+		update user set password = password(#{password}) 
+		from user where user_id= #{userId} and email=#{email}
+	</update>
 </mapper>
