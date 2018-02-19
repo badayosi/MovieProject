@@ -33,4 +33,34 @@ public class TimeTableService {
 			MySqlSessionFactory.closeSession(session);
 		}		
 	}
+	
+	public List<Timetable> selectByTheater(int no){
+		SqlSession session = null;
+		
+		try{
+			session = MySqlSessionFactory.openSession();
+			TimetableDao dao = session.getMapper(TimetableDao.class);
+			
+			List<Timetable> result = dao.selectByMovie(no);
+			
+			return result;
+		} finally {
+			MySqlSessionFactory.closeSession(session);
+		}		
+	}
+	
+	public void deleteByNo(int no){
+		SqlSession session = null;
+		
+		try{
+			session = MySqlSessionFactory.openSession();
+			TimetableDao dao = session.getMapper(TimetableDao.class);
+			
+			dao.deleteByNo(no);
+			
+			session.commit();
+		} finally {
+			MySqlSessionFactory.closeSession(session);
+		}
+	}
 }
