@@ -23,4 +23,10 @@
 	<update id="updateReservation" parameterType="Reservation">
 		update reservation set seat=#{seat} where no=#{no}
 	</update>
+	<insert id="insertReservation" parameterType="Reservation">
+		insert into Reservation(no, user_id, timetable_no, price, seat, progress) values(null, #{userId}, #{timetableNo}, #{price}, #{seat}, #{progress})
+	</insert>
+	<delete id="deleteReservation" parameterType="Reservation">
+		delete from Reservation where no=#{no}
+	</delete>
 </mapper>

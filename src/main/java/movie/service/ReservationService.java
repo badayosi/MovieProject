@@ -82,4 +82,34 @@ public class ReservationService {
 			MySqlSessionFactory.closeSession(session);
 		}
 	}
+	
+	public void insertReservation(Reservation reservation){
+		SqlSession session = null;
+		
+		try{
+			session = MySqlSessionFactory.openSession();
+			ReservationDao dao = session.getMapper(ReservationDao.class);
+			
+			dao.insertReservation(reservation);
+			
+			session.commit();
+		} finally {
+			MySqlSessionFactory.closeSession(session);
+		}
+	}
+	
+	public void deleteReservation(Reservation reservation){
+		SqlSession session = null;
+		
+		try{
+			session = MySqlSessionFactory.openSession();
+			ReservationDao dao = session.getMapper(ReservationDao.class);
+			
+			dao.deleteReservation(reservation);
+			
+			session.commit();
+		} finally {
+			MySqlSessionFactory.closeSession(session);
+		}
+	}
 }

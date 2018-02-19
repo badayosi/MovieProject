@@ -17,8 +17,8 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="../js/jquery-animate-css-rotate-scale.js"></script>
 <!-- CUSTOM JS -->
-<script type="text/javascript" src="reservation_seat.js?var=2"></script>
-<script type="text/javascript" src="reservation_approval.js?var=1"></script>
+<script type="text/javascript" src="reservation_seat.js?var=5"></script>
+<script type="text/javascript" src="reservation_approval.js?var=5"></script>
 <style>
 	@import url("/MovieProject/css/common.css");
 	/* 가로형 달력 CSS */
@@ -336,16 +336,14 @@
 			url:"reservationAjax.do?timeNo=" + timeNo + "&search=true",
 			type:"get",
 			dataType:"json",
-			success:function(json){	
+			success:function(json){					
 				// 예약석 배열화
 				var arrResult = new Array();
 				var targetIdx = 0;
-				for(var i=0 ; i<json.length ; i++){
-					var temp = json[i].split("/");
-					for(var j=0 ; j<temp.length ; j++){
-						arrResult[targetIdx] = temp[j];
-						targetIdx++;
-					}
+				var temp = json.resultSeat.split("/");
+				for(var i=0 ; i<temp.length ; i++){
+					arrResult[targetIdx] = temp[i];
+					targetIdx++;
 				}
 				
 				// 예약석 CSS 적용
@@ -357,6 +355,21 @@
 						}
 					}
 				});
+				
+				// USER 선택좌석이 존재할 경우 SELECT SEAT 적용
+				if(json.targetSeat != null){
+					var tempSeat = json.targetSeat.split("/");
+					$(".seatTable").find(".reserveSeat").each(function(index, obj){
+						for(var idx=0 ; idx<tempSeat.length ; idx++){
+							if($(this).html() == tempSeat[idx]){
+								$(this).removeClass("reserveSeat");
+								$(this).addClass("selectSeat");
+							}
+						}
+					});
+					$("#nav_data_seat").html(json.targetSeat);
+					$("#person_setting").find("select").val(tempSeat.length);
+				}
 			}
 		});
 		$("#theater_progess").css("display","block");
@@ -408,10 +421,13 @@
 			$(this).find("p").toggleClass("today");
 		});
 		
+		// 상영관예약_PREV버튼 클릭 시
 		$("#progress_prev").on("click",function(){
 			$("#theater_progess").css("display","none");
+			cancleProgress();
 		})
 		
+		// 상영관예약_NEXT버튼 클릭 시
 		$("#progress_next").on("click",function(){
 			checkSeat();
 		})
@@ -473,14 +489,15 @@
 				$("#quick-menu").animate({"right":"-500px"},300);
 			}
 		})
-		// 퀵메뉴 PREV버튼 클릭 시
+		// 퀵메뉴_PREV버튼 클릭 시
 		$("#nav_cancle").on("click",function(){
 			$("#nav_cancle").css("display","none");
 			$("#theater_progess").css("display","none");
 			$("#open_btn").rotate("0deg");
 			$("#quick-menu").animate({"right":"-500px"},300);
+			cancleProgress();
 		});
-		// 퀵메뉴 NEXT버튼 클릭 시
+		// 퀵메뉴_NEXT버튼 클릭 시
 		$("#nav_ok").on("click",function(){
 			checkSeat();
 		});
