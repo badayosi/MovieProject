@@ -22,7 +22,7 @@ insert into theater values(null, '5愿�', 10, 200, 'H', 10, '2D', '<table clas
 insert into movie(movie_no, movie_name, rating) values(null, '遺��궛�뻾', 18);
 insert into movie(movie_no, movie_name, rating) values(null, '�뿼�젰', 15);
 insert into movie(movie_no, movie_name, rating) values(null, '議곗꽑紐낇깘�젙', 12);
-insert into movie(movie_no, movie_name, rating) values(null, '�씎遺�', 18);
+insert into movie(movie_no, movie_name, rating) values(null, '�씎遺�', 18); 
 insert into movie(movie_no, movie_name, rating) values(null, '釉붾옓 �뙩�꽌', 12);
 insert into movie(movie_no, movie_name, rating) values(null, '洹멸쾬留뚯씠 �궡 �꽭�긽', 15);
 
