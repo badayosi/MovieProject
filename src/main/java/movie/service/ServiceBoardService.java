@@ -113,4 +113,19 @@ public class ServiceBoardService {
 		}
 		return null;
 	}
+	
+	public List<ServiceBoard> selectByUserList(String userid){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		ServiceBoardDao dao = session.getMapper(ServiceBoardDao.class);
+		List<ServiceBoard> list = null;
+		try{
+			list = dao.selectByUserlist(userid);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return list;
+	}
 }

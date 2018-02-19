@@ -1,3 +1,4 @@
+<%@page import="movie.dto.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -7,6 +8,16 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="../css/common.css">
 <title>Insert title here</title>
+<%
+	User user= (User)request.getAttribute("item");
+	String phone = user.getPhone();
+	String phone1 = phone.substring(0, 2);
+	String phone2 = phone.substring(4, 8);	
+	String phone3 = phone.substring(9);
+	
+	
+	String gender = user.getGender();
+%>
 <style>
 #joinForm {
 	width: 1024px;
@@ -272,6 +283,15 @@ input:FOCUS {
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+		if("여자"=="<%=gender%>"){
+			$("#radio1").attr("checked","checked");	
+		}else if("남자"=="<%=gender%>"){
+			$("#radio2").attr("checked","checked");	
+		}
+		
+		 
+		
+		
 		var idCk = 0;
 		var falseImgsrc = "../images/join_else_icon.png";
 		var trueImgsrc = "../images/join_icon.png";
@@ -470,6 +490,8 @@ function searchDoro(){
 				}
 				
 		})
+		
+		
 }
 </script>
 </head>
@@ -477,16 +499,14 @@ function searchDoro(){
 	<jsp:include page="../include/header.jsp"></jsp:include>
 	<div id="hiddenbg"></div>
 	<div id="joinForm">
-		<h2 id="h2text">회원정보입력</h2>
+		<h2 id="h2text">회원정보수정</h2>
 		<div id="joininputFrom">
-			<form action="join.do" method="post" id="jF">
+			<form action="userUpdate.do" method="post" id="jF">
 				<p>
 					<label>아이디</label> 
-					<input type="text" name="id" id="userId" placeholder="6자이상 영문/숫자를 입력하세요" onkeyup="this.value=this.value.replace(/[^A-Za-z0-9]/g,'');"> 
-					<input type="button" value="중복체크" id="checkId">
-					<img src="../images/join_else_icon.png" class="checkimg">
+					<input type="text" name="id" id="userId" value="${item.userId }" readonly="readonly"> 
 				</p>
-				<p>
+				<!-- <p>
 					<label>비밀번호</label> <input type="password" name="pw" placeholder="8자이상 영문/숫자/특수문자를 조합하세요" id="userPw">
 					
 					<img src="../images/join_else_icon.png" class="checkimg">
@@ -495,35 +515,48 @@ function searchDoro(){
 					<label>비밀번호 확인</label> <input type="password" name="pwch" id="userPwch">
 					
 					<img src="../images/join_else_icon.png" class="checkimg">
+				</p> -->
+				<p>
+					<label>이름</label>
+					<input type="text" name="name" id="userName" onkeyup="this.value=this.value.replace(/[^가-힣]/g,'');" value="${item.name }"  readonly="readonly">
+					<img src="../images/join_else_icon.png" class="checkimg">
 				</p>
 				<p>
-					<label>이름</label> <input type="text" name="name" id="userName" onkeyup="this.value=this.value.replace(/[^가-힣]/g,'');">
+					<label>이메일주소</label> <input type="email" name="email" id="userEmail" value="${item.email }">
 					
 					<img src="../images/join_else_icon.png" class="checkimg">
 				</p>
 				<p>
-					<label>이메일주소</label> <input type="email" name="email" id="userEmail">
-					
-					<img src="../images/join_else_icon.png" class="checkimg">
-				</p>
-				<p>
-					<label>휴대폰 번호</label> <select name="tel1" id="telSelect">
+					<label>휴대폰 번호</label> <select name="tel1" id="telSelect" value="<%=phone1%>">
 						<option>010</option>
 						<option>011</option>
 						<option>016</option>
 						<option>017</option>
 						<option>018</option>
 						<option>019</option>
-					</select> <input type="tel" name="tel2" class="telinput" id="userTel" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"> <input
-						type="tel" name="tel3" class="telinput" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+					</select>
+					<input type="tel" name="tel2" class="telinput" id="userTel" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" value="<%=phone2%>"> 
+					
+					<input type="tel" name="tel3" class="telinput" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"value="<%=phone3%>">
 						<img src="../images/join_else_icon.png" class="checkimg">
 						
 				</p>
+				<p>
+					<label>포인트</label> 
+					<input type="text" name="point" id="point" value="${item.point }"> 
+					
+					
+				</p>
+				<%-- <p>
+					<label>등급</label> 
+					<input type="text" name="id" id="userRank" value="${item.userRank}" > 
+				</p> --%>
 				<p id="radioP">
-					<label>성별</label> <input type="radio" name="gender" value="여자"
-						class="radioBtn" id="radio1"><span id="span1">여자</span> <input
-						type="radio" name="gender" value="남자" class="radioBtn" id="radio2"><span
-						id="span2">남자</span>
+					<label>성별</label> 
+						<input type="radio" name="gender" value="여자"	class="radioBtn" id="radio1">
+						<span id="span1">여자</span> 
+						<input	type="radio" name="gender" value="남자" class="radioBtn" id="radio2">
+						<span id="span2">남자</span>
 						<img src="../images/join_else_icon.png" class="checkimg" id="radioCheckImg">
 				</p>
 	
@@ -532,12 +565,12 @@ function searchDoro(){
 						value="우편번호 검색" id="addrSearchBtn"><input type="tel"
 						name="zipcode" id="zipcode"> <input type="text" name="addr"
 						id="addr" id="userAddr">
-						<input type="text" name="addrUser" id="addrUser">
-						<img src="../images/join_else_icon.png" class="checkimg">+
+						<input type="text" name="addrUser" id="addrUser" value="${item.addr }">
+						<img src="../images/join_else_icon.png" class="checkimg">
 				</p>
 				<p id="btnWrap">
-					<input type="submit" value="회원가입" id="joinBtn"> <input type="button"
-						value="취소" id="cencelBtn">
+					<input type="submit" value="수정" id="joinBtn"> 
+					<input type="button" value="취소" id="cencelBtn">
 				</p>
 	
 				<div id="searchWarp">
@@ -547,7 +580,7 @@ function searchDoro(){
 						<input type="button" id="search_cencel" value="취소">
 					</p>
 					<div id="resultAddrWrap">
-						<div class="searchResult" id="zxc">
+						<div class="searchResult" id="zxc" value="${item.addr }">
 							<p class="seacrch_zipcode">우편번호</p>
 							<p class="seacrch_addr">주소명</p>
 						</div>
@@ -556,25 +589,10 @@ function searchDoro(){
 	
 			</form>
 		</div>
-		<c:if test="${success !=null}">
-			<script type="text/javascript">
-				$("#h2text").text("회원가입완료");
-				$("#joininputFrom").empty();
-			</script>
-			<div id="successWrap">
-				<div id="successWrap_imgWrap">
-				<img src="../images/img_icon_join.png">
-				</div>
-				<div id="successWrap_textWrap">
-				<h2><span id="bluetext">${name }</span>님 환영합니다:)</h2>
-				<h2>서비스이용을 위해</h2>
-				<h2>다시 로그인을 해주세요.</h2>
-				<a href="login.do"><input type="button" value="로그인" class="loginBtn"></a>
-				<a href="index.jsp"><input type="button" value="홈 바로가기" class="loginBtn"></a>
-			</div>
-			</div>
-		</c:if>
+		
 	</div>
+	
+	
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>

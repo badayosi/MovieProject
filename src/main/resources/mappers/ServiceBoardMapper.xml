@@ -36,4 +36,7 @@
 	<select id="selectById" resultMap="serviceBoardResult" parameterType="int">
 	    select * from serviceBoard where board_no = #{boardNo}
 	</select>
+	<select id="selectByUserlist" resultMap="serviceBoardResult" parameterType="String">
+	    select * from serviceBoard where user_id = #{userId}
+	</select>
 </mapper>

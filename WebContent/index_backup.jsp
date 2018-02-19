@@ -136,45 +136,9 @@
     #sliderBottom .swiper-slide a img{
     	height:274px;
     }
-    
-    
-   .hiddenText{
-    	display:inline-block;
-		width:185px; 
-		height:274px;
-		background:black;
-		opacity:0.7;
-		position: absolute;
-		left: 50px;
-		top:0;
-		display: none;
-	}
-	.hiddenText a{
-		border:1px solid #B2A980;
-		color:#B2A980;
-		line-height: 300px;
-		padding:15px;
-		font-weight: bold;
-		font-size: 0.7em;
-		text-decoration: none;
-	}
-	#poster_middle .swiper-slide img{
-		width:185px; 
-		height:350px;
-	}
-	
 </style>
 <script type="text/javascript">
 	$(function(){
-		$(document).on("mouseover", "#poster_middle .swiper-slide",function(){
-			$(this).find(".hiddenText").css("display", "block");
-		})
-		
-		
-		$(document).on("mouseout","#poster_middle .swiper-slide",function(){
-			$(".hiddenText").css("display","none");
-		});
-		
 		
 		//제일 윗부분 화면
 		var swiper = new Swiper('#top',
@@ -213,14 +177,8 @@
 					var listTag="";
 					
 					$(json).each(function(i,obj){
-						listTag+="<div class='swiper-slide'><a href='user/userReadMovie.do?no="+obj.movieNo+"'>"+
-								"<img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"' title='"+obj.movieName+"'></a>"+
-								"<div class='hiddenText'><a href='#'>예매하기</a><a href='userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div>"+
-								"</div>";
-								
+						listTag+="<div class='swiper-slide'><a href='user/userReadMovie.do?no="+obj.movieNo+"'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"' title='"+obj.movieName+"'></a></div>";
 					})
-					
-					
 					$("#sliderBottom").append(listTag);
 					
 					 var swiper = new Swiper('#poster_middle', {
@@ -241,6 +199,7 @@
 </head>
 <body>
 	<jsp:include page="include/header.jsp"></jsp:include>
+	
 	
 	<div id="top" class="swiper-container" dir="rtl">
 		<div class="swiper-wrapper">

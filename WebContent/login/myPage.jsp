@@ -1,21 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
-<%
-	String pageFile = request.getParameter("page");
-	if(pageFile ==null){
-		pageFile = "myHistory";
-	}
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-  src="https://code.jquery.com/jquery-1.12.4.min.js"
-  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-  crossorigin="anonymous"></script> 
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> 
 <style type="text/css">
 	*{
  		position:relative;
@@ -58,18 +50,36 @@
 		text-align: center;
 		width: 254px;
 		border: 1px solid white;
-		/* 터치 =>231F20 */
-	}
-	#myNav ul li a{
-		text-decoration: none;
 		color: #231f20;
 		height: 49px;
 		font-size: 14px;
-		display: block;
+		cursor:pointer;
+		/* 터치 =>231F20 */
+	}
+	#userRank_span{
+		float:right;
+	}
+	#myInfo{
+		overflow:hidden;
+	}
+	.select_menu{
+		background: #231f20 !important;
+    	color: #cdc197 !important;
 	}
 </style>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
-	
+	$(function(){
+		$("#myNav ul li").click(function(){
+			if($(this).text()=="나의 문의 내역"){
+				$(this).addClass("select_menu");
+				$("#selectMenu").load("myNotice.jsp");
+			}
+		});
+		$(document).on("click",".table_title",function(){
+			
+		});
+	})
 </script>
 </head>
 <body>
@@ -77,20 +87,20 @@
 	<div id="myPage">
 		<div id="myInfo">
 			<h1>마이시네마</h1>
-			<div id="name"><span>테스트<%-- ${member.name } --%></span>님 환영합니다!
+			<div id="name"><span>${member.name }</span>님 환영합니다!
+			<span id="userRank_span">회원 등급 | ${member.userRank }</span>
 			</div>
 		</div>
 		<div id="myNav">
 			<ul>
-				<li><a href="myPage.jsp?page=myReservation">예매/구매내역</a></li>
-				<li><a href="myPage.jsp?page=myHistory">무비 히스토리</a></li>
-				<li><a href="myPage.jsp?page=myNotice">나의 문의 내역</a></li>
-				<li><a href="myPage.jsp?page=myInfo">나의 정보 관리</a></li>
+				<li>예매/구매내역</li>
+				<li>무비 히스토리</li>
+				<li>나의 문의 내역</li>
+				<li>나의 정보 관리</li>
 			</ul>
 		</div>
-		<div id="">
-		
-			<jsp:include page='<%=pageFile+ ".jsp"%>'></jsp:include>
+		<div id="selectMenu">
+			
 		</div>
 	</div>
 	<jsp:include page="../include/footer.jsp"></jsp:include>
