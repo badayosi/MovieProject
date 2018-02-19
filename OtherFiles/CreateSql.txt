@@ -22,6 +22,7 @@ CREATE TABLE movie.board (
    board_no      INT(11)      NOT NULL,
    user_id       VARCHAR(50)  NOT NULL,
    movie_no      INT(11)      NOT NULL,
+   user_name	 VARCHAR(50)  NOT NULL,
    board_content TEXT         NULL,
    regdate       DATE         NOT NULL,
    grade         INT(11)      NULL
