@@ -18,7 +18,7 @@
 			<c:if test="${member.userRank =='관리자'}">
 				<a>관리자님 환영합니다.</a>
 				<a href="logout.do?path=<%=request.getRequestURI() %>" id="logout">로그아웃 </a>
-				<a href="/MovieProject/login/myPage.jsp">관리자 모드</a>
+				<a href="/MovieProject/manager/managerListMovie.do">관리자 모드</a>
 			</c:if>
 			
 		</c:if>
