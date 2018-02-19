@@ -25,7 +25,11 @@ public class StarBoardHandler implements CommandHandler {
 		if(req.getParameter("size").equalsIgnoreCase("0")){
 			
 			int boardsize = 0;
-			List<Board> list = service.selectLimit(boardsize);
+			Board board=new Board();
+			int movieNo = Integer.parseInt(req.getParameter("movieNo"));
+			board.setGrade(boardsize);
+			board.setBoardNo(movieNo);
+			List<Board> list = service.selectLimit(board);
 			map.put("list", list);
 			ObjectMapper om = new ObjectMapper();
 			//String json = om.writeValueAsString(list); //json 형태의 String으로 변환
@@ -39,8 +43,11 @@ public class StarBoardHandler implements CommandHandler {
 		}else if(!req.getParameter("size").equalsIgnoreCase("0")){
 			
 			int boardsize = Integer.parseInt(req.getParameter("size"))*4;
+			Board board=new Board();
+			int movieNo = Integer.parseInt(req.getParameter("movieNo"));
 			System.out.println(boardsize);
-			List<Board> list = service.selectLimit(boardsize);
+			board.setGrade(boardsize);
+			List<Board> list = service.selectLimit(board);
 			ObjectMapper om = new ObjectMapper();
 			map.put("list", list);
 			String json = om.writeValueAsString(map); //json 형태의 String으로 변환

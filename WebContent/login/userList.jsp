@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
+	@import url("/MovieProject/css/common.css");
+	
 	#content{
 		width: 1024px;
 		margin: 0 auto;
@@ -45,7 +47,6 @@
 		<table>
 			<tr>
 				<th>아이디</th>
-				<th>비밀번호</th>
 				<th>이름</th>
 				<th>포인트</th>
 				<th>이메일</th>
@@ -58,7 +59,6 @@
 				<c:forEach var="item" items="${list }">
 			<tr>
 				<td>${item.userId}</td>
-				<td>${item.password}</td>
 				<td>${item.name }</td>
 				<td>${item.point }</td>
 				<td>${item.email }</td>

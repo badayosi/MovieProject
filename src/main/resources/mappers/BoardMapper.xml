@@ -14,15 +14,15 @@
 	</resultMap>
 	<select id="selectAll" resultMap="boardResult">
 		select * from Board
-	</select>
+	</select> 
 	<insert id="insert_board">
 		insert into board (user_id,movie_no,board_content,regdate,grade,user_name)values (#{userId},#{movieNo},#{boardContent},#{regdate},#{grade},#{userName});
 	</insert>
 	<select id="selectTosize" resultType="int">
-		select count(*) from board;
+		select count(*) from board where movie_no=#{movieNo};
 	</select>
-	<select id="selectLimit" resultMap="boardResult" parameterType="int">
-		select * from board where order by board_no desc limit #{size},4;
+	<select id="selectLimit" resultMap="boardResult" parameterType="Board">
+		select * from board where movie_no=#{boardNo} order by board_no desc limit #{grade},4;
 	</select>
 	
 </mapper>

@@ -53,13 +53,13 @@ public class BoardService {
 		return -1;
 	}
 	
-	public List<Board> selectLimit(int size){
+	public List<Board> selectLimit(Board board){
 		SqlSession session = null;
 		session = MySqlSessionFactory.openSession();
 		BoardDao dao = session.getMapper(BoardDao.class);
 		
 		try{
-			return dao.selectLimit(size);
+			return dao.selectLimit(board);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

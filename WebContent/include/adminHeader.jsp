@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" type="text/css" href="../css/header.css?ver=1">
+<link rel="stylesheet" type="text/css" href="../css/managerHeader.css?ver=2">
 <style>
+	@import url("/MovieProject/css/common.css");
+	
 	*{
 		margin:0;
 		padding:0;
@@ -35,11 +37,11 @@
 	</div> 
 	<div id="menubarWarp">
 		<ul id="menubar">
-			<li><a href="/MovieProject/index.jsp">HOME</a></li>
 			<li><a href="/MovieProject/manager/managerListMovie.do">영화관리</a></li>
-			<li><a href="/MovieProject/reservation/ReservationMain.jsp">예매관리</a></li>
+			<li><a href="/MovieProject/reservation/reservationGuide.do">예매관리</a></li>
 			<li><a href="/MovieProject/theater/list.do">상영관 관리</a></li>
 			<li><a href="/MovieProject/serviceBoard/ManagerServiceBoard.jsp">고객센터</a></li>
+			<li><a href="/MovieProject/login/userList.do">회원관리</a></li>
 		</ul>
 	</div>
 </header>

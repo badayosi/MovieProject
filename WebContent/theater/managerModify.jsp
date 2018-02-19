@@ -117,6 +117,9 @@
 	}
  } 
  </script>
+ <style type="text/css">
+ 	@import url("/MovieProject/css/common.css");
+ </style>
 </head>
 <body>
 	<form action="modify.do" method="post" name="f1">
