@@ -12,9 +12,8 @@
 	User user= (User)request.getAttribute("item");
 	String phone = user.getPhone();
 	String phone1 = phone.substring(0, 2);
-	String phone2 = phone.substring(2, 6);
-	String phone3 = phone.substring(6);
-	
+	String phone2 = phone.substring(4, 8);	
+	String phone3 = phone.substring(9);
 	
 	
 	String gender = user.getGender();
@@ -507,7 +506,7 @@ function searchDoro(){
 					<label>아이디</label> 
 					<input type="text" name="id" id="userId" value="${item.userId }" readonly="readonly"> 
 				</p>
-				<p>
+				<!-- <p>
 					<label>비밀번호</label> <input type="password" name="pw" placeholder="8자이상 영문/숫자/특수문자를 조합하세요" id="userPw">
 					
 					<img src="../images/join_else_icon.png" class="checkimg">
@@ -516,7 +515,7 @@ function searchDoro(){
 					<label>비밀번호 확인</label> <input type="password" name="pwch" id="userPwch">
 					
 					<img src="../images/join_else_icon.png" class="checkimg">
-				</p>
+				</p> -->
 				<p>
 					<label>이름</label>
 					<input type="text" name="name" id="userName" onkeyup="this.value=this.value.replace(/[^가-힣]/g,'');" value="${item.name }"  readonly="readonly">
@@ -544,7 +543,9 @@ function searchDoro(){
 				</p>
 				<p>
 					<label>포인트</label> 
-					<input type="text" name="id" id="point" value="${item.point }"> 
+					<input type="text" name="point" id="point" value="${item.point }"> 
+					
+					
 				</p>
 				<%-- <p>
 					<label>등급</label> 

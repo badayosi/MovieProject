@@ -12,7 +12,7 @@
 		<result property="name" column="name"/>
 		<result property="addr" column="addr"/>
 		<result property="gender" column="gender"/>
-		<result property="userRank" column="userRank"/>
+		<result property="userRank" column="user_rank"/>
 	</resultMap>
 	<select id="selectAll" resultMap="uesrResult">
 		select * from user
@@ -29,7 +29,7 @@
 	
 	<update id="update" parameterType="User">
 		update user set 
-		password=#{password},point=#{point},
+		point=#{point},
 		email=#{email},phone=#{phone},name=#{name},addr=#{addr},gender=#{gender},user_rank=#{userRank}
 		where user_id= #{userId}
 	</update>

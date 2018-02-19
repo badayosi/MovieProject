@@ -24,7 +24,7 @@ public class UserUpdateMovieHandler implements CommandHandler {
 	
 		}else if(req.getMethod().equalsIgnoreCase("post")){
 			String id = req.getParameter("id");
-			String pw = req.getParameter("pw");
+			String pw = "";
 			String name = req.getParameter("name");
 			String email = req.getParameter("email");
 			String tel1 = req.getParameter("tel1");
@@ -40,7 +40,7 @@ public class UserUpdateMovieHandler implements CommandHandler {
 			String p = req.getParameter("point");
 			int point = Integer.parseInt(p);
 			
-			User user = new User(id, pw, point, email, phone+"", address, gender, userRank, name);
+			User user = new User(id, pw, point, email, phone, address, gender, userRank, name);
 			System.out.println(user.toString());
 			
 			UserService service = UserService.getInstance();
@@ -48,7 +48,7 @@ public class UserUpdateMovieHandler implements CommandHandler {
 			
 			System.out.println(result);
 			
-			return "userUpdateList.jsp";
+			return "userList.do";
 		}
 		return null;
 	}

@@ -62,7 +62,7 @@
 				<td>${item.name }</td>
 				<td>${item.point }</td>
 				<td>${item.email }</td>
-				<td>0${item.phone }</td>
+				<td>${item.phone }</td>
 				<td>${item.addr }</td>
 				<td>${item.gender }</td>
 				<td>${item.userRank }</td>
