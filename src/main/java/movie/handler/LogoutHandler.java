@@ -10,7 +10,7 @@ public class LogoutHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {	
 		req.getSession().removeAttribute("member");
-		return "/index.jsp";
+		res.sendRedirect("/MovieProject/index.jsp");
+		return null;
 	}
-
 }
