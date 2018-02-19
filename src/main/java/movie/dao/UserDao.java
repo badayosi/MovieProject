@@ -9,4 +9,5 @@ public interface UserDao {
 	public User selectById(String id);
 	public User selectByIdCheckpass(User user);
 	public void insertUser(User user);
+	public void update(User user);
 }

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import movie.dto.Notice;
 import movie.service.NoticeService;
 import mvc.controller.CommandHandler;
-import sun.print.resources.serviceui;
 
 public class ManagerNoticeInsertHandler implements CommandHandler {
 
