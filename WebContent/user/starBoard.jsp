@@ -143,10 +143,10 @@
 		starRating();
 		
 		$("#insert_star_board").click(function(){
-			var userId = "testtest";
-			var movie_no = 1;
+			var userId = $("#userId").val();
+			var movie_no = $("#movieNo").val();
 			var board_content = $("#user_star_content").val().replace(/(?:\r\n|\r|\n)/g, '<br />');
-			var userName = "하홍";
+			var userName = $("#userName").val();
 			var grade = $("#outputtag b").text();
 			$.ajax({
 				url:"starboardinsert.do",
@@ -290,4 +290,7 @@ function boardListView(boardNo){
 		<div id="countBtn">
 				
 		</div>
+		<input type="hidden" id="userId" value="${member.userId }">
+		<input type="hidden" id="userName" value="${member.userName }">
+		<input type="hidden" id="movieNo" value="${movie.movieNo }">
 	</div>
