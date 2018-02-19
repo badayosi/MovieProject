@@ -11,10 +11,10 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="js/swiper.min.js"></script>
 <style type="text/css">
+	@import url("/MovieProject/css/common.css");
 	*{
  		position:relative;
  		margin:0 auto;
-		font-family: "나눔 고딕", 'Nanum Gothic', 'ng';
 		padding: 0;
 		margin: 0;
  	}
