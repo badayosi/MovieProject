@@ -75,7 +75,6 @@
 		color: white;		
 	}
 	#select{
-		border:1px solid grey;
 		padding-bottom:30px;
 		margin-bottom: 10px;
 	}
@@ -157,6 +156,10 @@
 	}
 	#input1{
 		display: none;
+	}
+	#content{
+		width: 1024px;
+		margin: 0 auto;
 	}
 </style>
 <script type="text/javascript">
@@ -263,8 +266,9 @@
 </script>
 </head>
 <body>
-	<jsp:include page="../include/header.jsp"></jsp:include>
+	<jsp:include page="../include/adminHeader.jsp"></jsp:include>
 	<p id="test"></p>
+	<div id="content">
 	<div id="select">
 		<h1>인원/좌석 선택</h1>
 	</div>
@@ -296,6 +300,7 @@
 					<input type="text" name="seat" id="input1">
 				</select>		
 			</div>
+			<br><br>
 			<div id="quick-menu">
 			<img src="../images/nav_condition_open.png" id="open">
 				<div id="nav_condition">
@@ -328,7 +333,7 @@
 		</c:if>  
 	</div>
 	
-
+	</div>
 	
 	
 	<br>

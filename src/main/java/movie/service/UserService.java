@@ -97,6 +97,25 @@ public class UserService{
 		return -1;
 	}
 	
+	public int deleteUser(String id){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		UserDao dao = session.getMapper(UserDao.class);
+		
+		try{
+			dao.deleteUser(id);
+			session.commit();
+			return 0;
+		}catch(Exception e){
+			
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		
+		return -1;
+	}
+	
 
 	public int updateUser(User user){
 		SqlSession session = null;

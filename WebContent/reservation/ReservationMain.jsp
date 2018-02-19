@@ -18,7 +18,6 @@
 		display: inline-block;
 		float: left;
 		padding:10px;
-		width:200px;
 		text-align:center;
 		border:1px solid white;
 		background: #CDC197;
@@ -40,8 +39,13 @@
 		<div id="SubBar">
 			<ul>
 				<li><a href="reservationGuide.do">관리자용 전체예약현황</a></li>
-				<li><a href="reservationGuide.do?id=user1">유저별 예약현황[user1]</a></li>
-				<li><a href="ReservationInsert_Member.jsp">예약페이지이동</a></li>
+				<li>
+					<a href="#">유저별 관리 보기</a>
+					<form action="reservationGuide.do" method="get">
+						<input type="text" name="id">
+						<input type="submit" value="검색">
+					</form>
+				</li>
 			</ul>
 		</div>
 		
