@@ -35,9 +35,8 @@
 	</div> 
 	<div id="menubarWarp">
 		<ul id="menubar">
-			<li><a href="/MovieProject/index.jsp">HOME</a></li>
 			<li><a href="/MovieProject/manager/managerListMovie.do">영화관리</a></li>
-			<li><a href="/MovieProject/reservation/ReservationMain.jsp">예매관리</a></li>
+			<li><a href="/MovieProject/reservation/reservationGuide.do">예매관리</a></li>
 			<li><a href="/MovieProject/theater/list.do">상영관 관리</a></li>
 			<li><a href="/MovieProject/serviceBoard/ManagerServiceBoard.jsp">고객센터</a></li>
 		</ul>

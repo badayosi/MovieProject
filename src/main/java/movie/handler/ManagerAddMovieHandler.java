@@ -47,7 +47,7 @@ public class ManagerAddMovieHandler implements CommandHandler {
 				int playTime = Integer.parseInt(multi.getParameter("moviePlaytime"));
 				String synopsis = multi.getParameter("movieSynopsis");
 				Date openDate = new SimpleDateFormat("yyyy-MM-dd").parse(multi.getParameter("movieOpenDate"));
-				Date closeDate = new SimpleDateFormat("yyyy-MM-dd").parse(multi.getParameter("movieOpenDate"));
+				Date closeDate = new SimpleDateFormat("yyyy-MM-dd").parse(multi.getParameter("movieEndDate"));
 				String poster = multi.getFilesystemName("moviePoster");
 				String steelCut=multi.getParameter("movieSteelCut");
 				String video = multi.getFilesystemName("movieVideo");

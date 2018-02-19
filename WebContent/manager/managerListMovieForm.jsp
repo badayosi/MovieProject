@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
+<link rel="stylesheet" type="text/css" href="/MovieProject/css/manager.css"> 
+<!-- <style type="text/css">
 	#listBody{
 		width:1024px;
 		margin:0 auto;
@@ -35,29 +36,32 @@
 		padding: 5px 10px;
 		color: black;
 	}
-</style>
+</style> -->
 </head>
 <body>
 	<jsp:include page="../include/adminHeader.jsp"></jsp:include>
 	<div id="listBody">
-		<p id="insert">
-			<a id="btnAdd" href="managerAddMovie.do"><button>영화추가</button></a>
-		</p>
-		<br><br>
-		<table>
-			<tr>
-				<th>제목</th>
-				<th>개봉일</th>
-				<th>종료일</th>
-			</tr>
-			<c:forEach var="item" items="${movieList }">
+		<div id="content">
+			<h2>영화관리</h2>
+			<table>
 				<tr>
-					<td><a href="managerReadMovie.do?no=${item.movieNo }">${item.movieName}</a></td>
-					<td><fmt:formatDate value="${item.openDate }" pattern="yyyy-MM-dd"/></td>
-					<td><fmt:formatDate value="${item.closeDate}" pattern="yyyy-MM-dd"/></td>
+					<th>제목</th>
+					<th>개봉일</th>
+					<th>종료일</th>
 				</tr>
-			</c:forEach>
-		</table>
+				<c:forEach var="item" items="${movieList }">
+					<tr>
+						<td><a href="managerReadMovie.do?no=${item.movieNo }">${item.movieName}</a></td>
+						<td><fmt:formatDate value="${item.openDate }" pattern="yyyy-MM-dd"/></td>
+						<td><fmt:formatDate value="${item.closeDate}" pattern="yyyy-MM-dd"/></td>
+					</tr>
+				</c:forEach>
+			</table>
+			
+			<p id="insert">
+				<a id="btnAdd" href="managerAddMovie.do"><button>영화추가</button></a>
+			</p>	
+			</div>
 	</div>
 <jsp:include page="../include/footer.jsp"></jsp:include>
 </body>

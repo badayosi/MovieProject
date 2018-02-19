@@ -6,8 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+
 	#addDiv{
-		width:40%;
+		width:1024px;
 		margin:0 auto;
 		text-align: center;
 	}
@@ -16,17 +17,17 @@
 		border-collapse:collapse;
 		font-size: 1.1em;
 	}
+	#infoTable th{
+		width: 100px;
+	}
 	#infoTable th,td{
 		border:1px solid black;
 		padding: 10px;
 	}
-	#infoTable th{
-		width:150px;
-	}
 	#infoTable tr td{
 		text-align: left;
 		width:400px;
-	}
+	} 
 	#insert{
 		margin-top: 20px;
 	}
@@ -36,12 +37,19 @@
 		padding: 5px 10px;
 		color: black;
 	}
+	h2{
+		width: 1024px;
+		margin: 0 auto;
+		margin-bottom: 20px;
+	}
+	
 </style>
 </head>
 <body>
 	<jsp:include page="../include/adminHeader.jsp"></jsp:include>
 
 	<div id="addDiv">
+		<h2>${movie.movieName} 상세보기</h2>
 		<table id="infoTable">
 			<tr>
 				<th>영화제목</th>

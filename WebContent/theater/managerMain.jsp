@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/MovieProject/css/manager.css"> 
 <style type="text/css">
-	#content{
+	/* #content{
 		width: 1024px;
 		margin: 0 auto;
 	}
@@ -21,18 +22,43 @@
 	}
 	#content th, #content td{
 		padding: 10px;
+	} */
+	/* table{
+		width: 1024px;
+		margin: 0 auto;
 	}
-	#insert{		
+	table, th{
+		border-top:2px solid #CDC197;
+		border-bottom:2px solid #CDC197;
+		border-collapse: collapse;
+	}
+	table,tr{
+		border-bottom:1px solid #CDC197;
+		border-collapse: collapse;
+		text-align: center;
+	}
+	th, td{
+		text-align: center;
+		padding: 10px;
+	}
+	h2{
+		width: 1024px;
+		margin: 0 auto;
+		margin-bottom: 20px;
+	}
+	#insert{	
+		padding-top: 20px;
+		width: 1024px;
+		margin: 0 auto;	
 		text-align:right;
-
 	}
 	#insert button{
 		font-size: 15px;
-		background: #848484;
+		background: #CDC197;
 		padding: 5px 10px;
 		font-weight: bold;
 		color: white;
-	}
+	} */
 </style>
 </head>
 <body>
@@ -41,7 +67,9 @@
 		<c:if test="${list==null }">
 				<%response.sendRedirect("list.do"); %>
 		</c:if>
-
+		
+		<h2>영화관 관리</h2>
+		
 		<table>
 			<tr>
 				<th>번호</th>

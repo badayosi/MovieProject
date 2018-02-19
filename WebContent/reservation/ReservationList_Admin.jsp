@@ -8,9 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<link rel="stylesheet" type="text/css" href="/MovieProject/css/manager.css"> 
 <style>
-	div#container{
+	/* div#container{
 		width:1024px;
 		min-height:600px;
 		margin:0 auto;
@@ -19,7 +19,7 @@
 	table, tr, th, td{
 		border:1px solid black;
 		border-collapse:collapse;
-	}
+	} */
 </style>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
@@ -48,9 +48,12 @@
 </head>
 <body>
 	<jsp:include page="../include/adminHeader.jsp"></jsp:include>
-	<div id="container">		
+	<jsp:include page="ReservationMain.jsp"></jsp:include>	
+	<div id="container">
+			
 		<c:if test="${result!=null}">
-			<p>조건별 검색(임시)</p>
+			<br>
+			<h2>전체 예약 보기</h2>
 			<form action="reservationGuide.do" method="post">
 				<table>
 					<tr>
@@ -76,8 +79,10 @@
 						</tr>
 					</c:forEach>
 				</table>
-				<input type="hidden" name="type">
-				<input type="button" value="예약취소">
+				<p id="insert">
+					<input type="hidden" name="type">
+					<input type="button" value="예약취소">
+				</p>
 			</form>
 		</c:if>
 		<c:if test="${result == null}">
