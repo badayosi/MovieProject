@@ -11,10 +11,10 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="js/swiper.min.js"></script>
 <style type="text/css">
+	@import url("/MovieProject/css/common.css");
 	*{
  		position:relative;
  		margin:0 auto;
-		font-family: "나눔 고딕", 'Nanum Gothic', 'ng';
 		padding: 0;
 		margin: 0;
  	}
@@ -215,7 +215,7 @@
 					$(json).each(function(i,obj){
 						listTag+="<div class='swiper-slide'><a href='user/userReadMovie.do?no="+obj.movieNo+"'>"+
 								"<img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"' title='"+obj.movieName+"'></a>"+
-								"<div class='hiddenText'><a href='#'>예매하기</a><a href='userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div>"+
+								"<div class='hiddenText'><a href='#'>예매하기</a><a href='user/userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div>"+
 								"</div>";
 								
 					})

@@ -15,6 +15,16 @@ select table_no, start_time, theater_name, theater_type, theater_maxcount
 from timetable, theater
 where timetable.table_no = theater.theater_no;
 
+/* MOVIEHISTORY VIEW*/
+create view moviehistory as
+select user.user_id, movie.movie_name, theater.theater_name, timetable.start_time,reservation.seat, movie.rating, movie.path_poster
+from reservation, timetable, theater, movie, user
+where reservation.user_id = user.user_id
+	and reservation.timetable_no = timetable.table_no
+	and timetable.movie_no = movie.movie_no
+	and timetable.theater_no = theater.theater_no
+	and reservation.progress = 0;
+
 /* ADDRESS */	
 load data local infile 'D:/workspace_bigdata/post_search/DataFiles/DAEGU.txt'
 into table address
@@ -27,3 +37,4 @@ set addrNo = @zipcode, sido = @sido, sigungu = @sigungu, doro = @doro, building1
 create INDEX idx_post_sido On address(sido);
 create INDEX idx_post_doro ON address(doro);
 create index idx_post_sigungu on address(sigungu);
+
