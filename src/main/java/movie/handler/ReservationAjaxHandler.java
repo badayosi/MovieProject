@@ -99,15 +99,38 @@ public class ReservationAjaxHandler implements CommandHandler {
 			if(req.getParameter("timeNo") != null && req.getParameter("search") != null){
 				System.out.println("SELECT MOVIE & SELECT TIME = RESULT RESERVATION USER");
 				int loadReserve = Integer.valueOf(req.getParameter("timeNo"));
-				reservationService = ReservationService.getInstance();
-				List<Reservation> resultReserve = reservationService.selectByTimeTable(loadReserve);
-				ArrayList<String> result = new ArrayList<String>();
-				for(Reservation reserveSeat : resultReserve){
-					result.add(reserveSeat.getSeat());
-				}
+				User user = (User)req.getSession().getAttribute("member");
+				HashMap<String, String> result = new HashMap<>();
 				
-				String jsonTime = om.writeValueAsString(result); //json 형태의 String으로 변환
-				pwJson.print(jsonTime);
+				// USER SESSION 획득 성공시
+				if(user != null){
+					reservationService = ReservationService.getInstance();
+					// TIMETABLE NO 조건으로 검색
+					List<Reservation> resultReserve = reservationService.selectByTimeTable(loadReserve);
+					
+					String makeStr = "";
+					for(Reservation reserveSeat : resultReserve){
+						if(makeStr.equals(""))
+							makeStr += reserveSeat.getSeat();
+						else
+							makeStr += "/"+reserveSeat.getSeat();
+					}
+					result.put("resultSeat", makeStr);
+					// USER ID, TIMETABLE NO 조건으로 검색
+					Reservation reserveResult = reservationService.selectByUserAndTime(user.getUserId(), loadReserve);
+					if(reserveResult != null)
+						result.put("targetSeat", reserveResult.getSeat());
+					String jsonResult = om.writeValueAsString(result); //json 형태의 String으로 변환
+					pwJson.print(jsonResult);
+				}
+				// USER SESSION 획득 실패시
+				else{
+					// ERROR 알림 후 LOGIN 이동
+					result.put("error", "USER 정보를 찾을 수 없습니다.\n로그인 후 이용바랍니다.");
+					result.put("solution", "/MovieProject/login/Login.jsp");
+					String jsonResult = om.writeValueAsString(result); //json 형태의 String으로 변환
+					pwJson.print(jsonResult);
+				}
 			}
 			
 			// RESERVATION.PROGRESS INSERT&UPDATE
@@ -132,9 +155,13 @@ public class ReservationAjaxHandler implements CommandHandler {
 					}
 					// 결과값이 NULL일 경우 RESERVATION INSERT 진행
 					else{
-						
-						// PROGRESS 예약진행중 1, 결제완료 2
-						//result.setProgress(1);
+						result = new Reservation();
+						result.setUserId(user.getUserId());
+						result.setTimetableNo(timetableNo);
+						result.setPrice(0);
+						result.setSeat(seat);
+						result.setProgress(1);
+						reservationService.insertReservation(result);
 					}
 					return null;
 				}
@@ -145,26 +172,51 @@ public class ReservationAjaxHandler implements CommandHandler {
 					errorAlert.put("solution", "/MovieProject/login/Login.jsp");
 				}
 				String jsonResult = om.writeValueAsString(errorAlert);
-				pwJson.print(jsonResult);	
+				pwJson.print(jsonResult);
+			}
+			
+			// RESERVATION.PROGRESS PREV,NEXT
+			if(req.getParameter("circultKey") != null){
+				System.out.println("RESERVATION.PROGRESS CIRCULTKEY METHOD");
+				String keyType = String.valueOf(req.getParameter("circultKey"));
+				int timetableNo = Integer.valueOf(req.getParameter("timetableNo"));
+				User user = (User)req.getSession().getAttribute("member");
+				HashMap<String, String> errorAlert = new HashMap<>(); 
 				
-				// 02/13 오후 09:30 진행상황
-				// 회원가입해서 새로운유저로만 테스트 진행할 수 있다.
-				// testuser/qwer1234%
-				// 좌석을 클릭해서 selectSeat로 변경시에
-				// reservationService에 회원ID와 상영시간표를 기준으로 검색해서
-				// 조건이 일치하는 예약이 있는경우 좌석컬럼의 정보를 변경
-				// 일치하지 않는경우 새로운 예약을 생성해서 정보를 저장
-				
-				// 02/14 오후 04:10 진행상황
-				// 좌석을 선택 시마다 회원ID, 상영시간표번호를 기준으로 검색해서 조건이 일치하는 정보를 가지고 들어가서 좌석컬럼을 계속수정함.
-				// 조건이 일치하지 않는 경우 INSERT과정 추가 필요.
-				// PREV 버튼을 클릭할경우 현재까지 저장된 좌석정보를 지워버려야한다.
-				// ID정보를 확인하고 그 정보를 바탕으로 상영시간표와 PROGRESS(1)로 검색해서 지워버리면 될거같다.
-				// NEXT 버튼을 클릭할경우 재확인창까지 통과하면 좌석정보를 고정시켜야한다.
-				// ID,TIME,PROGRESS(1)을 기준으로 검색해서 PROGRESS(2)로 변경할 필요가 있다.
-				// 세션정보 유지시간을 좀 더 길게끌고갈필요가있다.
-				// 브라우저가 꺼지거나, 유저가 직접 로그아웃을 클릭했을 때 세션정보파괴.
-				
+				// USER SESSION 획득 성공시
+				if(user != null){
+					System.out.println("USER LOAD SECCESS");
+					reservationService = ReservationService.getInstance();
+					// USER ID, TIMETABLE NO 조건으로 검색
+					Reservation result = reservationService.selectByUserAndTime(user.getUserId(), timetableNo);
+					System.out.println(result);
+					// 결과값이 리턴될 경우 KEY=FIX 일 때 RESERVATION UPDATE 진행
+					if(result != null && keyType.equals("fix")){
+						result.setProgress(2);
+						reservationService.updateReservation(result);
+					}
+					// 결과값이 리턴될 경우 KEY=CANCLE 일 때 RESERVATION DELETE 진행
+					else if(result != null && keyType.equals("cancle")){
+						reservationService.deleteReservation(result);
+					}
+					// 결과값이 NULL일 경우 RESERVATION ERROR 진행
+					else{
+						errorAlert.put("error", "예약진행 중 에러가 발생하였습니다.\n관리자에게 문의 후 이용바랍니다.");
+						errorAlert.put("solution", "/MovieProject/reservation/ReservationInsert_Member.jsp");
+						String jsonResult = om.writeValueAsString(errorAlert);
+						pwJson.print(jsonResult);
+						pwJson.flush();
+					}
+					return null;
+				}
+				// USER SESSION 획득 실패시
+				else{
+					// ERROR 알림 후 LOGIN 이동
+					errorAlert.put("error", "USER 정보를 찾을 수 없습니다.\n로그인 후 이용바랍니다.");
+					errorAlert.put("solution", "/MovieProject/login/Login.jsp");
+				}
+				String jsonResult = om.writeValueAsString(errorAlert);
+				pwJson.print(jsonResult);
 			}
 			pwJson.flush();
 		}
