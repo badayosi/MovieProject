@@ -10,17 +10,26 @@
 		<result property="regdate" column="regdate"/>
 		<result property="readcount" column="readcount"/>
 	</resultMap>
+	<select id="selectTosizeTitle" resultType="int" parameterType='String'>
+		select count(*) from notice where title like #{search};
+	</select>
+	<select id="selectTosizeContent" resultType="int" parameterType='String'>
+		select count(*) from notice where content like #{search};
+	</select>
+	<select id="selectTosizeTitleContent" resultType="int" parameterType='String'>
+		select count(*) from notice where title like #{search} and content like #{search};
+	</select>
 	<select id="selectTosize" resultType="int">
 		select count(*) from notice;
 	</select>
 	<select id="selectByTitle" resultMap="noticeResult" parameterType="Notice">
-		select * from notice where title like #{title} order by board_no desc limit #{size},10;
+		select * from notice where title like #{title} order by board_no desc limit #{boardNo},10;
 	</select>
 	<select id="selectByContent" resultMap="noticeResult" parameterType="Notice">
-		select * from notice where content like #{content} order by board_no desc limit #{size},10;
+		select * from notice where content like #{content} order by board_no desc limit #{boardNo},10;
 	</select>
 	<select id="selectByContentTitle" resultMap="noticeResult" parameterType="Notice">
-		select * from notice where content like #{content} and title like #{title} order by board_no desc limit #{size},10;
+		select * from notice where content like #{content} and title like #{title} order by board_no desc limit #{boardNo},10;
 	</select>
 	<insert id="insert" parameterType="Notice">
 		insert into notice (title,content,regdate,readcount) values(#{title},#{content},#{regdate},#{readcount})
@@ -33,6 +42,18 @@
 	</select>
 	<select id="selectByNo" resultMap="noticeResult" parameterType="int">
 		select * from notice where board_no >= #{boardNo} limit 0,3;
+	</select>
+	<select id="selectByOne" resultMap="noticeResult" parameterType="int">
+		select * from notice where board_no >= #{boardNo} limit 0,2;
+	</select>
+	<delete id="deleteNotice" parameterType="int">
+	   	delete from notice where board_no = #{boardNo};
+	</delete>
+	<update id="updateNotice" parameterType="Notice">
+	    update notice set title=#{title}, content=#{content}, regdate=#{regdate} where board_no = #{boardNo};
+	</update>
+	<select id="selectByNoOne" resultMap="noticeResult">
+	   	select * from notice where board_no = #{boardNo};
 	</select>
 	
 </mapper>

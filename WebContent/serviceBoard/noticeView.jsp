@@ -10,7 +10,6 @@
 	width: 1024px;
 	min-height: 600px;
 	margin: 0 auto;
-	display: none;
 }
 
 #search_wrap #search_top_div {
@@ -114,12 +113,14 @@
 #selectNoticeWrap {
 	width: 1024px;
 	margin: 0 auto;
+	display: none;
+	overflow: hidden;
 }
 
 #selectHeader {
-	margin-top: 20px;
+	margin-top: 30px;
 	border-top: 2px solid #ccc;
-	width: 1024px;
+	width: 962px;
 	padding:31px 30px 0px 30px;
 }
 #selectHeader h4{
@@ -213,16 +214,45 @@
 	color: black;
 	text-decoration: none;
 }
+#listBtnWrap{
+	margin:0 auto;
+	text-align: center;
+}
+#listBtnWrap #listBtn{
+	margin-top:15px;
+	width:100px;
+	height:50px;
+	font-size:16px;
+	color:#cdc197;
+	background: #231f20;
+	border:1px solid #231f20;
+	cursor: pointer;
+}
+#manager_btn_wrap{
+	float:right;
+	width:30%;
+	text-align:right;
+	margin-bottom:30px;
+}
+#manager_btn_wrap p input{
+	width:50px;
+	height:25px;
+	background: #231f20;
+	color:#cdc197;
+	padding:5px;
+	border:none;
+	line-height:20px;
+}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		listview(0);
-		$(document).on("click", "#numberP a", function() {
+		$(document).on("click", "#numberP a.allselect", function() {
 			var size = Number($(this).text()) - 1;
 			listview(size);
 		})
-
+		
 	})
 	function listview(size) {
 		$("tr").not("#header_table").remove();
@@ -239,8 +269,7 @@
 				for (var i = 0; i < json.list.length; i++) {
 					var tr = "<tr>"
 					var noTd = "<td>" + json.list[i].boardNo + "</td>";
-					var titleTd = "<td><a href='noticeselectno.do?no="
-							+ json.list[i].boardNo + "'>" + json.list[i].title
+					var titleTd = "<td><a href='#' class='selectNo'>" + json.list[i].title
 							+ "</a></td>";
 					var date = new Date(json.list[i].regdate);
 					var regDateTd = "<td>" + date.toLocaleDateString()
@@ -251,7 +280,7 @@
 					$("#notice_table").append(tr);
 				}
 				for (var i = 1; i <= json.size; i++) {
-					var aTag = "<a href='#'>" + i + "</a>";
+					var aTag = "<a href='#' class='allselect'>" + i + "</a>";
 					$("#numberP").append(aTag);
 				}
 			}
@@ -267,8 +296,8 @@
 				<option selected="selected">제목</option>
 				<option selected="selected">내용</option>
 				<option selected="selected">제목+내용</option>
-			</select> <input type="text" id="search"> <a href="#"><input
-				type="button" id="search_btn" value="검색"></a>
+			</select> <input type="text" id="search"> <input
+				type="button" id="search_btn" value="검색">
 		</div>
 		<div id="tablewrap">
 			<table id="notice_table">
@@ -284,12 +313,20 @@
 			<p id="numberP"></p>
 		</div>
 	</div>
+	
 	<div id="selectNoticeWrap">
+			<c:if test="${member.userRank == '관리자' }">
+				<div id="manager_btn_wrap">
+					<p>
+						<input type="button" value="수정" id="updateBtn">
+						<input type="button" value="삭제" id="deleteBtn">
+					</p>
+				</div>
+			</c:if>
 			<div id="selectHeader">
-				<h4>시스템 점검안내</h4>
+				<h4 id="title_h4">시스템 점검안내</h4>
 				<ul id="notice_ul">
-					<li id="regdate_Li"><b>등록일 :</b> 2018-02-06 <span
-						id="linespan"></span></li>
+					<li id="regdate_Li"><b>등록일 :</b> 2018-02-06 <span id="linespan"></span></li>
 					<li id="readcount_li"><b>조회수 :</b> 55</li>
 				</ul>
 			</div>
@@ -300,13 +337,16 @@
 				<ul id="chage_page_ul">
 					<li><b>다음글</b><img src="../images/sort-up.png">
 						<div>
-							<a href="#">L.pay 시스템 점검안내</a>
+							<a href="#" id="nextTitle">L.pay 시스템 점검안내</a>
 						</div></li>
 					<li><b>이전글</b><img src="../images/caret-down.png">
 						<div>
-							<a href="#">시스템 점검 안내</a>
+							<a href="#" id="prevTitle">시스템 점검 안내</a>
 						</div></li>
 				</ul>
+			</div>
+			<div id="listBtnWrap">
+				<button id="listBtn">목록</button>
 			</div>
 		</div>
 

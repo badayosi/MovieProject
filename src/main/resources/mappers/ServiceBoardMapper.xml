@@ -20,7 +20,7 @@
 		select count(*) from serviceBoard;
 	</select>
 	<select id="selectByall" resultMap="serviceBoardResult" parameterType="int">
-	    select * from serviceBoard #{size},4;
+	    select * from serviceBoard order by board_no desc limit #{size},10;
 	</select>
 	<insert id="insert" parameterType="ServiceBoard">
 	    insert into serviceBoard (user_id,consulting,classification,title,content,regdate,answer) values(#{userId},#{consulting},#{classification},#{title},#{content},#{regdate},#{answer})
@@ -31,7 +31,7 @@
 	</insert>
 	
 	<update id="update" parameterType="ServiceBoard">
-	    update serviceBoard set answer=#{answer}, answerContent =#{answercontent} where boardNo = #{boardNo}
+	    update serviceBoard set answer=#{answer}, answer_content =#{answerContent} where board_no = #{boardNo}
 	</update>
 	<select id="selectById" resultMap="serviceBoardResult" parameterType="int">
 	    select * from serviceBoard where board_no = #{boardNo}

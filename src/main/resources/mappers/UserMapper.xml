@@ -12,7 +12,7 @@
 		<result property="name" column="name"/>
 		<result property="addr" column="addr"/>
 		<result property="gender" column="gender"/>
-		<result property="userRank" column="userRank"/>
+		<result property="userRank" column="user_rank"/>
 	</resultMap>
 	<select id="selectAll" resultMap="uesrResult">
 		select * from user
@@ -24,6 +24,6 @@
 		select * from user where user_id= #{userId} and password = password(#{password});
 	</select>
 	<insert id="insertUser"  parameterType="User">
-		insert into user values(#{userId},password(#{password}),#{point},#{email},#{phone},#{addr},#{gender},#{userRank},#{name});
+		insert into user(user_id, password, point, email, phone, addr, gender, user_rank, name) values(#{userId},password(#{password}),#{point},#{email},#{phone},#{addr},#{gender},#{userRank},#{name});
 	</insert>
 </mapper>

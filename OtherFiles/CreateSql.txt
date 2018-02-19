@@ -4,29 +4,28 @@ DROP SCHEMA IF EXISTS movie;
 -- movie
 CREATE SCHEMA movie;
 
+-- use movie
 use movie;
 
 -- address
 CREATE TABLE movie.address (
-   addrNo    CHAR(5)     NULL COMMENT '�슦�렪踰덊샇', -- �슦�렪踰덊샇
-   sido      VARCHAR(20) NULL COMMENT '�떆�룄', -- �떆�룄
-   sigungu   VARCHAR(20) NULL COMMENT '�떆援곌뎄', -- �떆援곌뎄
-   doro      VARCHAR(20) NULL COMMENT '�룄濡�', -- �룄濡�
-   building1 INT(5)      NULL COMMENT '嫄대Ъ踰덊샇1', -- 嫄대Ъ踰덊샇1
-   building2 INT(5)      NULL COMMENT '嫄대Ъ踰덊샇2' -- 嫄대Ъ踰덊샇2
-)
-COMMENT 'address';
+   addrNo    CHAR(5)     null,
+   sido      VARCHAR(20) null,
+   sigungu   VARCHAR(20) null,
+   doro      VARCHAR(20) null,
+   building1 INT(5)      null,
+   building2 INT(5)      null
+);
 
 -- board
 CREATE TABLE movie.board (
-   board_no      INT(11)      NOT NULL COMMENT '寃뚯떆�뙋踰덊샇', -- 寃뚯떆�뙋踰덊샇
-   user_id       VARCHAR(50)  NOT NULL COMMENT '�쉶�썝id', -- �쉶�썝id
-   movie_no      INT(11)      NOT NULL COMMENT '�쁺�솕_no', -- �쁺�솕_no
-   board_content TEXT         NULL     COMMENT '寃뚯떆�뙋�궡�슜', -- 寃뚯떆�뙋�궡�슜
-   regdate       DATE         NOT NULL COMMENT '�벑濡앹씪', -- �벑濡앹씪
-   grade         INT(11)      NULL     COMMENT '媛쒖씤蹂꾩젏' -- 媛쒖씤蹂꾩젏
-)
-COMMENT 'board';
+   board_no      INT(11)      NOT NULL,
+   user_id       VARCHAR(50)  NOT NULL,
+   movie_no      INT(11)      NOT NULL,
+   board_content TEXT         NULL,
+   regdate       DATE         NOT NULL,
+   grade         INT(11)      NULL
+);
 
 create table movie.notice(
 	board_no integer primary key auto_increment,
@@ -50,236 +49,150 @@ create table movie.serviceBoard(
     answer boolean,
     answer_content text
 );
-
 ALTER TABLE serviceBoard ADD constraint PRIMARY KEY (board_no);
 ALTER TABLE serviceBoard MODIFY COLUMN board_no integer NOT NULL AUTO_INCREMENT;
 
 -- board
-ALTER TABLE movie.board
-   ADD CONSTRAINT
-      PRIMARY KEY (
-         board_no -- 寃뚯떆�뙋踰덊샇
-      );
-
-ALTER TABLE movie.board
-   MODIFY COLUMN board_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '寃뚯떆�뙋踰덊샇';
+ALTER TABLE movie.board ADD constraint PRIMARY KEY (board_no);
+ALTER TABLE movie.board MODIFY COLUMN board_no INT(11) NOT NULL AUTO_INCREMENT;
 
 -- movie
 CREATE TABLE movie.movie (
-   movie_no      INT(11)      NOT NULL COMMENT '�쁺�솕_no', -- �쁺�솕_no
-   movie_name    VARCHAR(50)  NOT NULL COMMENT '�쁺�솕�씠由�', -- �쁺�솕�씠由�
-   path_poster   VARCHAR(255) NULL     COMMENT '�룷�뒪�꽣', -- �룷�뒪�꽣
-   play_time     INT(11)      NULL     COMMENT '�긽�쁺�떆媛�', -- �긽�쁺�떆媛�
-   rating        INT(11)      NULL     COMMENT '�벑湲�', -- �벑湲�
-   grade         DOUBLE       NULL     COMMENT '珥앺룊�젏', -- 珥앺룊�젏
-   open_date     DATE         NULL     COMMENT '媛쒕큺�씪', -- 媛쒕큺�씪
-   close_date    DATE         NULL     COMMENT '醫낅즺�씪', -- 醫낅즺�씪
-   genre         VARCHAR(255) NULL     COMMENT '�옣瑜�', -- �옣瑜�
-   path_steelcut VARCHAR(255) NULL     COMMENT '�뒪�떥而�', -- �뒪�떥而�
-   path_video    VARCHAR(255) NULL     COMMENT '�룞�쁺�긽', -- �룞�쁺�긽
-   synopsis      TEXT         NULL     COMMENT '以꾧굅由�', -- 以꾧굅由�
-   actor         VARCHAR(255) NULL     COMMENT '諛곗슦', -- 諛곗슦
-   director      VARCHAR(255) NULL     COMMENT '媛먮룆', -- 媛먮룆
-   filePath      varchar(255) null     COMMENT '파일경로' -- 파일경로;
-)
-COMMENT 'movie';
+   movie_no      INT(11)      NOT NULL,
+   movie_name    VARCHAR(50)  NOT NULL,
+   path_poster   VARCHAR(255) NULL,
+   play_time     INT(11)      NULL,
+   rating        INT(11)      NULL,
+   grade         DOUBLE       NULL,
+   open_date     DATE         NULL,
+   close_date    DATE         NULL,
+   genre         VARCHAR(255) NULL,
+   path_steelcut VARCHAR(255) NULL,
+   path_video    VARCHAR(255) NULL,
+   synopsis      TEXT         NULL,
+   actor         VARCHAR(255) NULL,
+   director      VARCHAR(255) NULL,
+   filePath      varchar(255) null
+);
 
 -- movie
-ALTER TABLE movie.movie
-   ADD CONSTRAINT
-      PRIMARY KEY (
-         movie_no -- �쁺�솕_no
-      );
-
-ALTER TABLE movie.movie
-   MODIFY COLUMN movie_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '�쁺�솕_no';
+ALTER TABLE movie.movie ADD constraint PRIMARY KEY (movie_no);
+ALTER TABLE movie.movie MODIFY COLUMN movie_no INT(11) NOT NULL AUTO_INCREMENT;
    
 -- reservation
 CREATE TABLE movie.reservation (
-   no           INT(11)      NOT NULL COMMENT '예약번호', -- 예약번호
-   user_id      VARCHAR(50)  NOT NULL COMMENT '회원id', -- 회원id
-   timetable_no INT(11)      NOT NULL COMMENT '상영시간표_no', -- 상영시간표_no
-   price        INT(11)      NOT NULL COMMENT '가격', -- 가격
-   seat         VARCHAR(255) NOT NULL COMMENT '좌석등급', -- 좌석번호
-   progress     INT(11)      NOT NULL COMMENT '진행여부' -- 진행상태
+   no           INT(11)      NOT NULL,
+   user_id      VARCHAR(50)  NOT NULL,
+   timetable_no INT(11)      NOT NULL,
+   price        INT(11)      NOT NULL,
+   seat         VARCHAR(255) NOT NULL,
+   progress     INT(11)      NOT NULL
 )
 COMMENT 'reservation';
 
 -- reservation
-ALTER TABLE movie.reservation
-   ADD CONSTRAINT
-      PRIMARY KEY (
-         no -- �삁�빟踰덊샇
-      );
-
-ALTER TABLE movie.reservation
-   MODIFY COLUMN no INT(11) NOT NULL AUTO_INCREMENT COMMENT '�삁�빟踰덊샇';
+ALTER TABLE movie.reservation ADD CONSTRAINT PRIMARY KEY (no);
+ALTER TABLE movie.reservation MODIFY COLUMN no INT(11) NOT NULL AUTO_INCREMENT;
 
 -- theater
 CREATE TABLE movie.theater (
-   theater_no       INT(11)      NOT NULL COMMENT 'theater_no', -- theater_no
-   theater_name     VARCHAR(255) NOT NULL COMMENT '�씠由�', -- �씠由�
-   theater_floor    INT(11)      NOT NULL COMMENT '痢듭닔', -- 痢듭닔
-   theater_maxcount INT(11)      NOT NULL COMMENT '�씤�썝', -- �씤�썝
-   theater_row      VARCHAR(2)   NOT NULL COMMENT '諛곗튂', -- �뻾
-   theater_col      INT(11)      NULL     COMMENT '�뿴', -- �뿴
-   theater_type     VARCHAR(255) NOT NULL COMMENT '�긽�쁺愿�醫낅쪟', -- �긽�쁺愿�醫낅쪟
-   theater_table    TEXT         NULL     COMMENT '醫뚯꽍諛곗튂�룄' -- 醫뚯꽍諛곗튂�룄
-)
-COMMENT 'theater';
+   theater_no       INT(11)      NOT NULL,
+   theater_name     VARCHAR(255) NOT NULL,
+   theater_floor    INT(11)      NOT null,
+   theater_maxcount INT(11)      NOT null,
+   theater_row      VARCHAR(2)   NOT NULL,
+   theater_col      INT(11)      NULL,
+   theater_type     VARCHAR(255) NOT NULL,
+   theater_table    TEXT         NULL
+);
 
 -- theater
-ALTER TABLE movie.theater
-   ADD CONSTRAINT
-      PRIMARY KEY (
-         theater_no -- theater_no
-      );
-
-ALTER TABLE movie.theater
-   MODIFY COLUMN theater_no INT(11) NOT NULL AUTO_INCREMENT COMMENT 'theater_no';
+ALTER TABLE movie.theater ADD constraint PRIMARY KEY (theater_no);
+ALTER TABLE movie.theater MODIFY COLUMN theater_no INT(11) NOT NULL AUTO_INCREMENT;
 
 -- timetable
 CREATE TABLE movie.timetable (
-   table_no   INT(11) NOT NULL COMMENT '�떆媛꾪몴no', -- �떆媛꾪몴no
-   movie_no   INT(11) NOT NULL COMMENT '�쁺�솕_no', -- �쁺�솕_no
-   theater_no INT(11) NOT NULL COMMENT '�긽�쁺愿�_no', -- �긽�쁺愿�_no
-   start_time DATETIME    NOT NULL COMMENT '諛⑹쁺�떆�옉�떆媛�', -- 諛⑹쁺�떆�옉�떆媛�
-   end_time   DATETIME    NOT NULL COMMENT '諛⑹쁺醫낅즺�떆媛�' -- 諛⑹쁺醫낅즺�떆媛�
-)
-COMMENT 'timetable';
+   table_no   INT(11) NOT NULL,
+   movie_no   INT(11) NOT NULL,
+   theater_no INT(11) NOT NULL,
+   start_time DATETIME    NOT NULL,
+   end_time   DATETIME    NOT NULL
+);
 
 -- timetable
-ALTER TABLE movie.timetable
-   ADD CONSTRAINT
-      PRIMARY KEY (
-         table_no -- �떆媛꾪몴no
-      );
-
-ALTER TABLE movie.timetable
-   MODIFY COLUMN table_no INT(11) NOT NULL AUTO_INCREMENT COMMENT '�떆媛꾪몴no';
+ALTER TABLE movie.timetable ADD constraint PRIMARY KEY (table_no);
+ALTER TABLE movie.timetable MODIFY COLUMN table_no INT(11) NOT NULL AUTO_INCREMENT;
 
 -- user
 CREATE TABLE movie.user (
-   user_id   VARCHAR(50)  NOT NULL COMMENT '�쉶�썝id', -- �쉶�썝id
-   password  VARCHAR(50)  NOT NULL COMMENT '鍮꾨�踰덊샇', -- 鍮꾨�踰덊샇
-   point     INT(11)      NULL     COMMENT '�룷�씤�듃', -- �룷�씤�듃
-   email     VARCHAR(50)  NOT NULL COMMENT 'email', -- email
-   phone     VARCHAR(50)      NOT NULL COMMENT '�쟾�솕踰덊샇', -- �쟾�솕踰덊샇
-   addr      VARCHAR(255) NOT NULL COMMENT '二쇱냼', -- 二쇱냼
-   name       VARCHAR(255) NOT NULL COMMENT '�씠由�', -- �씠由�
-   gender    VARCHAR(50)  NOT NULL COMMENT '�꽦蹂�', -- �꽦蹂�
-   user_rank VARCHAR(50)  NULL     COMMENT '�쉶�썝�벑湲�' -- �쉶�썝�벑湲�
-)
-COMMENT 'user';
+   user_id   VARCHAR(50)  NOT NULL,
+   password  VARCHAR(50)  NOT NULL,
+   point     INT(11)      NULL,
+   email     VARCHAR(50)  NOT null,
+   phone     VARCHAR(50)  NOT NULL,
+   addr      VARCHAR(255) NOT NULL,
+   gender    VARCHAR(50)  NOT NULL,
+   user_rank VARCHAR(50)  NULL,
+   name      VARCHAR(255) NOT NULL
+);
 
 -- user
-ALTER TABLE movie.user
-   ADD CONSTRAINT
-      PRIMARY KEY (
-         user_id -- �쉶�썝id
-      );
+ALTER TABLE movie.user ADD constraint PRIMARY KEY (user_id);
 
 -- user_rank
 CREATE TABLE movie.user_rank (
-   name     VARCHAR(50) NOT NULL COMMENT 'name', -- name
-   discount INT(11)     NULL     COMMENT 'discount' -- discount
-)
-COMMENT 'user_rank';
+   name     VARCHAR(50) NOT NULL,
+   discount INT(11)     NULL
+);
 
 -- user_rank
-ALTER TABLE movie.user_rank
-   ADD CONSTRAINT
-      PRIMARY KEY (
-         name -- name
-      );
+ALTER TABLE movie.user_rank ADD constraint PRIMARY KEY (name);
 
 -- board
 ALTER TABLE movie.board
-   ADD CONSTRAINT FK_movie_TO_board -- FK_movie_TO_board
-      FOREIGN KEY (
-         movie_no -- �쁺�솕_no
-      )
-      REFERENCES movie.movie ( -- movie
-         movie_no -- �쁺�솕_no
-      ),
-   ADD INDEX FK_movie_TO_board (
-      movie_no -- �쁺�솕_no
-   );
+ADD CONSTRAINT FK_movie_TO_board
+FOREIGN KEY (movie_no)
+REFERENCES movie.movie (movie_no),
+ADD INDEX FK_movie_TO_board (movie_no);
 
 -- board
 ALTER TABLE movie.board
-   ADD CONSTRAINT FK_user_TO_board -- FK_user_TO_board
-      FOREIGN KEY (
-         user_id -- �쉶�썝id
-      )
-      REFERENCES movie.user ( -- user
-         user_id -- �쉶�썝id
-      ),
-   ADD INDEX FK_user_TO_board (
-      user_id -- �쉶�썝id
-   );
+ADD CONSTRAINT FK_user_TO_board
+FOREIGN KEY (user_id)
+REFERENCES movie.user (user_id),
+ADD INDEX FK_user_TO_board (user_id);
 
 -- reservation
 ALTER TABLE movie.reservation
-   ADD CONSTRAINT FK_timetable_TO_reservation -- FK_timetable_TO_reservation
-      FOREIGN KEY (
-         timetable_no -- �긽�쁺�떆媛꾪몴_no
-      )
-      REFERENCES movie.timetable ( -- timetable
-         table_no -- �떆媛꾪몴no
-      ),
-   ADD INDEX FK_timetable_TO_reservation (
-      timetable_no -- �긽�쁺�떆媛꾪몴_no
-   );
+ADD CONSTRAINT FK_timetable_TO_reservation
+FOREIGN KEY (timetable_no)
+REFERENCES movie.timetable (table_no),
+ADD INDEX FK_timetable_TO_reservation (timetable_no);
 
 -- reservation
 ALTER TABLE movie.reservation
-   ADD CONSTRAINT FK_user_TO_reservation -- FK_user_TO_reservation
-      FOREIGN KEY (
-         user_id -- �쉶�썝id
-      )
-      REFERENCES movie.user ( -- user
-         user_id -- �쉶�썝id
-      ),
-   ADD INDEX FK_user_TO_reservation (
-      user_id -- �쉶�썝id
-   );
+ADD CONSTRAINT FK_user_TO_reservation
+FOREIGN KEY (user_id)
+REFERENCES movie.user (user_id),
+ADD INDEX FK_user_TO_reservation (user_id);
 
 -- timetable
 ALTER TABLE movie.timetable
-   ADD CONSTRAINT FK_movie_TO_timetable -- FK_movie_TO_timetable
-      FOREIGN KEY (
-         movie_no -- �쁺�솕_no
-      )
-      REFERENCES movie.movie ( -- movie
-         movie_no -- �쁺�솕_no
-      ),
-   ADD INDEX FK_movie_TO_timetable (
-      movie_no -- �쁺�솕_no
-   );
+ADD CONSTRAINT FK_movie_TO_timetable
+FOREIGN KEY (movie_no)
+REFERENCES movie.movie (movie_no),
+ADD INDEX FK_movie_TO_timetable (movie_no);
 
 -- timetable
 ALTER TABLE movie.timetable
-   ADD CONSTRAINT FK_theater_TO_timetable -- FK_theater_TO_timetable
-      FOREIGN KEY (
-         theater_no -- �긽�쁺愿�_no
-      )
-      REFERENCES movie.theater ( -- theater
-         theater_no -- theater_no
-      ),
-   ADD INDEX FK_theater_TO_timetable (
-      theater_no -- �긽�쁺愿�_no
-   );
+ADD CONSTRAINT FK_theater_TO_timetable
+FOREIGN KEY (theater_no)
+REFERENCES movie.theater (theater_no),
+ADD INDEX FK_theater_TO_timetable (theater_no);
 
 -- user
 ALTER TABLE movie.user
-   ADD CONSTRAINT FK_user_rank_TO_user -- FK_user_rank_TO_user
-      FOREIGN KEY (
-         user_rank -- �쉶�썝�벑湲�
-      )
-      REFERENCES movie.user_rank ( -- user_rank
-         name -- name
-      ),
-   ADD INDEX FK_user_rank_TO_user (
-      user_rank -- �쉶�썝�벑湲�
-   );
+ADD CONSTRAINT FK_user_rank_TO_user
+FOREIGN KEY (user_rank)
+REFERENCES movie.user_rank (name),
+ADD INDEX FK_user_rank_TO_user (user_rank);

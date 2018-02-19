@@ -48,4 +48,38 @@ public class ReservationService {
 			MySqlSessionFactory.closeSession(session);
 		}
 	}
+	
+	public Reservation selectByUserAndTime(String id, int timeNo){
+		SqlSession session = null;
+		
+		try{
+			session = MySqlSessionFactory.openSession();
+			ReservationDao dao = session.getMapper(ReservationDao.class);
+			Reservation reservation = new Reservation();
+			
+			reservation.setUserId(id);
+			reservation.setTimetableNo(timeNo);
+			
+			Reservation result = dao.selectByUserAndTime(reservation);
+			
+			return result;
+		} finally {
+			MySqlSessionFactory.closeSession(session);
+		}
+	}
+	
+	public void updateReservation(Reservation reservation){
+		SqlSession session = null;
+		
+		try{
+			session = MySqlSessionFactory.openSession();
+			ReservationDao dao = session.getMapper(ReservationDao.class);
+			
+			dao.updateReservation(reservation);
+			
+			session.commit();
+		} finally {
+			MySqlSessionFactory.closeSession(session);
+		}
+	}
 }

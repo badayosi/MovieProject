@@ -27,7 +27,7 @@ public class NoticeService {
 		try{
 			list = dao.selectLimit(size);
 			for(Notice n : list){
-				System.out.println(n);
+				
 			}
 			return list;
 		}catch(Exception e){
@@ -61,7 +61,7 @@ public class NoticeService {
 		NoticeDao dao = session.getMapper(NoticeDao.class);
 		
 		try{
-			dao.updateByreadCoutn(notice);
+			dao.updateByreadCount(notice);
 			session.commit();
 			return 0;
 		}catch(Exception e){
@@ -86,11 +86,11 @@ public class NoticeService {
 		}
 		return -1;
 	}
-	public Notice selectByNo(int boardNo){
+	public List<Notice> selectByNo(int boardNo){
 		SqlSession session = null;
 		session = MySqlSessionFactory.openSession();
 		NoticeDao dao = session.getMapper(NoticeDao.class);
-		Notice notice = null;
+		List<Notice> notice = null;
 		try{
 			notice = dao.selectByNo(boardNo);
 		}catch(Exception e){
@@ -100,5 +100,155 @@ public class NoticeService {
 		}
 		
 		return notice;
+	}
+	public List<Notice> selectByOne(int boardNo){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		List<Notice> notice = null;
+		try{
+			notice = dao.selectByOne(boardNo);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		
+		return notice;
+	}
+	public List<Notice> selectByTitle(Notice notice){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		List<Notice> list = null;
+		try{
+			list = dao.selectByTitle(notice);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return list;
+	}
+	public List<Notice> selectByContent(Notice notice){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		List<Notice> list = null;
+		try{
+			list = dao.selectByContent(notice);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return list;
+	}
+	public List<Notice> selectByContentTitle(Notice notice){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		List<Notice> list = null;
+		try{
+			list = dao.selectByContentTitle(notice);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return list;
+	}
+	public int selectTosizeTitle(String search){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		
+		try{
+			return dao.selectTosizeTitle(search);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return -1;
+	}
+	
+	public int selectTosizeContent(String search){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		
+		try{
+			return dao.selectTosizeContent(search);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return -1;
+	}
+	
+	public int selectTosizeTitleContent(String search){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		
+		try{
+			return dao.selectTosizeTitleContent(search);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return -1;
+	}
+	
+	public int deleteNotice(int boardNo){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		
+		try{
+			dao.deleteNotice(boardNo);
+			session.commit();
+			return 0;
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return -1;
+	}
+	
+	public int updateNotice(Notice notice){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		
+		try{
+			dao.updateNotice(notice);
+			session.commit();
+			return 0;
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return -1;
+	}
+	
+	public Notice selectByNoOne(int boardNo){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		NoticeDao dao = session.getMapper(NoticeDao.class);
+		
+		try{
+			return dao.selectByNoOne(boardNo);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return null;
 	}
 }
