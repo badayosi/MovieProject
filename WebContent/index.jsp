@@ -199,7 +199,6 @@
 		      },
 		    }); 
 		
-		
 		 
 		 $.ajax({
 				url:"user/listMovie.do",
