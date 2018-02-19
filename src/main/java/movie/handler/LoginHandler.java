@@ -32,7 +32,9 @@ public class LoginHandler implements CommandHandler {
 			}			
 			System.out.println(user);
 			req.getSession().setAttribute("member",user);
-			return "/index.jsp";
+			
+			res.sendRedirect("/MovieProject/index.jsp");
+			return null;
 			
 		}
 		return null;
