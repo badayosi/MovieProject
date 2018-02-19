@@ -35,9 +35,45 @@ function selectSeat(target){
 		settingClear();
 		// 퀵메뉴 SEAT정보 갱신
 		applyQuickSeat();
+		// 퀵메뉴 PAY정보 갱신
+		applyPayment();
 		// 좌석배치설정 갱신_INPUT DISABLE
 		settingDisable($("#person_setting").find("select").val() - setCount());
+		// TABLE RESERVATION SET PROGRESS
+		setProgress();
 	}
+}
+
+// AJAX_선택좌석을 예약진행중으로 변경
+function setProgress(){
+	var selectSeat = null;
+	var timeTableNo = null;
+	
+	// 예외처리 : 확인된 좌석이 없을 시 AJAX호출 금지
+	if($("#select_info").find(".nav_data").eq(3).html() == ""){
+		console.log("FUNCTION : setProgress fail");
+		return;
+	}
+	// 좌석이 확인될 경우 AJAX호출 시작
+	else{
+		selectSeat = $("#select_info").find(".nav_data").eq(3).html();
+		timeTableNo = $("#timeNo").val();		
+	}		
+	
+	$.ajax({
+		url:"reservationAjax.do?seat=" + selectSeat + "&timetableNo=" + timeTableNo,
+		type:"get",
+		dataType:"json",
+		success:function(json){
+			console.log("setProgress success");
+			console.log(json);
+			
+			if(json.error != null){
+				alert(json.error);
+				location.replace(json.solution);
+			}
+		}
+	});
 }
 
 // 선택한 좌석수 찾기
@@ -227,7 +263,7 @@ function applyPayment(){
 	// QUICK 금액 반영
 	$("#nav_seat").find(".nav_data").each(function(index,obj){
 		if(index != 3)
-			$(obj).html()
+			$(obj).html(arrPay[index]);
 	});
 	
 	var total = 0;
