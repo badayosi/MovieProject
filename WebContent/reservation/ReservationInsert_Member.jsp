@@ -180,6 +180,9 @@
 	ul#movieZone .selectMovie{
 		font-weight: bold;
 	}
+	#quick-menu #nav_condition #select_info #img{
+		background-size: 157px !important;
+	}
 </style>
 <script type="text/javascript">
 	function makeCalendar(){
@@ -293,7 +296,7 @@
 				// 경고문구 제거
 				$("#warning_noMovie").css("display","none");
 				// 임시코드_ QUICK POSTER 변경
-				$("#select_info").find("#img").css("background","url('../images/bongi.jpg");
+				$("#select_info").find("#img").css("background","url('/MovieProject/upload/"+json.movie.movieNo+"/"+json.movie.pathPoster+"'");
 				// QUICK TITLE 변경
 				$("#nav_title").html(json.movie.movieName);
 			}

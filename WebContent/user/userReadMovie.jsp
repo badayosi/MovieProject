@@ -27,7 +27,12 @@
 		  arrows:true,
 		  focusOnSelect: true
 		});
-		
+		$("video").focusin(function(){
+			alert("asdf");
+		});
+		$(document).on("focusout","video",function(){
+			$("video").stop();
+		});
 	});
 </script>
 <style type="text/css">

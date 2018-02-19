@@ -59,8 +59,9 @@
 				steelcutStr += $("#steelcut").get(0).files[i].name + ",";
 			}
 			$("input[type='hidden']").val(steelcutStr);
+			var synopsis=$("textarea[name='movieSynopsis']").val().replace(/(?:\r\n|\r|\n)/g, '<br />');
+			$("textarea[name='movieSynopsis']").val(synopsis);
 			
-			alert(poster);
 			if(poster!=""||video!=""||steelcutStr!=""){
 				$("#updateForm").attr("action", formAction+"&yes=1");
 			}else{
