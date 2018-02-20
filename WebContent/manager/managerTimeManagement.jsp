@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,19 +19,50 @@
 		margin:0 auto;
 		text-align:center;
 	}
+	/* 상영관 관리 */
 	#leftContent{
-		border:1px solid black;
+		border:1px solid grey;
 		float: left;
 		width: 500px;
-		height: 500px;
+		min-height: 500px;
 	}
-	
+	#leftContent h2{
+		margin-top: 20px;
+	}
+	#theater_list{
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+	#leftContent table{
+		width: 400px;
+		margin-left:50px;
+		margin-bottom: 20px;
+	}
+	#leftContent table,#leftContent th{
+		border-top:1px solid #CDC197;
+		border-bottom:1px solid #CDC197;
+		border-collapse: collapse;
+	}
+	#leftContent table tr{
+		border-bottom:1px solid #CDC197;
+		border-collapse: collapse;
+		text-align: center;
+	}
+	#leftContent th, #leftContent td{
+		text-align: center;
+		padding: 10px;
+	}
+	.start_date td{
+		background: #EFEBDB;
+		
+	}
+	/* 상영관 추가 */
 	#rightContent{
 		border:1px solid black;
 		float: right;
 		
 		width: 500px;
-		height: 500px;
+		min-height: 500px;
 	}
 	
 </style>
@@ -239,7 +271,6 @@
 			<div id="leftContent">
 				<h2>상영관 관리</h2>
 				<div id="select">
-				 
 					<select id="theater_list">
 					
 					</select>
