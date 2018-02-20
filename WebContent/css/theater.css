@@ -3,10 +3,10 @@
 		font-family: "나눔 고딕", 'Nanum Gothic', 'ng';
 		padding: 0;
 	}
-	form{
+	/* form{
 		width: 400px;
 		border: 1px solid gray;
-	}
+	} */
 	label{
 		width: 100px;
 		float: left;
@@ -18,7 +18,7 @@
 	.error, .error2, .error3, .error4, .error5, .error6{
 		color: red;
 		padding: 0;
-		margin: 0 0 0 90px;
+		margin: 0 0 20px 220px;
 		font-size: 12px;
 		display: none;
 	} 
