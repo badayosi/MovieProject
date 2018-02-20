@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" type="text/css" href="../css/managerHeader.css?ver=2">
+<link rel="stylesheet" type="text/css" href="../css/managerHeader.css?ver=4">
+
+
 <style>
 	@import url("/MovieProject/css/common.css");
 	
@@ -41,6 +43,7 @@
 			<li><a href="/MovieProject/manager/managerListMovie.do">영화관리</a></li>
 			<li><a href="/MovieProject/reservation/reservationGuide.do">예매관리</a></li>
 			<li><a href="/MovieProject/theater/list.do">상영관 관리</a></li>
+			<li><a href="/MovieProject/manager/managerTimeManagement.jsp">상영시간표 관리</a></li>
 			<li><a href="/MovieProject/serviceBoard/ManagerServiceBoard.jsp">고객센터</a></li>
 			<li><a href="/MovieProject/login/userList.do">회원관리</a></li>
 		</ul>

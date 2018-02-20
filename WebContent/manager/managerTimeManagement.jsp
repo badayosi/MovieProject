@@ -8,15 +8,31 @@
 <style type="text/css">	
 	@import url("/MovieProject/css/common.css");
 	#container{
-		width:1000px;
+		width:1024px;
 		margin:0 auto;
 		text-align: center;
+		overflow: hidden;
 	}
 	#container #theater_schedule{
 		width:800px;
 		margin:0 auto;
 		text-align:center;
 	}
+	#leftContent{
+		border:1px solid black;
+		float: left;
+		width: 500px;
+		height: 500px;
+	}
+	
+	#rightContent{
+		border:1px solid black;
+		float: right;
+		
+		width: 500px;
+		height: 500px;
+	}
+	
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
@@ -219,15 +235,24 @@
 <body> 
 	<jsp:include page="../include/adminHeader.jsp"></jsp:include>
 		<div id="container">
-			<div id="select">
-			 
-				<select id="theater_list">
-				
-				</select>
-				<a id="go" href="managerTheaterSchedule.jsp?"><input type="button" name="add_list" value="상영 스케줄 추가"></a>
+			
+			<div id="leftContent">
+				<h2>상영관 관리</h2>
+				<div id="select">
+				 
+					<select id="theater_list">
+					
+					</select>
+					<a id="go" href="managerTheaterSchedule.jsp?"><input type="button" name="add_list" value="상영 스케줄 추가"></a>
+				</div>
+				<div id="theater_schedule">
+				 
+				</div>
 			</div>
-			<div id="theater_schedule">
-			 
+			
+			<div id="rightContent">
+				<h2>상영관 추가</h2>
+				
 			</div>
 		</div>
 	<jsp:include page="../include/footer.jsp"></jsp:include>
