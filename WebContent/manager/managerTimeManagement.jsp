@@ -249,7 +249,7 @@
 				 
 				</div>
 			</div>
-			
+			 
 			<div id="rightContent">
 				<h2>상영관 추가</h2>
 				
