@@ -8,7 +8,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.ibatis.type.IntegerTypeHandler;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import movie.dto.Movie;
@@ -68,6 +67,28 @@ public class ManagerAjaxHandler implements CommandHandler {
 			// DELETE
 			if(req.getParameter("type").equals("delete")){
 				if(req.getParameter("target").equals("timetable") && req.getParameter("scope").equals("no")){
+					String no = req.getParameter("timetableno");
+					
+					ReservationService reservationService = ReservationService.getInstance();
+					List<Reservation> resultReservation = reservationService.selectByTimeTable(Integer.valueOf(no));
+					System.out.println(resultReservation.size());
+					HashMap<String, String> result = new HashMap<String, String>();
+					if(resultReservation.size() == 0){
+						TimeTableService timeTableService = TimeTableService.getInstance();
+						timeTableService.deleteByNo(Integer.valueOf(no));
+						result.put("success", "정상적으로 삭제되었습니다.");
+					}
+					else{
+						result.put("error", "존재하지 않거나 예약자가 존재하여 삭제할 수 없습니다.");
+					}
+					String json = om.writeValueAsString(result);
+					pwJson.print(json);
+				}
+			}
+			
+			// INSERT
+			if(req.getParameter("type").equals("insert")){
+				if(req.getParameter("target").equals("timetable")){
 					String no = req.getParameter("timetableno");
 					
 					ReservationService reservationService = ReservationService.getInstance();

@@ -417,7 +417,7 @@
 
 	$(function(){
 		makeCalendar();
-		loadAllMovie();
+		loadAllMovie();		
 		
 		$("#integer td").on("click",function(){
 			$("#integer td p").removeClass("today");
