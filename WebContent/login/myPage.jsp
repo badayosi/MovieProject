@@ -124,6 +124,10 @@
 				$("#checkpwWrap").css("display","none");
 				$("#password").val("");
 				$("#selectMenu").load("myReservation.jsp");
+			}else if($(this).text()=="무비 히스토리"){
+				$("#checkpwWrap").css("display","none");
+				$("#password").val("");
+				$("#selectMenu").load("myMovieHistory.jsp");
 			}
 		});
 		$(document).on("click",".table_title",function(){
