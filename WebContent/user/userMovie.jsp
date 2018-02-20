@@ -49,7 +49,7 @@
 		
 	}
 	#listArea table tr td{
-		
+		 
 	}
 	#listArea table tr td .listDiv{
 		text-align: center;
