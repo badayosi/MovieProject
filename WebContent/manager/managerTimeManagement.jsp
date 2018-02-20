@@ -7,6 +7,16 @@
 <title>Insert title here</title>
 <style type="text/css">	
 	@import url("/MovieProject/css/common.css");
+	#container{
+		width:1000px;
+		margin:0 auto;
+		text-align: center;
+	}
+	#container #theater_schedule{
+		width:800px;
+		margin:0 auto;
+		text-align:center;
+	}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
@@ -191,7 +201,17 @@
 		
 		// 상영관 선택 시
 		$("#theater_list").on("change",function(){
+			$("#theater_schedule").empty();
 			loadTheaterById($("#theater_list").val());
+			
+		});
+		$(document).on("click", "#go",function(){
+			if($("#theater_list").val()=="상영관을 선택하세요"){
+				alert("상영관을 선택해주세요.");
+				return false;
+			}else{
+				$("#go").attr("href","managerTheaterSchedule.jsp?no="+$(this).val());
+			}
 		});
 	});
 </script>
@@ -199,10 +219,13 @@
 <body> 
 	<jsp:include page="../include/adminHeader.jsp"></jsp:include>
 		<div id="container">
-			<select id="theater_list">
+			<div id="select">
 			
-			</select>
-			<input type="button" name="add_list" value="추가" onclick="javascript:">
+				<select id="theater_list">
+				
+				</select>
+				<a id="go" href="managerTheaterSchedule.jsp?"><input type="button" name="add_list" value="상영 스케줄 추가"></a>
+			</div>
 			<div id="theater_schedule">
 			 
 			</div>
