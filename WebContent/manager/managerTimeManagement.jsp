@@ -204,7 +204,7 @@
 			</select>
 			<input type="button" name="add_list" value="추가" onclick="javascript:">
 			<div id="theater_schedule">
-			
+			 
 			</div>
 		</div>
 	<jsp:include page="../include/footer.jsp"></jsp:include>
