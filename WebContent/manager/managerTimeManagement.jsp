@@ -64,7 +64,9 @@
 		width: 500px;
 		min-height: 500px;
 	}
-	
+	#movieListByDate{
+		list-style: none;
+	}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
@@ -83,6 +85,7 @@
 					makeTag += "<option value='" + json[i].theaterNo + "'>" + json[i].theaterName + "</option>";
 				}
 				$("#theater_list").append(makeTag);
+				$("#theater_add_list").append(makeTag);
 			}
 		});
 	}
@@ -190,26 +193,7 @@
 			}
 		});
 	}
-	
-	function addTimeTable(){
-		$.ajax({
-			url:"managerAjax.do?type=insert&target=timetable",
-			type:"get",
-			dataType:"json",
-			success:function(json){
-				console.log(json);
-				if(json.success != null){
-					$(".time_no").each(function(index,obj){
-						if($(this).attr("value") == tableNo)
-							$(this).parent().parent().remove();
-					});
-					alert(json.success);
-				}
-				else
-					alert(json.error);
-			}
-		});
-	}
+
 	
 	function formatChange(date, type){
 		var newDate = new Date(date);
@@ -244,6 +228,28 @@
 		return "Type Miss Error";
 	}
 	
+	function selectMovieByDate(choicedate){
+		$.ajax({
+			url:"/MovieProject/user/listMovie.do",
+			type:"get",
+			dataType:"json",
+			success:function(json){
+				//console.log(json);
+				var date=new Date(choicedate);
+				var selDate=date.getTime();
+				var str="";
+				console.log(json);
+				$(json).each(function(i,obj){
+					if(obj.openDate<=selDate && obj.closeDate>=selDate){
+						str+="<li><a class='movieName' href='#'><b>"+obj.movieName+" </b></a><span class='mPlaytime'>("+obj.playTime+"분)</span></li>"; 
+					}
+				})
+				$("#movieListByDate").append(str);
+			}
+		}) 
+		
+	}
+	
 	$(function(){
 		loadTheater();
 		
@@ -251,15 +257,17 @@
 		$("#theater_list").on("change",function(){
 			$("#theater_schedule").empty();
 			loadTheaterById($("#theater_list").val());
-			
 		});
-		$(document).on("click", "#go",function(){
-			if($("#theater_list").val()=="상영관을 선택하세요"){
-				alert("상영관을 선택해주세요.");
-				return false;
-			}else{
-				$("#go").attr("href","managerTheaterSchedule.jsp?no="+$(this).val());
-			}
+		
+		$("#selectDate").on("change",function(){
+			$("#movieListByDate").empty();
+			var selDate=$("#selectDate").val();
+			selectMovieByDate(selDate);
+		});
+		
+		$(document).on("click",".movieName",function(){
+			alert($(this).text());
+			
 		});
 	});
 </script>
@@ -274,7 +282,6 @@
 					<select id="theater_list">
 					
 					</select>
-					<a id="go" href="managerTheaterSchedule.jsp?"><input type="button" name="add_list" value="상영 스케줄 추가"></a>
 				</div>
 				<div id="theater_schedule">
 				 
@@ -283,7 +290,17 @@
 			 
 			<div id="rightContent">
 				<h2>상영관 추가</h2>
-				
+				<div id="addInfo">
+					<select id="theater_add_list">
+					
+					</select>
+					<input id="selectDate" type="date">
+				</div>
+				<div id="movieListDiv">
+					<ul id="movieListByDate">
+					
+					</ul>
+				</div>
 			</div>
 		</div>
 	<jsp:include page="../include/footer.jsp"></jsp:include>
