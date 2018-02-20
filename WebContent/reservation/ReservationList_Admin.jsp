@@ -11,12 +11,15 @@
 <link rel="stylesheet" type="text/css" href="/MovieProject/css/manager.css"> 
 <style>
 	@import url("/MovieProject/css/common.css");
-	/* div#container{
+	 #container{
 		width:1024px;
 		min-height:600px;
 		margin:0 auto;
-		background:#F9F6EC;
+		background:#F9F6EC; 
+		
 	}
+	
+	/*
 	table, tr, th, td{
 		border:1px solid black;
 		border-collapse:collapse;

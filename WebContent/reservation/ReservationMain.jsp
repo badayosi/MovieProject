@@ -17,7 +17,7 @@
 		list-style: none;
 		display: inline-block;
 		float: left;
-		padding:10px;
+		padding:10px 20px;
 		text-align:center;
 		border:1px solid white;
 		background: #CDC197;
@@ -27,6 +27,9 @@
 		font-size: 15px;
 		font-weight: bold;
 		color: black;
+	}
+	form{
+		display: inline-block;
 	}
 	
 </style>

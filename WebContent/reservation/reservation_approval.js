@@ -26,7 +26,7 @@ function confirmReserve(){
 	var str = "";
 	
 	str += "최종결제단계 입니다.\n";
-	str += "확인을 선택 시 아래 항목으로 예약 및 결제됩니다.\n"
+	str += "확인 선택 시 아래 항목으로 예약 및 결제됩니다.\n"
 	str += "결제정보를 다시 한번 확인해주세요.\n";
 	str += "\n";
 	str += "영화명 : " + $("#nav_title").html() + "\n";
@@ -34,8 +34,10 @@ function confirmReserve(){
 	str += "상영시간 : " + $("#select_info").find(".nav_data").eq(1).html() + "\n";
 	str += "선택좌석 : " + $("#select_info").find(".nav_data").eq(3).html() + "\n";
 	str += "결제금액 : " + $("#total_payment").find(".nav_data").eq(0).html() + "원" + "\n";
-	if(confirm(str))
+	if(confirm(str)){
+		fixProgress();
 		alert("예약이 완료되었습니다.");
+	}
 	else
 		alert("예약이 취소되었습니다.");
 }

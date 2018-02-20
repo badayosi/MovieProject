@@ -44,7 +44,7 @@ function selectSeat(target){
 	}
 }
 
-// AJAX_선택좌석을 예약진행중으로 변경
+// AJAX_선택좌석을 예약진행중으로 변경(PROGRESS:1)
 function setProgress(){
 	var selectSeat = null;
 	var timeTableNo = null;
@@ -67,6 +67,46 @@ function setProgress(){
 		success:function(json){
 			console.log("setProgress success");
 			console.log(json);
+			
+			if(json.error != null){
+				alert(json.error);
+				location.replace(json.solution);
+			}
+		}
+	});
+}
+
+// AJAX_현재 진행된 예약내용을 FIX(PROGRESS:2)
+function fixProgress(){
+	var timeTableNo = $("#timeNo").val();
+	$.ajax({
+		url:"reservationAjax.do?circultKey=fix&timetableNo=" + timeTableNo,
+		type:"get",
+		dataType:"json",
+		success:function(json){
+			console.log("fixProgress success");
+			console.log(json);
+			
+			if(json.error != null){
+				alert(json.error);
+				location.replace(json.solution);
+			}
+		}
+	});
+}
+
+//AJAX_현재 진행된 예약내용을 CANCLE(PROGRESS:0)
+function cancleProgress(){
+	var timeTableNo = $("#timeNo").val();
+	$.ajax({
+		url:"reservationAjax.do?circultKey=cancle&timetableNo=" + timeTableNo,
+		type:"get",
+		dataType:"json",
+		success:function(json){
+			console.log("cancleProgress success");
+			console.log(json);
+			
+			$("#person_setting").find("select").val(0);
 			
 			if(json.error != null){
 				alert(json.error);

@@ -33,6 +33,15 @@ insert into movie(movie_no, movie_name, rating, open_date, close_date) values(nu
 
 /* TIMETABLE DUMP DATA */
 insert into timetable values(null, 1, 1, '2018/02/05 13:20:00', '2018/02/05 14:20:00');
+insert into timetable values(null, 1, 1, '2018/02/05 15:20:00', '2018/02/05 16:20:00');
+insert into timetable values(null, 1, 1, '2018/02/05 17:20:00', '2018/02/05 18:20:00');
+insert into timetable values(null, 1, 1, '2018/02/05 19:20:00', '2018/02/05 20:20:00');
+insert into timetable values(null, 1, 1, '2018/02/05 21:20:00', '2018/02/05 22:20:00');
+insert into timetable values(null, 1, 1, '2018/02/05 23:20:00', '2018/02/06 00:20:00');
+insert into timetable values(null, 1, 1, '2018/02/06 13:20:00', '2018/02/06 14:20:00');
+insert into timetable values(null, 1, 1, '2018/02/06 15:20:00', '2018/02/06 14:20:00');
+insert into timetable values(null, 1, 1, '2018/02/06 17:20:00', '2018/02/06 14:20:00');
+insert into timetable values(null, 1, 1, '2018/02/06 19:20:00', '2018/02/06 14:20:00');
 insert into timetable values(null, 2, 2, '2018/02/05 13:20:00', '2018/02/05 14:20:00');
 insert into timetable values(null, 3, 3, '2018/02/05 13:20:00', '2018/02/05 14:20:00');
 insert into timetable values(null, 4, 4, '2018/02/05 13:20:00', '2018/02/05 14:20:00');

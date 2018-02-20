@@ -78,6 +78,25 @@ public class UserService{
 		return user;
 	}
 	
+	public User findId(User u) {
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		UserDao dao = session.getMapper(UserDao.class);
+		User user = null;
+		try{
+			user = dao.findId(u);
+			if(user == null){
+				return null;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return user;
+	}
+	
 	public int insertUser(User user){
 		SqlSession session = null;
 		session = MySqlSessionFactory.openSession();

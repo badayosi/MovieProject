@@ -20,13 +20,16 @@
 #leftWrap{
 	float: left;
 	width:60%;
+	background: #fff;
+	
 }
 #loginForm {
 	width: 100%;
-	height: 200px;
+	padding-top:50px;
+	height: 250px;
 	position: relative;
-	background: #fff;
-	
+	top: 65px;
+	left: 25px;
 }
 
 #loginForm p {
@@ -51,7 +54,8 @@
 	width: 125px;
 	height: 110px;
 	position: absolute;
-	top: 40px;
+	top: 20px;
+	
 	right: 100px;
 }
 
@@ -70,8 +74,9 @@
 }
 
 #searchWrap {
-	top: 120px;
-	left: 180px;
+	position:relative;
+	top: 110px;
+	left: 140px;
 }
 
 #searchWrap a {
@@ -91,7 +96,6 @@
 }
 
 #memberWrap {
-	
 	width: 100%;
 	height:100px;
 	background: #fff;
@@ -131,6 +135,7 @@
 		<div id="loginWrap">
 			<h2>로그인</h2>
 			<div id="leftWrap">
+				<div id="from2">
 				<form action="login.do" method="post" id="loginForm">
 					<p id="p1">
 						<label>아이디</label> <input type="text" name="id">
@@ -140,7 +145,8 @@
 					</p>
 					<input type="submit" id="loginBtn">
 					<p id="searchWrap">
-						<a href="#">아이디/비밀번호 찾기</a>
+						<a href="findIdPw.jsp">아이디/비밀번호 찾기 | </a>
+						<a href="#">회원가입</a>
 					</p>
 					<c:if test="${error !=null}">
 						<script type="text/javascript">
@@ -148,9 +154,8 @@
 						</script>
 					</c:if>
 				</form>
-				<div id="memberWrap">
-					<a href="#"><h1>회원가입</h1></a>
 				</div>
+				
 			</div>
 			<div id="imgWrap">
 				<img src="../images/loginImg2.PNG">

@@ -186,6 +186,7 @@ function boardListView(boardNo){
 	$("#userStarBoardView").empty();
 	$("#countBtn").empty();
 	var movieNo=$("#movieNo").val();
+	
 	$.ajax({
 		url:"starboard.do",
 		type:"get",
@@ -247,12 +248,25 @@ function boardListView(boardNo){
 					var pageNo = "<span class='page_number'>"+(boardSize+1)+"</span>"
 					$("#countBtn").append(pageNo);
 				}
+				addGrade();
 			}else{
 				$("#userStarBoardView").text("현재 등록된 평점이 없습니다.");
 			}
 		}
 	})
 }
+	function addGrade(){
+		var grade=0;
+		
+		$(".user_star_board_socre").each(function(i,obj){
+			grade+=Number($(obj).text());
+		})
+		grade=grade/$(".user_star_board_socre").size();
+		$(".info1").append(grade+"점");
+		//$(".info1").append(grade+"점");
+		
+	}
+	
 </script>
 
 	<div id="starBorad">
