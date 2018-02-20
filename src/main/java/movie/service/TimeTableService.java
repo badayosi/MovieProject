@@ -49,6 +49,21 @@ public class TimeTableService {
 		}		
 	}
 	
+	public Timetable selectByNo(int no){
+		SqlSession session = null;
+		
+		try{
+			session = MySqlSessionFactory.openSession();
+			TimetableDao dao = session.getMapper(TimetableDao.class);
+			
+			Timetable result = dao.selectByNo(no);
+			
+			return result;
+		} finally {
+			MySqlSessionFactory.closeSession(session);
+		}		
+	}
+	
 	public void deleteByNo(int no){
 		SqlSession session = null;
 		

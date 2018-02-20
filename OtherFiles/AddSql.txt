@@ -13,7 +13,7 @@ where reservation.user_id = user.user_id
 create view reservation_progress as
 select table_no, start_time, theater_name, theater_type, theater_maxcount
 from timetable, theater
-where timetable.table_no = theater.theater_no;
+where timetable.theater_no = theater.theater_no;
 
 /* MOVIEHISTORY VIEW*/
 create view moviehistory as

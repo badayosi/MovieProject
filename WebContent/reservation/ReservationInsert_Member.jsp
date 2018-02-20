@@ -8,17 +8,19 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="reservation_common.css">
-<link rel="stylesheet" type="text/css" href="theater_progress.css">
+<link rel="stylesheet" type="text/css" href="theater_progress.css?var=1">
 <link rel="stylesheet" type="text/css" href="theater_seat.css">
-<link rel="stylesheet" type="text/css" href="theater_menu.css?var=4">
-<link rel="stylesheet" type="text/css" href="theater_quick.css?var=2">
+<link rel="stylesheet" type="text/css" href="theater_menu.css?var=2">
+<link rel="stylesheet" type="text/css" href="theater_quick.css?var=4">
 <link rel="stylesheet" type="text/css" href="theater_list.css">
 <!-- API JS -->
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="../js/jquery-animate-css-rotate-scale.js"></script>
 <!-- CUSTOM JS -->
-<script type="text/javascript" src="reservation_seat.js?var=5"></script>
-<script type="text/javascript" src="reservation_approval.js?var=5"></script>
+<script type="text/javascript" src="reservation_seat.js?var=1"></script>
+<script type="text/javascript" src="reservation_approval.js?var=1"></script>
+<script type="text/javascript" src="reservation_person_setting.js?var=1"></script>
+<script type="text/javascript" src="reservation_seat_setting.js?var=1"></script>
 <style>
 	@import url("/MovieProject/css/common.css");
 	/* 가로형 달력 CSS */
@@ -263,7 +265,14 @@
 		});
 	}
 	
-	function selectMovie(no){		
+	function selectMovie(no){
+		// USER 정보가 없으면 로그인페이지로 리턴
+		if(!checkSession()){
+			alert("USER 정보를 확인할 수 없습니다.\n로그인 후 이용해주세요.");
+			location.replace("/MovieProject/login/Login.jsp");
+			return;
+		}
+		
 		$.ajax({
 			url:"reservationAjax.do?no=" + no,
 			type:"get",
@@ -339,39 +348,43 @@
 			url:"reservationAjax.do?timeNo=" + timeNo + "&search=true",
 			type:"get",
 			dataType:"json",
-			success:function(json){					
-				// 예약석 배열화
-				var arrResult = new Array();
-				var targetIdx = 0;
-				var temp = json.resultSeat.split("/");
-				for(var i=0 ; i<temp.length ; i++){
-					arrResult[targetIdx] = temp[i];
-					targetIdx++;
-				}
-				
-				// 예약석 CSS 적용
-				$(".seatTable").find("span").each(function(index, obj){
-					for(var idx=0 ; idx<arrResult.length ; idx++){
-						if(arrResult[idx] == $(this).html()){
-							$(this).removeClass("seat");
-							$(this).addClass("reserveSeat");
-						}
+			success:function(json){
+				console.log(json);
+				if(json.resultSeat != null){
+					// 예약석 배열화
+					var arrResult = new Array();
+					var targetIdx = 0;
+					var temp = json.resultSeat.split("/");
+					for(var i=0 ; i<temp.length ; i++){
+						arrResult[targetIdx] = temp[i];
+						targetIdx++;
 					}
-				});
-				
-				// USER 선택좌석이 존재할 경우 SELECT SEAT 적용
-				if(json.targetSeat != null){
-					var tempSeat = json.targetSeat.split("/");
-					$(".seatTable").find(".reserveSeat").each(function(index, obj){
-						for(var idx=0 ; idx<tempSeat.length ; idx++){
-							if($(this).html() == tempSeat[idx]){
-								$(this).removeClass("reserveSeat");
-								$(this).addClass("selectSeat");
+					
+					// 예약석 CSS 적용
+					$(".seatTable").find("span").each(function(index, obj){
+						for(var idx=0 ; idx<arrResult.length ; idx++){
+							if(arrResult[idx] == $(this).html()){
+								$(this).removeClass("seat");
+								$(this).addClass("reserveSeat");
 							}
 						}
 					});
-					$("#nav_data_seat").html(json.targetSeat);
-					$("#person_setting").find("select").val(tempSeat.length);
+					
+					// USER 선택좌석이 존재할 경우 SELECT SEAT 적용
+					if(json.targetSeat != null){
+						var tempSeat = json.targetSeat.split("/");
+						$(".seatTable").find(".reserveSeat").each(function(index, obj){
+							for(var idx=0 ; idx<tempSeat.length ; idx++){
+								if($(this).html() == tempSeat[idx]){
+									$(this).removeClass("reserveSeat");
+									$(this).addClass("selectSeat");
+								}
+							}
+						});
+						$("#nav_data_seat").html(json.targetSeat);
+						$("#total_person").html(tempSeat.length);
+						$("#person_setting select")
+					}
 				}
 			}
 		});
@@ -406,13 +419,13 @@
 	// 유저세션 확인
 	function checkSession(){
 		<%
-			String id = "";
+			boolean checker;
 			if(session.getAttribute("member") != null)
-				id = String.valueOf(session.getAttribute("member"));
+				checker = true;
 			else
-				id = "Session 확인불가";
+				checker = false;
 		%>
-		alert("<%=id%>");
+		return <%=checker%>;
 	}
 
 	$(function(){
@@ -437,21 +450,20 @@
 		
 		// 상영관예약_좌석클릭 시
 		$(document).on("click",".seat",function(){
-			if($("#person_setting").find("select").val() == 0)
-				alert("총 인원을 설정해주세요.");
-			else{
-				
-				selectSeat($(this));
-			}
+			selectSeat($(this));
 		})
 		// 상영관예약_예약좌석클릭 시
 		$(document).on("click",".selectSeat",function(){
 			selectSeat($(this));
 		})
-		// 상영관예약_인원클릭 시
+		// 상영관예약_인원타입설정 시
 		$(document).on("change","#person_setting select",function(){
-			settingChange();
+			changePersonSetting();
 		})
+		// 상영관예약_초기화버튼 클릭 시
+		$(document).on("click","#select_clear",function(){
+			alert("초기화 클릭");
+		});
 		// 상영관예약_좌석배치설정 시
 		$(document).on("click","#seat_setting input",function(){
 			settingChoice($(this).val());
@@ -460,22 +472,15 @@
 		$(document).on("mouseover",".seat",function(){
 			if(!$(this).hasClass("selectSeat")
 					&& !$(this).hasClass("reserveSeat")
-					&& $("#person_setting").find("select").val()-setCount()!=0)
+					&& $(".selectSeat").length < 9)
 				$(this).toggleClass("overSeat");
 		});
 		// 상영관예약_마우스아웃
 		$(document).on("mouseout",".seat",function(){
 			if(!$(this).hasClass("selectSeat")
 					&& !$(this).hasClass("reserveSeat")
-					&& $("#person_setting").find("select").val()-setCount()!=0)
+					&& $(".selectSeat").length < 9)
 				$(this).toggleClass("overSeat");
-		});
-		// 상영관예약_인원타입설정 시
-		$(document).on("change","#person_setting input",function(){
-			// 인원초과 예외처리
-			if(checkPersonSetting()){
-				applyPayment();	
-			}
 		});
 		
 		// 퀵메뉴_OPEN
@@ -552,7 +557,7 @@
 			<div id="theater_seat">
 				<div id="theater_menu">
 					<div id="person_setting">
-						<label>총 인원</label>
+						<label>성인</label>
 						<select>
 							<option>0</option>
 							<option>1</option>
@@ -564,14 +569,45 @@
 							<option>7</option>
 							<option>8</option>
 						</select>
-						<label>성인</label>
-						<input type="number" value="0" min="0" max="8">
 						<label>청소년</label>
-						<input type="number" value="0" min="0" max="8">
+						<select>
+							<option>0</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+						</select>
 						<label>시니어</label>
-						<input type="number" value="0" min="0" max="8">
+						<select>
+							<option>0</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+						</select>
 						<label>장애인</label>
-						<input type="number" value="0" min="0" max="8">
+						<select>
+							<option>0</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+							<option>7</option>
+							<option>8</option>
+						</select>
+						<label id="label_total_person">현재 선택좌석</label>
+						<p id="total_person">0</p>
+						<button id="select_clear">선택 초기화</button>
 					</div>
 					<div id="seat_setting">
 						<label>좌석 배치설정</label>
@@ -585,7 +621,7 @@
 						<label>■■■■</label>
 					</div>
 					<div id="warning_info">
-						<p>청소년/시니어/장애인은 연령설정을 해주시기 바랍니다. 인원세부설정을 하지않을 경우 성인요금으로 계산됩니다.</p>
+						<p>최대 8자리까지 선택가능합니다. / 인원세부설정을 하지않을 경우 성인요금으로 자동계산됩니다.</p>
 						<p>만 15세 미만의 고객님(영,유아 포함)은 반드시 부모님 또는 성인 보호자의 동반하에 관람이 가능합니다.</p>
 					</div>
 					<div id="draw_seat">

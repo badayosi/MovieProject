@@ -62,12 +62,15 @@ public class ReservationAjaxHandler implements CommandHandler {
 				HashMap<String, Object> jsonResult = new HashMap<>();
 				
 				String selectMovie = req.getParameter("no");
+				System.out.println(selectMovie);
 				timeTableService = TimeTableService.getInstance();
 				Movie movieResult = movieService.selectById(Integer.valueOf(selectMovie));
+				System.out.println(movieResult);
 				// POSTER DATA LOAD
 				jsonResult.put("movie", movieResult);
 				// TIMETABLE DATA LOAD
 				List<Timetable> timetableResult = timeTableService.selectByMovie(movieResult.getMovieNo());
+				System.out.println(timetableResult);
 				progressService = ReservationProgressService.getInstance();
 				reservationService = ReservationService.getInstance();
 				ReservationProgress progressResult = null;
@@ -88,8 +91,10 @@ public class ReservationAjaxHandler implements CommandHandler {
 			if(req.getParameter("timeNo") != null && req.getParameter("search") == null){
 				System.out.println("SELECT MOVIE & SELECT TIME = RESULT THEATER");
 				int loadTheater = Integer.valueOf(req.getParameter("timeNo"));
+				timeTableService = TimeTableService.getInstance();
+				Timetable resultTime = timeTableService.selectByNo(loadTheater);
 				theaterService = TheaterService.getInstance();
-				Theater result = theaterService.selectById(loadTheater);
+				Theater result = theaterService.selectById(resultTime.getTheaterNo());
 				
 				String jsonTime = om.writeValueAsString(result); //json 형태의 String으로 변환
 				pwJson.print(jsonTime);

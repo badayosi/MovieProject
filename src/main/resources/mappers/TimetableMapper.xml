@@ -19,6 +19,9 @@
 	<select id="selectByTheater" parameterType="int" resultMap="TimetableResult">
 		select * from Timetable where theater_No=#{no}
 	</select>
+	<select id="selectByNo" parameterType="int" resultMap="TimetableResult">
+		select * from Timetable where table_No=#{no}
+	</select>
 	<delete id="deleteByNo" parameterType="int">
 		delete from Timetable where table_No=#{no}
 	</delete>
