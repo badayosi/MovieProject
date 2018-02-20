@@ -13,7 +13,7 @@
 }
 #container .list{
 	width:490px;
-	border:1px solid blue;
+	border:1px solid #ccc;
 	margin-bottom:20px;
 	margin-left:10px;
 	display:inline-block;
@@ -31,11 +31,15 @@
  #container .list .mInfoTable td:nth-child(even){
  	padding-left:10px;
  }
- h4{
- 	margin:10px;
+ td{
+ 	padding-bottom:10px;
  }
- #mInfoTable tr td h2{
+ h4{
+ 	margin:0;
+ }
+ td h2{
  	text-align: center;
+ 	padding-bottom:20px;
  }
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
