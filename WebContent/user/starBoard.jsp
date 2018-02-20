@@ -263,8 +263,6 @@ function boardListView(boardNo){
 		})
 		grade=grade/$(".user_star_board_socre").size();
 		$("#grade").text(grade.toFixed(1)+"점");
-		//$(".info1").append(grade+"점");
-		
 	}
 	
 </script>

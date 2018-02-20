@@ -6,22 +6,8 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
-import movie.dao.AddressDao;
-import movie.dao.BoardDao;
 import movie.dao.MovieDao;
-import movie.dao.ReservationDao;
-import movie.dao.TheaterDao;
-import movie.dao.TimetableDao;
-import movie.dao.UserDao;
-import movie.dao.UserRankDao;
-import movie.dto.Address;
-import movie.dto.Board;
 import movie.dto.Movie;
-import movie.dto.Reservation;
-import movie.dto.Theater;
-import movie.dto.Timetable;
-import movie.dto.User;
-import movie.dto.UserRank;
 import mvc.util.MySqlSessionFactory;
 
 public class TestMovie {
