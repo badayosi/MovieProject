@@ -119,10 +119,20 @@
 		font-weight: bold;
 	}
 	
+	#movieZone li{
+		padding: 5px;
+	}
 </style>
 <script type="text/javascript">
 	$(function(){
 		loadAllMovie();
+		
+		$(document).on("mouseover","#movieZone li",function(){
+			$(this).css("border","3px solid #CDC197");
+		})
+		$(document).on("mouseout","#movieZone li",function(){
+			$(this).css("border","none");
+		})
 	})
 	function loadAllMovie(){
 	$.ajax({
@@ -199,7 +209,7 @@
 			</tr>
 			<tr>
   				<td class="officeBottom">
-					<a href="#">예매하기</a>
+					<a href="/MovieProject/reservation/ReservationInsert_Member.jsp">예매하기</a>
 				</td>
 			</tr>
 		</table>

@@ -34,6 +34,9 @@
 		font-weight: bold;
 		color: white;
 	}
+	#addr{
+		width: 230px;
+	}
 </style>
 <title>Insert title here</title>
 <script
@@ -66,7 +69,7 @@
 				<th>포인트</th>
 				<th>이메일</th>
 				<th>폰번호</th>
-				<th>주소</th>
+				<th id="addr">주소</th>
 				<th>성별</th>
 				<th>등급</th>
 				<th>수정</th>
