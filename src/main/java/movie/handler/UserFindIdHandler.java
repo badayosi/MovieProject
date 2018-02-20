@@ -21,8 +21,11 @@ public class UserFindIdHandler implements CommandHandler {
 		
 		UserService service = UserService.getInstance();
 		User findUser = service.findId(user);
-		
-		req.setAttribute("id", findUser.getUserId());
+		if(findUser == null){
+			req.setAttribute("id", "일치하는 아이디가 없습니다.");
+		}else{
+			req.setAttribute("id", "귀하의 아이디는" + findUser.getUserId()+"입니다");
+		}		
 		
 		return "findIdPw.jsp";
 	}

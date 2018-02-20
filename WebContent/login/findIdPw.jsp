@@ -6,36 +6,41 @@
 <head>
 <meta charset="UTF-8">
 
-<title>DGV 환영합니다</title>
+<title>아이디/비밀번호 찾기 입니다</title>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("#findIdForm").submit(function() {
 		
-		if($("input[name='name']").val() == ""){
-			$("input[name='name']").focus();
+		if($("#findIdForm input[name='name']").val() == ""){
+			$("#findIdForm input[name='name']").focus();
 			return false;
 		}
-		if($("input[name='email']").val() == ""){
-			$("input[name='email']").focus();
+		if($("#findIdForm input[name='email']").val() == ""){
+			$("#findIdForm input[name='email']").focus();
 			return false;
 		}
 	})
-	$("#findPwForm").submit(function() {
+	 $("#findPwForm").submit(function() {
 		
-		if($("input[name='id']").val() == ""){
-			$("input[name='id']").focus();
+		if($("#findPwForm input[name='id']").val() == ""){
+			$("#findPwForm input[name='id']").focus();
 			return false;
 		}
-		if($("input[name='email']").val() == ""){
-			$("input[name='email']").focus();
+		if($("#findPwForm input[name='email']").val() == ""){
+			$("#findPwForm input[name='email']").focus();
 			return false;
 		}
+		
 	})
 
 })
 </script>
 <style>
+	body{
+		margin: 0;
+		padding: 0;
+	}
 	#content{
 		width: 1024px;
 		margin: 0 auto;
@@ -79,36 +84,46 @@ $(function(){
 			<h2>아이디/비밀번호 찾기</h2>
 			
 			<div id="leftWrap">
-					<form action="findId.do" method="post" id="findIdForm">
-						<p>
-							<label>이름</label> <input type="text" name="name">
-						</p>
-						<p>
-							<label>이메일</label> <input type="text" name="email">
-						</p>
-						<input type="submit" id="loginBtn" value="아이디 찾기">
-						
-					</form>				
+				<form action="findId.do" method="post" id="findIdForm">
+					<p>
+						<label>이름</label> <input type="text" name="name">
+					</p>
+					<p>
+						<label>이메일</label> <input type="text" name="email">
+					</p>
+					<input type="submit" id="loginBtn" value="아이디 찾기">
+					
+				</form>	
+				<c:if test="${id!=null }">
+				<div id="findId">
+					<br><br>
+					 ${id }
+				</div>
+			</c:if>			
 			</div>
 			
 			<div id="rightWrap">
-					<form action="login.do" method="post" id="findPwForm">
-						<p>
-							<label>아이디</label> <input type="text" name="id">
-						</p>
-						<p>
-							<label>이메일</label> <input type="text" name="email">
-						</p>
-						<input type="submit" id="loginBtn" value="비밀번호 찾기">
-					</form>
+				<form action="findPw.do" method="post" id="findPwForm">
+					<p>
+						<label>아이디</label> <input type="text" name="id">
+					</p>
+					<p>
+						<label>이메일</label> <input type="text" name="email">
+					</p>
+					<input type="submit" value="비밀번호 찾기">
+				</form>
+				
+				<c:if test="${result!=null }">
+					<div id="findPw">
+						<br><br>
+						 ${result }
+					</div>
+				</c:if>
 			</div>
 			
-			<c:if test="${id!=null }">
-				<div id="findId">
-					<br><br>
-					귀하의 아이디는 ${id } 입니다.
-				</div>
-			</c:if>
+			
+			
+			
 	
 	</div>
 </body>

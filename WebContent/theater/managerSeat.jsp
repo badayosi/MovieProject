@@ -13,6 +13,10 @@
   crossorigin="anonymous"></script>
   <style type="text/css">
   	@import url("/MovieProject/css/common.css");
+  	#content{
+		width: 1024px;
+		margin: 0 auto;
+	}
   	#tableContent{
   		border: 1px solid black;
   		background: #f9f8f3;
@@ -59,25 +63,27 @@
   	form{
 		width: 400px;		
 		float:left;
-		margin-left: 100px;
+		margin-top: 20px;
 	}
 	label{
+		display:inline-block;
+		
 		width: 100px;
 		float: left;
-		padding-left: 10px;
 		font-weight: bold;
 	}
 	input[type='text']{
 		height: 22px;
+		margin-bottom:10px;
 		border: 1px solid grey;
 	}
-	
 	p:LAST-CHILD {
 		text-align: center;
 	}
+	/* 버튼 */
 	.btns{
 		float: right;
-		margin-right: 120px;
+		
 	}
 	.btns button, input[type='submit']{
 		background: #848484;
@@ -187,59 +193,53 @@
 </script>
 </head>
 <body>
-	<div>
+	<jsp:include page="../include/adminHeader.jsp"></jsp:include>
+	<div id="content">
 		<h2>${item.theaterName }</h2>
-	</div>
+		<br>
+		<div id="tableContent">
+			<c:if test="${item.theaterTable!=null }">
+				${item.theaterTable }
+			</c:if>
+		</div>
+		<c:if test="${item.theaterTable==null ||item.theaterTable==''}">
+			<script type="text/javascript">
+					setTable();
+			</script>
+		</c:if>  
 	
-	<div id="tableContent">
-		<c:if test="${item.theaterTable!=null }">
-			${item.theaterTable }
-		</c:if>
-	</div>
-	<c:if test="${item.theaterTable==null ||item.theaterTable==''}">
-		<script type="text/javascript">
-				setTable();
-		</script>
-	</c:if>  
-
-	<div class='btns'>
-		<button id="set">재설정</button>
-		<button id="add">좌석추가</button>
-		<button id="del">좌석삭제</button>
-		<button id="way">복도</button>
-		<button id="wayNo">복도 삭제</button>
-	</div>
-	<form action="managerSeat.do" method="post" name="f1">
-		<p class="displayHidden">
-			<label>상영관번호</label>
-			<input type="text" name="number" value="${item.theaterNo}">
-		</p> 
-		
-		<!-- <p>
-		
-			<label>실제 좌석 인원</label>
-			<input type="text" name="count">
-		</p> -->
-		<p>
-			<label>수용인원</label>
-			<input type="text" name="maxcount" value="<%=num %>" readonly>
-		</p>
-		<p>
-			<label>행</label>
-			<input type="text" name="row" value="<%=row1 %>" readonly>
-		</p>
-		<p>
-			<label>열</label>
-			<input type="text" name="col" value="<%=col %>" readonly>
-		</p>
-		
-			<input type="text" name="table" id="input1" class="displayHidden">
+		<div class='btns'>
+			<button id="set">재설정</button>
+			<button id="add">좌석추가</button>
+			<button id="del">좌석삭제</button>
+			<button id="way">복도</button>
+			<button id="wayNo">복도 삭제</button>
+		</div>
+		<form action="managerSeat.do" method="post" name="f1">
+			<p class="displayHidden">
+				<label>상영관번호</label>
+				<input type="text" name="number" value="${item.theaterNo}">
+			</p> 
+			<p>
+				<label>수용인원</label>
+				<input type="text" name="maxcount" value="<%=num %>" readonly>
+			</p>
+			<p>
+				<label>행</label>
+				<input type="text" name="row" value="<%=row1 %>" readonly>
+			</p>
+			<p>
+				<label>열</label>
+				<input type="text" name="col" value="<%=col %>" readonly>
+			</p>
 			
-		<p>
-			<input type="submit" value="저장">
-		</p>
-	</form>
-	<br>
-	
+				<input type="text" name="table" id="input1" class="displayHidden">
+				
+			<p>
+				<input type="submit" value="저장">
+			</p>
+		</form>
+		<br>
+	</div>
 </body>
 </html>

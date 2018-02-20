@@ -15,5 +15,6 @@ public interface UserDao {
 	public void passwordUpdate(User user);
 	public void deleteUpdate(String id);
 	public User findId(User user);
-	public void updatePw(User user);
+	public User findPw(User user);
+	public int updatePw(User user);
 }

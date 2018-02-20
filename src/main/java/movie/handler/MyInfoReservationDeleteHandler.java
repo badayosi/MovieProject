@@ -20,9 +20,7 @@ public class MyInfoReservationDeleteHandler implements CommandHandler {
 		r.setNo(no);
 		ReservationService service = ReservationService.getInstance();
 		service.deleteReservation(r);
-		
-		
-		
+			
 		return null;
 	}   
 

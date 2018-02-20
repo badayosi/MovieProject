@@ -227,7 +227,7 @@
 				<a id="go" href="managerTheaterSchedule.jsp?"><input type="button" name="add_list" value="상영 스케줄 추가"></a>
 			</div>
 			<div id="theater_schedule">
-			
+			 
 			</div>
 		</div>
 	<jsp:include page="../include/footer.jsp"></jsp:include>

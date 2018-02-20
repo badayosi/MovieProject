@@ -36,7 +36,7 @@ public class UserUpdateMovieHandler implements CommandHandler {
 			String addrUser = req.getParameter("addrUser");
 			String address = "("+zipcode+")"+addr+" "+addrUser;
 			String gender = req.getParameter("gender");
-			String userRank = "일반등급";
+			String userRank = req.getParameter("userRank");
 			String p = req.getParameter("point");
 			int point = Integer.parseInt(p);
 			

@@ -545,13 +545,11 @@ function searchDoro(){
 				<p>
 					<label>포인트</label> 
 					<input type="text" name="point" id="point" value="${item.point }"> 
-					
-					
 				</p>
-				<%-- <p>
+				<p>
 					<label>등급</label> 
-					<input type="text" name="id" id="userRank" value="${item.userRank}" > 
-				</p> --%>
+					<input type="text" name="userRank" id="userRank" value="${item.userRank}" > 
+				</p>
 				<p id="radioP">
 					<label>성별</label> 
 						<input type="radio" name="gender" value="여자"	class="radioBtn" id="radio1">
