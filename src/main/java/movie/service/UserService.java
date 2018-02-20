@@ -97,6 +97,25 @@ public class UserService{
 		return user;
 	}
 	
+	public User findPw(User u) {
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		UserDao dao = session.getMapper(UserDao.class);
+		User user = null;
+		try{
+			user = dao.findPw(u);
+			if(user == null){
+				return null;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return user;
+	}
+	
 	public int insertUser(User user){
 		SqlSession session = null;
 		session = MySqlSessionFactory.openSession();
@@ -144,6 +163,25 @@ public class UserService{
 			UserDao dao=session.getMapper(UserDao.class);
 			
 			dao.update(user);
+			session.commit();
+			
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return -1;
+	}
+	
+	public int updatePw(User user){
+		SqlSession session = null;
+		
+		try {
+			session = MySqlSessionFactory.openSession();
+			UserDao dao=session.getMapper(UserDao.class);
+			System.out.println(user);
+			dao.updatePw(user);
 			session.commit();
 			
 			return 1;

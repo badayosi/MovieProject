@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,13 +50,30 @@
 		margin-bottom: 20px;
 	}
 	
+	#btn{
+		float: right;
+		margin-bottom: 20px;
+		font-size: 15px;	
+	}
+	#btn button{
+		background: #EFEBDB;
+		padding: 5px 10px;
+		color: black;
+	}
 </style>
 </head>
 <body>
+	<c:if test="${result!=null }">
+			<script type="text/javascript">
+				alert("${result}");
+			</script>
+	</c:if>
 	<jsp:include page="../include/adminHeader.jsp"></jsp:include>
 
 	<div id="addDiv">
-		<h2>${movie.movieName} 상세보기</h2>
+		
+		<h2>${movie.movieName} 상세보기</h2>		
+		<a href="managerListMovie.do" id="btn"><button>리스트 돌아가기</button></a>
 		<table id="infoTable">
 			<tr>
 				<th>영화제목</th>

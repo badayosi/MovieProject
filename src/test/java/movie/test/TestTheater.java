@@ -22,6 +22,7 @@ import movie.dto.Timetable;
 import movie.dto.User;
 import movie.dto.UserRank;
 import movie.service.TheaterService;
+import movie.service.UserService;
 import mvc.util.MySqlSessionFactory;
 
 public class TestTheater {
@@ -151,13 +152,18 @@ public class TestTheater {
 		SqlSession session=null;
 		try {
 			session=MySqlSessionFactory.openSession();
-			UserDao dao=session.getMapper(UserDao.class);
+			UserService service = UserService.getInstance();
+			
 			User user = new User();
-			user.setName("유저");
-			user.setEmail("user5@test.com");
-			User u = dao.findId(user);
+			user.setUserId("user2111");
+			user.setEmail("user2@test.com");
+			
+			user.setPassword("1234456");
+			int r = service.updatePw(user);
+			User u = service.findPw(user);
 			
 			System.out.println(u.toString());
+			System.out.println(r);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
