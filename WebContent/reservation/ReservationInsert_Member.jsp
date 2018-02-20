@@ -39,6 +39,7 @@
 	div#calendar_day{
 		width:90%;
 		margin:0 auto;
+		padding-top: 50px;	
 	}
 	div#calendar_day > table{
 		width:100%;
@@ -185,6 +186,9 @@
 	}
 	
 	/* 시간표 css */
+	#timeTableDiv{
+		padding-left: 20px;
+	}
 	#timeTableDiv a{
 		color: black;
 		text-decoration: none;
@@ -220,14 +224,48 @@
 		height: 40px;
 		
 	}
-	
+	/* 달력 */
+	.a, .b, .c{
+		font-size: 12px;
+	}
+	.a p, .b p, .c p{
+		font-size: 16px;
+		position: relative;
+	}
+	.a{
+		color:red;
+	}
+	.b{
+		color:blue;
+	}
+	.month1{
+		font-size: 25px;
+	}
+	.newMonth{
+		position: relative;
+	}
+	.month1{
+		position:absolute;
+		left: 25px;
+		top: -55px;
+		text-decoration: underline;
+		font-weight: bold;
+	}
+	.year1{
+		font-size: 12px;
+		position:absolute;
+		left: 50px;
+		top: -45px;
+	}
 	
 </style>
 <script type="text/javascript">
 	function makeCalendar(){
 		var todayDate = new Date();
+		var t = new Date();
 		var dateCount = 14;
 		var weekStr = new Array("일","월","화","수","목","금","토","일");
+		var weekStr1 = new Array("a","c","c","c","c","c","b","a");
 		
 		var year = todayDate.getFullYear();
 		var month = todayDate.getMonth()+1;
@@ -242,25 +280,37 @@
 			else if(row == 1)
 				makeStr += "<tr id='integer'>";		
 			for(var col=weekday ; col<dateCount+weekday ; col++){
-				switch(row){
+				switch(row){				
 					case 0:
-						makeStr += "<td>" + weekStr[col%7] + "</td>";
+						makeStr += "<td class='"+weekStr1[col%7]+"' class='week'>" + weekStr[col%7] + "</td>";
 						break;
 					case 1:
-						if(todayDate.getDate() == day)
-							makeStr += "<td><p class='today'>" + day + "</p></td>";
-						else
-							makeStr += "<td><p>" + day + "</p></td>";
+						if(todayDate.getDate() == day){			
+							makeStr += "<td class='"+weekStr1[col%7]+" newMonth'>"+"<span class='month1'>"+ month+"</span>"+"<span class='year1'>"+year +"</span>"+"<p class='today'>" + t.getDate() + "</p></td>";
+						}
+						else{
+							if(t.getDate() == 1){
+								var month1 = t.getMonth()+1;
+								var year1 = t.getFullYear();
+								/* makeStr +=  */
+								makeStr += "<td class='"+weekStr1[col%7]+" newMonth'>"+"<span class='month1'>"+ month1+"</span>"+"<span class='year1'>"+year1 +"</span>"+"<p>" + t.getDate() + "</p></td>";
+							}else{
+								makeStr += "<td class='"+weekStr1[col%7]+"'><p>" + t.getDate() + "</p></td>";	
+							}							
+						}
 						day++;
+						t.setDate(t.getDate()+1);
 						break;
 				}
 			}
 			makeStr += "</tr>";
 		}
 		makeStr += "</table>";
-		$("#year").html(year);
-		$("#month").html(month);
-		$("#calendar_day").html(makeStr);
+		
+		/* $("#year").html(year);
+		$("#month").html(month);*/
+		
+		$("#calendar_day").html(makeStr); 
 	}
 	
 	function loadAllMovie(){
@@ -565,7 +615,8 @@
 	<jsp:include page="../include/header.jsp"></jsp:include>
 	<div id="container">
 		<div id="horizontal_calendar">
-			<p><span id="month">2</span><span id="year">2018</span></p>
+			<!-- <p><span id="month">2</span><span id="year">2018</span></p> -->
+			
 			<div id="calendar_day">
 				
 			</div>

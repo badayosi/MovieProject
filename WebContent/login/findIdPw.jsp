@@ -12,23 +12,23 @@
 $(function(){
 	$("#findIdForm").submit(function() {
 		
-		if($("input[name='name']").val() == ""){
-			$("input[name='name']").focus();
+		if($("#findIdForm input[name='name']").val() == ""){
+			$("#findIdForm input[name='name']").focus();
 			return false;
 		}
-		if($("input[name='email']").val() == ""){
-			$("input[name='email']").focus();
+		if($("#findIdForm input[name='email']").val() == ""){
+			$("#findIdForm input[name='email']").focus();
 			return false;
 		}
 	})
 	 $("#findPwForm").submit(function() {
 		
-		if($("input[name='id']").val() == ""){
-			$("input[name='id']").focus();
+		if($("#findPwForm input[name='id']").val() == ""){
+			$("#findPwForm input[name='id']").focus();
 			return false;
 		}
-		if($("input[name='email']").val() == ""){
-			$("input[name='email']").focus();
+		if($("#findPwForm input[name='email']").val() == ""){
+			$("#findPwForm input[name='email']").focus();
 			return false;
 		}
 		
@@ -37,6 +37,10 @@ $(function(){
 })
 </script>
 <style>
+	body{
+		margin: 0;
+		padding: 0;
+	}
 	#content{
 		width: 1024px;
 		margin: 0 auto;
