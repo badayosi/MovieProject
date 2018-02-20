@@ -81,6 +81,10 @@
 		font-size: 1.1em;
 		text-decoration: none;
 	}
+	table tr td .listDiv .mPoster{
+		width:250px;
+		height:350px;
+	}
 </style>
 <script type="text/javascript">
 $(function() {

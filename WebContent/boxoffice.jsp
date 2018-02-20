@@ -132,37 +132,45 @@
 		dataType:"json",
 		success:function(json){
 			
-			console.log(json);
+			//console.log(json);
+			var date=new Date();
+			var nowDate=date.getTime();
+			
 			var makeMovieList;
 			for(var index=0;index<json.length;index++){
-				makeMovieList = "";
-				makeMovieList += "<li>";
-				makeMovieList += "<a href='javascript:selectMovie(" + json[index].movieNo +")'>";
-				
-				makeMovieList += "<div class='rating";				
-				switch(json[index].rating){
-					case 12:
-						makeMovieList += " age12'>";
-						break;
-					case 15:
-						makeMovieList += " age15'>";
-						break;
-					case 18:
-						makeMovieList += " age18'>";
-						break;
-					default:
-						makeMovieList += " ageall'>";
-						break;
+				if(json[index].closeDate<nowDate || json[index].openDate>nowDate){
+					continue;
+				}else{
+					
+					makeMovieList = "";
+					makeMovieList += "<li>";
+					makeMovieList += "<a href='javascript:selectMovie(" + json[index].movieNo +")'>";
+					
+					makeMovieList += "<div class='rating";				
+					switch(json[index].rating){
+						case 12:
+							makeMovieList += " age12'>";
+							break;
+						case 15:
+							makeMovieList += " age15'>";
+							break;
+						case 18:
+							makeMovieList += " age18'>";
+							break;
+						default:
+							makeMovieList += " ageall'>";
+							break;
+					}
+					makeMovieList += "</div>";
+					makeMovieList += "<div class='movieName'>" + json[index].movieName + "</div>";
+					makeMovieList += "<input type='hidden' name='movieKey' value=" + json[index].movieNo +">";
+					/* makeMovieList +=  "."+ ++index;
+					--index; */
+					makeMovieList += "</a>";
+					
+					makeMovieList += "</li>";
+					$("#movieZone").append(makeMovieList);
 				}
-				makeMovieList += "</div>";
-				makeMovieList += "<div class='movieName'>" + json[index].movieName + "</div>";
-				makeMovieList += "<input type='hidden' name='movieKey' value=" + json[index].movieNo +">";
-				/* makeMovieList +=  "."+ ++index;
-				--index; */
-				makeMovieList += "</a>";
-				
-				makeMovieList += "</li>";
-				$("#movieZone").append(makeMovieList);
 			}
 		}
 	});

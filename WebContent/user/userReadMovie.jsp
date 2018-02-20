@@ -27,11 +27,8 @@
 		  arrows:true,
 		  focusOnSelect: true
 		});
-		$("video").focusin(function(){
-			alert("asdf");
-		});
-		$(document).on("focusout","video",function(){
-			$("video").stop();
+		$(document).on("click","button.slick-prev.slick-arrow, button.slick-next.slick-arrow",function(){
+			$("#bigImgWrap .bigImg h3 video")[0].pause();
 		});
 	});
 </script>
@@ -163,7 +160,7 @@
    			</div>
    			<div id="textInfo">
    				<h1>${movie.movieName}</h1>
-   				<span class="info1"><h3>관람평점 </h3></span>
+   				<span class="info1"><h3>관람평점 </h3><span id="grade"></span></span>
    				<span class="info2"><h3>등급 </h3>${movie.rating }세 미만 관람 불가</span>
    				<br>
    				<span class="info3"><h3>개봉일 </h3>${openDate}</span>
