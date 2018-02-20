@@ -183,6 +183,45 @@
 	#quick-menu #nav_condition #select_info #img{
 		background-size: 157px !important;
 	}
+	
+	/* 시간표 css */
+	#timeTableDiv a{
+		color: black;
+		text-decoration: none;
+		float: left;
+		overflow: hidden;
+	}
+	#timeTable{
+		display:inline-block;
+		float:left;
+		
+		padding:0 !important;
+		/* border: 2px solid #CDC197; */
+		margin-right: 20px;
+		margin-bottom: 20px;
+	}
+	#timeTable td{
+		width:100px;
+		text-align:center;
+		border:none !important;
+		padding:0 !important;
+	}
+	#timeTable tr{
+		background: white;
+		border: 1px solid grey;
+		height:20px !important;
+		padding:0 !important;
+	}
+	.t1, .t3{
+		font-size: 12px;
+	}
+	.t2{
+		font-size: 18px;
+		height: 40px;
+		
+	}
+	
+	
 </style>
 <script type="text/javascript">
 	function makeCalendar(){
@@ -275,22 +314,23 @@
 				// 선택영화 상영시간표 정보 LOAD
 				$("#theaterList").html("");
 				var makeTheaterList;
+				makeTheaterList = "";
+				makeTheaterList += "<div id='timeTableDiv'>";
+				
 				for(var index=0 ; index<json.time.length ; index++){
-					makeTheaterList = "";
-					makeTheaterList += "<div>";
 					makeTheaterList += "<a href='javascript:loadSeat(" + json.time[index].timeNo +","+ json.time[index].startTime +")'>";
-					makeTheaterList += "<table>";
+					makeTheaterList += "<table id='timeTable'>";
 					makeTheaterList += "<tr>";
-					makeTheaterList += "<td>" + formatChange(json.time[index].startTime, "time") + "</td>";
-					makeTheaterList += "<td>" + json.time[index].theaterName + "</td>";
-					makeTheaterList += "<td>(" + json.time[index].theaterType + ")</td>";
-					makeTheaterList += "<td>" + json.time[index].restSeat + " / " + json.time[index].maxSeat + "</td>";
+					makeTheaterList += "<tr><td class='t1'>" + json.time[index].theaterName+ " ("+json.time[index].theaterType  + ")</td></tr>";
+					makeTheaterList += "<tr><td class='t2'>" + formatChange(json.time[index].startTime, "time") + "</td></tr>";
+					/* makeTheaterList += "<tr><td class='t3'>(" + json.time[index].theaterType + ")</td></tr>"; */
+					makeTheaterList += "<tr><td class='t3'>" + json.time[index].restSeat + " / " + json.time[index].maxSeat + "</td></tr>";
 					makeTheaterList += "</tr>";
 					makeTheaterList += "</table>";
 					makeTheaterList += "</a>";
-					makeTheaterList += "</div>";
-					$("#theaterList").append(makeTheaterList); 
 				}
+				makeTheaterList += "</div>";
+				$("#theaterList").append(makeTheaterList);
 				
 				// 영화 선택시  QUICK 반영
 				// 경고문구 제거
@@ -505,6 +545,18 @@
 			checkSeat();
 		});
 		
+		$(document).on("mouseover","#timeTable",function(){
+			$(this).children().children().css("background","black");
+			$(this).children().children().css("color","white");
+			$(this).children().children().css("font-weight","bold");
+		})
+		
+		$(document).on("mouseout","#timeTable",function(){
+			$(this).children().children().css("background","white");
+			$(this).children().children().css("color","black");
+			$(this).children().children().css("font-weight","normal");
+		})
+		
 	});
 </script>
 
@@ -532,7 +584,7 @@
 							<li>가나다순</li>
 						</ul>
 					</td>
-					<td rowspan="2" id="theaterList">
+					<td rowspan="2" id="theaterList" valign="top">
 					
 					</td>
 				</tr>

@@ -39,6 +39,11 @@
 </style> -->
 </head>
 <body>
+	<c:if test="${result!=null }">
+			<script type="text/javascript">
+				alert("${result}");
+			</script>
+	</c:if>
 	<jsp:include page="../include/adminHeader.jsp"></jsp:include>
 	<div id="listBody">
 		<div id="content">

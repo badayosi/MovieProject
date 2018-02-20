@@ -28,8 +28,8 @@
 	</insert>
 	<update id="update" parameterType="User">
 		update user set 
-		point=#{point},
-		email=#{email},phone=#{phone},name=#{name},addr=#{addr},gender=#{gender},user_rank=#{userRank}
+		point=#{point},	email=#{email},phone=#{phone},name=#{name},addr=#{addr},
+		gender=#{gender},user_rank=#{userRank}
 		where user_id= #{userId}
 	</update>
 	<delete id="deleteUser" parameterType="String">
@@ -47,8 +47,12 @@
 	<select id="findId" resultMap="uesrResult" parameterType="User">
 		select * from user where name=#{name} and email=#{email}
 	</select>
+	<select id="findPw" resultMap="uesrResult" parameterType="User">
+		select * from user where user_id= #{userId} and email=#{email}
+	</select>
 	<update id="updatePw" parameterType="User">
-		update user set password = password(#{password}) 
-		from user where user_id= #{userId} and email=#{email}
+		update user set 
+		password = password(#{password}) 
+		where user_id= #{userId} and email=#{email}
 	</update>
 </mapper>
