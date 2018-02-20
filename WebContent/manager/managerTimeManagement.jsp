@@ -220,7 +220,7 @@
 	<jsp:include page="../include/adminHeader.jsp"></jsp:include>
 		<div id="container">
 			<div id="select">
-			
+			 
 				<select id="theater_list">
 				
 				</select>
