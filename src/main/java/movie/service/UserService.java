@@ -161,6 +161,7 @@ public class UserService{
 		UserDao dao = session.getMapper(UserDao.class);
 		
 		try{
+			
 			dao.userUpdate(user);
 			session.commit();
 			return 0;
@@ -192,7 +193,6 @@ public class UserService{
 	}
 	
 	public int deleteUpdate(String id){
-		System.out.println("서비스 시작");
 		SqlSession session = null;
 		session = MySqlSessionFactory.openSession();
 		UserDao dao = session.getMapper(UserDao.class);
