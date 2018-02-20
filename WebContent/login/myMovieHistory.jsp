@@ -23,7 +23,6 @@
 	width:150px;
 	float:left;
 	padding:20px;
-	
 }
  #container .list .mInfoTable{
  	width:60%;
