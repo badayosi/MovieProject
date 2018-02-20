@@ -218,13 +218,11 @@
 		});
 	})
 </script>
-
 </head>
 <body>
 	<div id="myNotice_wrap">
 		<input type="hidden" value="${member.userId }" id="userId">
 		<div id="myNotice_header">
-			
 				<p>
 					<label>검색</label>
 					<input type="text" name="title" placeholder="제목을 입력하세요" id="mynotice_title">

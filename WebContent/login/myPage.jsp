@@ -256,7 +256,7 @@ function searchDoro(){
 			
 		</div>
 		<div id="checkpwWrap">
-			<form>
+			<form action="" method="get">
 				<p id="p1">
 					<label>비밀번호 </label>
 					<input type="text" name="password">
