@@ -111,5 +111,6 @@ public class ReservationService {
 		} finally {
 			MySqlSessionFactory.closeSession(session);
 		}
+		
 	}
 }

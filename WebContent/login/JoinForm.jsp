@@ -172,7 +172,7 @@ input:FOCUS {
 }
 
 #searchWarp .searchResult .seacrch_zipcode {
-	width: 20%;
+	width: 18%;
 	text-align: center;
 	margin-right:10px !important;
 	border-right: 1px solid #ccc;
@@ -180,7 +180,7 @@ input:FOCUS {
 
 #searchWarp .searchResult .seacrch_addr {
 	text-align: right;
-	width: 70%;
+	width: 69%;
 	border-right: 1px solid #ccc;
 }
 
@@ -259,8 +259,9 @@ input:FOCUS {
 		height: 40px;
 		font-size:14px;
 	}
-.checkimg{
-}
+	.checkimg{
+	
+	}
 #radioCheckImg{
 	display: inline-block;
 }
@@ -311,7 +312,7 @@ input:FOCUS {
 			$("#zipcode").nextAll(".checkimg").css("display","inline-block");
 			$("#zipcode").nextAll(".checkimg").attr("src",trueImgsrc);
 		})
-		 $("#searchWarp #search_cencel").click(function(){
+		$("#searchWarp #search_cencel").click(function(){
 			$("#hiddenbg").css("display","none");
 			$("#searchWarp").css("display","none");
 			$("#doro").val("");
@@ -533,7 +534,7 @@ function searchDoro(){
 						name="zipcode" id="zipcode"> <input type="text" name="addr"
 						id="addr" id="userAddr">
 						<input type="text" name="addrUser" id="addrUser">
-						<img src="../images/join_else_icon.png" class="checkimg">+
+						<img src="../images/join_else_icon.png" class="checkimg">
 				</p>
 				<p id="btnWrap">
 					<input type="submit" value="회원가입" id="joinBtn"> <input type="button"

@@ -81,7 +81,7 @@ public class TestTheater {
 		}
 	}
 	
-	@Test
+	//  @Test
 	public void test(){
 		TheaterService service = TheaterService.getInstance();
 		Theater theater = new Theater(3, "4관", 100, 100, "G", 10, "일반");
@@ -138,6 +138,26 @@ public class TestTheater {
 					
 			dao.update(u);
 			session.commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			MySqlSessionFactory.closeSession(session);
+		}
+	}
+	
+	@Test
+	public void testfind(){
+		SqlSession session=null;
+		try {
+			session=MySqlSessionFactory.openSession();
+			UserDao dao=session.getMapper(UserDao.class);
+			User user = new User();
+			user.setName("유저");
+			user.setEmail("user5@test.com");
+			User u = dao.findId(user);
+			
+			System.out.println(u.toString());
 			
 		} catch (Exception e) {
 			e.printStackTrace();

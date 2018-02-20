@@ -4,19 +4,22 @@
 <html>
 <head>
 <title>Insert title here</title>
+
 <style>
 	#managerboard_wrap{
 		width:1024px;
 	}
 	#managerboard_wrap #list_board_table{
-		width:90%;
+		width:1024px;
 		padding:20px;
 		border-collapse: collapse;
-		border-color:#ccc;
-		
+		/* border-color:#ccc; */
 	}
 	#managerboard_wrap #list_board_table tr,#managerboard_wrap #list_board_table tr td{
 		text-align: center;
+	}
+	table, tr, th, td{
+		border: none;
 	}
 	.hidden_span{
 		display: none;
@@ -26,6 +29,8 @@
 		cursor:pointer;
 	}
 </style>
+
+<link rel="stylesheet" type="text/css" href="/MovieProject/css/manager.css"> 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function(){

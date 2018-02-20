@@ -19,6 +19,7 @@
  	
 	#myPage{
 		width: 1024px;
+		min-height:600px;
 		margin: 0 auto;
 	}
 	#name{
@@ -66,14 +67,63 @@
 		background: #231f20 !important;
     	color: #cdc197 !important;
 	}
+	#checkpwWrap{
+		position: absolute;
+		top:30%;
+		left:28%;
+		display: none;
+	}
+	#checkpwWrap #formdiv{
+		width:500px;
+		height:150px !important;
+		position: relative;
+		background: #EFEBDB;
+	}
+	#checkpwWrap #formdiv p#p1 {
+		position: absolute;
+		top:45px;
+		left:50px;
+		padding:10px;
+		font-size:20px;
+		
+	}
+	#checkpwWrap #formdiv p#p1 input{
+		padding:5px;
+		font-size:17px;
+	}
+	#checkpwWrap #formdiv p#p2 {
+		position: absolute;
+		top:55px;
+		left:350px;
+	}
+	#checkpwWrap #formdiv p#p2 input{
+		width:60px;
+		height:37px;
+		padding: 5px;
+		background: #231f20;
+		border:none;
+		color:#cdc197;
+	}
+	
+	
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function(){
 		$("#myNav ul li").click(function(){
+			$("#myNav ul li").not($(this)).removeClass("select_menu");
+			$(this).addClass("select_menu");
 			if($(this).text()=="나의 문의 내역"){
-				$(this).addClass("select_menu");
+				$("#checkpwWrap").css("display","none");
+				$("#password").val("");
 				$("#selectMenu").load("myNotice.jsp");
+			}else if($(this).text()=="나의 정보 관리"){
+				$("#selectMenu").empty();
+				$("#checkpwWrap").css("display","block");
+			}else if($(this).text()=="예매/구매내역"){
+				$("#checkpwWrap").css("display","none");
+				$("#password").val("");
+				$("#selectMenu").load("myReservation.jsp");
 			}
 		});
 		$(document).on("click",".table_title",function(){
@@ -98,10 +148,20 @@
 						$("#answer_wrap").css("display","block");
 						 $("#answer_wrap p").html(json.answerContent); 
 					}
-					
 				}
 			})
 		});
+		$(document).on("click","#addrSearchBtn",function(){
+			$("#searchWarp").css("display","block");
+			$("#resultAddrWrap div").not("#zxc").remove();
+		})
+		$(document).on("click","#searchWarp #search_cencel",function(){
+			$("#searchWarp").css("display","none");
+			$("#doro").val("");
+		 })
+		$(document).on("click","#doroSearchWrap",function(){
+			 searchDoro();
+		 })
 		$(document).on("click","#mynotice_submit",function(){
 			var title = $("#mynotice_title").val();
 			var userId = $("#userId").val();
@@ -142,8 +202,159 @@
 				alert("제목을 입력해주세요");
 				$("#mynotice_title").focus();
 			}
+			
+		})
+		$("#passwordCheckedBtn").click(function(){
+			var password = $("#password").val();
+			var userId = $("#userId").val();
+			$.ajax({
+				url:"mynoticecheckpass.do",
+				type:"get",
+				data:{"password":password,
+					"userId":userId},
+				dataType:"json",
+				success:function(json){
+					console.log(json);
+					if(json == null){
+						alert("비밀번호가 틀렸습니다.");
+						$("#password").focus();
+					}else{
+						$("#checkpwWrap").css("display","none");
+						$("#selectMenu").load("myInfo.jsp");
+					}
+				}
+				
+			})
+		})
+		$(document).on("click","#updateBtn",function(){
+			
+			var addr = "("+$("#zipcode").val()+")"+$("#addr").val()+"/"+$("#addrUser").val();
+			var email = $("#userEmail").val();
+			var tel = $("#telSelect").val()+"-"+$(".telinput").eq(0).val()+"-"+$(".telinput").eq(1).val();
+			var userId = $("#userId").val();
+			
+			$.ajax({
+				url:"myinfoupdate.do",
+				type:"get",
+				data:{"addr":addr,
+					"email":email,
+					"tel":tel,
+					"userId":userId},
+				dataType:"json",
+				success:function(json){
+					console.log(json);
+					if(json.result ==0){
+						alert("수정되었습니다.");
+						$("#selectMenu").load("myInfo.jsp");
+					}else{
+						alert("예상치 못한 오류가 발생하였습니다.");
+					}
+				}
+			})
+		})
+		$(document).on("click","#passwordBtn",function(){
+			var reg =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
+			
+			if(!reg.test($("#userPwnew").val())){
+				alert("8자이상 영문/숫자/특수문자를 조합하세요");
+				return false;
+			}else if($("#userPwnew").val() != $("#userPwch").val()){
+				alert("비밀번호가 일치하지 않습니다.");
+				return false;
+			}
+			
+			var pass = $("#userPwnew").val();
+			var userId = $("#userId").val();
+			$.ajax({
+				url:"myinfopasswordupdate.do",
+				type:"get",
+				data:{"pass":pass,
+					"userId":userId},
+				dataType:"json",
+				success:function(json){
+					console.log(json);
+					if(json.result ==0){
+						alert("비밀번호가 변경되었습니다.");
+						$("#selectMenu").load("myInfo.jsp");
+					}else{
+						alert("예상치 못한 오류가 발생하였습니다.");
+					}
+				}
+			})
+			
+		})
+		$(document).on("click","#deleteUpdate_img",function(){
+			if(confirm("정말 탈퇴하시겠습니까?")){
+				var userId = $("#userId").val();
+				alert("이벤트 발생");
+				$.ajax({
+					url:"myinfodelete.do",
+					type:"get",
+					data:{"userId":userId},
+					dataType:"json",
+					success:function(json){
+						alert("이용해 주셔서 감사합니다.");
+						location.href="/MovieProject/index.jsp";
+					}
+				})
+			}
+		})
+		$(document).on("click",".xmark_img",function(){
+			if(confirm("예매를 취소하시겠습니까?")){
+				
+				var no = $(this).prev().find(".reservationNo").text();
+				$.ajax({
+					url:"myReservationdelete.do",
+					type:"get",
+					data:{"no":no},
+					success:function(){
+						alert("예매를 취소하였습니다.");
+						$("#selectMenu").load("myReservation.jsp");
+					}
+				})
+			}else{
+				
+			}
 		})
 	})
+function searchDoro(){
+		var doro = $("#doro").val();
+		 if(doro ==""){
+			 alert("도로명을 입력해주세요");
+			 return false;
+		 }
+		 $("#resultAddrWrap div").not("#zxc").remove();
+		 
+		 $.ajax({
+				url:"joinaddr.do",
+				type:"get",
+				data:{"doro":doro},
+				dataType:"json",
+				success:function(json){
+					console.log(json)
+					if(json.length==0){
+						var div = "<div class='searchResult hoverResult'>";
+						var zipcode = "<p class='seacrch_zipcode'></p>";
+						var addr ="<p class='seacrch_addr'>검색 결과가 없습니다.</p>";
+						div += zipcode+addr +"</div>";
+						$("#resultAddrWrap").append(div);
+						return;
+					} 
+					for(var i=0; i<json.length; i++){
+						var div = "<div class='searchResult hoverResult'>";
+						var zipcode = "<p class='seacrch_zipcode'>"+json[i].addrNo+"</p>";
+						var addr ="<p class='seacrch_addr'>"+json[i].sido+" "+json[i].sigungu+" "+json[i].doro
+								+" "+json[i].building1+json[i].building2+"</p>";
+						div += zipcode + addr +"</div>";
+						$("#resultAddrWrap").append(div);
+
+					}
+				}
+				
+		})
+		
+		
+}
 </script>
 </head>
 <body>
@@ -164,7 +375,19 @@
 			</ul>
 		</div>
 		<div id="selectMenu">
-			
+
+		</div>
+		<div id="checkpwWrap">
+			<div id="formdiv">
+				<p id="p1">
+					<label>비밀번호 </label>
+					<input type="password" id="password">
+					<input type="hidden" id="userId" value="${member.userId}">
+				</p>
+				<p id="p2">
+					<input type="button" value="확인" id="passwordCheckedBtn">
+				</p>
+			</div>
 		</div>
 	</div>
 	<jsp:include page="../include/footer.jsp"></jsp:include>
