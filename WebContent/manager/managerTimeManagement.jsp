@@ -203,7 +203,15 @@
 		$("#theater_list").on("change",function(){
 			$("#theater_schedule").empty();
 			loadTheaterById($("#theater_list").val());
-			$("#go").attr("href","managerTheaterSchedule.jsp?no="+$(this).val());
+			
+		});
+		$(document).on("click", "#go",function(){
+			if($("#theater_list").val()=="상영관을 선택하세요"){
+				alert("상영관을 선택해주세요.");
+				return false;
+			}else{
+				$("#go").attr("href","managerTheaterSchedule.jsp?no="+$(this).val());
+			}
 		});
 	});
 </script>
@@ -216,7 +224,7 @@
 				<select id="theater_list">
 				
 				</select>
-				<a id="go" href="managerTheaterSchedule.jsp?"><input type="button" name="add_list" value="상영 스케줄 추가" onclick="javascript:"></a>
+				<a id="go" href="managerTheaterSchedule.jsp?"><input type="button" name="add_list" value="상영 스케줄 추가"></a>
 			</div>
 			<div id="theater_schedule">
 			
