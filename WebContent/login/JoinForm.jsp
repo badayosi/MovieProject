@@ -311,7 +311,7 @@ input:FOCUS {
 			$("#zipcode").nextAll(".checkimg").css("display","inline-block");
 			$("#zipcode").nextAll(".checkimg").attr("src",trueImgsrc);
 		})
-		 $("#searchWarp #search_cencel").click(function(){
+		$("#searchWarp #search_cencel").click(function(){
 			$("#hiddenbg").css("display","none");
 			$("#searchWarp").css("display","none");
 			$("#doro").val("");
@@ -533,7 +533,7 @@ function searchDoro(){
 						name="zipcode" id="zipcode"> <input type="text" name="addr"
 						id="addr" id="userAddr">
 						<input type="text" name="addrUser" id="addrUser">
-						<img src="../images/join_else_icon.png" class="checkimg">+
+						<img src="../images/join_else_icon.png" class="checkimg">
 				</p>
 				<p id="btnWrap">
 					<input type="submit" value="회원가입" id="joinBtn"> <input type="button"

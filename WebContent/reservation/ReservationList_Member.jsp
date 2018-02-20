@@ -31,12 +31,16 @@
 	<jsp:include page="ReservationMain.jsp"></jsp:include>
 	<div id="container">
 		<br>
+		<%
+			String id = (String)request.getAttribute("user");
+			/* String id = re.getUserId(); */
+		
+		%>
+		<c:if test="${result==null}">
+			<h2><%=id %> 예약이 없습니다.</h2>
+		</c:if>
+		
 		<c:if test="${result!=null}">
-			<%
-				String id = (String)request.getAttribute("user");
-				/* String id = re.getUserId(); */
-			
-			%>
 			<h2><%=id %> 예약 보기</h2>
 			<c:forEach var="member" items="${result}">
 				<table>

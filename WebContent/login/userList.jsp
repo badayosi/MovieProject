@@ -5,23 +5,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="/MovieProject/css/manager.css?ver=1">  
 <style type="text/css">
 	@import url("/MovieProject/css/common.css");
 	#content{
 		width: 1024px;
 		margin: 0 auto;
 	}
-	#content table{
+	/* #content table{
 		width: 1024px;
 	}
 	#content table, tr, th, td{
 		border: 1px solid grey;
 		border-collapse: collapse;
 		text-align: center;
-	}
+	}*/
 	#content th, #content td{
 		padding: 10px 5px;
-	}
+	} 
 	#insert{		
 		text-align:right;
 
@@ -57,6 +58,7 @@
 		<c:if test="${list==null }">
 				<%response.sendRedirect("userList.do"); %>
 		</c:if>
+		<h2>회원 관리</h2>
 		<table>
 			<tr>
 				<th>아이디</th>

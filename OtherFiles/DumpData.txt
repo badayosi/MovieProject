@@ -3,6 +3,7 @@ use movie;
 /* USER_RANK DUMP DATA */
 insert into user_rank values ('관리자',0);
 insert into user_rank values ('일반등급',0);
+insert into user_rank values('탈퇴회원',0);
 
 /* USER DUMP DATA */
 insert into `user` values('user1', '1234', 0, 'user1@test.com', 01012345678, '대구 남구 대명1동', '남자', '관리자', '유저1');
