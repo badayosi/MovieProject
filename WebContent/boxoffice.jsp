@@ -129,7 +129,7 @@
 		url:"reservation/reservationAjax.do",
 		type:"get",
 		dataType:"json",
-		success:function(json){
+		success:function(json){ 
 			
 			//console.log(json);
 			var date=new Date();

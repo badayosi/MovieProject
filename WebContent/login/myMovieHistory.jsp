@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="../js/jquery-1.12.4.min.js"></script>
+
 <style type="text/css">
 #container{
 	width:1024px;
@@ -29,16 +29,19 @@
  	border-collapse: collapse; 
  }
  #container .list .mInfoTable td:nth-child(even){
- 	
  	padding-left:10px;
  }
  h4{
  	margin:10px;
  }
+ #mInfoTable tr td h2{
+ 	text-align: center;
+ }
 </style>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		var userId="user1";
+		var userId=$("#userId").val();
 		$.ajax({
 			url:"myMovieHistory.do",
 			type:"get",
@@ -50,7 +53,17 @@
 				
 				$(json).each(function(i,obj){
 					var date=new Date(obj.startTime);
+					var seat = obj.seat;
+					var seatNumber = 1;
 					
+					while(true){
+						if(seat.toString().indexOf("/") >0){
+							seat = seat.toString().replace("/","");
+							seatNumber += 1;
+						}else{
+							break;
+						}
+					} 
 					 
 					str+="<div class='list'>"
 			   		+"<img src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'>"
@@ -72,7 +85,7 @@
 			   		+"</tr>"
 			   		+"<tr>"
 			   		+"<td><h4>관람인원</h4></td>"
-			   		+"<td>2명</td>"
+			   		+"<td>"+seatNumber+"명</td>"
 			   		+"</tr>"
 			   		+"</table>"
 			   		+"</div>";
@@ -86,7 +99,7 @@
 </head>
 <body>
    <div id="container">
-	   	
+	   	<input type="hidden" value="${member.userId }" id="userId">
    </div>
 </body>
 </html>
