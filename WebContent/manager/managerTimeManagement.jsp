@@ -24,7 +24,6 @@
 				for(var i=0 ; i<json.length ; i++){
 					makeTag += "<option value='" + json[i].theaterNo + "'>" + json[i].theaterName + "</option>";
 				}
-				
 				$("#theater_list").append(makeTag);
 			}
 		});
