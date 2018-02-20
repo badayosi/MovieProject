@@ -51,7 +51,7 @@
 .jF p input {
 	width: 300px;
 	height: 40px;
-	font-size: 20px;
+	font-size: 16px;
 	border: 2px solid #ccc;
 }
 #telSelect {
@@ -227,7 +227,7 @@ input:FOCUS {
 	margin-left:258px;
 	width:461px !important
 }
-#joinBtn,#cencelBtn{
+#passwordBtn,#joinBtn,#cencelBtn{
 	width:100px !important;
 	height: 40px !important;
 	background: #333333;
@@ -248,7 +248,6 @@ input:FOCUS {
 		var zipcode = $("#userAddr").val().substring(1,6);
 		var userAddr = $("#userAddr").val().substring(7,$("#userAddr").val().indexOf("/"));
 		var addrUser = $("#userAddr").val().substring($("#userAddr").val().indexOf("/")+1,$("#userAddr").val().length);
-	
 		$("#telSelect").val(tel1);
 		$(".telinput").eq(0).val(tel2);
 		$(".telinput").eq(1).val(tel3);
@@ -257,24 +256,33 @@ input:FOCUS {
 		$("#addrUser").val(addrUser);
 		$(document).on("click","#updateUser_img",function(){
 			$("#userupdate_wrap").css("display","block");
+			$("#passwordUpdate_wrap").css("display","none");
 		})
+		$(document).on("click","#passwordUpdate_img",function(){
+			$("#passwordUpdate_wrap").css("display","block");
+			$("#userupdate_wrap").css("display","none");
+		})
+		
+		
+		
 	})
 </script>
 	<input type="hidden" value="${member.addr }" id="userAddr">
 	<input type="hidden" value="${member.phone }" id="userTel">
+	<input type="hidden" value="${member.userId }" id="userId">
 	<div id="myInfo">
 		<ul>
 			<li><a href="#" id="updateUser_img"><img src="images/info1.png" ></a></li>
-			<li><a href="#"><img src="images/info2.png"></a></li>
+			<li><a href="#" id="passwordUpdate_img"><img src="images/info2.png"></a></li>
 			<li><a href="#"><img src="images/info3.png"></a></li>
-			<li><a href="#"><img src="images/info4.png"></a></li>
+			<li><a href="#" id="deleteUpdate_img"><img src="images/info4.png"></a></li>
 		</ul>
 	</div>
 	<div id="userupdate_wrap">
-		<form action="join.do" method="post" class="jF">
+		<div class="jF">
 				<p>
-					<label>아이디</label> 
-					<span>${member.userId }</span> 
+					<label>아이디</label>
+					<span>${member.userId }</span>
 					
 				</p>
 				<p>
@@ -304,7 +312,7 @@ input:FOCUS {
 						
 				</p>
 				<p id="btnWrap">
-					<input type="submit" value="수정" id="joinBtn"> <input type="button"
+					<input type="submit" value="수정" id="updateBtn"> <input type="button"
 						value="취소" id="cencelBtn">
 				</p>
 	
@@ -321,13 +329,10 @@ input:FOCUS {
 						</div>
 					</div>
 				</div>
-			</form>
+			</div>
 	</div>
 	<div id="passwordUpdate_wrap">
-		<form action="join.do" method="post" class="jF">
-				<p>
-					<label>현재 비밀번호</label> <input type="password" name="pw"  id="userPw">
-				</p>
+		<div class="jF">
 				<p>
 					<label>새 비밀번호</label> <input type="password" name="pw" placeholder="8자이상 영문/숫자/특수문자를 조합하세요" id="userPwnew">
 				</p>
@@ -335,22 +340,8 @@ input:FOCUS {
 					<label>비밀번호 확인</label> <input type="password" name="pwch" id="userPwch">
 				</p>
 				<p id="btnWrap">
-					<input type="submit" value="변경" id="joinBtn"> <input type="reset"
+					<input type="button" value="변경" id="passwordBtn"> <input type="button"
 						value="취소" id="cencelBtn">
 				</p>
-		</form>
-	</div>
-	<div id="passwordUpdate_wrap">
-		<form action="join.do" method="post" class="jF">
-				<p>
-					<label>새 비밀번호</label> <input type="password" name="pw" placeholder="8자이상 영문/숫자/특수문자를 조합하세요" id="userPwnew">
-				</p>
-				<p>
-					<label>비밀번호 확인</label> <input type="password" name="pwch" id="userPwch">
-				</p>
-				<p id="btnWrap">
-					<input type="submit" value="변경" id="joinBtn"> <input type="reset"
-						value="취소" id="cencelBtn">
-				</p>
-		</form>
+		</div>
 	</div>

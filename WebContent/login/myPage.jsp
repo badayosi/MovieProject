@@ -73,13 +73,13 @@
 		left:28%;
 		display: none;
 	}
-	#checkpwWrap form{
+	#checkpwWrap #formdiv{
 		width:500px;
 		height:150px !important;
 		position: relative;
 		background: #EFEBDB;
 	}
-	#checkpwWrap form p#p1 {
+	#checkpwWrap #formdiv p#p1 {
 		position: absolute;
 		top:45px;
 		left:50px;
@@ -87,16 +87,16 @@
 		font-size:20px;
 		
 	}
-	#checkpwWrap form p#p1 input{
+	#checkpwWrap #formdiv p#p1 input{
 		padding:5px;
 		font-size:17px;
 	}
-	#checkpwWrap form p#p2 {
+	#checkpwWrap #formdiv p#p2 {
 		position: absolute;
 		top:55px;
 		left:350px;
 	}
-	#checkpwWrap form p#p2 input{
+	#checkpwWrap #formdiv p#p2 input{
 		width:60px;
 		height:37px;
 		padding: 5px;
@@ -114,6 +114,8 @@
 			$("#myNav ul li").not($(this)).removeClass("select_menu");
 			$(this).addClass("select_menu");
 			if($(this).text()=="나의 문의 내역"){
+				$("#checkpwWrap").css("display","none");
+				$("#password").val("");
 				$("#selectMenu").load("myNotice.jsp");
 			}else if($(this).text()=="나의 정보 관리"){
 				$("#selectMenu").empty();
@@ -196,6 +198,102 @@
 				alert("제목을 입력해주세요");
 				$("#mynotice_title").focus();
 			}
+			
+		})
+		$("#passwordCheckedBtn").click(function(){
+			var password = $("#password").val();
+			var userId = $("#userId").val();
+			$.ajax({
+				url:"mynoticecheckpass.do",
+				type:"get",
+				data:{"password":password,
+					"userId":userId},
+				dataType:"json",
+				success:function(json){
+					console.log(json);
+					if(json == null){
+						alert("비밀번호가 틀렸습니다.");
+						$("#password").focus();
+					}else{
+						$("#checkpwWrap").css("display","none");
+						$("#selectMenu").load("myInfo.jsp");
+					}
+				}
+				
+			})
+		})
+		$(document).on("click","#updateBtn",function(){
+			
+			var addr = "("+$("#zipcode").val()+")"+$("#addr").val()+"/"+$("#addrUser").val();
+			var email = $("#userEmail").val();
+			var tel = $("#telSelect").val()+"-"+$(".telinput").eq(0).val()+"-"+$(".telinput").eq(1).val();
+			var userId = $("#userId").val();
+			
+			$.ajax({
+				url:"myinfoupdate.do",
+				type:"get",
+				data:{"addr":addr,
+					"email":email,
+					"tel":tel,
+					"userId":userId},
+				dataType:"json",
+				success:function(json){
+					console.log(json);
+					if(json.result ==0){
+						alert("수정되었습니다.");
+						$("#selectMenu").load("myInfo.jsp");
+					}else{
+						alert("예상치 못한 오류가 발생하였습니다.");
+					}
+				}
+			})
+		})
+		$(document).on("click","#passwordBtn",function(){
+			var reg =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
+			
+			if(!reg.test($("#userPwnew").val())){
+				alert("8자이상 영문/숫자/특수문자를 조합하세요");
+				return false;
+			}else if($("#userPwnew").val() != $("#userPwch").val()){
+				alert("비밀번호가 일치하지 않습니다.");
+				return false;
+			}
+			
+			var pass = $("#userPwnew").val();
+			var userId = $("#userId").val();
+			$.ajax({
+				url:"myinfopasswordupdate.do",
+				type:"get",
+				data:{"pass":pass,
+					"userId":userId},
+				dataType:"json",
+				success:function(json){
+					console.log(json);
+					if(json.result ==0){
+						alert("비밀번호가 변경되었습니다.");
+						$("#selectMenu").load("myInfo.jsp");
+					}else{
+						alert("예상치 못한 오류가 발생하였습니다.");
+					}
+				}
+			})
+			
+		})
+		$(document).on("click","#deleteUpdate_img",function(){
+			if(confirm("정말 탈퇴하시겠습니까?")){
+				var userId = $("#userId").val();
+				alert("이벤트 발생");
+				$.ajax({
+					url:"myinfodelete.do",
+					type:"get",
+					data:{"userId":userId},
+					dataType:"json",
+					success:function(json){
+						alert("이용해 주셔서 감사합니다.");
+						location.href="/MovieProject/index.jsp";
+					}
+				})
+			}
 		})
 	})
 function searchDoro(){
@@ -232,6 +330,7 @@ function searchDoro(){
 				}
 				
 		})
+		
 }
 </script>
 </head>
@@ -253,18 +352,19 @@ function searchDoro(){
 			</ul>
 		</div>
 		<div id="selectMenu">
-			
+
 		</div>
 		<div id="checkpwWrap">
-			<form action="" method="get">
+			<div id="formdiv">
 				<p id="p1">
 					<label>비밀번호 </label>
-					<input type="text" name="password">
+					<input type="password" id="password">
+					<input type="hidden" id="userId" value="${member.userId}">
 				</p>
 				<p id="p2">
-					<input type="submit" value="확인">
+					<input type="button" value="확인" id="passwordCheckedBtn">
 				</p>
-			</form>
+			</div>
 		</div>
 	</div>
 	<jsp:include page="../include/footer.jsp"></jsp:include>

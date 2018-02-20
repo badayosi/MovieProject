@@ -143,7 +143,9 @@
 						<a href="#">아이디/비밀번호 찾기</a>
 					</p>
 					<c:if test="${error !=null}">
-						<p>${error }</p>
+						<script type="text/javascript">
+							alert("${error}");
+						</script>
 					</c:if>
 				</form>
 				<div id="memberWrap">
