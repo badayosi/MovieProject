@@ -15,12 +15,12 @@ public class MyInfoDeleteHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		System.out.println("핸들러 시작");
+		
 		String userId = req.getParameter("userId");
 		UserService service = UserService.getInstance();
 		
 		int result = service.deleteUpdate(userId);
-		System.out.println("서비스 종료");
+		
 		req.getSession().removeAttribute("member");
 		HashMap<String,Integer> map = new HashMap<>();
 		map.put("result", result);

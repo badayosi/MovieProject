@@ -120,6 +120,10 @@
 			}else if($(this).text()=="나의 정보 관리"){
 				$("#selectMenu").empty();
 				$("#checkpwWrap").css("display","block");
+			}else if($(this).text()=="예매/구매내역"){
+				$("#checkpwWrap").css("display","none");
+				$("#password").val("");
+				$("#selectMenu").load("myReservation.jsp");
 			}
 		});
 		$(document).on("click",".table_title",function(){
@@ -295,6 +299,23 @@
 				})
 			}
 		})
+		$(document).on("click",".xmark_img",function(){
+			if(confirm("예매를 취소하시겠습니까?")){
+				
+				var no = $(this).prev().find(".reservationNo").text();
+				$.ajax({
+					url:"myReservationdelete.do",
+					type:"get",
+					data:{"no":no},
+					success:function(){
+						alert("예매를 취소하였습니다.");
+						$("#selectMenu").load("myReservation.jsp");
+					}
+				})
+			}else{
+				
+			}
+		})
 	})
 function searchDoro(){
 		var doro = $("#doro").val();
@@ -326,10 +347,12 @@ function searchDoro(){
 								+" "+json[i].building1+json[i].building2+"</p>";
 						div += zipcode + addr +"</div>";
 						$("#resultAddrWrap").append(div);
+
 					}
 				}
 				
 		})
+		
 		
 }
 </script>

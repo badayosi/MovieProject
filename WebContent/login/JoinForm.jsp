@@ -172,7 +172,7 @@ input:FOCUS {
 }
 
 #searchWarp .searchResult .seacrch_zipcode {
-	width: 20%;
+	width: 18%;
 	text-align: center;
 	margin-right:10px !important;
 	border-right: 1px solid #ccc;
@@ -180,7 +180,7 @@ input:FOCUS {
 
 #searchWarp .searchResult .seacrch_addr {
 	text-align: right;
-	width: 70%;
+	width: 69%;
 	border-right: 1px solid #ccc;
 }
 
@@ -259,8 +259,9 @@ input:FOCUS {
 		height: 40px;
 		font-size:14px;
 	}
-.checkimg{
-}
+	.checkimg{
+	
+	}
 #radioCheckImg{
 	display: inline-block;
 }
