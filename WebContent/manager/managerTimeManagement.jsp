@@ -134,6 +134,26 @@
 		});
 	}
 	
+	function addTimeTable(){
+		$.ajax({
+			url:"managerAjax.do?type=insert&target=timetable",
+			type:"get",
+			dataType:"json",
+			success:function(json){
+				console.log(json);
+				if(json.success != null){
+					$(".time_no").each(function(index,obj){
+						if($(this).attr("value") == tableNo)
+							$(this).parent().parent().remove();
+					});
+					alert(json.success);
+				}
+				else
+					alert(json.error);
+			}
+		});
+	}
+	
 	function formatChange(date, type){
 		var newDate = new Date(date);
 		
@@ -183,6 +203,7 @@
 			<select id="theater_list">
 			
 			</select>
+			<input type="button" name="add_list" value="추가" onclick="javascript:">
 			<div id="theater_schedule">
 			
 			</div>
