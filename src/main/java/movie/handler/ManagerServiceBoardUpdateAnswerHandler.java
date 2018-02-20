@@ -21,7 +21,7 @@ public class ManagerServiceBoardUpdateAnswerHandler implements CommandHandler {
 		ServiceBoard sb = new ServiceBoard(boardNo, regdate, answer, answerContent);
 		ServiceBoardService service = ServiceBoardService.getInstance();
 		service.update(sb);
-		return "ManagerBoard.jsp";
+		return "ManagerServiceBoard.jsp";
 	}
 
 }
