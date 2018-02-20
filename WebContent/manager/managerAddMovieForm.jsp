@@ -94,7 +94,9 @@
 				steelcutStr += $("#a").get(0).files[i].name + ",";
 			}
 			$("input[type='hidden']").val(steelcutStr);
-			alert($("input[type='hidden']").val());	
+			var content=$("textarea[name='movieSynopsis']").val().replace(/(?:\r\n|\r|\n)/g, '<br />');
+			alert(content);
+			$("textarea[name='movieSynopsis']").val(content);
 		});
 	});
 </script>
