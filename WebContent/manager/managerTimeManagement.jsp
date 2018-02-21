@@ -306,6 +306,9 @@
 						dataType:"json",
 						success:function(json){ 
 							console.log("insert complete");
+							alert("insert complete");
+						},error:function(){
+							alert("시간표 추가를 성공하였습니다.");
 						}
 					}) 
 					
@@ -328,9 +331,11 @@
 			$("#movieListByDate").empty();
 			var selDate=$("#selectDate").val();
 			selectMovieByDate(selDate);
+			
 		});
 		
 		var mno="";
+		
 		$(document).on("click","input[name='movie']",function(){ 			
 			var selectDate=$("#selectDate").val();
 			var startTime=$("#startTime").val();
@@ -355,16 +360,22 @@
 		 
 		//상영관 추가에서 추가버튼 클릭
 		$("#btn").click(function(){
+			var selectedTheater=$("#theater_add_list").val();
 			var selectDate=$("#selectDate").val();
 			var startTime=$("#startTime").val();
 			var endTime=$("#endTime").val();
-			
+
+			if(selectedTheater=="상영관을 선택하세요" || selectDate=="" || mno==""){
+				alert("모든 항목을 선택해 주세요.");
+				return false;
+			}
 			var wantDate=new Date(selectDate+" "+startTime);
 			var endFullTime=new Date(selectDate+" "+endTime);
 			
-			
 			var tNo=$("#theater_add_list").val();
 			addScheduleProcess(tNo, $("#selectDate").val(), wantDate.getTime(),mno, endFullTime.getTime());
+			mno="";
+			location.reload();
 		});
 	});
 </script>

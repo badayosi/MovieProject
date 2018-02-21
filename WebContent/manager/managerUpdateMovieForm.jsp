@@ -164,7 +164,7 @@
 		<p id="insert">
 			<input type="hidden" name="movieSteelCut" value="">
 			<input type="submit" value="수정">
-			<a href="managerReadMovie.do"><input type="button" value="취소"></a>
+			<a href="managerReadMovie.do?no=${movie.movieNo}"><input type="button" value="취소"></a>
 		</p>
 	</form>	
 </div>
