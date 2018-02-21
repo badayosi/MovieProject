@@ -285,6 +285,7 @@ input:FOCUS {
 				$(this).find("input").css("border-color", "#cccccc");
 			})
 		})
+		
 		$("input").each(
 				function(i, obj) {
 					$(this).focus(

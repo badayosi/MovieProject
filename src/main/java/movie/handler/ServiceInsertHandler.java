@@ -73,9 +73,7 @@ public class ServiceInsertHandler implements CommandHandler {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}		
-		
-		
+		}
 		return null;
 		
 	}
