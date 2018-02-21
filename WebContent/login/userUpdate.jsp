@@ -284,18 +284,17 @@ input:FOCUS {
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+		var zipcode = $("#userAddr").val().substring(1,6);
+		var userAddr = $("#userAddr").val().substring(7,$("#userAddr").val().indexOf("/"));
+		var addrUser = $("#userAddr").val().substring($("#userAddr").val().indexOf("/")+1,$("#userAddr").val().length);
+		$("#zipcode").val(zipcode);
+		$("#addr").val(userAddr);
+		$("#addrUser").val(addrUser);
 		if("여자"=="<%=gender%>"){
 			$("#radio1").attr("checked","checked");	
 		}else if("남자"=="<%=gender%>"){
 			$("#radio2").attr("checked","checked");	
 		}
-		
-		 
-		
-		
-		var idCk = 0;
-		var falseImgsrc = "../images/join_else_icon.png";
-		var trueImgsrc = "../images/join_icon.png";
 		$("#joinForm #jF p").each(function(i, obj) {
 			$(obj).hover(function() {
 				$(this).find("label").css("color", "black");
@@ -329,14 +328,11 @@ input:FOCUS {
 			$("#hiddenbg").css("display","block");
 			$("#searchWarp").css("display","block");
 			$("#resultAddrWrap div").not("#zxc").remove();
-			$("#zipcode").nextAll(".checkimg").css("display","inline-block");
-			$("#zipcode").nextAll(".checkimg").attr("src",trueImgsrc);
 		})
 		 $("#searchWarp #search_cencel").click(function(){
 			$("#hiddenbg").css("display","none");
 			$("#searchWarp").css("display","none");
 			$("#doro").val("");
-			$("#zipcode").nextAll(".checkimg").attr("src",falseImgsrc);
 		 })
 		$("#doroSearchWrap").click(function(){
 			 searchDoro();
@@ -362,97 +358,19 @@ input:FOCUS {
 			$(this).css("background","none");
 		})
 		$("#cencelBtn").click(function(){
-			location.href="index.jsp";
-		})
-		
-		$("#checkId").click(function(){
-			var id = $("#userId").val();
-			 $.ajax({
-					url:"idcheck.do",
-					type:"get",
-					data:{"id":id},
-					dataType:"json",
-					success:function(json){
-						console.log(json);
-						if(json == "false"){
-							alert("중복된 아이이디입니다.");
-							$("#userId").nextAll(".checkimg").attr("src",falseImgsrc);
-						}else if(json =="true"){
-							var reg =/^(?=.*[A-Za-z])[A-Za-z0-9]{6,12}$/;
-						    var reg2 = /^[A-Za-z]{6,12}$/;
-							if(reg.test(id) || reg2.test(id)){
-								$("#userId").nextAll(".checkimg").attr("src",trueImgsrc);
-							}else{
-								alert("6자이상 영문/숫자를 입력해주세요");
-							}
-						}
-					}
-			})
-		})
-		$("input[name='pw']").keyup(function(){
-			var reg =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,20}$/;
-			
-			if(reg.test($(this).val())){
-				$("#userPw").nextAll(".checkimg").attr("src",trueImgsrc);
-			}else{
-				$("#userPw").nextAll(".checkimg").attr("src",falseImgsrc);
-			}
-		})
-		$("input[name='pwch']").keyup(function(){
-			if($(this).val() != $("input[name='pw']").val()){
-				$("#userPwch").nextAll(".checkimg").attr("src",falseImgsrc);
-			}else{
-				$("#userPwch").nextAll(".checkimg").attr("src",trueImgsrc);
-			}
-		})
-		$("input[name='name']").keyup(function(){
-			var regName =/^[가-힣]{2,10}$/;
-			if(!regName.test($(this).val())){
-				$("#userName").nextAll(".checkimg").css("display","inline-block");
-				$("#userName").nextAll(".checkimg").attr("src",falseImgsrc);
-			}else{
-				$("#userName").nextAll(".checkimg").css("display","inline-block");
-				$("#userName").nextAll(".checkimg").attr("src",trueImgsrc);
-			}
-		})
-		$("input[name='email']").keyup(function(){
-			var regEmail = /^\w{4,12}@[a-z]{2,10}[\.]?(com|or.kr|net)$/;
-			if(!regEmail.test($(this).val())){
-				$("#userEmail").nextAll(".checkimg").css("display","inline-block");
-				$("#userEmail").nextAll(".checkimg").attr("src",falseImgsrc);
-			}else{
-				$("#userEmail").nextAll(".checkimg").css("display","inline-block");
-				$("#userEmail").nextAll(".checkimg").attr("src",trueImgsrc);
-			}
-		})
-		
-		$("input[name='tel2'],input[name='tel3']").keyup(function(e){
-			var regTel1 = /^[0-9]{3,4}$/;
-			var regTel2 = /^[0-9]{4}$/;
-			if($("input[name='tel2']").val().length==4){
-				$("#userTel").nextAll("input").focus();
-			}
-			if(!regTel1.test($("input[name='tel2']").val()) || !regTel2.test($("input[name='tel3']").val())){
-				$("#userTel").nextAll(".checkimg").attr("src",falseImgsrc);
-			}else{
-				$("#userTel").nextAll(".checkimg").attr("src",trueImgsrc);
-			}
-		})
-		$("input[name='gender']").click(function(){
-			$("#radio2").nextAll(".checkimg").attr("src",trueImgsrc);
+			location.href="userList.do";
 		})
 		
 		
 		$("#jF").submit(function(){	
-			var bl = true;
-			$(".checkimg").each(function(i, obj) {
-				if($(obj).attr("src") == falseImgsrc){
-					$(obj).siblings('input').focus();
-					bl = false;
+			var ex = 0;
+			$("#jF>p input[type='text']").each(function(i, obj) {
+				if($(this).val() ==""){
+					ex = 1;
 				}
 			})
-			if(!bl){
-				alert("x표시를 다시 입력하세요");
+			if(ex == 1){
+				alert("공백을 입력해주세요");
 				return false;
 			}
 		})
@@ -498,6 +416,7 @@ function searchDoro(){
 </head>
 <body>
 	<jsp:include page="../include/header.jsp"></jsp:include>
+	<input type="hidden" value="${item.addr }" id="userAddr">
 	<div id="hiddenbg"></div>
 	<div id="joinForm">
 		<h2 id="h2text">회원정보수정</h2>
@@ -507,25 +426,15 @@ function searchDoro(){
 					<label>아이디</label> 
 					<input type="text" name="id" id="userId" value="${item.userId }" readonly="readonly"> 
 				</p>
-				<!-- <p>
-					<label>비밀번호</label> <input type="password" name="pw" placeholder="8자이상 영문/숫자/특수문자를 조합하세요" id="userPw">
-					
-					<img src="../images/join_else_icon.png" class="checkimg">
-				</p>
-				<p>
-					<label>비밀번호 확인</label> <input type="password" name="pwch" id="userPwch">
-					
-					<img src="../images/join_else_icon.png" class="checkimg">
-				</p> -->
+				
 				<p>
 					<label>이름</label>
 					<input type="text" name="name" id="userName" onkeyup="this.value=this.value.replace(/[^가-힣]/g,'');" value="${item.name }"  readonly="readonly">
-					<img src="../images/join_else_icon.png" class="checkimg">
+					
 				</p>
 				<p>
-					<label>이메일주소</label> <input type="email" name="email" id="userEmail" value="${item.email }">
-					
-					<img src="../images/join_else_icon.png" class="checkimg">
+					<label>이메일주소</label> 
+					<input type="email" name="email" id="userEmail" value="${item.email }">
 				</p>
 				<p>
 					<label>휴대폰 번호</label> <select name="tel1" id="telSelect" value="<%=phone1%>">
@@ -539,7 +448,7 @@ function searchDoro(){
 					<input type="tel" name="tel2" class="telinput" id="userTel" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" value="<%=phone2%>"> 
 					
 					<input type="tel" name="tel3" class="telinput" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"value="<%=phone3%>">
-						<img src="../images/join_else_icon.png" class="checkimg">
+						
 						
 				</p>
 				<p>
@@ -548,7 +457,7 @@ function searchDoro(){
 				</p>
 				<p>
 					<label>등급</label> 
-					<%-- <input type="text" name="userRank" id="userRank" value="${item.userRank}" > --%> 
+					
 					<select name="userRank" id="userRank" value="${item.userRank}" >
 						<option value="관리자">관리자</option>
 						<option value="일반등급">일반등급</option>
@@ -562,7 +471,7 @@ function searchDoro(){
 						<span id="span1">여자</span> 
 						<input	type="radio" name="gender" value="남자" class="radioBtn" id="radio2">
 						<span id="span2">남자</span>
-						<img src="../images/join_else_icon.png" class="checkimg" id="radioCheckImg">
+						
 				</p>
 	
 				<p id="postWrap">
@@ -570,8 +479,8 @@ function searchDoro(){
 						value="우편번호 검색" id="addrSearchBtn"><input type="tel"
 						name="zipcode" id="zipcode"> <input type="text" name="addr"
 						id="addr" id="userAddr">
-						<input type="text" name="addrUser" id="addrUser" value="${item.addr }">
-						<img src="../images/join_else_icon.png" class="checkimg">
+						<input type="text" name="addrUser" id="addrUser" value="">
+						
 				</p>
 				<p id="btnWrap">
 					<input type="submit" value="수정" id="joinBtn"> 
@@ -585,7 +494,7 @@ function searchDoro(){
 						<input type="button" id="search_cencel" value="취소">
 					</p>
 					<div id="resultAddrWrap">
-						<div class="searchResult" id="zxc" value="${item.addr }">
+						<div class="searchResult" id="zxc" >
 							<p class="seacrch_zipcode">우편번호</p>
 							<p class="seacrch_addr">주소명</p>
 						</div>
