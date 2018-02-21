@@ -31,7 +31,6 @@ $(function(){
 			$("#findPwForm input[name='email']").focus();
 			return false;
 		}
-		
 	})
 
 })
@@ -80,7 +79,6 @@ $(function(){
 <body>
 	<jsp:include page="../include/header.jsp"></jsp:include>
 	<div id="content">
-		
 			<h2>아이디/비밀번호 찾기</h2>
 			
 			<div id="leftWrap">
@@ -120,11 +118,6 @@ $(function(){
 					</div>
 				</c:if>
 			</div>
-			
-			
-			
-			
-	
 	</div>
 </body>
 </html>
