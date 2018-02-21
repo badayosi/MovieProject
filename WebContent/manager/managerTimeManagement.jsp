@@ -76,6 +76,24 @@
 	#movieListByDate{
 		list-style: none;
 	}
+	table{
+		border-collapse: collapse;
+		width:470px;
+		margin:0 auto;
+	}
+	table tr td{
+		border:1px solid black;
+		width:200px;
+		height:400px;
+		text-align: left;
+		padding-left:10px;
+	}
+	table tr td:first-child{
+		width:150px;
+	}
+	table tr td:last-child{
+		/* padding-left:10px; */
+	}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
@@ -250,7 +268,7 @@
 				console.log(json);
 				$(json).each(function(i,obj){
 					if(obj.openDate<=selDate && obj.closeDate>=selDate){
-						str+="<li><a class='movieName' href='#'><b>"+obj.movieName+" </b></a><span class='mPlaytime'>("+obj.playTime+"분)</span></li>"; 
+						str+="<li><input type='radio' name='movie' value='"+obj.movieName+"'><b>"+obj.movieName+" </b>(<span class='mPlaytime'>"+obj.playTime+"</span>분)</li>"; 
 					}
 				})
 				$("#movieListByDate").append(str);
@@ -261,20 +279,42 @@
 	$(function(){
 		loadTheater();
 		
-		// 상영관 선택 시
+		// 상영관 관리에서 선택
 		$("#theater_list").on("change",function(){
 			$("#theater_schedule").empty();
 			loadTheaterById($("#theater_list").val());
 		});
 		
+		//상영관 추가에서 날짜 선택
 		$("#selectDate").on("change",function(){
 			$("#movieListByDate").empty();
 			var selDate=$("#selectDate").val();
 			selectMovieByDate(selDate);
 		});
 		
-		$(document).on("click",".movieName",function(){
-			alert($(this).text());
+		$(document).on("click","input[name='movie']",function(){ 
+			var selectDate=$("#selectDate").val();
+			var startTime=$("#startTime").val();
+			var playTime=Number($(this).nextAll(".mPlaytime").text());
+			
+			var date=new Date(selectDate+" "+startTime);
+			var endTime = date.getTime() + (playTime * 60*1000);
+			date = new Date(endTime);
+			var endHour=date.getHours()+"";
+			var endMinute=date.getMinutes()+"";
+			
+			if(endHour.length==1){
+				endHour=0+endHour;
+			}
+			if(endMinute.length==1){
+				endMinute=0+endMinute;
+			}	
+			$("#endTime").val(endHour+":"+endMinute);
+			
+		});
+		 
+		//상영관 추가에서 추가버튼 클릭
+		$("#btn").click(function(){
 			
 		});
 	});
@@ -298,17 +338,34 @@
 			 
 			<div id="rightContent">
 				<h2>상영관 추가</h2>
+				<h4>※상영관, 상영일, 시작시간 입력 후 영화를 선택해 주세요.※</h4>
 				<div id="addInfo">
-					<select id="theater_add_list">
+					<table>
+						<tr>
+							<td>
+								<p>상영관:</p>
+								<select id="theater_add_list">
+								</select><br><br>
+								<p>상영일:</p>
+								<input id="selectDate" type="date"><br><br>
+								<p>시작시간:</p>
+								<input id="startTime" type="time" value="10:00"><br><br>
+								<p>종료시간:</p>
+								<input id="endTime" type="time" value="12:00" disabled="disabled">
+							</td>
+							<td>
+								<div id="movieListDiv">
+									<ul id="movieListByDate">
 					
-					</select>
-					<input id="selectDate" type="date">
-				</div>
-				<div id="movieListDiv">
-					<ul id="movieListByDate">
+									</ul>
+								</div>
+							</td>
+						</tr>
+					</table>
 					
-					</ul>
+					<button id="btn">추가</button>
 				</div>
+				
 			</div>
 		</div>
 	<jsp:include page="../include/footer.jsp"></jsp:include>
