@@ -136,25 +136,6 @@
 					<td>
 						<form action="managerserviceboardupdateanswer.do" method="get" id="answer_update">
 							<input type="hidden" value="${sb.boardNo}" name="no">
-<<<<<<< HEAD
-							<label id="label_text">답글 </label>
-							<p>
-								${sb.answerContent }
-							</p>
-
-						</form>
-					</td>
-				</c:if>
-				<c:if test="${sb.answerContent == null }">
-					<td>
-						<form action="managerserviceboardupdateanswer.do" method="get" id="answer_update">
-							<input type="hidden" value="${sb.boardNo}" name="no">
-							<label id="label_text">답글 </label>
-							<textarea rows="" cols="" name="answerContent" id="answerContent">
-							
-							</textarea>
-							
-=======
 							<label id="label_answer">답글 </label>
 							<div id="p_answercontent">
 								<p>${sb.answerContent }</p>
@@ -168,7 +149,6 @@
 							<input type="hidden" value="${sb.boardNo}" name="no">
 							<label id="label_text">답글 </label>
 							<textarea rows="" cols="" name="answerContent" id="answerContent"></textarea>			
->>>>>>> refs/heads/bum2
 							<p id="btn">
 								<input type="reset" value="취소">
 								<input type="submit" value="전송">
