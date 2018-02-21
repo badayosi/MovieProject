@@ -167,8 +167,11 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$("#li2").addClass("select_menu");
-		$("#sss").load("ServiceUserBoardView.jsp");
+		if($("#newLoad").val()==""){
+			$("#li1").addClass("select_menu");
+			$("#sss").load("noticeView.jsp");
+		}
+		
 		$(document).on("submit","#service_form",function(){
 			$("#content_ta").val($("#content_ta").val().replace(/(?:\r\n|\r|\n)/g, '<br />'));
 			
@@ -190,9 +193,14 @@
 				$("#li2").removeClass("select_menu");
 				$("#li1").addClass("select_menu");
 			}else{
-				$("#sss").load("ServiceUserBoardView.jsp");
-				$("#li2").addClass("select_menu");
-				$("#li1").removeClass("select_menu");
+				if($("#ckUser").val()==""){
+					location.href="/MovieProject/login/Login.jsp";
+				}else{
+					$("#sss").load("ServiceUserBoardView.jsp");
+					$("#li2").addClass("select_menu");
+					$("#li1").removeClass("select_menu");
+				}
+				
 			}
 		})
 		$(document).on("click","#nextTitle, #prevTitle",function(){
@@ -287,7 +295,7 @@ function noticeSelect(no){
 					var date = new Date(json[1].regdate);
 					$("#regdate_Li").html("<b>등록일 :</b>"+date.toLocaleDateString()+"<span id='linespan'></span>"+"<span class='hidden_span'>"+json[1].boardNo+"</span>");
 					$("#readcount_li").html("<b>조회수 :</b>"+json[1].readcount);
-					$("#selectContent p").text(json[1].content);
+					$("#selectContent p").html(json[1].content);
 				
 					$("#nextTitle").html(json[2].title+"<span class='hidden_span'>"+json[2].boardNo+"</span>");
 					$("#prevTitle").html(json[0].title+"<span class='hidden_span'>"+json[0].boardNo+"</span>");
@@ -297,7 +305,7 @@ function noticeSelect(no){
 						var date = new Date(json[0].regdate);
 						$("#regdate_Li").html("<b>등록일 :</b>"+date.toLocaleDateString()+"<span id='linespan'></span>"+"<span class='hidden_span'>"+json[0].boardNo+"</span>");
 						$("#readcount_li").html("<b>조회수 :</b>"+json[0].readcount);
-						$("#selectContent p").text(json[0].content);
+						$("#selectContent p").html(json[0].content);
 						$("#nextTitle").html(json[1].title+"<span class='hidden_span'>"+json[1].boardNo+"</span>");
 						$("#prevTitle").text("이전 게시글이 없습니다.");
 					}else{
@@ -305,7 +313,7 @@ function noticeSelect(no){
 						var date = new Date(json[1].regdate);
 						$("#regdate_Li").html("<b>등록일 :</b>"+date.toLocaleDateString()+"<span id='linespan'></span>"+"<span class='hidden_span'>"+json[1].boardNo+"</span>");
 						$("#readcount_li").html("<b>조회수 :</b>"+json[1].readcount);
-						$("#selectContent p").text(json[1].content);
+						$("#selectContent p").html(json[1].content);
 						$("#nextTitle").text("다음 게시글이 없습니다.");
 						$("#prevTitle").html(json[0].title+"<span class='hidden_span'>"+json[0].boardNo+"</span>");
 					}
@@ -329,12 +337,15 @@ function noticeSelect(no){
 		</div>
 		<div id="sss"></div>
 	</div>
+	<input type="hidden" id="ckUser" value="${member.userId }">
+	
 	<c:if test="${updateNo !=null }">
 		<script>
 			$("#sss").load("noticeView.jsp");
 			noticeSelect("${updateNo }");
 		</script>
 	</c:if>
+	<input type="hidden" id="newLoad" value="${insertService}">
 	<c:if test="${insertService !=null }">
 		<script>
 			

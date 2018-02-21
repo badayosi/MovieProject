@@ -12,14 +12,14 @@
 	}
 	#myreservation_wrap #myreservation_ul{
 		width:100%;
+		border-bottom:1px solid #ccc;
 	}
 	#myreservation_wrap #myreservation_ul .myreservation_li{
 		width:95%;
 		overflow:hidden;
 		list-style:none;
-		padding:20px 0px 20px 30px;
+		padding:20px;
 		position:relative;
-		border-bottom:1px solid #ccc;
 	}
 	#myreservation_wrap #myreservation_ul .left_img{
 		float:left;
@@ -88,7 +88,7 @@
 						var p2 = "<p><span class='span_left'>상영관(좌석)</span> <b>"+json[i].theaterName+ " ("+json[i].seat+")</b></p>";
 						var p3 = "<p><span class='span_left'>예매내역</span> <b>"+json[i].rating+"세"+" "+ json[i].movieName+"("+json[i].theaterType+")</b></p>";
 						var money = json[i].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-						var p4 = "<p><span class='span_left'>총 결제 금액</span> <b>"+money+"원</b></p>"
+						var p4 = "<p><span class='span_left'>총 결제 금액</span> <b>"+money+"원</b></p>";
 						divRight += p1 + p2+p3+p4 +"</div>";
 						li += divleft + divRight +"<img src='images/xmark.png' class='xmark_img'>" +"</li>";
 						$("#myreservation_ul").append(li);

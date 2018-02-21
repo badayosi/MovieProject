@@ -107,12 +107,12 @@ public class UserFindPwHandler implements CommandHandler {
 			// 이메일 내용
 			String msg1 = "";
 			
-			msg1 = "Spring Homepage 임시 비밀번호 입니다.";
+			msg1 = "롯데 시네마 임시 비밀번호 입니다.";
 			msg1 += "<div align='center' style='border:1px solid black; font-family:verdana'>";
 			msg1 += "<h3 style='color: blue;'>";
 			msg1 += user.getUserId() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
 			msg1 += "<p>임시 비밀번호 : ";
-			msg1 += user.getPassword() + "</p></div>";
+			msg1 += user.getPassword() + "</p><br></div>";
 			
 			
 			msg.setText(msg1, "UTF-8");

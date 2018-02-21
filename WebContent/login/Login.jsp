@@ -124,8 +124,7 @@
 				$("#p2 input").focus();
 				return false;
 			}
-		})
-
+		});
 	})
 </script>
 </head>
@@ -143,10 +142,10 @@
 					<p id="p2">
 						<label>비밀번호</label> <input type="password" name="password">
 					</p>
-					<input type="submit" id="loginBtn">
+					<input type="submit" id="loginBtn" value="">
 					<p id="searchWrap">
 						<a href="findIdPw.jsp">아이디/비밀번호 찾기 | </a>
-						<a href="#">회원가입</a>
+						<a href="JoinForm.jsp">회원가입</a>
 					</p>
 					<c:if test="${error !=null}">
 						<script type="text/javascript">
@@ -155,12 +154,10 @@
 					</c:if>
 				</form>
 				</div>
-				
 			</div>
 			<div id="imgWrap">
 				<img src="../images/loginImg2.PNG">
 			</div>
-
 		</div>
 	</div>
 	<jsp:include page="../include/footer.jsp"></jsp:include>

@@ -11,7 +11,7 @@
 	#container{
 		width:1024px;
 		margin:0 auto;
-		text-align: center;
+		text-align: center; 
 		overflow: hidden;
 	}
 	#container #theater_schedule{

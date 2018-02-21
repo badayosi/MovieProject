@@ -84,6 +84,11 @@
 		padding: 5px 10px;
 		color: black;
 	}
+	.error1{
+		color: red;
+		font-size: 13px;
+		display: none;
+	}
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -98,6 +103,19 @@
 			alert(content);
 			$("textarea[name='movieSynopsis']").val(content);
 		});
+		
+		
+		$("input[name='moviePlaytime']").change(function(){		
+			var num = $(this).val();	
+			num = num.charCodeAt(0);
+			if(num>47&&num<58){
+				$(this).parent().find(".error1").css("display","none");
+			}else{
+				$(this).val("");
+				$(this).parent().find(".error1").css("display","block");
+			}
+		})
+		
 	});
 </script>
 </head>
@@ -126,11 +144,23 @@
 			</tr>
 			<tr>
 				<th>관람등급</th>
-				<td><input type="text" name="movieRating"></td>
+				
+				<td>
+					<select name="movieRating">
+						<option value="7">전체관람가</option>
+						<option value="12">12세 이상</option>
+						<option value="15">15세 이상</option>
+						<option value="18">청소년 관람 불가</option>
+					</select>
+					<!-- <input type="text" name="movieRating"> -->
+				</td>
 			</tr>
 			<tr>
 				<th>상영시간</th>
-				<td><input type="text" name="moviePlaytime"></td>
+				<td>
+					<input type="text" name="moviePlaytime">
+					<span class="error1">숫자만 입력하세요</span>
+				</td>
 			</tr>
 			<tr>
 				<th>줄거리</th>

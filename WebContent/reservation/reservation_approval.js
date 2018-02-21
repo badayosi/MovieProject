@@ -1,7 +1,3 @@
-// 승인조건
-// 조건1 : 설정된 인원만큼 좌석이 모두 선택되었는가?
-// 조건2 : 금액 재확인
-
 // 선택좌석/설정인원 매치확인
 function checkSeat(){
 	var checker = 0;
@@ -24,19 +20,22 @@ function checkSeat(){
 // 최종단계 결제확인
 function confirmReserve(){
 	var str = "";
-	
+	var temp = "";
+	var title = new Array();
 	str += "최종결제단계 입니다.\n";
 	str += "확인 선택 시 아래 항목으로 예약 및 결제됩니다.\n"
 	str += "결제정보를 다시 한번 확인해주세요.\n";
 	str += "\n";
+	temp = $("#select_info").find(".nav_data").eq(0).html();
+	title = temp.split("<");
 	str += "영화명 : " + $("#nav_title").html() + "\n";
-	str += "상영날짜 : " + $("#select_info").find(".nav_data").eq(0).html() + "\n";
+	str += "상영날짜 : " + title[0] + "\n";
 	str += "상영시간 : " + $("#select_info").find(".nav_data").eq(1).html() + "\n";
 	str += "선택좌석 : " + $("#select_info").find(".nav_data").eq(3).html() + "\n";
 	str += "결제금액 : " + $("#total_payment").find(".nav_data").eq(0).html() + "원" + "\n";
 	if(confirm(str)){
 		fixProgress();
-		alert("예약이 완료되었습니다.");
+		location.replace("/MovieProject/login/myPage.jsp");
 	}
 	else
 		alert("예약이 취소되었습니다.");

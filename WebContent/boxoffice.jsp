@@ -140,20 +140,22 @@
 		type:"get",
 		dataType:"json",
 		success:function(json){ 
-			
-			//console.log(json);
 			var date=new Date();
 			var nowDate=date.getTime();
 			
 			var makeMovieList;
-			for(var index=0;index<json.length;index++){
+			var length = json.length;
+			if(length>9){
+				length=8;
+			}
+			for(var index=0;index<length;index++){
 				if(json[index].closeDate<nowDate || json[index].openDate>nowDate){
 					continue;
 				}else{
 					
 					makeMovieList = "";
 					makeMovieList += "<li>";
-					makeMovieList += "<a href='javascript:selectMovie(" + json[index].movieNo +")'>";
+					makeMovieList += "<a href='/MovieProject/reservation/ReservationInsert_Member.jsp'>";
 					
 					makeMovieList += "<div class='rating";				
 					switch(json[index].rating){
@@ -173,8 +175,6 @@
 					makeMovieList += "</div>";
 					makeMovieList += "<div class='movieName'>" + json[index].movieName + "</div>";
 					makeMovieList += "<input type='hidden' name='movieKey' value=" + json[index].movieNo +">";
-					/* makeMovieList +=  "."+ ++index;
-					--index; */
 					makeMovieList += "</a>";
 					
 					makeMovieList += "</li>";

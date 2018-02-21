@@ -22,6 +22,9 @@
 	<select id="selectByDate" resultMap="TimetableResult">
 		select * from timetable where theater_no=#{param1} and start_time like #{param2}
 	</select>
+	<select id="selectByNo" parameterType="int" resultMap="TimetableResult">
+		select * from Timetable where table_No=#{no}
+	</select>
 	<delete id="deleteByNo" parameterType="int">
 		delete from Timetable where table_No=#{no}
 	</delete>

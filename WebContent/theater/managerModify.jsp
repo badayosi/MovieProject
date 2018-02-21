@@ -29,7 +29,7 @@
 		height: 25px;
 		margin-bottom: 20px;
 	}
-	input[type='submit']{
+	input[type='submit'],input[type="button"]{
 		font-size: 15px;
 		background: #CDC197;
 		padding: 5px 10px;
@@ -193,8 +193,10 @@
 			<input type="text" name="table"  class="displayHidden" value="...">
 			<p>
 				<input type="submit" value="수정">
+				<a href="list.do"><input type="button" value="취소"></a>
 			</p>
 		</form>
+		
 	</div>
 </body>
 </html>

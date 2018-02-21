@@ -34,6 +34,21 @@ public class ReservationService {
 		}		
 	}
 	
+	public List<Reservation> selectById(String id){
+		SqlSession session = null;
+		
+		try{
+			session = MySqlSessionFactory.openSession();
+			ReservationDao dao = session.getMapper(ReservationDao.class);
+			
+			List<Reservation> result = dao.selectById(id);
+			
+			return result;
+		} finally {
+			MySqlSessionFactory.closeSession(session);
+		}		
+	}
+	
 	public List<Reservation> selectByAll(){
 		SqlSession session = null;
 		
@@ -110,7 +125,21 @@ public class ReservationService {
 			session.commit();
 		} finally {
 			MySqlSessionFactory.closeSession(session);
-		}
+		}	
+	}
+	
+	public void fixReservation(Reservation reservation){
+		SqlSession session = null;
 		
+		try{
+			session = MySqlSessionFactory.openSession();
+			ReservationDao dao = session.getMapper(ReservationDao.class);
+			
+			dao.fixReservation(reservation);
+			
+			session.commit();
+		} finally {
+			MySqlSessionFactory.closeSession(session);
+		}
 	}
 }

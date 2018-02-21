@@ -44,14 +44,14 @@
 		color: #CDC197 !important;
 	}
 	#listArea{
-		width:70%;
+		width:1024px;
 		margin:0 auto;
 		text-align: center;
+		
 	}
-	#listArea table{
+	/* #listArea table{
 		width:100%;
 		margin:0 auto;
-		
 	}
 	#listArea table tr td{
 		 
@@ -60,12 +60,9 @@
 		text-align: center;
 		width:250px;
 		position: relative;
-	}
-	.mPoster{
-		width:250px;
-		height:350px;
-	}
-	#listArea table tr td .hiddenText{
+	} */
+	
+	/* #listArea table tr td .hiddenText{
 		width:100%; 
 		height:350px;
 		background:black;
@@ -75,6 +72,8 @@
 		top:0;
 		display: none;
 	}
+	
+	
 	#listArea table tr td .hiddenText a{
 		width:100px;
 		height:100px;
@@ -86,9 +85,71 @@
 		font-size: 1.1em;
 		text-decoration: none;
 	}
+	
+	
 	table tr td .listDiv .mPoster{
 		width:250px;
 		height:350px;
+	} */
+	.mPoster{
+		width:228px;
+		height:334px;
+	}
+	
+	.listMovieli .hiddenText{
+		width:100%; 
+		height:350px;
+		background:black;
+		opacity:0.7;
+		position: absolute;
+		left: 11px;
+		top:0;
+		width:228px;
+		height: 334px;
+		display: none;
+		z-index: 10;
+	}
+
+	
+	.listMovieli .hiddenText a{
+		width:100px;
+		height:100px;
+		border:1px solid #B2A980;
+		color:#B2A980;
+		line-height: 300px;
+		padding:15px;
+		font-weight: bold;
+		font-size: 1.1em;
+		text-decoration: none;
+		z-index: 10;
+	}
+	
+	.listMovieul{
+		width:1024px;
+		overflow: hidden;
+	}
+	.listDiv{
+		display: inline-block;
+		border:1px solid black;
+		width:228px;
+		margin: 0;
+		padding: 0;
+	}
+	.listDiv a{
+		display: inline-block;
+		margin-top:5px;
+		margin-bottom: 10px;
+		text-decoration: none;
+		color: black;
+	}
+	.listMovieul li{
+		/* border:1px solid black; */
+		list-style: none;
+		padding-bottom:20px;
+		width: 250px;
+		display: inline-block;
+		float: left;
+		position: relative;
 	}
 </style>
 <script type="text/javascript">
@@ -110,19 +171,17 @@ $(function() {
 			var date=new Date();
 			var nowDate=date.getTime();
 			
-			var listTag="<table><tr>";
+			var listTag="<ul class='listMovieul'>";
 			
 			$(json).each(function(i,obj){
 				if(obj.openDate<nowDate && obj.closeDate>nowDate){
-					listTag+="<td><div class='listDiv'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'>"
-								+"<a href='userReadMovie.do?no="+obj.movieNo+"'><p>"+obj.movieName+"</p></a>"
-								+"<div class='hiddenText'><a href='#'>예매하기</a><a href='userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div></div></td>";
+					listTag+="<li class='listMovieli'><div class='listDiv'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'>"
+								+"<a href='userReadMovie.do?no="+obj.movieNo+"'><p>"+obj.movieName+"</p></a></div>"
+								+"<div class='hiddenText'><a href='#'>예매하기</a><a href='userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div></li>";
+					
 				}
-				if((i+1)%4==0){
-					listTag+="<tr>";
-				}		
 			})
-			listTag+="</tr></table>";
+			listTag+="</ul>";
 			$("#listArea").append(listTag);
 		}
 	}) 
@@ -145,20 +204,17 @@ $(function() {
 				success:function(json){
 					console.log(json);
 					
-					var listTag="<table><tr>";
+					var listTag="<ul class='listMovieul'>";
 					
 					$(json).each(function(i,obj){
 						if(obj.openDate<nowDate && obj.closeDate>nowDate){
-							listTag+="<td><div class='listDiv'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'>"
+							listTag+="<li class='listMovieli'><div class='listDiv'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'>"
 										+"<a href='userReadMovie.do?no="+obj.movieNo+"'><p>"+obj.movieName+"</p></a></div>"
-										+"<div class='hiddenText'><a href='#'>예매하기</a><a href='userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div></td>";
+										+"<div class='hiddenText'><a href='#'>예매하기</a><a href='userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div></li>";
 							
 						}
-						if((i+1)%4==0){
-							listTag+="<tr>";
-						}		
 					})
-					listTag+="</tr></table>";
+					listTag+="</ul>";
 					$("#listArea").append(listTag);
 				}
 			})
@@ -172,21 +228,20 @@ $(function() {
 					var date=new Date();
 					var nowDate=date.getTime();
 					
-					listTag="<table><tr>";
+
+
+					var listTag="<ul class='listMovieul'>";
+								
+								$(json).each(function(i,obj){
+									if(obj.openDate>nowDate){
+										listTag+="<li class='listMovieli'><div class='listDiv'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'>"
+													+"<a href='userReadMovie.do?no="+obj.movieNo+"'><p>"+obj.movieName+"</p></a></div>"
+													+"<div class='hiddenText'><a href='#'>예매하기</a><a href='userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div></li>";
+										
+									}
+								})
+					listTag+="</ul>";
 					
-					$(json).each(function(i,obj){
-						if(obj.openDate>nowDate){
-							
-							listTag+="<td><div class='listDiv'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'>"
-									+"<a href='userReadMovie.do?no="+obj.movieNo+"'><p>"+obj.movieName+"</p></a></div>"
-									+"<div class='hiddenText'><a href='#'>예매하기</a><a href='userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div></td>";
-							
-							if((i+1)%4==0){
-								listTag+="</tr><tr>";
-							}	
-						}
-					})
-					listTag+="</tr></table>";
 					$("#listArea").append(listTag);
 				}
 			})
@@ -198,6 +253,18 @@ $(function() {
 	})
 	
 	$(document).on("mouseout","td .listDiv",function(){
+		$(".hiddenText").css("display","none");
+	});
+	
+	
+	
+
+	$(document).on("mouseover", ".listMovieli",function(){
+		$(this).find(".hiddenText").css("display", "block");
+	})
+	
+	
+	$(document).on("mouseout",".listMovieli",function(){
 		$(".hiddenText").css("display","none");
 	});
 });
@@ -226,5 +293,6 @@ $(function() {
 		
    	</div>
    	
+   	<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>
