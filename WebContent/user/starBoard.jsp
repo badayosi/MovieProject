@@ -141,8 +141,14 @@
 <script type="text/javascript">
 	$(function(){
 		starRating();
-		
+		$("#user_star_content").click(function(){
+			if($("#userId").val() == ""){
+				alert("로그인후 사용 가능합니다.")
+				$(this).val("");
+			}
+		})
 		$("#insert_star_board").click(function(){
+			
 			var userId = $("#userId").val();
 			var movie_no = $("#movieNo").val();
 			var board_content = $("#user_star_content").val().replace(/(?:\r\n|\r|\n)/g, '<br />');
@@ -158,6 +164,7 @@
 					"grade":grade},
 				dataType:"json",
 				success:function(json){
+					$("#user_star_content").val("");
 					boardListView(0);
 				}
 			})
