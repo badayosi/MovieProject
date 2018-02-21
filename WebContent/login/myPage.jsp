@@ -103,12 +103,12 @@
 		border:none;
 		color:#cdc197;
 	}
-	
-	
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function(){
+		$("#myNav ul li").eq(0).addClass("select_menu");
+		$("#selectMenu").load("myReservation.jsp");
 		$("#myNav ul li").click(function(){
 			$("#myNav ul li").not($(this)).removeClass("select_menu");
 			$(this).addClass("select_menu");
@@ -146,7 +146,12 @@
 					$("#title_h4").text(json.title);
 					var date = new Date(json.regdate);
 					$("#regdate_Li").html("<b> 등록일 :"+date.toLocaleDateString());
-					$("#selectContent p").html(json.content);
+					if(json.filepath !=null){
+						$("#selectContent p").html("<img src='"+json.filepath+"/"+json.filename+"' id='fileImg'><br>"+json.content);
+						
+					}else{
+						$("#selectContent p").html(json.content);	
+					}
 					if(json.answer){
 						$("#answer_wrap").css("display","block");
 						 $("#answer_wrap p").html(json.answerContent); 

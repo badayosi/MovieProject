@@ -160,7 +160,9 @@ ADD INDEX FK_movie_TO_board (movie_no);
 ALTER TABLE movie.board
 ADD CONSTRAINT FK_user_TO_board
 FOREIGN KEY (user_id)
-REFERENCES movie.user (user_id),
+REFERENCES movie.user (user_id)
+on update cascade
+on delete cascade,
 ADD INDEX FK_user_TO_board (user_id);
 
 -- reservation
@@ -174,7 +176,9 @@ ADD INDEX FK_timetable_TO_reservation (timetable_no);
 ALTER TABLE movie.reservation
 ADD CONSTRAINT FK_user_TO_reservation
 FOREIGN KEY (user_id)
-REFERENCES movie.user (user_id),
+REFERENCES movie.user (user_id)
+on update cascade
+on delete cascade,
 ADD INDEX FK_user_TO_reservation (user_id);
 
 -- timetable

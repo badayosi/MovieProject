@@ -168,13 +168,8 @@
 <script type="text/javascript">
 	$(function(){
 		if($("#newLoad").val()==""){
-			$("#li2").addClass("select_menu");
-			$("#sss").load("ServiceUserBoardView.jsp");
-		}
-		if($("#ckUser").val()==""){
-			$("#sss").load("noticeView.jsp");
-			$("#li2").removeClass("select_menu");
 			$("#li1").addClass("select_menu");
+			$("#sss").load("noticeView.jsp");
 		}
 		
 		$(document).on("submit","#service_form",function(){
@@ -300,7 +295,7 @@ function noticeSelect(no){
 					var date = new Date(json[1].regdate);
 					$("#regdate_Li").html("<b>등록일 :</b>"+date.toLocaleDateString()+"<span id='linespan'></span>"+"<span class='hidden_span'>"+json[1].boardNo+"</span>");
 					$("#readcount_li").html("<b>조회수 :</b>"+json[1].readcount);
-					$("#selectContent p").text(json[1].content);
+					$("#selectContent p").html(json[1].content);
 				
 					$("#nextTitle").html(json[2].title+"<span class='hidden_span'>"+json[2].boardNo+"</span>");
 					$("#prevTitle").html(json[0].title+"<span class='hidden_span'>"+json[0].boardNo+"</span>");
@@ -310,7 +305,7 @@ function noticeSelect(no){
 						var date = new Date(json[0].regdate);
 						$("#regdate_Li").html("<b>등록일 :</b>"+date.toLocaleDateString()+"<span id='linespan'></span>"+"<span class='hidden_span'>"+json[0].boardNo+"</span>");
 						$("#readcount_li").html("<b>조회수 :</b>"+json[0].readcount);
-						$("#selectContent p").text(json[0].content);
+						$("#selectContent p").html(json[0].content);
 						$("#nextTitle").html(json[1].title+"<span class='hidden_span'>"+json[1].boardNo+"</span>");
 						$("#prevTitle").text("이전 게시글이 없습니다.");
 					}else{
@@ -318,7 +313,7 @@ function noticeSelect(no){
 						var date = new Date(json[1].regdate);
 						$("#regdate_Li").html("<b>등록일 :</b>"+date.toLocaleDateString()+"<span id='linespan'></span>"+"<span class='hidden_span'>"+json[1].boardNo+"</span>");
 						$("#readcount_li").html("<b>조회수 :</b>"+json[1].readcount);
-						$("#selectContent p").text(json[1].content);
+						$("#selectContent p").html(json[1].content);
 						$("#nextTitle").text("다음 게시글이 없습니다.");
 						$("#prevTitle").html(json[0].title+"<span class='hidden_span'>"+json[0].boardNo+"</span>");
 					}

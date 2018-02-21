@@ -10,7 +10,8 @@
 <link rel="stylesheet" type="text/css" href="theater_progress.css?var=1">
 <link rel="stylesheet" type="text/css" href="theater_seat.css">
 <link rel="stylesheet" type="text/css" href="theater_menu.css?var=2">
-<link rel="stylesheet" type="text/css" href="theater_quick.css?var=4">
+<link rel="stylesheet" type="text/css" href="theater_quick.css?var=5">
+
 <link rel="stylesheet" type="text/css" href="theater_list.css">
 <!-- API JS -->
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
@@ -263,6 +264,8 @@
 		top: -45px;
 	}
 	
+	/* 퀵뷰  */
+	
 </style>
 <script type="text/javascript">
 	function makeCalendar(){
@@ -408,7 +411,10 @@
 				// 경고문구 제거
 				$("#warning_noMovie").css("display","none");
 				// 임시코드_ QUICK POSTER 변경
-				$("#select_info").find("#img").css("background","url('/MovieProject/upload/"+json.movie.movieNo+"/"+json.movie.pathPoster+"'");
+				$("#select_info").find("#img").css("background","url('/MovieProject/upload/"+json.movie.movieNo+"/"+json.movie.pathPoster+"') no-repeat center");
+				
+				
+				
 				// QUICK TITLE 변경
 				$("#nav_title").html(json.movie.movieName);
 			}
@@ -751,6 +757,7 @@
 			</div>
 			<div id="progress_next"><p>NEXT</p></div>
 		</div>
+		<!-- 퀵뷰 -->
 		<div id="quick-menu">
 			<img src="../images/nav_condition_open.png" id="open_btn">
 			<div id="nav_condition">
@@ -801,7 +808,7 @@
 					</tr>
 					<tr id="total_payment">
 						<td class="nav_info">총 결제금액</td>
-						<td class="nav_data" colspan="2">0</td>
+						<td class="nav_data" id="money" colspan="2">0</td>
 					</tr>
 				</table>
 				<div id="nav_control">

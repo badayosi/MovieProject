@@ -56,4 +56,3 @@ where reservation.user_id = user.user_id
 create INDEX idx_post_sido On address(sido);
 create INDEX idx_post_doro ON address(doro);
 create index idx_post_sigungu on address(sigungu);
-
