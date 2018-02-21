@@ -31,15 +31,15 @@
 	</insert>
 	
 	<update id="update" parameterType="ServiceBoard">
-	    update serviceBoard set answer=#{answer}, answer_content =#{answerContent} where board_no = #{boardNo}
+	    update serviceBoard set answer=#{answer}, answer_content =#{answerContent} where board_no = #{boardNo} 
 	</update>
 	<select id="selectById" resultMap="serviceBoardResult" parameterType="int">
-	    select * from serviceBoard where board_no = #{boardNo}
+	    select * from serviceBoard where board_no = #{boardNo} order by board_no desc;
 	</select>
 	<select id="selectByUserlist" resultMap="serviceBoardResult" parameterType="String">
-	    select * from serviceBoard where user_id = #{userId} order by board_no
+	    select * from serviceBoard where user_id = #{userId} order by board_no desc;
 	</select>
 	<select id="selectBytitle" resultMap="serviceBoardResult" parameterType="ServiceBoard">
-		select * from serviceBoard where user_id = #{userId} and title like #{title} order by board_no
+		select * from serviceBoard where user_id = #{userId} and title like #{title} order by board_no desc;
 	</select>
 </mapper>
