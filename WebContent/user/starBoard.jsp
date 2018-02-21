@@ -262,9 +262,7 @@ function boardListView(boardNo){
 			grade+=Number($(obj).text());
 		})
 		grade=grade/$(".user_star_board_socre").size();
-		$(".info1").append(grade+"점");
-		//$(".info1").append(grade+"점");
-		
+		$("#grade").text(grade.toFixed(1)+"점");
 	}
 	
 </script>

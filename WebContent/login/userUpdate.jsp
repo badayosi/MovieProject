@@ -49,7 +49,7 @@
 	color: #ccc;
 }
 
-#joinForm #jF p input {
+#joinForm #jF p input,select {
 	width: 300px;
 	height: 40px;
 	font-size: 20px;
@@ -545,13 +545,17 @@ function searchDoro(){
 				<p>
 					<label>포인트</label> 
 					<input type="text" name="point" id="point" value="${item.point }"> 
-					
+				</p>
+				<p>
+					<label>등급</label> 
+					<%-- <input type="text" name="userRank" id="userRank" value="${item.userRank}" > --%> 
+					<select name="userRank" id="userRank" value="${item.userRank}" >
+						<option value="관리자">관리자</option>
+						<option value="일반등급">일반등급</option>
+						<option value="탈퇴회원">탈퇴회원</option>
+					</select>
 					
 				</p>
-				<%-- <p>
-					<label>등급</label> 
-					<input type="text" name="id" id="userRank" value="${item.userRank}" > 
-				</p> --%>
 				<p id="radioP">
 					<label>성별</label> 
 						<input type="radio" name="gender" value="여자"	class="radioBtn" id="radio1">

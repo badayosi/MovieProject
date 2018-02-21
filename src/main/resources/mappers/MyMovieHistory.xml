@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="movie.dao.MyMovieHistoryDao">
+	<resultMap type="MyMovieHistory" id="movieHistoryResult">
+		<result property="userId" column="user_id"/>
+		<result property="movieNo" column="movie_no"/>
+		<result property="movieName" column="movie_name"/>
+		<result property="theaterName" column="theater_name"/>
+		<result property="startTime" column="start_time"/>
+		<result property="seat" column="seat"/>
+		<result property="rating" column="rating"/>
+		<result property="pathPoster" column="path_poster"/>		
+	</resultMap>
+	
+	<select id="selectById" resultMap="movieHistoryResult">
+		select * from moviehistory where user_id=#{userId} 
+	</select>	
+	
+</mapper>

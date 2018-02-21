@@ -3,7 +3,10 @@
 	font-family: "나눔 고딕", 'Nanum Gothic', 'ng';
 	padding: 0;
 	}
-
+	body{
+		margin: 0;
+		padding: 0;
+	}
 	table{
 		width: 1024px;
 		margin: 0 auto;

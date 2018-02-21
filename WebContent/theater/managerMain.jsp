@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/MovieProject/css/manager.css"> 
+<link rel="stylesheet" type="text/css" href="/MovieProject/css/manager.css?ver=1"> 
 <style type="text/css">
 	@import url("/MovieProject/css/common.css");
 	/* #content{
@@ -67,6 +67,11 @@
 	<div id="content">
 		<c:if test="${list==null }">
 				<%response.sendRedirect("list.do"); %>
+		</c:if>
+		<c:if test="${result!=null }">
+			<script type="text/javascript">
+				alert("${result}");
+			</script>
 		</c:if>
 		
 		<h2>영화관 관리</h2>

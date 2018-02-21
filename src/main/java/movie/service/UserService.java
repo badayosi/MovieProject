@@ -78,6 +78,44 @@ public class UserService{
 		return user;
 	}
 	
+	public User findId(User u) {
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		UserDao dao = session.getMapper(UserDao.class);
+		User user = null;
+		try{
+			user = dao.findId(u);
+			if(user == null){
+				return null;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return user;
+	}
+	
+	public User findPw(User u) {
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		UserDao dao = session.getMapper(UserDao.class);
+		User user = null;
+		try{
+			user = dao.findPw(u);
+			if(user == null){
+				return null;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return user;
+	}
+	
 	public int insertUser(User user){
 		SqlSession session = null;
 		session = MySqlSessionFactory.openSession();
@@ -136,4 +174,78 @@ public class UserService{
 		return -1;
 	}
 	
+	public int userUpdate(User user){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		UserDao dao = session.getMapper(UserDao.class);
+		
+		try{
+			
+			dao.userUpdate(user);
+			session.commit();
+			return 0;
+		}catch(Exception e){
+			
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return -1;
+	}
+	
+	public int passwordUpdate(User user){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		UserDao dao = session.getMapper(UserDao.class);
+		
+		try{
+			dao.passwordUpdate(user);
+			session.commit();
+			return 0;
+		}catch(Exception e){
+			
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return -1;
+	}
+	
+	public int deleteUpdate(String id){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		UserDao dao = session.getMapper(UserDao.class);
+		
+		try{
+			dao.deleteUpdate(id);
+			session.commit();
+			return 0;
+		}catch(Exception e){
+			
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return -1;
+	}
+	
+	public int updatePw(User user){
+		SqlSession session = null;
+		
+		try {
+			session = MySqlSessionFactory.openSession();
+			UserDao dao=session.getMapper(UserDao.class);
+			System.out.println(user);
+			dao.updatePw(user);
+			session.commit();
+			
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return -1;
+	}
+
 }

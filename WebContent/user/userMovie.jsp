@@ -10,6 +10,11 @@
 <script src="../js/jquery-1.12.4.min.js"></script>
 <script src="../js/slick.js"></script>
 <style type="text/css">
+	@import url("/MovieProject/css/common.css");
+	body{
+		margin: 0;
+		padding: 0;
+	}
 	.bxslider{
 		width: 1024px !important;
 		margin:0 auto !important;
@@ -49,7 +54,7 @@
 		
 	}
 	#listArea table tr td{
-		
+		 
 	}
 	#listArea table tr td .listDiv{
 		text-align: center;
@@ -80,6 +85,10 @@
 		font-weight: bold;
 		font-size: 1.1em;
 		text-decoration: none;
+	}
+	table tr td .listDiv .mPoster{
+		width:250px;
+		height:350px;
 	}
 </style>
 <script type="text/javascript">

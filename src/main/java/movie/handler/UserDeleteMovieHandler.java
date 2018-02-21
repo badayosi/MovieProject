@@ -19,7 +19,7 @@ public class UserDeleteMovieHandler implements CommandHandler {
 		UserService service  = UserService.getInstance();
 		
 		service.deleteUser(id);
-		
+		  
 		return "userList.do";
 		
 	}

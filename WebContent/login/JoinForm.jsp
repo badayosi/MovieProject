@@ -172,7 +172,7 @@ input:FOCUS {
 }
 
 #searchWarp .searchResult .seacrch_zipcode {
-	width: 20%;
+	width: 18%;
 	text-align: center;
 	margin-right:10px !important;
 	border-right: 1px solid #ccc;
@@ -180,7 +180,7 @@ input:FOCUS {
 
 #searchWarp .searchResult .seacrch_addr {
 	text-align: right;
-	width: 70%;
+	width: 69%;
 	border-right: 1px solid #ccc;
 }
 
@@ -259,8 +259,9 @@ input:FOCUS {
 		height: 40px;
 		font-size:14px;
 	}
-.checkimg{
-}
+	.checkimg{
+	
+	}
 #radioCheckImg{
 	display: inline-block;
 }
@@ -284,6 +285,7 @@ input:FOCUS {
 				$(this).find("input").css("border-color", "#cccccc");
 			})
 		})
+		
 		$("input").each(
 				function(i, obj) {
 					$(this).focus(
@@ -311,7 +313,7 @@ input:FOCUS {
 			$("#zipcode").nextAll(".checkimg").css("display","inline-block");
 			$("#zipcode").nextAll(".checkimg").attr("src",trueImgsrc);
 		})
-		 $("#searchWarp #search_cencel").click(function(){
+		$("#searchWarp #search_cencel").click(function(){
 			$("#hiddenbg").css("display","none");
 			$("#searchWarp").css("display","none");
 			$("#doro").val("");
@@ -354,7 +356,7 @@ input:FOCUS {
 					success:function(json){
 						console.log(json);
 						if(json == "false"){
-							alert("중복된 아이이디입니다.");
+							alert("중복된 아이디입니다.");
 							$("#userId").nextAll(".checkimg").attr("src",falseImgsrc);
 						}else if(json =="true"){
 							var reg =/^(?=.*[A-Za-z])[A-Za-z0-9]{6,12}$/;
@@ -533,7 +535,7 @@ function searchDoro(){
 						name="zipcode" id="zipcode"> <input type="text" name="addr"
 						id="addr" id="userAddr">
 						<input type="text" name="addrUser" id="addrUser">
-						<img src="../images/join_else_icon.png" class="checkimg">+
+						<img src="../images/join_else_icon.png" class="checkimg">
 				</p>
 				<p id="btnWrap">
 					<input type="submit" value="회원가입" id="joinBtn"> <input type="button"

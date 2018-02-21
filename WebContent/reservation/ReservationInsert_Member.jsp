@@ -41,6 +41,7 @@
 	div#calendar_day{
 		width:90%;
 		margin:0 auto;
+		padding-top: 50px;	
 	}
 	div#calendar_day > table{
 		width:100%;
@@ -185,12 +186,88 @@
 	#quick-menu #nav_condition #select_info #img{
 		background-size: 157px !important;
 	}
+	
+	/* 시간표 css */
+	#timeTableDiv{
+		padding-left: 20px;
+	}
+	#timeTableDiv a{
+		color: black;
+		text-decoration: none;
+		float: left;
+		overflow: hidden;
+	}
+	#timeTable{
+		display:inline-block;
+		float:left;
+		
+		padding:0 !important;
+		/* border: 2px solid #CDC197; */
+		margin-right: 20px;
+		margin-bottom: 20px;
+	}
+	#timeTable td{
+		width:100px;
+		text-align:center;
+		border:none !important;
+		padding:0 !important;
+	}
+	#timeTable tr{
+		background: white;
+		border: 1px solid grey;
+		height:20px !important;
+		padding:0 !important;
+	}
+	.t1, .t3{
+		font-size: 12px;
+	}
+	.t2{
+		font-size: 18px;
+		height: 40px;
+		
+	}
+	/* 달력 */
+	.a, .b, .c{
+		font-size: 12px;
+	}
+	.a p, .b p, .c p{
+		font-size: 16px;
+		position: relative;
+	}
+	.a{
+		color:red;
+	}
+	.b{
+		color:blue;
+	}
+	.month1{
+		font-size: 25px;
+	}
+	.newMonth{
+		position: relative;
+	}
+	.month1{
+		position:absolute;
+		left: 25px;
+		top: -55px;
+		text-decoration: underline;
+		font-weight: bold;
+	}
+	.year1{
+		font-size: 12px;
+		position:absolute;
+		left: 50px;
+		top: -45px;
+	}
+	
 </style>
 <script type="text/javascript">
 	function makeCalendar(){
 		var todayDate = new Date();
+		var t = new Date();
 		var dateCount = 14;
 		var weekStr = new Array("일","월","화","수","목","금","토","일");
+		var weekStr1 = new Array("a","c","c","c","c","c","b","a");
 		
 		var year = todayDate.getFullYear();
 		var month = todayDate.getMonth()+1;
@@ -205,25 +282,37 @@
 			else if(row == 1)
 				makeStr += "<tr id='integer'>";		
 			for(var col=weekday ; col<dateCount+weekday ; col++){
-				switch(row){
+				switch(row){				
 					case 0:
-						makeStr += "<td>" + weekStr[col%7] + "</td>";
+						makeStr += "<td class='"+weekStr1[col%7]+"' class='week'>" + weekStr[col%7] + "</td>";
 						break;
 					case 1:
-						if(todayDate.getDate() == day)
-							makeStr += "<td><p class='today'>" + day + "</p></td>";
-						else
-							makeStr += "<td><p>" + day + "</p></td>";
+						if(todayDate.getDate() == day){			
+							makeStr += "<td class='"+weekStr1[col%7]+" newMonth'>"+"<span class='month1'>"+ month+"</span>"+"<span class='year1'>"+year +"</span>"+"<p class='today'>" + t.getDate() + "</p></td>";
+						}
+						else{
+							if(t.getDate() == 1){
+								var month1 = t.getMonth()+1;
+								var year1 = t.getFullYear();
+								/* makeStr +=  */
+								makeStr += "<td class='"+weekStr1[col%7]+" newMonth'>"+"<span class='month1'>"+ month1+"</span>"+"<span class='year1'>"+year1 +"</span>"+"<p>" + t.getDate() + "</p></td>";
+							}else{
+								makeStr += "<td class='"+weekStr1[col%7]+"'><p>" + t.getDate() + "</p></td>";	
+							}							
+						}
 						day++;
+						t.setDate(t.getDate()+1);
 						break;
 				}
 			}
 			makeStr += "</tr>";
 		}
 		makeStr += "</table>";
-		$("#year").html(year);
-		$("#month").html(month);
-		$("#calendar_day").html(makeStr);
+		
+		/* $("#year").html(year);
+		$("#month").html(month);*/
+		
+		$("#calendar_day").html(makeStr); 
 	}
 	
 	function loadAllMovie(){
@@ -284,22 +373,23 @@
 				// 선택영화 상영시간표 정보 LOAD
 				$("#theaterList").html("");
 				var makeTheaterList;
+				makeTheaterList = "";
+				makeTheaterList += "<div id='timeTableDiv'>";
+				
 				for(var index=0 ; index<json.time.length ; index++){
-					makeTheaterList = "";
-					makeTheaterList += "<div>";
 					makeTheaterList += "<a href='javascript:loadSeat(" + json.time[index].timeNo +","+ json.time[index].startTime +")'>";
-					makeTheaterList += "<table>";
+					makeTheaterList += "<table id='timeTable'>";
 					makeTheaterList += "<tr>";
-					makeTheaterList += "<td>" + formatChange(json.time[index].startTime, "time") + "</td>";
-					makeTheaterList += "<td>" + json.time[index].theaterName + "</td>";
-					makeTheaterList += "<td>(" + json.time[index].theaterType + ")</td>";
-					makeTheaterList += "<td>" + json.time[index].restSeat + " / " + json.time[index].maxSeat + "</td>";
+					makeTheaterList += "<tr><td class='t1'>" + json.time[index].theaterName+ " ("+json.time[index].theaterType  + ")</td></tr>";
+					makeTheaterList += "<tr><td class='t2'>" + formatChange(json.time[index].startTime, "time") + "</td></tr>";
+					/* makeTheaterList += "<tr><td class='t3'>(" + json.time[index].theaterType + ")</td></tr>"; */
+					makeTheaterList += "<tr><td class='t3'>" + json.time[index].restSeat + " / " + json.time[index].maxSeat + "</td></tr>";
 					makeTheaterList += "</tr>";
 					makeTheaterList += "</table>";
 					makeTheaterList += "</a>";
-					makeTheaterList += "</div>";
-					$("#theaterList").append(makeTheaterList); 
 				}
+				makeTheaterList += "</div>";
+				$("#theaterList").append(makeTheaterList);
 				
 				// 영화 선택시  QUICK 반영
 				// 경고문구 제거
@@ -507,6 +597,19 @@
 			checkSeat();
 		});
 		
+		//시간표 마우스 오버
+		$(document).on("mouseover","#timeTable",function(){
+			$(this).children().children().css("background","black");
+			$(this).children().children().css("color","white");
+			$(this).children().children().css("font-weight","bold");
+		})
+		
+		$(document).on("mouseout","#timeTable",function(){
+			$(this).children().children().css("background","white");
+			$(this).children().children().css("color","black");
+			$(this).children().children().css("font-weight","normal");
+		})
+		
 	});
 </script>
 
@@ -515,7 +618,8 @@
 	<jsp:include page="../include/header.jsp"></jsp:include>
 	<div id="container">
 		<div id="horizontal_calendar">
-			<p><span id="month">2</span><span id="year">2018</span></p>
+			<!-- <p><span id="month">2</span><span id="year">2018</span></p> -->
+			
 			<div id="calendar_day">
 				
 			</div>
@@ -534,7 +638,7 @@
 							<li>가나다순</li>
 						</ul>
 					</td>
-					<td rowspan="2" id="theaterList">
+					<td rowspan="2" id="theaterList" valign="top">
 					
 					</td>
 				</tr>

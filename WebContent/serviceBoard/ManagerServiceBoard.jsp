@@ -47,8 +47,8 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$("#menuSelect").load("ManagerNotice.jsp");
-		$("#li1").addClass("select_menu");
+		$("#menuSelect").load("ManagerBoard.jsp");
+		$("#li2").addClass("select_menu");
 		$("#manager_serviceBoard_wrap ul li").click(function(){
 			if($(this).text()=="공지사항추가"){
 				$("#menuSelect").load("ManagerNotice.jsp");
@@ -63,7 +63,7 @@
 		$(document).on("click",".titleClick",function(){
 			var no = $(this).find(".hidden_span").text();
 			location.href ="managerserviceboardupdate.do?no="+no;
-		})
+		})  
 		
 	})
 </script>

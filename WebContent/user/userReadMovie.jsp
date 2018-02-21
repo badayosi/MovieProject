@@ -27,11 +27,8 @@
 		  arrows:true,
 		  focusOnSelect: true
 		});
-		$("video").focusin(function(){
-			alert("asdf");
-		});
-		$(document).on("focusout","video",function(){
-			$("video").stop();
+		$(document).on("click","button.slick-prev.slick-arrow, button.slick-next.slick-arrow",function(){
+			$("#bigImgWrap .bigImg h3 video")[0].pause();
 		});
 	});
 </script>
@@ -45,6 +42,8 @@
 		background: #353535;
 		padding-top:30px;
 		padding-bottom:30px;
+		height: 470px;
+		
 	}
 	#bigImgWrap .bigImg{
 		width:900px;
@@ -57,33 +56,31 @@
 		color: white !important;
 	} */
 	#container{
-		width:80%;
-		margin:0 auto;
-	}
-	.bigImg h3 img{
-		width:800px;
+		max-width:835px;
+		
 		margin:0 auto;
 	}
 	.bigImg h3{
 		/* text-align: center; */
 	}
-	.bigImg h3 video{
-		width:900px;
-		margin:0 auto;
-	}
 	#container #imgListDiv{
 		width:950px;
 		height:120px;
 		margin:15px auto;
-		
+
 	} 
-	#container #imgListDiv .imgList h3 img{
-		width:150px;
-		margin:10px auto;
+	
+	.bigImg h3 img , .bigImg h3 video{
+		height:470px;
+		max-width:835px;
+		margin:0 auto;
 	}
-	#container #imgListDiv .imgList h3 video{
-		width:150px;
-		margin:10px auto;
+	
+	#container #imgListDiv .imgList h3 img, #container #imgListDiv .imgList h3 video{
+		/* max-width: 150px;	 */	
+		height:84px;
+		width:135px;
+		margin:4px auto;
 	}
 	#movieInfo{
 		width:990px;
@@ -91,15 +88,19 @@
 		margin:0 auto;
 	}
 	#movieInfo #moviePoster{
-		width:229px;
+		width:175px;
 		text-align: center;
 		float:left;
 		overflow: hidden;
 	}
+	#moviePoster img{
+		width: 175px;
+		height: 250px;
+	}
 	#movieInfo #moviePoster a{
 		width:100%;
 		height:40px;
-		margin-top:15px;
+		margin-top:5px;
 		background: #231F20;
 		color:#CDC197;
 		display:inline-block;
@@ -132,6 +133,13 @@
 		margin-top:20px;
 		margin-bottom:50px;
 	}
+	
+	.title{
+		width: 100px;
+	}
+	#grade{
+		margin: 0px !important;
+	}
 </style>
 </head>
 <body>
@@ -162,8 +170,44 @@
    				<a href="#">예매하기</a>
    			</div>
    			<div id="textInfo">
-   				<h1>${movie.movieName}</h1>
-   				<span class="info1"><h3>관람평점 </h3></span>
+   				<table>
+   					<tr>
+   						<td colspan="4"><h1>${movie.movieName}</h1></td>
+   					</tr>
+   					<tr>
+   						<td class="title"><h3>관람평점 </h3></td>
+   						<td><span id="grade"></span></td>
+   						<td class="title"><h3>등급 </h3></td>
+   						<td>${movie.rating }세 이상 관람가</td>
+   					</tr>
+   					<tr>
+   						<td class="title"><h3>개봉일 </h3></td>
+   						<td>${openDate}</td>
+   						<td class="title"><h3>방영시간 </h3></td>
+   						<td>${movie.playTime }분</td>
+   					</tr>
+   					<tr>
+   						<td class="title"><h3>스페셜관<br>상영정보 </h3></td>
+   						<td colspan="3">
+   							<table>
+			   					<tr>
+			   						<td><img src="../images/img_sinfo_01_off.jpg"></td>
+			   						<td><img src="../images/img_sinfo_02_off.jpg"></td>
+			   						<td><img src="../images/img_sinfo_03_off.jpg"></td>
+			   						<td><img src="../images/img_sinfo_06_on.jpg"></td>
+			   					</tr>
+			   					<tr>
+			   						<td><img src="../images/img_sinfo_08_off.jpg"></td>
+			   						<td><img src="../images/img_sinfo_09_on.jpg"></td>
+			   						<td><img src="../images/img_sinfo_10_on.jpg"></td>
+			   						<td><img src="../images/img_sinfo_13_on.jpg"></td>
+			   					</tr>
+			   				</table>
+   						</td>
+   					</tr>
+   				</table>
+   				<%-- 
+   				<span class="info1"><h3>관람평점 </h3><span id="grade"></span></span>
    				<span class="info2"><h3>등급 </h3>${movie.rating }세 미만 관람 불가</span>
    				<br>
    				<span class="info3"><h3>개봉일 </h3>${openDate}</span>
@@ -186,7 +230,7 @@
    						<td><img src="../images/img_sinfo_10_on.jpg"></td>
    						<td><img src="../images/img_sinfo_13_on.jpg"></td>
    					</tr>
-   				</table>
+   				</table> --%>
    			</div>
    			
    		</div>

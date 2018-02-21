@@ -87,7 +87,7 @@ public class ManagerAjaxHandler implements CommandHandler {
 			}
 			
 			// INSERT
-			if(req.getParameter("type").equals("insert")){
+			/*if(req.getParameter("type").equals("insert")){
 				if(req.getParameter("target").equals("timetable")){
 					String no = req.getParameter("timetableno");
 					
@@ -106,7 +106,7 @@ public class ManagerAjaxHandler implements CommandHandler {
 					String json = om.writeValueAsString(result);
 					pwJson.print(json);
 				}
-			}
+			}*/
 		}
 		pwJson.flush();
 		return null;

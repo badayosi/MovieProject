@@ -233,6 +233,7 @@
 	width:30%;
 	text-align:right;
 	margin-bottom:30px;
+	padding-bottom:20px;
 }
 #manager_btn_wrap p input{
 	width:50px;
@@ -241,7 +242,7 @@
 	color:#cdc197;
 	padding:5px;
 	border:none;
-	line-height:20px;
+	line-height:10px;
 }
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>

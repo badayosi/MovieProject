@@ -11,7 +11,32 @@
   src="https://code.jquery.com/jquery-1.12.4.min.js"
   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
   crossorigin="anonymous"></script> 
- <link rel="stylesheet" type="text/css" href="../css/theater.css?ver=1">
+ <link rel="stylesheet" type="text/css" href="../css/theater.css?ver=2">
+  <link rel="stylesheet" type="text/css" href="/MovieProject/css/manager.css?ver=1">
+ <style type="text/css">
+ 	@import url("/MovieProject/css/common.css");
+ 	#content{
+ 		border:none !important;
+		width: 1024px;
+		margin: 0 auto;
+	}
+	label{
+		display: inline-block;
+		width: 200px;
+	}
+	input[type='text']{
+		width: 300px;
+		height: 25px;
+		margin-bottom: 20px;
+	}
+	input[type='submit'],input[type="button"]{
+		font-size: 15px;
+		background: #CDC197;
+		padding: 5px 10px;
+		font-weight: bold;
+		color: white;
+	}
+ </style> 
  <script src="../js/theater.js"></script>
 
  <%
@@ -117,58 +142,61 @@
 	}
  } 
  </script>
- <style type="text/css">
- 	@import url("/MovieProject/css/common.css");
- </style>
 </head>
 <body>
-	<form action="modify.do" method="post" name="f1">
-		<p>
-			<label>상영관번호</label>
-			<input type="text" name="number" value="${item.theaterNo }" readonly>
-		</p>
-		<p>
-			<label>상영관이름</label>
-			<input type="text" name="name" value="${item.theaterName }">
-			<span class="error">상영관명을 입력하세요</span>
-		</p>
-		<p>
-			<label>층수(위치)</label>
-			<input type="text" name="floor"  value="${item.theaterFloor }">
-			<span class="error">위치를 입력하세요</span>
-			<span class="error6">숫자로 입력하세요</span>
-		</p>
-		<p>
-			<label>수용인원</label>
-			<input type="text" name="maxcount" value="${item.theaterMaxcount }">
-			<span class="error">인원을 입력하세요</span>
-			<span class="error5">인원을 입력하세요</span>
-			<span class="error6">숫자로 입력하세요</span>
-		</p>
-		<p>
-			<label>열(숫자)</label>
-			<input type="text" name="col" value="${item.col }">
-			<span class="error">열을 입력하세요</span>
-			<span class="error4">열을 입력하세요</span>
-			<span class="error6">숫자로 입력하세요</span>
-		</p>
-		<p>
-			<label>행(알파벳)</label>
-			<input type="text" name="row" maxlength="1"  value="${item.row }"/>
-			<span class="error">행을 입력하세요</span>
-			<span class="error2">영어로 입력하세요</span>
-			<span class="error3">전체인원을 수용할 수 없습니다</span>
-		</p>
+	<jsp:include page="../include/adminHeader.jsp"></jsp:include>
+	<div id="content">
+		<h2>${item.theaterName } 수정</h2>
+		<form action="modify.do" method="post" name="f1">
+			<p>
+				<label>상영관번호</label>
+				<input type="text" name="number" value="${item.theaterNo }" readonly>
+			</p>
+			<p>
+				<label>상영관이름</label>
+				<input type="text" name="name" value="${item.theaterName }">
+				<span class="error">상영관명을 입력하세요</span>
+			</p>
+			<p>
+				<label>층수(위치)</label>
+				<input type="text" name="floor"  value="${item.theaterFloor }">
+				<span class="error">위치를 입력하세요</span>
+				<span class="error6">숫자로 입력하세요</span>
+			</p>
+			<p>
+				<label>수용인원</label>
+				<input type="text" name="maxcount" value="${item.theaterMaxcount }">
+				<span class="error">인원을 입력하세요</span>
+				<span class="error5">인원을 입력하세요</span>
+				<span class="error6">숫자로 입력하세요</span>
+			</p>
+			<p>
+				<label>열(숫자)</label>
+				<input type="text" name="col" value="${item.col }">
+				<span class="error">열을 입력하세요</span>
+				<span class="error4">열을 입력하세요</span>
+				<span class="error6">숫자로 입력하세요</span>
+			</p>
+			<p>
+				<label>행(알파벳)</label>
+				<input type="text" name="row" maxlength="1"  value="${item.row }"/>
+				<span class="error">행을 입력하세요</span>
+				<span class="error2">영어로 입력하세요</span>
+				<span class="error3">전체인원을 수용할 수 없습니다</span>
+			</p>
+			
+			<p>
+				<label>상영관종류</label>
+				<input type="text" name="type" value="${item.theaterType }">
+				<span class="error">상영관 종류를 입력하세요</span>
+			</p>
+			<input type="text" name="table"  class="displayHidden" value="...">
+			<p>
+				<input type="submit" value="수정">
+				<a href="list.do"><input type="button" value="취소"></a>
+			</p>
+		</form>
 		
-		<p>
-			<label>상영관종류</label>
-			<input type="text" name="type" value="${item.theaterType }">
-			<span class="error">상영관 종류를 입력하세요</span>
-		</p>
-		<input type="text" name="table"  class="displayHidden" value="...">
-		<p>
-			<input type="submit" value="수정">
-		</p>
-	</form>
+	</div>
 </body>
 </html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="movie.dao.ReservationUserDao">
+	<resultMap type="ReservationUser" id="reservationUserResult">
+		<result property="no" column="no"/>
+		<result property="userId" column="user_Id"/>
+		<result property="movieName" column="movie_Name"/>
+		<result property="movieNo" column="movie_no"/>
+		<result property="theaterName" column="theater_Name"/>
+		<result property="theaterType" column="theater_Type"/>
+		<result property="startTime" column="start_Time"/>
+		<result property="seat" column="seat"/>
+		<result property="price" column="price"/>
+		<result property="rating" column="rating"/>
+		<result property="pathPoster" column="path_poster"/>
+	</resultMap>
+	<select id="selectById" parameterType="String" resultMap="reservationUserResult">
+		select * from reservation_user where user_id = #{id}
+	</select>
+
+</mapper>

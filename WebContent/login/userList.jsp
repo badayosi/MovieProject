@@ -5,23 +5,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="/MovieProject/css/manager.css?ver=1">  
 <style type="text/css">
 	@import url("/MovieProject/css/common.css");
 	#content{
 		width: 1024px;
 		margin: 0 auto;
 	}
-	#content table{
+	/* #content table{
 		width: 1024px;
 	}
 	#content table, tr, th, td{
 		border: 1px solid grey;
 		border-collapse: collapse;
 		text-align: center;
-	}
+	}*/
 	#content th, #content td{
 		padding: 10px 5px;
-	}
+	} 
 	#insert{		
 		text-align:right;
 
@@ -32,6 +33,9 @@
 		padding: 5px 10px;
 		font-weight: bold;
 		color: white;
+	}
+	#addr{
+		width: 230px;
 	}
 </style>
 <title>Insert title here</title>
@@ -57,6 +61,7 @@
 		<c:if test="${list==null }">
 				<%response.sendRedirect("userList.do"); %>
 		</c:if>
+		<h2>회원 관리</h2>
 		<table>
 			<tr>
 				<th>아이디</th>
@@ -64,7 +69,7 @@
 				<th>포인트</th>
 				<th>이메일</th>
 				<th>폰번호</th>
-				<th>주소</th>
+				<th id="addr">주소</th>
 				<th>성별</th>
 				<th>등급</th>
 				<th>수정</th>

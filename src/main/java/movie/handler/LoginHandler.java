@@ -29,6 +29,9 @@ public class LoginHandler implements CommandHandler {
 			}else if(user1 == null){
 				req.setAttribute("error","비밀번호가 일치하지 않습니다.");
 				return "Login.jsp";
+			}else if(user.getUserRank().equals("탈퇴회원")){
+				req.setAttribute("error","탈퇴한 회원입니다.");
+				return "Login.jsp";
 			}			
 			System.out.println(user);
 			req.getSession().setAttribute("member",user);

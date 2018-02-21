@@ -17,13 +17,14 @@ public class TheaterDeleteHandler implements CommandHandler {
 		int result = service.deleteTheater(no);
 		
 		if(result<0){
-			req.setAttribute("result", "에러");
+			req.setAttribute("result", "시간표에 사용되어서 삭제가 불가능합니다.");
 		}
 		if(result>0){
-			req.setAttribute("result", "성공");
+			req.setAttribute("result", "삭제에 성공하셨습니다.");
 		}
 		
-		return "list.do";
+		res.sendRedirect("list.do");
+		return null;
 	}
 
 }

@@ -11,12 +11,17 @@
 <link rel="stylesheet" type="text/css" href="/MovieProject/css/manager.css"> 
 <style>
 	@import url("/MovieProject/css/common.css");
-	/* div#container{
+	body{
+		margin: 0;
+		padding: 0;
+	}
+	 #container{
 		width:1024px;
 		min-height:600px;
 		margin:0 auto;
-		background:#F9F6EC;
+		background:#F9F6EC; 
 	}
+	/*
 	table, tr, th, td{
 		border:1px solid black;
 		border-collapse:collapse;
@@ -49,9 +54,10 @@
 </head>
 <body>
 	<jsp:include page="../include/adminHeader.jsp"></jsp:include>
-	<jsp:include page="ReservationMain.jsp"></jsp:include>	
+	
+	<jsp:include page="ReservationMain.jsp"></jsp:include>
+		
 	<div id="container">
-			
 		<c:if test="${result!=null}">
 			<br>
 			<h2>전체 예약 보기</h2>

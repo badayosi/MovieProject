@@ -119,50 +119,71 @@
 		font-weight: bold;
 	}
 	
-	
+	#movieZone li{
+		padding: 5px;
+	}
 </style>
 <script type="text/javascript">
 	$(function(){
 		loadAllMovie();
+		
+		$(document).on("mouseover","#movieZone li",function(){
+			$(this).css("border","3px solid #CDC197");
+		})
+		$(document).on("mouseout","#movieZone li",function(){
+			$(this).css("border","none");
+		})
 	})
 	function loadAllMovie(){
 	$.ajax({
 		url:"reservation/reservationAjax.do",
 		type:"get",
 		dataType:"json",
-		success:function(json){
+		success:function(json){ 
 			
-			console.log(json);
+			//console.log(json);
+			var date=new Date();
+			var nowDate=date.getTime();
+			
 			var makeMovieList;
-			for(var index=0;index<json.length;index++){
-				makeMovieList = "";
-				makeMovieList += "<li>";
-				makeMovieList += "<a href='javascript:selectMovie(" + json[index].movieNo +")'>";
-				
-				makeMovieList += "<div class='rating";				
-				switch(json[index].rating){
-					case 12:
-						makeMovieList += " age12'>";
-						break;
-					case 15:
-						makeMovieList += " age15'>";
-						break;
-					case 18:
-						makeMovieList += " age18'>";
-						break;
-					default:
-						makeMovieList += " ageall'>";
-						break;
+			var length = json.length;
+			if(length>9){
+				length=8;
+			}
+			for(var index=0;index<length;index++){
+				if(json[index].closeDate<nowDate || json[index].openDate>nowDate){
+					continue;
+				}else{
+					
+					makeMovieList = "";
+					makeMovieList += "<li>";
+					makeMovieList += "<a href='javascript:selectMovie(" + json[index].movieNo +")'>";
+					
+					makeMovieList += "<div class='rating";				
+					switch(json[index].rating){
+						case 12:
+							makeMovieList += " age12'>";
+							break;
+						case 15:
+							makeMovieList += " age15'>";
+							break;
+						case 18:
+							makeMovieList += " age18'>";
+							break;
+						default:
+							makeMovieList += " ageall'>";
+							break;
+					}
+					makeMovieList += "</div>";
+					makeMovieList += "<div class='movieName'>" + json[index].movieName + "</div>";
+					makeMovieList += "<input type='hidden' name='movieKey' value=" + json[index].movieNo +">";
+					/* makeMovieList +=  "."+ ++index;
+					--index; */
+					makeMovieList += "</a>";
+					
+					makeMovieList += "</li>";
+					$("#movieZone").append(makeMovieList);
 				}
-				makeMovieList += "</div>";
-				makeMovieList += "<div class='movieName'>" + json[index].movieName + "</div>";
-				makeMovieList += "<input type='hidden' name='movieKey' value=" + json[index].movieNo +">";
-				/* makeMovieList +=  "."+ ++index;
-				--index; */
-				makeMovieList += "</a>";
-				
-				makeMovieList += "</li>";
-				$("#movieZone").append(makeMovieList);
 			}
 		}
 	});
@@ -192,7 +213,7 @@
 			</tr>
 			<tr>
   				<td class="officeBottom">
-					<a href="#">예매하기</a>
+					<a href="/MovieProject/reservation/ReservationInsert_Member.jsp">예매하기</a>
 				</td>
 			</tr>
 		</table>
