@@ -57,9 +57,6 @@ public class UserFindPwHandler implements CommandHandler {
 		
 		return "findIdPw.jsp";
 	}
-	
-	
-	
 	public void HtmlEmail(User user){
 		Properties p = System.getProperties();
 
@@ -135,14 +132,9 @@ public class UserFindPwHandler implements CommandHandler {
 		} catch (MessagingException msg_e) {
 
 			msg_e.printStackTrace();
-
 		}
 
-	
 	}
-		
-
-
 	class MyAuthentication extends Authenticator {
 		
 		PasswordAuthentication pa;	
@@ -168,7 +160,4 @@ public class UserFindPwHandler implements CommandHandler {
 		}
 
 	}
-	
-	
-
 }
