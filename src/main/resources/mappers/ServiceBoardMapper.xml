@@ -19,8 +19,8 @@
 	<select id="selectTosize" resultType="int">
 		select count(*) from serviceBoard;
 	</select>
-	<select id="selectByall" resultMap="serviceBoardResult" parameterType="int">
-	    select * from serviceBoard order by board_no desc limit #{size},10;
+	<select id="selectByall" resultMap="serviceBoardResult">
+	    select * from serviceBoard order by board_no desc;
 	</select>
 	<insert id="insert" parameterType="ServiceBoard">
 	    insert into serviceBoard (user_id,consulting,classification,title,content,regdate,answer) values(#{userId},#{consulting},#{classification},#{title},#{content},#{regdate},#{answer})

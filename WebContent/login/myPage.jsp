@@ -145,7 +145,7 @@
 					
 					$("#title_h4").text(json.title);
 					var date = new Date(json.regdate);
-					$("#regdate_Li").html("<b> 등록일 :</br>"+date.toLocaleDateString()+"<span id='linespan'></span>");
+					$("#regdate_Li").html("<b> 등록일 :"+date.toLocaleDateString());
 					$("#selectContent p").html(json.content);
 					if(json.answer){
 						$("#answer_wrap").css("display","block");

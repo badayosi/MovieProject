@@ -17,7 +17,7 @@ public class ManagerServiceBoardListHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		ServiceBoardService service = ServiceBoardService.getInstance();
-		List<ServiceBoard> lists = service.selectByAll(0);
+		List<ServiceBoard> lists = service.selectByAll();
 		
 		ObjectMapper om = new ObjectMapper();
 		String json = om.writeValueAsString(lists); //json 형태의 String으로 변환

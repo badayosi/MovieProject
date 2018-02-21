@@ -15,12 +15,15 @@
 		height:200px;
 		resize:none;
 		text-align: left !important;
+		margin-left:110px;
 	}
 	.label, .con{
+		
 		display: inline-block;
 		margin-bottom: 10px;
 	}
 	.con{
+		text-align:left;
 		width: 700px;
 	}
 	.label{
@@ -55,13 +58,32 @@
 		font-weight: bold;
 		background: #CDC197;
 	}
+	#btn input:first-child{
+		margin-left:120px;
+	}
 	#answer_update{
 		position: relative;
+		overflow:hidden;
 	}
 	#answer_update #label_text{
 		position: absolute;
 		top:30px;
 		left:40px;
+	}
+	#label_answer{
+		width:200px;
+		padding:10px 10px 10px 40px;
+		margin-bottom:10px;
+		float:left;
+		text-align: center;
+	}
+	#p_answercontent{
+		width:60%;
+		text-align:left !important;
+		float:left;
+	}
+	#p_answercontent p{
+		padding:10px;
 	}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -103,11 +125,10 @@
 					<td>
 						<form action="managerserviceboardupdateanswer.do" method="get" id="answer_update">
 							<input type="hidden" value="${sb.boardNo}" name="no">
-							<label id="label_text">답글 </label>
-							<p>
-								${sb.answerContent }
-							</p>
-
+							<label id="label_answer">답글 </label>
+							<div id="p_answercontent">
+								<p>${sb.answerContent }</p>
+							</div>
 						</form>
 					</td>
 				</c:if>
@@ -116,10 +137,7 @@
 						<form action="managerserviceboardupdateanswer.do" method="get" id="answer_update">
 							<input type="hidden" value="${sb.boardNo}" name="no">
 							<label id="label_text">답글 </label>
-							<textarea rows="" cols="" name="answerContent" id="answerContent">
-							
-							</textarea>
-							
+							<textarea rows="" cols="" name="answerContent" id="answerContent"></textarea>			
 							<p id="btn">
 								<input type="reset" value="취소">
 								<input type="submit" value="전송">
