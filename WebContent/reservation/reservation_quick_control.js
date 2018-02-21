@@ -18,6 +18,11 @@ function applyQuickSeat(){
 	});
 }
 
+// 퀵메뉴 선택좌석 초기화
+function initQuickSeat(){
+	$("#nav_data_seat").html("선택좌석");
+}
+
 // 퀵메뉴 문자열 분리
 function splitString(str, type){
 	var tempArr = str.split(type);

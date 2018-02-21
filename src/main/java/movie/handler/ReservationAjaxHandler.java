@@ -4,7 +4,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,10 +38,6 @@ public class ReservationAjaxHandler implements CommandHandler {
 		om = new ObjectMapper();
 		// REQUEST GET
 		if(req.getMethod().equalsIgnoreCase("get")){
-			System.out.println("PARAMETER no :"+req.getParameter("no"));
-			System.out.println("PARAMETER timeNo :"+req.getParameter("timeNo"));
-			System.out.println("PARAMETER seat :"+req.getParameter("seat"));
-			
 			// MEMBER RESERVATION
 			// MOVIE LIST LOAD
 			if(req.getParameter("no") == null
@@ -58,19 +53,16 @@ public class ReservationAjaxHandler implements CommandHandler {
 			
 			// SELECT MOVIE IF EXISTS
 			if(req.getParameter("no") != null){
-				System.out.println("SELECT MOVIE IF EXISTS");
 				HashMap<String, Object> jsonResult = new HashMap<>();
 				
 				String selectMovie = req.getParameter("no");
-				System.out.println(selectMovie);
+				User user = (User)req.getSession().getAttribute("member");
 				timeTableService = TimeTableService.getInstance();
 				Movie movieResult = movieService.selectById(Integer.valueOf(selectMovie));
-				System.out.println(movieResult);
 				// POSTER DATA LOAD
 				jsonResult.put("movie", movieResult);
 				// TIMETABLE DATA LOAD
 				List<Timetable> timetableResult = timeTableService.selectByMovie(movieResult.getMovieNo());
-				System.out.println(timetableResult);
 				progressService = ReservationProgressService.getInstance();
 				reservationService = ReservationService.getInstance();
 				ReservationProgress progressResult = null;
@@ -82,6 +74,8 @@ public class ReservationAjaxHandler implements CommandHandler {
 					progressResult.setRestSeat(progressResult.getRestSeat()-reservationResult.size());
 					result.add(progressResult);
 				}
+				reservationResult = reservationService.selectById(user.getUserId());
+				jsonResult.put("reserve", reservationResult);
 				jsonResult.put("time", result);
 				String json = om.writeValueAsString(jsonResult);
 				pwJson.print(json);
@@ -89,7 +83,6 @@ public class ReservationAjaxHandler implements CommandHandler {
 			
 			// SELECT MOVIE & SELECT TIME = RESULT THEATER
 			if(req.getParameter("timeNo") != null && req.getParameter("search") == null){
-				System.out.println("SELECT MOVIE & SELECT TIME = RESULT THEATER");
 				int loadTheater = Integer.valueOf(req.getParameter("timeNo"));
 				timeTableService = TimeTableService.getInstance();
 				Timetable resultTime = timeTableService.selectByNo(loadTheater);
@@ -102,7 +95,6 @@ public class ReservationAjaxHandler implements CommandHandler {
 			
 			// SELECT MOVIE & SELECT TIME = RESULT RESERVATION USER
 			if(req.getParameter("timeNo") != null && req.getParameter("search") != null){
-				System.out.println("SELECT MOVIE & SELECT TIME = RESULT RESERVATION USER");
 				int loadReserve = Integer.valueOf(req.getParameter("timeNo"));
 				User user = (User)req.getSession().getAttribute("member");
 				HashMap<String, String> result = new HashMap<>();
@@ -140,22 +132,22 @@ public class ReservationAjaxHandler implements CommandHandler {
 			
 			// RESERVATION.PROGRESS INSERT&UPDATE
 			if(req.getParameter("seat") != null && req.getParameter("timetableNo") != null){
-				System.out.println("RESERVATION.PROGRESS INSERT&UPDATE");
 				String seat = String.valueOf(req.getParameter("seat"));
+				int pay = Integer.valueOf(req.getParameter("pay")); 
 				int timetableNo = Integer.valueOf(req.getParameter("timetableNo"));
 				User user = (User)req.getSession().getAttribute("member");
 				HashMap<String, String> errorAlert = new HashMap<>(); 
 				
 				// USER SESSION 획득 성공시
 				if(user != null){
-					System.out.println("USER LOAD SECCESS");
 					reservationService = ReservationService.getInstance();
 					// USER ID, TIMETABLE NO 조건으로 검색
 					Reservation result = reservationService.selectByUserAndTime(user.getUserId(), timetableNo);
-					System.out.println(result);
 					// 결과값이 리턴될 경우 RESERVATION UPDATE 진행
 					if(result != null){
 						result.setSeat(seat);
+						result.setProgress(1);
+						result.setPrice(pay);
 						reservationService.updateReservation(result);
 					}
 					// 결과값이 NULL일 경우 RESERVATION INSERT 진행
@@ -165,6 +157,7 @@ public class ReservationAjaxHandler implements CommandHandler {
 						result.setTimetableNo(timetableNo);
 						result.setPrice(0);
 						result.setSeat(seat);
+						result.setPrice(pay);
 						result.setProgress(1);
 						reservationService.insertReservation(result);
 					}
@@ -182,7 +175,6 @@ public class ReservationAjaxHandler implements CommandHandler {
 			
 			// RESERVATION.PROGRESS PREV,NEXT
 			if(req.getParameter("circultKey") != null){
-				System.out.println("RESERVATION.PROGRESS CIRCULTKEY METHOD");
 				String keyType = String.valueOf(req.getParameter("circultKey"));
 				int timetableNo = Integer.valueOf(req.getParameter("timetableNo"));
 				User user = (User)req.getSession().getAttribute("member");
@@ -190,15 +182,13 @@ public class ReservationAjaxHandler implements CommandHandler {
 				
 				// USER SESSION 획득 성공시
 				if(user != null){
-					System.out.println("USER LOAD SECCESS");
 					reservationService = ReservationService.getInstance();
 					// USER ID, TIMETABLE NO 조건으로 검색
 					Reservation result = reservationService.selectByUserAndTime(user.getUserId(), timetableNo);
-					System.out.println(result);
 					// 결과값이 리턴될 경우 KEY=FIX 일 때 RESERVATION UPDATE 진행
 					if(result != null && keyType.equals("fix")){
 						result.setProgress(2);
-						reservationService.updateReservation(result);
+						reservationService.fixReservation(result);
 					}
 					// 결과값이 리턴될 경우 KEY=CANCLE 일 때 RESERVATION DELETE 진행
 					else if(result != null && keyType.equals("cancle")){

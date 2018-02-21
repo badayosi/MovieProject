@@ -10,6 +10,7 @@ function selectPerson(){
 	$("#total_person").html(setCount());
 }
 
+// 인원설정 초기화
 function initPerson(){
 	$("#person_setting select").each(function(index, obj){
 		$(this).val(0);

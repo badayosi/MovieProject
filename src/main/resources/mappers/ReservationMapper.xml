@@ -17,11 +17,17 @@
 	<select id="selectByTimeTable" parameterType="int" resultMap="ReservationResult">
 		select * from Reservation where timetable_no = #{no}
 	</select>
+	<select id="selectById" parameterType="string" resultMap="ReservationResult">
+		select * from Reservation where user_id = #{id}
+	</select>
 	<select id="selectByUserAndTime" parameterType="Reservation" resultMap="ReservationResult">
 		select * from Reservation where user_id = #{userId} and timetable_no = #{timetableNo}
 	</select>
 	<update id="updateReservation" parameterType="Reservation">
-		update reservation set seat=#{seat} where no=#{no}
+		update reservation set seat=#{seat}, progress=#{progress} where no=#{no}
+	</update>
+	<update id="fixReservation" parameterType="Reservation">
+		update reservation set progress=#{progress} where no=#{no}
 	</update>
 	<insert id="insertReservation" parameterType="Reservation">
 		insert into Reservation(no, user_id, timetable_no, price, seat, progress) values(null, #{userId}, #{timetableNo}, #{price}, #{seat}, #{progress})

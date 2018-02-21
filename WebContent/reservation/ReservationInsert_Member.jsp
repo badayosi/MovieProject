@@ -16,11 +16,11 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="../js/jquery-animate-css-rotate-scale.js"></script>
 <!-- CUSTOM JS -->
-<script type="text/javascript" src="reservation_seat.js?var=4"></script>
-<script type="text/javascript" src="reservation_approval.js?var=4"></script>
-<script type="text/javascript" src="reservation_person_setting.js?var=4"></script>
-<script type="text/javascript" src="reservation_seat_setting.js?var=4"></script>
-<script type="text/javascript" src="reservation_quick_control.js?var=4"></script>
+<script type="text/javascript" src="reservation_seat.js?var=1"></script>
+<script type="text/javascript" src="reservation_approval.js?var=2"></script>
+<script type="text/javascript" src="reservation_person_setting.js?var=1"></script>
+<script type="text/javascript" src="reservation_seat_setting.js?var=1"></script>
+<script type="text/javascript" src="reservation_quick_control.js?var=2"></script>
 <style>
 	@import url("/MovieProject/css/common.css");
 	/* 가로형 달력 CSS */
@@ -224,8 +224,11 @@
 	.t2{
 		font-size: 18px;
 		height: 40px;
-		
 	}
+	.reserveTable{
+		background:rgba(0,0,0,0.2) !important;
+	}
+	
 	/* 달력 */
 	.a, .b, .c{
 		font-size: 12px;
@@ -307,11 +310,7 @@
 			}
 			makeStr += "</tr>";
 		}
-		makeStr += "</table>";
-		
-		/* $("#year").html(year);
-		$("#month").html(month);*/
-		
+		makeStr += "</table>";		
 		$("#calendar_day").html(makeStr); 
 	}
 	
@@ -378,11 +377,11 @@
 				
 				for(var index=0 ; index<json.time.length ; index++){
 					makeTheaterList += "<a href='javascript:loadSeat(" + json.time[index].timeNo +","+ json.time[index].startTime +")'>";
+					makeTheaterList += "<input type='hidden' name='table_key' value='" + json.time[index].timeNo + "'>";
 					makeTheaterList += "<table id='timeTable'>";
 					makeTheaterList += "<tr>";
 					makeTheaterList += "<tr><td class='t1'>" + json.time[index].theaterName+ " ("+json.time[index].theaterType  + ")</td></tr>";
 					makeTheaterList += "<tr><td class='t2'>" + formatChange(json.time[index].startTime, "time") + "</td></tr>";
-					/* makeTheaterList += "<tr><td class='t3'>(" + json.time[index].theaterType + ")</td></tr>"; */
 					makeTheaterList += "<tr><td class='t3'>" + json.time[index].restSeat + " / " + json.time[index].maxSeat + "</td></tr>";
 					makeTheaterList += "</tr>";
 					makeTheaterList += "</table>";
@@ -390,6 +389,20 @@
 				}
 				makeTheaterList += "</div>";
 				$("#theaterList").append(makeTheaterList);
+				
+				for(var i=0 ; i<json.reserve.length ; i++){
+					$("#timeTableDiv input[name='table_key']").each(function(index,obj){
+						console.log(Number(json.reserve[i].timetableNo));
+						console.log(Number($(this).val()));
+						console.log(Number(json.reserve[i].timetableNo) == Number($(this).val()));
+						console.log($(this).parent().find(".t1").html());
+						if(Number(json.reserve[i].timetableNo) == Number($(this).val())){
+							$(this).parent().find(".t1").parent().addClass("reserveTable");
+							$(this).parent().find(".t2").parent().addClass("reserveTable");
+							$(this).parent().find(".t3").parent().addClass("reserveTable");
+						}
+					});  
+				}
 				
 				// 영화 선택시  QUICK 반영
 				// 경고문구 제거
@@ -424,7 +437,7 @@
 		
 		// 시간 선택시  QUICK 반영
 		// QUICK DATE 변경 + Hidden Type TimeTable 번호보유
-		$("#select_info table").find(".nav_data").eq(0).html(formatChange(startTime, "date") + "<input type='hidden' id='timeNo'name='timeNo' value='" + timeNo + "''>");
+		$("#select_info table").find(".nav_data").eq(0).html(formatChange(startTime, "date") + "<input type='hidden' id='timeNo'name='timeNo' value='" + timeNo + "'>");
 		// QUICK TIME 변경
 		$("#select_info table").find(".nav_data").eq(1).html(formatChange(startTime, "time"));
 		// QUICK CONTROL BUTTON 변경
@@ -473,7 +486,8 @@
 						});
 						$("#nav_data_seat").html(json.targetSeat);
 						$("#total_person").html(tempSeat.length);
-						$("#person_setting select")
+						$("#person_setting select").first().find("option").eq(tempSeat.length).attr("selected",true);
+						applyPayment();
 					}
 				}
 			}
@@ -552,7 +566,12 @@
 		})
 		// 상영관예약_초기화버튼 클릭 시
 		$(document).on("click","#select_clear",function(){
-			alert("초기화 클릭");
+			seatAllClear();
+			initPerson();
+			if(checkPositionByQuick() == "open")
+				closeQuick();
+			applyPayment();
+			initQuickSeat();
 		});
 		// 상영관예약_좌석배치설정 시
 		$(document).on("click","#seat_setting input",function(){

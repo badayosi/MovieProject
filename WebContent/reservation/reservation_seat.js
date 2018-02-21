@@ -41,12 +41,16 @@ function selectSeat(target){
 	equalChecker();
 	// 좌석배치설정 갱신
 	settingDisable();
+	// AJAX호출
+	setProgress();
 }
 
 // AJAX_선택좌석을 예약진행중으로 변경(PROGRESS:1)
 function setProgress(){
 	var selectSeat = null;
 	var timeTableNo = null;
+	var totalPayment = "";
+	var temp = "";
 	
 	// 예외처리 : 확인된 좌석이 없을 시 AJAX호출 금지
 	if($("#select_info").find(".nav_data").eq(3).html() == ""){
@@ -59,8 +63,12 @@ function setProgress(){
 		timeTableNo = $("#timeNo").val();		
 	}		
 	
+	temp = $("#total_payment").find(".nav_data").html().split(",");
+	for(var i=0 ; i<temp.length ; i++)
+		totalPayment += temp[i];
+	
 	$.ajax({
-		url:"reservationAjax.do?seat=" + selectSeat + "&timetableNo=" + timeTableNo,
+		url:"reservationAjax.do?seat=" + selectSeat + "&timetableNo=" + timeTableNo + "&pay=" + totalPayment,
 		type:"get",
 		dataType:"json",
 		success:function(json){
@@ -74,8 +82,7 @@ function setProgress(){
 		}
 	});
 }
-
-// AJAX_현재 진행된 예약내용을 FIX(PROGRESS:2)
+//AJAX_현재 진행된 예약내용을 FIX(PROGRESS:2)
 function fixProgress(){
 	var timeTableNo = $("#timeNo").val();
 	$.ajax({
@@ -85,11 +92,6 @@ function fixProgress(){
 		success:function(json){
 			console.log("fixProgress success");
 			console.log(json);
-			
-			if(json.error != null){
-				alert(json.error);
-				location.replace(json.solution);
-			}
 		}
 	});
 }
