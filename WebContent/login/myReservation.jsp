@@ -12,14 +12,14 @@
 	}
 	#myreservation_wrap #myreservation_ul{
 		width:100%;
+		border-bottom:1px solid #ccc;
 	}
 	#myreservation_wrap #myreservation_ul .myreservation_li{
 		width:95%;
 		overflow:hidden;
 		list-style:none;
-		padding:20px 0px 20px 30px;
+		padding:20px;
 		position:relative;
-		border-bottom:1px solid #ccc;
 	}
 	#myreservation_wrap #myreservation_ul .left_img{
 		float:left;

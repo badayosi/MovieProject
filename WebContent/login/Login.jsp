@@ -124,8 +124,7 @@
 				$("#p2 input").focus();
 				return false;
 			}
-		})
-
+		});
 	})
 </script>
 </head>

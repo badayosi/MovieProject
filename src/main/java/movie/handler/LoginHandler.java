@@ -1,9 +1,17 @@
 package movie.handler;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import movie.dto.Reservation;
+import movie.dto.Timetable;
 import movie.dto.User;
+import movie.service.ReservationService;
+import movie.service.TimeTableService;
 import movie.service.UserService;
 import mvc.controller.CommandHandler;
 
@@ -34,6 +42,23 @@ public class LoginHandler implements CommandHandler {
 				return "Login.jsp";
 			}			
 			System.out.println(user);
+			
+			// RESERVATION.PROGRESS 영역 관리
+			ReservationService reservationService = ReservationService.getInstance();
+			List<Reservation> resultReserve = reservationService.selectById(id);
+			TimeTableService timeTableService = TimeTableService.getInstance();
+			Timetable resultTime = null;
+			Date currentDate = new Date();
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			for(Reservation reservation : resultReserve){
+				resultTime = timeTableService.selectByNo(reservation.getTimetableNo());
+				if(sf.format(resultTime.getEndTime()).compareTo(sf.format(currentDate)) < 0){
+					reservation.setProgress(0);
+					reservationService.fixReservation(reservation);
+				}				
+			}
+			
+			
 			req.getSession().setAttribute("member",user);
 			
 			res.sendRedirect("/MovieProject/index.jsp");
