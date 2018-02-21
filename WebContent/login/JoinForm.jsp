@@ -355,7 +355,7 @@ input:FOCUS {
 					success:function(json){
 						console.log(json);
 						if(json == "false"){
-							alert("중복된 아이이디입니다.");
+							alert("중복된 아이디입니다.");
 							$("#userId").nextAll(".checkimg").attr("src",falseImgsrc);
 						}else if(json =="true"){
 							var reg =/^(?=.*[A-Za-z])[A-Za-z0-9]{6,12}$/;

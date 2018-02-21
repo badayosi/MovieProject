@@ -50,7 +50,6 @@ public class ServiceInsertHandler implements CommandHandler {
 				ServiceBoard sb = new ServiceBoard(userId, consulting, classification, title, content, regdate,answer);		
 				int result = service.insert(sb);	
 				req.setAttribute("insertService", "성공");
-				
 				return "ServiceUserBoard.jsp";
 			}else{
 				System.out.println("파일잇음");
@@ -72,8 +71,6 @@ public class ServiceInsertHandler implements CommandHandler {
 				req.setAttribute("insertService", "성공");
 				return "ServiceUserBoard.jsp";
 			}
-			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		

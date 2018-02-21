@@ -167,15 +167,14 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$("#li2").addClass("select_menu");
-		$("#sss").load("ServiceUserBoardView.jsp");
-		
+		if($("#newLoad").val()==""){
+			$("#li2").addClass("select_menu");
+			$("#sss").load("ServiceUserBoardView.jsp");
+		}
 		if($("#ckUser").val()==""){
 			$("#sss").load("noticeView.jsp");
 			$("#li2").removeClass("select_menu");
 			$("#li1").addClass("select_menu");
-			
-			
 		}
 		
 		$(document).on("submit","#service_form",function(){
@@ -344,12 +343,14 @@ function noticeSelect(no){
 		<div id="sss"></div>
 	</div>
 	<input type="hidden" id="ckUser" value="${member.userId }">
+	
 	<c:if test="${updateNo !=null }">
 		<script>
 			$("#sss").load("noticeView.jsp");
 			noticeSelect("${updateNo }");
 		</script>
 	</c:if>
+	<input type="hidden" id="newLoad" value="${insertService}">
 	<c:if test="${insertService !=null }">
 		<script>
 			
