@@ -298,6 +298,7 @@
 				
 				if(num > 0){
 					alert("중복되는 시간이 있습니다.");
+					//return false;
 				}else{
 					$.ajax({
 						url:"/MovieProject/manager/managerAddTimetable.do",
@@ -373,9 +374,11 @@
 			var endFullTime=new Date(selectDate+" "+endTime);
 			
 			var tNo=$("#theater_add_list").val();
-			addScheduleProcess(tNo, $("#selectDate").val(), wantDate.getTime(),mno, endFullTime.getTime());
-			mno="";
-			location.reload();
+		 	addScheduleProcess(tNo, $("#selectDate").val(), wantDate.getTime(),mno, endFullTime.getTime());
+			
+				mno="";
+				location.reload();
+			
 		});
 	});
 </script>
