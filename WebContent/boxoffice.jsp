@@ -146,7 +146,11 @@
 			var nowDate=date.getTime();
 			
 			var makeMovieList;
-			for(var index=0;index<json.length;index++){
+			var length = json.length;
+			if(length>9){
+				length=8;
+			}
+			for(var index=0;index<length;index++){
 				if(json[index].closeDate<nowDate || json[index].openDate>nowDate){
 					continue;
 				}else{

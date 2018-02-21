@@ -45,9 +45,10 @@ public class TheaterModifyHandler implements CommandHandler {
 				req.setAttribute("result", "성공");
 			}
 			//System.out.println(result);
-			return "list.do";
+			res.sendRedirect("list.do");
+			return null;
 		}
-		return "list.do";
+		return null;
 	}
 
 }

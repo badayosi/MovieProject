@@ -146,7 +146,7 @@
 					<input type="submit" id="loginBtn">
 					<p id="searchWrap">
 						<a href="findIdPw.jsp">아이디/비밀번호 찾기 | </a>
-						<a href="#">회원가입</a>
+						<a href="JoinForm.jsp">회원가입</a>
 					</p>
 					<c:if test="${error !=null}">
 						<script type="text/javascript">
