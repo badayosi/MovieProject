@@ -76,22 +76,22 @@
 	#movieListByDate{
 		list-style: none;
 	}
-	table{
+	#addInfo table{
 		border-collapse: collapse;
 		width:470px;
 		margin:0 auto;
 	}
-	table tr td{
+	#addInfo table tr td{
 		border:1px solid black;
 		width:200px;
 		height:400px;
 		text-align: left;
 		padding-left:10px;
 	}
-	table tr td:first-child{
+	#addInfo table tr td:first-child{
 		width:150px;
 	}
-	table tr td:last-child{
+	#addInfo table tr td:last-child{
 		/* padding-left:10px; */
 	}
 </style>
@@ -227,13 +227,18 @@
 		
 		if(type=="time"){
 			var hourStr = "";
+			var minStr="";
 			
 			if(newDate.getHours() < 10)
 				hourStr = "0" + newDate.getHours();
 			else
 				hourStr = newDate.getHours();
+			if(newDate.getMinutes() < 10)
+				minStr = "0" + newDate.getMinutes();
+			else
+				minStr = newDate.getMinutes();
 			
-			return hourStr + ":" + newDate.getMinutes();
+			return hourStr + ":" + minStr;
 		}
 		if(type=="date"){
 			var dateStr = "";
@@ -261,20 +266,53 @@
 			type:"get",
 			dataType:"json",
 			success:function(json){ 
-				//console.log(json);
 				var date=new Date(choicedate);
 				var selDate=date.getTime();
 				var str="";
-				console.log(json);
+				//console.log(json);
 				$(json).each(function(i,obj){
 					if(obj.openDate<=selDate && obj.closeDate>=selDate){
-						str+="<li><input type='radio' name='movie' value='"+obj.movieName+"'><b>"+obj.movieName+" </b>(<span class='mPlaytime'>"+obj.playTime+"</span>분)</li>"; 
+						str+="<li><input class='mNo' type='hidden' value='"+obj.movieNo+"'><input type='radio' name='movie' value='"+obj.movieName+"'><b>"+obj.movieName+" </b>(<span class='mPlaytime'>"+obj.playTime+"</span>분)</li>"; 
 					}
 				})
 				$("#movieListByDate").append(str);
 			}
 		}) 
 	}
+	
+	function addScheduleProcess(theaterNo,date,wantDate,movieNo,endTime){
+		$.ajax({
+			url:"/MovieProject/manager/managerListTimetableByDate.do",
+			type:"get",
+			data:{"theaterNo":theaterNo,"date":date},
+			dataType:"json",
+			success:function(json){ 	
+				console.log(json);
+				var num=0;
+				
+				$(json).each(function(i,obj){
+					if((obj.startTime <= wantDate) && (wantDate<=obj.endTime)){
+						num++;
+					}
+				});
+				
+				if(num > 0){
+					alert("중복되는 시간이 있습니다.");
+				}else{
+					$.ajax({
+						url:"/MovieProject/manager/managerAddTimetable.do",
+						type:"get",
+						data:{"movieNo":movieNo,"theaterNo":theaterNo,"startTime":wantDate,"endTime":endTime},
+						dataType:"json",
+						success:function(json){ 
+							console.log("insert complete");
+						}
+					}) 
+					
+				}
+			}
+		}) 
+	} 
 	
 	$(function(){
 		loadTheater();
@@ -292,10 +330,12 @@
 			selectMovieByDate(selDate);
 		});
 		
-		$(document).on("click","input[name='movie']",function(){ 
+		var mno="";
+		$(document).on("click","input[name='movie']",function(){ 			
 			var selectDate=$("#selectDate").val();
 			var startTime=$("#startTime").val();
 			var playTime=Number($(this).nextAll(".mPlaytime").text());
+			mno=$(this).prev(".mNo").val();
 			
 			var date=new Date(selectDate+" "+startTime);
 			var endTime = date.getTime() + (playTime * 60*1000);
@@ -315,7 +355,16 @@
 		 
 		//상영관 추가에서 추가버튼 클릭
 		$("#btn").click(function(){
+			var selectDate=$("#selectDate").val();
+			var startTime=$("#startTime").val();
+			var endTime=$("#endTime").val();
 			
+			var wantDate=new Date(selectDate+" "+startTime);
+			var endFullTime=new Date(selectDate+" "+endTime);
+			
+			
+			var tNo=$("#theater_add_list").val();
+			addScheduleProcess(tNo, $("#selectDate").val(), wantDate.getTime(),mno, endFullTime.getTime());
 		});
 	});
 </script>

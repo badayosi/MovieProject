@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import movie.dao.MovieDao;
 import movie.dao.TimetableDao;
+import movie.dto.Movie;
 import movie.dto.Timetable;
 import mvc.util.MySqlSessionFactory;
 
@@ -41,12 +43,24 @@ public class TimeTableService {
 			session = MySqlSessionFactory.openSession();
 			TimetableDao dao = session.getMapper(TimetableDao.class);
 			
-			List<Timetable> result = dao.selectByMovie(no);
-			
+			List<Timetable> result = dao.selectByTheater(no);
+
 			return result;
 		} finally {
 			MySqlSessionFactory.closeSession(session);
 		}		
+	}
+	
+	public List<Timetable> selectByDate(int theaterNo, String date){
+		try (SqlSession session = MySqlSessionFactory.openSession();) {
+			TimetableDao dao = session.getMapper(TimetableDao.class);
+			List<Timetable> list = dao.selectByDate(theaterNo, date);
+
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public void deleteByNo(int no){
@@ -61,6 +75,17 @@ public class TimeTableService {
 			session.commit();
 		} finally {
 			MySqlSessionFactory.closeSession(session);
+		}
+	}
+	
+	public void insert(Timetable timetable){
+		try (SqlSession session = MySqlSessionFactory.openSession();) {
+			TimetableDao dao = session.getMapper(TimetableDao.class);
+			dao.insert(timetable);
+			session.commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

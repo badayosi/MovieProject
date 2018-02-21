@@ -47,7 +47,7 @@ public class ManagerAjaxHandler implements CommandHandler {
 					String no = req.getParameter("theaterno");
 					
 					TimeTableService timeTableService = TimeTableService.getInstance();
-					List<Timetable> resultTimeTable = timeTableService.selectByMovie(Integer.valueOf(no));
+					List<Timetable> resultTimeTable = timeTableService.selectByTheater(Integer.valueOf(no));
 					
 					MovieService movieService = MovieService.getInstance();
 					ArrayList<Movie> resultMovie = new ArrayList<>();

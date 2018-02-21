@@ -14,6 +14,14 @@ public class Timetable {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Timetable(int movieNo, int theaterNo, Date startTime, Date endTime) {
+		super();
+		this.movieNo = movieNo;
+		this.theaterNo = theaterNo;
+		this.startTime = startTime;
+		this.endTime = endTime;
+	}
+
 	public Timetable(int tableNo, int movieNo, int theaterNo, Date startTime, Date endTime) {
 		super();
 		this.tableNo = tableNo;

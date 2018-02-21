@@ -17,9 +17,16 @@
 		select * from Timetable where movie_No=#{no}
 	</select>
 	<select id="selectByTheater" parameterType="int" resultMap="TimetableResult">
-		select * from Timetable where theater_No=#{no}
+		select * from Timetable where theater_No=#{no} order by start_time;
+	</select>
+	<select id="selectByDate" resultMap="TimetableResult">
+		select * from timetable where theater_no=#{param1} and start_time like #{param2}
 	</select>
 	<delete id="deleteByNo" parameterType="int">
 		delete from Timetable where table_No=#{no}
 	</delete>
+	
+	<insert id="insert" parameterType="Timetable">
+		insert into timetable values(null,#{movieNo}, #{theaterNo}, #{startTime},#{endTime})
+	</insert>
 </mapper>
