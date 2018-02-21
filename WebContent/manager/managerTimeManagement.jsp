@@ -43,7 +43,6 @@
 		background: grey;
 		padding: 10px;
 	}
-	
 	#leftContent table{
 		width: 400px;
 		margin-left:50px;
