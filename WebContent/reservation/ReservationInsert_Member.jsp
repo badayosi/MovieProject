@@ -595,6 +595,7 @@
 			checkSeat();
 		});
 		
+		//시간표 마우스 오버
 		$(document).on("mouseover","#timeTable",function(){
 			$(this).children().children().css("background","black");
 			$(this).children().children().css("color","white");

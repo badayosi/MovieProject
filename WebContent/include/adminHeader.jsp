@@ -11,8 +11,9 @@
 		margin:0;
 		padding:0;
 	}
-	#headerWrap h2{
-		
+	#headH2{
+		margin:0;
+		padding:0;
 		text-align: center;
 		height: 70px;
 		line-height: 70px;
@@ -22,6 +23,8 @@
 		padding:0;
 		margin-bottom: 50px;
 	}
+	
+	
 </style>
 <header>
 	<div id="headerWrap">
@@ -36,8 +39,10 @@
 				<a href="/MovieProject/login/JoinForm.jsp">회원가입</a>
 			</c:if>
 		</div>
-		<h2>관리자 로그인</h2>
 	</div> 
+	<div  id="headH2">
+		<h2>관리자 로그인</h2>
+	</div>
 	<div id="menubarWarp">
 		<ul id="menubar">
 			<li><a href="/MovieProject/manager/managerListMovie.do">영화관리</a></li>

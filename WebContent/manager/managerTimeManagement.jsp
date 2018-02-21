@@ -26,17 +26,28 @@
 		width: 500px;
 		min-height: 500px;
 	}
-	#leftContent h2{
+	#leftContent h2, #rightContent h2{
 		margin-top: 20px;
 	}
 	#theater_list{
 		margin-top: 20px;
 		margin-bottom: 20px;
 	}
+	#leftContent select{
+		width: 200px;
+		padding: .2em .3em;
+		border: 1px solid #999;
+ 		border-radius: 0px;
+	}
+	#leftContent a input[type='submit']{
+		background: grey;
+		padding: 10px;
+	}
+	
 	#leftContent table{
 		width: 400px;
 		margin-left:50px;
-		margin-bottom: 20px;
+		margin-bottom: 50px;
 	}
 	#leftContent table,#leftContent th{
 		border-top:1px solid #CDC197;
@@ -58,9 +69,8 @@
 	}
 	/* 상영관 추가 */
 	#rightContent{
-		border:1px solid black;
-		float: right;
-		
+		border:1px solid grey;
+		float: right;		
 		width: 500px;
 		min-height: 500px;
 	}
