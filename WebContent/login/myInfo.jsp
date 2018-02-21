@@ -227,7 +227,7 @@ input:FOCUS {
 	margin-left:258px;
 	width:461px !important
 }
-#passwordBtn,#joinBtn,#cencelBtn{
+#passwordBtn,#joinBtn,#updateBtn,#cencelBtn{
 	width:100px !important;
 	height: 40px !important;
 	background: #333333;
@@ -263,7 +263,15 @@ input:FOCUS {
 			$("#userupdate_wrap").css("display","none");
 		})
 		
-		
+		$(".jF p").each(function(i, obj) {
+			$(obj).hover(function() {
+				$(this).find("label").css("color", "black");
+				$(this).find("input").css("border-color", "black");
+			}, function() {
+				$(this).find("label").css("color", "#cccccc");
+				$(this).find("input").css("border-color", "#cccccc");
+			})
+		})
 		
 	})
 </script>
@@ -283,7 +291,6 @@ input:FOCUS {
 				<p>
 					<label>아이디</label>
 					<span>${member.userId }</span>
-					
 				</p>
 				<p>
 					<label>이 름</label>

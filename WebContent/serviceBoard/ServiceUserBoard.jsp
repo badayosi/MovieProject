@@ -167,8 +167,16 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$("#li2").addClass("select_menu");
-		$("#sss").load("ServiceUserBoardView.jsp");
+		if($("#newLoad").val()==""){
+			$("#li2").addClass("select_menu");
+			$("#sss").load("ServiceUserBoardView.jsp");
+		}
+		if($("#ckUser").val()==""){
+			$("#sss").load("noticeView.jsp");
+			$("#li2").removeClass("select_menu");
+			$("#li1").addClass("select_menu");
+		}
+		
 		$(document).on("submit","#service_form",function(){
 			$("#content_ta").val($("#content_ta").val().replace(/(?:\r\n|\r|\n)/g, '<br />'));
 			
@@ -190,9 +198,14 @@
 				$("#li2").removeClass("select_menu");
 				$("#li1").addClass("select_menu");
 			}else{
-				$("#sss").load("ServiceUserBoardView.jsp");
-				$("#li2").addClass("select_menu");
-				$("#li1").removeClass("select_menu");
+				if($("#ckUser").val()==""){
+					location.href="/MovieProject/login/Login.jsp";
+				}else{
+					$("#sss").load("ServiceUserBoardView.jsp");
+					$("#li2").addClass("select_menu");
+					$("#li1").removeClass("select_menu");
+				}
+				
 			}
 		})
 		$(document).on("click","#nextTitle, #prevTitle",function(){
@@ -329,12 +342,15 @@ function noticeSelect(no){
 		</div>
 		<div id="sss"></div>
 	</div>
+	<input type="hidden" id="ckUser" value="${member.userId }">
+	
 	<c:if test="${updateNo !=null }">
 		<script>
 			$("#sss").load("noticeView.jsp");
 			noticeSelect("${updateNo }");
 		</script>
 	</c:if>
+	<input type="hidden" id="newLoad" value="${insertService}">
 	<c:if test="${insertService !=null }">
 		<script>
 			

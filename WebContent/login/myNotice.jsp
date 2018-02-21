@@ -175,6 +175,7 @@
 	}
 	#answer_wrap_h4{
 		margin-bottom:15px;
+		padding-left:30px;
 	}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -246,7 +247,7 @@
 			<div id="selectHeader">
 				<h4 id="title_h4">시스템 점검안내</h4>
 				<ul id="notice_ul">
-					<li id="regdate_Li"><b>등록일 :</b> 2018-02-06 <span id="linespan"></span></li>
+					<li id="regdate_Li"><b>등록일 : </b> 2018-02-06 <span id="linespan"></span></li>
 				</ul>
 			</div>
 			<div id="selectContent">

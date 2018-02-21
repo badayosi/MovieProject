@@ -18,13 +18,13 @@ public class ServiceBoardService {
 		return INSTANCE;
 	}
 	
-	public List<ServiceBoard> selectByAll(int size){
+	public List<ServiceBoard> selectByAll(){
 		SqlSession session = null;
 		session = MySqlSessionFactory.openSession();
 		ServiceBoardDao dao = session.getMapper(ServiceBoardDao.class);
 		List<ServiceBoard> list = null;
 		try{
-			list = dao.selectByall(size);
+			list = dao.selectByall();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
