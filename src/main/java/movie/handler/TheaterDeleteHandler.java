@@ -23,7 +23,8 @@ public class TheaterDeleteHandler implements CommandHandler {
 			req.setAttribute("result", "삭제에 성공하셨습니다.");
 		}
 		
-		return "list.do";
+		res.sendRedirect("list.do");
+		return null;
 	}
 
 }
