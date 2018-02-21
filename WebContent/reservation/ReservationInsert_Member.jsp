@@ -300,7 +300,6 @@
 							if(t.getDate() == 1){
 								var month1 = t.getMonth()+1;
 								var year1 = t.getFullYear();
-								/* makeStr +=  */
 								makeStr += "<td class='"+weekStr1[col%7]+" newMonth'>"+"<span class='month1'>"+ month1+"</span>"+"<span class='year1'>"+year1 +"</span>"+"<p>" + t.getDate() + "</p></td>";
 							}else{
 								makeStr += "<td class='"+weekStr1[col%7]+"'><p>" + t.getDate() + "</p></td>";	
@@ -323,34 +322,46 @@
 			type:"get",
 			dataType:"json",
 			success:function(json){
+				var date=new Date();
+				var nowDate=date.getTime();
 				
-				console.log(json);
 				var makeMovieList;
-				for(var index=0;index<json.length;index++){
-					makeMovieList = "";
-					makeMovieList += "<li>";
-					makeMovieList += "<a href='javascript:selectMovie(" + json[index].movieNo +")'>";
-					makeMovieList += "<div class='rating";
-					switch(json[index].rating){
-						case 12:
-							makeMovieList += " age12'>";
-							break;
-						case 15:
-							makeMovieList += " age15'>";
-							break;
-						case 18:
-							makeMovieList += " age18'>";
-							break;
-						default:
-							makeMovieList += " ageall'>";
-							break;
+				var length = json.length;
+				if(length>9){
+					length=8;
+				}
+				for(var index=0;index<length;index++){
+					if(json[index].closeDate<nowDate || json[index].openDate>nowDate){
+						continue;
+					}else{
+						
+						makeMovieList = "";
+						makeMovieList += "<li>";
+						makeMovieList += "<a href='javascript:selectMovie(" + json[index].movieNo +")'>";
+						
+						makeMovieList += "<div class='rating";				
+						switch(json[index].rating){
+							case 12:
+								makeMovieList += " age12'>";
+								break;
+							case 15:
+								makeMovieList += " age15'>";
+								break;
+							case 18:
+								makeMovieList += " age18'>";
+								break;
+							default:
+								makeMovieList += " ageall'>";
+								break;
+						}
+						makeMovieList += "</div>";
+						makeMovieList += "<div class='movieName'>" + json[index].movieName + "</div>";
+						makeMovieList += "<input type='hidden' name='movieKey' value=" + json[index].movieNo +">";
+						makeMovieList += "</a>";
+						
+						makeMovieList += "</li>";
+						$("#movieZone").append(makeMovieList);
 					}
-					makeMovieList += "</div>";
-					makeMovieList += "<div class='movieName'>" + json[index].movieName + "</div>";
-					makeMovieList += "<input type='hidden' name='movieKey' value=" + json[index].movieNo +">";
-					makeMovieList += "</a>";
-					makeMovieList += "</li>";
-					$("#movieZone").append(makeMovieList);
 				}
 			}
 		});
@@ -818,7 +829,6 @@
 			</div>
 		</div>
 	</div>
-	<button onclick="checkSession()">세션확인</button>
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
 </html>

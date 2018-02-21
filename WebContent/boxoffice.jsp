@@ -140,8 +140,6 @@
 		type:"get",
 		dataType:"json",
 		success:function(json){ 
-			
-			//console.log(json);
 			var date=new Date();
 			var nowDate=date.getTime();
 			
@@ -177,8 +175,6 @@
 					makeMovieList += "</div>";
 					makeMovieList += "<div class='movieName'>" + json[index].movieName + "</div>";
 					makeMovieList += "<input type='hidden' name='movieKey' value=" + json[index].movieNo +">";
-					/* makeMovieList +=  "."+ ++index;
-					--index; */
 					makeMovieList += "</a>";
 					
 					makeMovieList += "</li>";
