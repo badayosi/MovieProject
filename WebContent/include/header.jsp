@@ -22,7 +22,6 @@
 			<a href="/MovieProject/login/Login.jsp" id="login">로그인</a>
 			
 			<a href="/MovieProject/login/JoinForm.jsp">회원가입</a>
-			<a href="/MovieProject/login/myPage.jsp">마이시네마</a>
 		</c:if>
 	</div>
 	

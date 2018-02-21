@@ -41,6 +41,11 @@
  	text-align: center;
  	padding-bottom:20px;
  }
+ #nodateMovie{
+ 	width:1000px;
+ 	font-size:20px;
+ 	text-align:center;
+ }
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
@@ -52,9 +57,12 @@
 			data:{"userId":userId},
 			dataType:"json",
 			success:function(json){
-				console.log(json);
-				var str="";
 				
+				var str="";
+				if(json.length ==0){
+					str = "<table class='mInfoTable'><tr><td colspan='2'><h2 id='nodateMovie'>무비 히스트리가 없습니다.</h2></td></tr></table>";
+					
+				}
 				$(json).each(function(i,obj){
 					var date=new Date(obj.startTime);
 					var seat = obj.seat;
