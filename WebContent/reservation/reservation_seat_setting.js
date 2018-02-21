@@ -33,6 +33,13 @@ function seatAllBlock(){
 	});
 }
 
+// 마우스 오버 이벤트 CSS 전체 초기화
+function overSeatAllClear(){
+	$(".seatTable").find("td").each(function(index, obj){
+		$(this).find("span").removeClass("overSeat");	
+	});
+}
+
 // 선택불가좌석 복구 처리
 function seatRestore(){
 	$(".seatTable").find("td").each(function(rowIndex,rowObj){

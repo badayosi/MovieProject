@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,10 +16,11 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="../js/jquery-animate-css-rotate-scale.js"></script>
 <!-- CUSTOM JS -->
-<script type="text/javascript" src="reservation_seat.js?var=1"></script>
-<script type="text/javascript" src="reservation_approval.js?var=1"></script>
-<script type="text/javascript" src="reservation_person_setting.js?var=1"></script>
-<script type="text/javascript" src="reservation_seat_setting.js?var=1"></script>
+<script type="text/javascript" src="reservation_seat.js?var=4"></script>
+<script type="text/javascript" src="reservation_approval.js?var=4"></script>
+<script type="text/javascript" src="reservation_person_setting.js?var=4"></script>
+<script type="text/javascript" src="reservation_seat_setting.js?var=4"></script>
+<script type="text/javascript" src="reservation_quick_control.js?var=4"></script>
 <style>
 	@import url("/MovieProject/css/common.css");
 	/* 가로형 달력 CSS */
@@ -466,13 +466,16 @@
 		});
 		// 상영관예약_좌석배치설정 시
 		$(document).on("click","#seat_setting input",function(){
-			settingChoice($(this).val());
+			seatRestore();
+			settingChoice($("#seat_setting input:checked").val());
 		})
 		// 상영관예약_마우스오버
 		$(document).on("mouseover",".seat",function(){
 			if(!$(this).hasClass("selectSeat")
 					&& !$(this).hasClass("reserveSeat")
 					&& $(".selectSeat").length < 9)
+				$(this).toggleClass("overSeat");
+			if(!$(this).hasClass("overSeat"))
 				$(this).toggleClass("overSeat");
 		});
 		// 상영관예약_마우스아웃
@@ -481,21 +484,15 @@
 					&& !$(this).hasClass("reserveSeat")
 					&& $(".selectSeat").length < 9)
 				$(this).toggleClass("overSeat");
+			if($(this).hasClass("overSeat"))
+				$(this).toggleClass("overSeat");
 		});
-		
-		// 퀵메뉴_OPEN
-		$("#open_btn").on("mouseover",function(){
-			if($("#quick-menu").css("right") == "-500px"){
-				$("#open_btn").rotate("180deg");
-				$("#quick-menu").animate({"right":"0px"},300);
-			}
-		})
-		// 퀵메뉴_CLOSE
+		// 퀵메뉴_컨트롤
 		$("#open_btn").on("click",function(){
-			if($("#quick-menu").css("right") == "0px"){
-				$("#open_btn").rotate("0deg");
-				$("#quick-menu").animate({"right":"-500px"},300);
-			}
+			if(checkPositionByQuick() == "close")
+				openQuick();
+			if(checkPositionByQuick() == "open")
+				closeQuick();
 		})
 		// 퀵메뉴_PREV버튼 클릭 시
 		$("#nav_cancle").on("click",function(){
