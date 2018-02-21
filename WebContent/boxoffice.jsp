@@ -155,7 +155,7 @@
 					
 					makeMovieList = "";
 					makeMovieList += "<li>";
-					makeMovieList += "<a href='javascript:selectMovie(" + json[index].movieNo +")'>";
+					makeMovieList += "<a href='/MovieProject/reservation/ReservationInsert_Member.jsp'>";
 					
 					makeMovieList += "<div class='rating";				
 					switch(json[index].rating){
