@@ -257,7 +257,6 @@
 				$("#movieListByDate").append(str);
 			}
 		}) 
-		
 	}
 	
 	$(function(){
