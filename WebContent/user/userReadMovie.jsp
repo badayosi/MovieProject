@@ -169,7 +169,7 @@
    		<div id="movieInfo">
    			<div id="moviePoster">
    				<img src="/MovieProject/upload/${movie.movieNo}/${movie.pathPoster}">
-   				<a href="#">예매하기</a>
+   				<a href="/MovieProject/reservation/ReservationInsert_Member.jsp">예매하기</a>
    			</div>
    			<div id="textInfo">
    				<table>
