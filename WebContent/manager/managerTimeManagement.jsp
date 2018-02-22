@@ -33,6 +33,10 @@
 		margin-top: 20px;
 		margin-bottom: 20px;
 	}
+	#theater_schedule table tr th:FIRST-CHILD{
+		width: 70px;
+	}
+	
 	#leftContent select{
 		width: 200px;
 		padding: .2em .3em;
@@ -93,6 +97,16 @@
 	}
 	#addInfo table tr td:last-child{
 		/* padding-left:10px; */
+	}
+	
+	#btn{
+		margin:10px 0px;
+		
+		font-size: 15px;
+		background: #CDC197;
+		padding: 5px 10px;
+		font-weight: bold;
+		color: white;
 	}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -167,7 +181,7 @@
 					// 제목용 ROW 생성
 					makeTag += "<tr>";
 					makeTag += "<th>";
-					makeTag += "상영시간(시작-종료)";
+					makeTag += "상영시간<br>(시작-종료)";
 					makeTag += "</th>";
 					makeTag += "<th>";
 					makeTag += "영화명";
@@ -388,7 +402,7 @@
 		<div id="container">
 			
 			<div id="leftContent">
-				<h2>상영관 관리</h2>
+				<h2>상영관별 시간표 확인</h2>
 				<div id="select">
 					<select id="theater_list">
 					
@@ -400,7 +414,7 @@
 			</div>
 			 
 			<div id="rightContent">
-				<h2>상영관 추가</h2>
+				<h2>상영시간표 추가</h2>
 				<h4>※상영관, 상영일, 시작시간 입력 후 영화를 선택해 주세요.※</h4>
 				<div id="addInfo">
 					<table>
