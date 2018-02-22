@@ -332,7 +332,6 @@
 					if(json[index].closeDate<nowDate || json[index].openDate>nowDate){
 						continue;
 					}else{
-						
 						makeMovieList = "";
 						makeMovieList += "<li>";
 						makeMovieList += "<a href='javascript:selectMovie(" + json[index].movieNo +")'>";
