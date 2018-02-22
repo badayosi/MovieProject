@@ -69,7 +69,22 @@ $(function(){
 		height: 30px;
 		width: 200px;
 	}
-	#findId{
+	.insert{	
+		padding-top: 20px;
+		width: 512px;
+		margin: 0 auto;	
+		text-align:center;
+	}
+	.insert input[type='submit']{
+		font-size: 15px;
+		background: #CDC197;
+		padding: 5px 10px;
+		font-weight: bold;
+		color: white;
+	}
+	
+	
+	.find{
 		padding-top:40px;
 		font-size: 20px;
 		font-weight: bold;
@@ -89,15 +104,10 @@ $(function(){
 					<p>
 						<label>이메일</label> <input type="text" name="email">
 					</p>
-					<input type="submit" id="loginBtn" value="아이디 찾기">
-					
+					<p class="insert">
+						<input type="submit" id="loginBtn" value="아이디 찾기">
+					</p>
 				</form>	
-				<c:if test="${id!=null }">
-				<div id="findId">
-					<br><br>
-					 ${id }
-				</div>
-			</c:if>			
 			</div>
 			
 			<div id="rightWrap">
@@ -108,15 +118,27 @@ $(function(){
 					<p>
 						<label>이메일</label> <input type="text" name="email">
 					</p>
-					<input type="submit" value="비밀번호 찾기">
+					<p class="insert">
+						<input type="submit" value="비밀번호 찾기">
+					</p>
 				</form>
 				
+				
+			</div>
+			<div>
+				<c:if test="${id!=null }">
+					<div class="find">
+						<br><br>
+						 ${id }
+					</div>
+				</c:if>		
 				<c:if test="${result!=null }">
-					<div id="findPw">
+					<div class="find">
 						<br><br>
 						 ${result }
 					</div>
 				</c:if>
+			
 			</div>
 	</div>
 </body>

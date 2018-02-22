@@ -74,6 +74,7 @@
 		height:470px;
 		max-width:835px;
 		margin:0 auto;
+		text-align: center;
 	}
 	
 	#container #imgListDiv .imgList h3 img, #container #imgListDiv .imgList h3 video{
@@ -81,6 +82,7 @@
 		height:84px;
 		width:135px;
 		margin:4px auto;
+		text-align: center;
 	}
 	#movieInfo{
 		width:990px;
@@ -209,11 +211,14 @@
    			</div>
    			
    		</div>
+   		<div id="synopsis">
+			<h1>시놉시스</h1>
+			<br>
+			${movie.synopsis}
+			<br>   				
+		</div>
 	</div>
-	<div id="synopsis">
-		<h1>시놉시스</h1>
-		${movie.synopsis}   				
-	</div>
+	
 	
 
 	<jsp:include page="starBoard.jsp"></jsp:include>

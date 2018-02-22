@@ -177,7 +177,7 @@ $(function() {
 				if(obj.openDate<nowDate && obj.closeDate>nowDate){
 					listTag+="<li class='listMovieli'><div class='listDiv'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'>"
 								+"<a href='userReadMovie.do?no="+obj.movieNo+"'><p>"+obj.movieName+"</p></a></div>"
-								+"<div class='hiddenText'><a href='#'>예매하기</a><a href='userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div></li>";
+								+"<div class='hiddenText'><a href='/MovieProject/reservation/ReservationInsert_Member.jsp'>예매하기</a><a href='userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div></li>";
 					
 				}
 			})
@@ -210,7 +210,7 @@ $(function() {
 						if(obj.openDate<nowDate && obj.closeDate>nowDate){
 							listTag+="<li class='listMovieli'><div class='listDiv'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'>"
 										+"<a href='userReadMovie.do?no="+obj.movieNo+"'><p>"+obj.movieName+"</p></a></div>"
-										+"<div class='hiddenText'><a href='#'>예매하기</a><a href='userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div></li>";
+										+"<div class='hiddenText'><a href='/MovieProject/reservation/ReservationInsert_Member.jsp'>예매하기</a><a href='userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div></li>";
 							
 						}
 					})
@@ -236,7 +236,7 @@ $(function() {
 									if(obj.openDate>nowDate){
 										listTag+="<li class='listMovieli'><div class='listDiv'><img class='mPoster' src='/MovieProject/upload/"+obj.movieNo+"/"+obj.pathPoster+"'>"
 													+"<a href='userReadMovie.do?no="+obj.movieNo+"'><p>"+obj.movieName+"</p></a></div>"
-													+"<div class='hiddenText'><a href='#'>예매하기</a><a href='userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div></li>";
+													+"<div class='hiddenText'><a href='/MovieProject/reservation/ReservationInsert_Member.jsp'>예매하기</a><a href='userReadMovie.do?no="+obj.movieNo+"'>상세보기</a></div></li>";
 										
 									}
 								})
