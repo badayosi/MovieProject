@@ -301,7 +301,7 @@
 				</select>		
 			</div>
 			<br><br>
-			<div id="quick-menu">
+			<!-- <div id="quick-menu">
 			<img src="../images/nav_condition_open.png" id="open">
 				<div id="nav_condition">
 					<h2 id="nav_title">그것만이 내세상</h2>
@@ -316,7 +316,7 @@
 			         </ul>
 			         <input type="submit" value="다음단계 ▶">
 		         </div>
-	         </div>
+	         </div> -->
 		</form>
 	
 	
