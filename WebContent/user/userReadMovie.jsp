@@ -67,7 +67,6 @@
 		width:950px;
 		height:120px;
 		margin:0 auto;
-
 	} 
 	.bigImg h3 img, .bigImg h3{
 		text-align: center;
