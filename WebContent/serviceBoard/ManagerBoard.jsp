@@ -90,6 +90,10 @@
 			var select = $("#select_search").val();
 			
 			var text = $("#search_input").val();
+			if(text == ""){
+				alert("검색 결과를 입력해주세요");
+				return;
+			}
 			$.ajax({
 				url:"mynoticesearch.do",
 				type:"get",
