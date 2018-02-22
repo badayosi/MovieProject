@@ -200,14 +200,20 @@
 						var tdclassification = "<td>"+json[i].classification+"</<td>";
 						var tdtitle = "<td class='table_title'>"+json[i].title+"</<td>";
 						var date = new Date(json[i].regdate);
-						var tdregdate = "<td>"+date.toLocaleDateString()+"</<td>";
+		                var month = date.getMonth()+1;
+		                var tdRegdate="";  
+		                if(month.length=1){
+		                	tdRegdate+="<td>"+date.getFullYear()+"-0"+(month)+"-"+date.getDate()+"</td>";
+		                }else{
+		                	tdRegdate+="<td>"+date.getFullYear()+"-"+(month)+"-"+date.getDate()+"</td>";
+		                }
 						var tdanswer = "";
 						if(json[i].answer){
 							tdanswer = "<td>O</td>"
 						}else{
 							tdanswer = "<td>X</td>"
 						}
-						tr += tdNo + tdclassification +tdtitle + tdregdate + tdanswer;
+						tr += tdNo + tdclassification +tdtitle + tdRegdate + tdanswer;
 						$("#notice_table").append(tr);
 					}
 				}

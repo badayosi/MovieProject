@@ -65,6 +65,7 @@
 				}
 				$(json).each(function(i,obj){
 					var date=new Date(obj.startTime);
+					
 					var seat = obj.seat;
 					var seatNumber = 1;
 					

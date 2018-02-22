@@ -78,7 +78,14 @@ function alllist(){
 						var tdUserId="<td>"+json[i].userId+"</td>";
 						var tdTitle="<td class='titleClick'>"+hiddenspan+json[i].title+"</td>";
 						var date = new Date(json[i].regdate);
-						var tdRegdate="<td>"+date.toLocaleDateString()+"</td>";
+		                var month = date.getMonth()+1;
+		                var tdRegdate="";  
+		                if(month.length=1){
+		                	tdRegdate+="<td>"+date.getFullYear()+"-0"+(month)+"-"+date.getDate()+"</td>";
+		                }else{
+		                	tdRegdate+="<td>"+date.getFullYear()+"-"+(month)+"-"+date.getDate()+"</td>";
+		                }
+						
 						var tdAnswer = "<td>";
 						if(json[i].answer){
 							tdAnswer += "O</td>";
@@ -110,7 +117,13 @@ function booleanlist(b){
 						var tdUserId="<td>"+json[i].userId+"</td>";
 						var tdTitle="<td class='titleClick'>"+hiddenspan+json[i].title+"</td>";
 						var date = new Date(json[i].regdate);
-						var tdRegdate="<td>"+date.toLocaleDateString()+"</td>";
+		                var month = date.getMonth()+1;
+		                var tdRegdate="";  
+		                if(month.length=1){
+		                	tdRegdate+="<td>"+date.getFullYear()+"-0"+(month)+"-"+date.getDate()+"</td>";
+		                }else{
+		                	tdRegdate+="<td>"+date.getFullYear()+"-"+(month)+"-"+date.getDate()+"</td>";
+		                }
 						var tdAnswer = "<td>";
 						if(json[i].answer){
 							tdAnswer += "O</td>";

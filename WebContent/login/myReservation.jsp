@@ -82,6 +82,7 @@
 						var img = "<img src='/MovieProject/upload/"+json[i].movieNo+"/"+json[i].pathPoster+"'>";
 						divleft += img +"</div>";
 						var date = new Date(json[i].startTime);
+						
 						var dateStr = date.toLocaleString().substring(0, date.toLocaleString().length-3);
 						var divRight = "<div class='right_wrap'>";
 						var p1 = "<p><span class='span_left'>예매 번호(예매일)</span> <b><span class='reservationNo'>"+json[i].no+"</span>"+" ("+dateStr+")</b></p>";
