@@ -139,7 +139,7 @@
 		overflow: scroll;
 		overflow-x:hidden;
 	}
-</style>
+</style> 
 
 <script type="text/javascript" src="js/star.js"></script>
 <script type="text/javascript">
