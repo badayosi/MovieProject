@@ -17,7 +17,20 @@ public class ServiceBoardService {
 	public static ServiceBoardService getInstance() {
 		return INSTANCE;
 	}
-	
+	public void delete(int boardNo){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		ServiceBoardDao dao = session.getMapper(ServiceBoardDao.class);
+		try{
+			dao.delete(boardNo);
+			session.commit();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+	}
 	public List<ServiceBoard> selectByAll(){
 		SqlSession session = null;
 		session = MySqlSessionFactory.openSession();
@@ -151,6 +164,34 @@ public class ServiceBoardService {
 		List<ServiceBoard> list = null;
 		try{
 			list = dao.selectByanswer(b);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return list;
+	}
+	public List<ServiceBoard> selectByuserIdTitle(String title){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		ServiceBoardDao dao = session.getMapper(ServiceBoardDao.class);
+		List<ServiceBoard> list = null;
+		try{
+			list = dao.selectByuserIdTitle(title);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return list;
+	}
+	public List<ServiceBoard> selectByUserserachlist(String userId){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		ServiceBoardDao dao = session.getMapper(ServiceBoardDao.class);
+		List<ServiceBoard> list = null;
+		try{
+			list = dao.selectByUserserachlist(userId);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{

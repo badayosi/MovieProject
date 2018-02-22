@@ -19,7 +19,24 @@
 		width:1024px;
 		min-height:600px;
 		margin:0 auto;
-		background:#F9F6EC; 
+		/* background:#F9F6EC;  */
+	}
+	table th{
+		font-size: 16px;
+		padding: 10px 0px;
+	}
+	table #time{
+		width: 190px;
+	}
+	
+	table #seat{
+		width: 100px !important;
+	}
+	input[type='button']{
+		padding: 5px 10px;
+		font-weight: bold;
+		background: #CDC197;
+		margin: 0 20px 40px 0;
 	}
 	/*
 	table, tr, th, td{
@@ -65,12 +82,12 @@
 				<table>
 					<tr>
 						<th>구분</th>
-						<th>예약번호</th>
+						<th>번호</th>
 						<th>ID</th>
 						<th>영화</th>
 						<th>상영관</th>
-						<th>시간</th>
-						<th>좌석</th>
+						<th id="time">시간</th>
+						<th id="seat">좌석</th>
 						<th>결제금액</th>
 					</tr>
 					<c:forEach var="member" items="${result}">

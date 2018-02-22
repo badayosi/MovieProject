@@ -269,7 +269,7 @@
 			</div>
 			
 			<div class="swiper-slide" id="top_right">
-				<img src="images/event.jpg">
+				<img src="images/event1.jpg">
 			</div>	
 		</div>
 		<div class="swiper-button-next"></div>
