@@ -286,7 +286,7 @@
 			type:"get",
 			data:{"theaterNo":theaterNo,"date":date},
 			dataType:"json",
-			success:function(json){ 	
+			success:function(json){ 	 
 				console.log(json);
 				var num=0;
 				
