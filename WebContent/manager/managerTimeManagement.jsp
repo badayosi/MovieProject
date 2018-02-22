@@ -361,7 +361,7 @@
 		});
 		
 		var mno="";
-		
+		 
 		$(document).on("click","input[name='movie']",function(){ 			
 			var selectDate=$("#selectDate").val();
 			var startTime=$("#startTime").val();
