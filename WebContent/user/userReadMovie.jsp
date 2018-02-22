@@ -49,12 +49,6 @@
 		width:900px;
 		margin:0 auto;
 	}
-	/* #bigImgWrap .bigImg .slick-prev:before, .slick-next:before{
-		font-family: 'slick';
-		font-size: 150px;
-		line-height: -1;
-		color: white !important;
-	} */
 	#container{
 		max-width:990px;
 		max-width:835px;
