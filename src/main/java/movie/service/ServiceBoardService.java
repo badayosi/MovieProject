@@ -171,4 +171,32 @@ public class ServiceBoardService {
 		}
 		return list;
 	}
+	public List<ServiceBoard> selectByuserIdTitle(String title){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		ServiceBoardDao dao = session.getMapper(ServiceBoardDao.class);
+		List<ServiceBoard> list = null;
+		try{
+			list = dao.selectByuserIdTitle(title);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return list;
+	}
+	public List<ServiceBoard> selectByUserserachlist(String userId){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		ServiceBoardDao dao = session.getMapper(ServiceBoardDao.class);
+		List<ServiceBoard> list = null;
+		try{
+			list = dao.selectByUserserachlist(userId);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return list;
+	}
 }

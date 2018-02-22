@@ -39,6 +39,9 @@
 	<select id="selectByUserlist" resultMap="serviceBoardResult" parameterType="String">
 	    select * from serviceBoard where user_id = #{userId} order by board_no desc;
 	</select>
+	<select id="selectByUserserachlist" resultMap="serviceBoardResult" parameterType="String">
+	    select * from serviceBoard where user_id like #{userId} order by board_no desc;
+	</select>
 	<select id="selectBytitle" resultMap="serviceBoardResult" parameterType="ServiceBoard">
 		select * from serviceBoard where user_id = #{userId} and title like #{title} order by board_no desc;
 	</select>
@@ -48,4 +51,7 @@
 	<delete id="delete" parameterType="int">
 		delete from serviceboard where board_no = #{boardNo};
 	</delete>
+	<select id="selectByuserIdTitle" resultMap="serviceBoardResult" parameterType="String">
+		select * from serviceBoard where title like #{title} order by board_no desc;
+	</select>
 </mapper>
