@@ -58,13 +58,13 @@ $(function(){
 	
 	p{
 		margin-bottom: 20px;
+		text-align:left;
 	}
 	label{
 		display:inline-block;
 		width: 150px;
 		font-size: 20px;
 	}
-	
 	input{
 		height: 30px;
 		width: 200px;
@@ -73,19 +73,21 @@ $(function(){
 		padding-top: 20px;
 		width: 512px;
 		margin: 0 auto;	
-		text-align:center;
+		text-align:left;
 	}
 	.insert input[type='submit']{
 		font-size: 15px;
 		background: #CDC197;
-		padding: 5px 10px;
+		padding: 0px 10px;
 		font-weight: bold;
 		color: white;
 	}
-	
-	
 	.find{
-		padding-top:40px;
+		clear:both;
+		width:1000px;
+		text-align:center;
+		height:100px;
+		padding:10px;
 		font-size: 20px;
 		font-weight: bold;
 	}
@@ -125,20 +127,19 @@ $(function(){
 				
 				
 			</div>
-			<div>
+			<div class="find">
 				<c:if test="${id!=null }">
-					<div class="find">
+					<div class="find2">
 						<br><br>
 						 ${id }
 					</div>
 				</c:if>		
 				<c:if test="${result!=null }">
-					<div class="find">
+					<div class="find1">
 						<br><br>
 						 ${result }
 					</div>
 				</c:if>
-			
 			</div>
 	</div>
 </body>

@@ -57,7 +57,6 @@
 	} */
 	#container{
 		max-width:835px;
-		
 		margin:0 auto;
 	}
 	.bigImg h3{
@@ -142,6 +141,7 @@
 	#grade{
 		margin: 0px !important;
 	}
+	
 </style>
 </head>
 <body>
@@ -217,10 +217,11 @@
 			${movie.synopsis}
 			<br>   				
 		</div>
+		
+		
+	
 	</div>
 	
-	
-
 	<jsp:include page="starBoard.jsp"></jsp:include>
 	<jsp:include page="../include/footer.jsp"></jsp:include>
 </body>
