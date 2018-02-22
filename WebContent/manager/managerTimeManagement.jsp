@@ -336,7 +336,14 @@
 		});
 		
 		$("#startTime").on("change",function(){
-			
+			var selectDate=$("#selectDate").val();
+			var startTime=$("#startTime").val();
+			var wantDate=new Date(selectDate+" "+startTime);
+			var date=new Date();
+			var nowDate=date.getTime();
+			if(wantDate.getTime() <= nowDate){
+				alert("선택 날짜가 오늘 날짜보다 전입니다. 날짜를 다시 선택해 주세요.");
+			}
 		});
 		
 		var mno="";
