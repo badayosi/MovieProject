@@ -16,7 +16,7 @@
 				<a href="/MovieProject/login/logout.do" id="logout">로그아웃 </a>
 				<a href="/MovieProject/manager/managerListMovie.do">관리자 모드</a>
 			</c:if>
-			
+		
 		</c:if>
 		<c:if test="${member == null}">
 			<a href="/MovieProject/login/Login.jsp" id="login">로그인</a>
@@ -25,7 +25,7 @@
 		</c:if>
 	</div>
 	
-	<h1><img src="/MovieProject/images/main_logo.gif"></h1>
+	<h1><a href="/MovieProject/index.jsp"><img src="/MovieProject/images/main_logo.gif"></a></h1>
 
 </div> 
 <div id="menubarWarp">
