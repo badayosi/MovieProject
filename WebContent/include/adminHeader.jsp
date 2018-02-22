@@ -32,7 +32,7 @@
 			<c:if test="${member != null}">
 				${member.name }님 환영합니다. |
 				<a href="/MovieProject/index.jsp">회원화면 가기 </a>
-				<a href="logout.do?path=<%=request.getRequestURI() %>" id="logout">로그아웃 </a>
+				<a href="/MovieProject/login/logout.do" id="logout">로그아웃 </a>
 			</c:if>
 			<c:if test="${member == null}">
 				<a href="/MovieProject/login/Login.jsp" id="login">로그인</a>|
