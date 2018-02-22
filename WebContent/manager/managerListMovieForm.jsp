@@ -8,35 +8,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/MovieProject/css/manager.css"> 
-<!-- <style type="text/css">
-	#listBody{
-		width:1024px;
-		margin:0 auto;
-		text-align: center;
+<style type="text/css">
+	.mname{
+		text-decoration: none;
+		font-weight: bold;
+		color:black;
 	}
-	#listBody #btnAdd{
-		float:right;
-	}
-	#listBody table{
-		clear:both;
-		border-collapse: collapse;
-		width:1024px;
-		margin:0 auto;
-	}
-	#listBody table tr th,td{
-		border:1px solid black;
-		padding: 5px;
-	}
-	#listBody table tr th{ 
-		width:200px;
-	}
-	#insert button{
-		font-size: 15px;
-		background: #EFEBDB;
-		padding: 5px 10px;
-		color: black;
-	}
-</style> -->
+</style>
 </head>
 <body>
 	<c:if test="${result!=null }">
@@ -56,7 +34,7 @@
 				</tr>
 				<c:forEach var="item" items="${movieList }">
 					<tr>
-						<td><a href="managerReadMovie.do?no=${item.movieNo }">${item.movieName}</a></td>
+						<td><a class="mname" href="managerReadMovie.do?no=${item.movieNo }">${item.movieName}</a></td>
 						<td><fmt:formatDate value="${item.openDate }" pattern="yyyy-MM-dd"/></td>
 						<td><fmt:formatDate value="${item.closeDate}" pattern="yyyy-MM-dd"/></td>
 					</tr>
