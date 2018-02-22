@@ -45,4 +45,7 @@
 	<select id="selectByanswer" resultMap="serviceBoardResult" parameterType="Boolean">
 		select * from serviceboard where answer = #{answer};
 	</select>
+	<delete id="delete" parameterType="int">
+		delete from serviceboard where board_no = #{boardNo};
+	</delete>
 </mapper>

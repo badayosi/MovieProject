@@ -14,5 +14,5 @@ public interface ServiceBoardDao {
 	public List<ServiceBoard> selectByUserlist(String userid);
 	public List<ServiceBoard> selectBytitle(ServiceBoard sb);
 	public List<ServiceBoard> selectByanswer(boolean b);
-	
+	public void delete(int boardNo);
 }

@@ -173,6 +173,16 @@
 		border:1px solid #231f20;
 		cursor: pointer;
 	}
+	#listBtnWrap #deleteBtn{
+		margin-top:15px;
+		width:100px;
+		height:50px;
+		font-size:16px;
+		border: 1px solid #999;
+    	background: #fff;
+   		color: #231f20;
+		cursor: pointer;
+	}
 	#answer_wrap_h4{
 		margin-bottom:15px;
 		padding-left:30px;
@@ -181,6 +191,30 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 	$(function(){
+		startlist();
+		$("#listBtn").click(function(){
+			$("#selectNoticeWrap").css("display","none"); 
+			$("#myNotice_wrap").css("display","block");
+		});
+		$(document).on("click","#deleteBtn",function(){
+			if(confirm("문의글을 삭제하시겠습니까?")){
+				var no = $("#hidNo").val();
+				 $.ajax({
+					url:"mynoticedelete.do",
+					type:"get",
+					data:{"no":no},
+					success:function(){
+						alert("삭제되었습니다.");
+						startlist();
+						$("#selectNoticeWrap").css("display","none"); 
+						$("#myNotice_wrap").css("display","block");
+					}
+					
+				})
+			}
+		})
+	})
+function startlist(){
 		var userId = $("#userId").val();
 		$.ajax({
 			url:"mynoticelist.do",
@@ -218,12 +252,8 @@
 					}
 				}
 			}
-		});
-		$("#listBtn").click(function(){
-			$("#selectNoticeWrap").css("display","none"); 
-			$("#myNotice_wrap").css("display","block");
-		});
-	})
+		});		
+}
 </script>
 </head>
 <body>
@@ -264,6 +294,7 @@
 				<p></p>
 			</div>
 			<div id="listBtnWrap">
+				<button id="deleteBtn">삭제</button>
 				<button id="listBtn">목록</button>
 			</div>
 	</div>

@@ -139,7 +139,6 @@
 				dataType:"json",
 				success:function(json){
 					console.log(json);
-					
 					$("#selectNoticeWrap").css("display","block"); 
 					$("#myNotice_wrap").css("display","none");
 					
@@ -152,7 +151,7 @@
 	                }else{
 	                	tdRegdate+=date.getFullYear()+"-"+(month)+"-"+date.getDate();
 	                }
-					$("#regdate_Li").html("<b> 등록일 :"+tdRegdate);
+					$("#regdate_Li").html("<b> 등록일 :"+tdRegdate  +"<input type='hidden' id='hidNo' value='"+no+"'>");
 					if(json.filepath !=null){
 						$("#selectContent p").html("<img src='"+json.filepath+"/"+json.filename+"' id='fileImg'><br>"+json.content);
 						
@@ -247,6 +246,7 @@
 				
 			})
 		})
+		
 		$(document).on("click","#updateBtn",function(){
 			
 			var addr = "("+$("#zipcode").val()+")"+$("#addr").val()+"/"+$("#addrUser").val();

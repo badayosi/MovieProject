@@ -17,7 +17,20 @@ public class ServiceBoardService {
 	public static ServiceBoardService getInstance() {
 		return INSTANCE;
 	}
-	
+	public void delete(int boardNo){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		ServiceBoardDao dao = session.getMapper(ServiceBoardDao.class);
+		try{
+			dao.delete(boardNo);
+			session.commit();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+	}
 	public List<ServiceBoard> selectByAll(){
 		SqlSession session = null;
 		session = MySqlSessionFactory.openSession();
