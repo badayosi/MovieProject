@@ -513,8 +513,21 @@
 	function formatChange(date, type){
 		var newDate = new Date(date);
 		
-		if(type=="time")
-			return newDate.getHours() + ":" + newDate.getMinutes();
+		if(type=="time"){
+			var hourStr = "";
+			var minStr="";
+			
+			if(newDate.getHours() < 10)
+				hourStr = "0" + newDate.getHours();
+			else
+				hourStr = newDate.getHours();
+			if(newDate.getMinutes() < 10)
+				minStr = "0" + newDate.getMinutes();
+			else
+				minStr = newDate.getMinutes();
+			
+			return hourStr + ":" + minStr;
+		}
 		if(type=="date"){
 			var dateStr = "";
 			
