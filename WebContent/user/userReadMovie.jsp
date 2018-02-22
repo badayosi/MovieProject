@@ -49,9 +49,15 @@
 		width:900px;
 		margin:0 auto;
 	}
+	/* #bigImgWrap .bigImg .slick-prev:before, .slick-next:before{
+		font-family: 'slick';
+		font-size: 150px;
+		line-height: -1;
+		color: white !important;
+	} */
 	#container{
+		width:990px;
 		max-width:990px;
-		max-width:835px;
 		margin:0 auto;
 	}
 	.bigImg h3{
@@ -71,7 +77,6 @@
 		max-width:835px;
 		margin:0 auto;
 	}
-	
 	#container #imgListDiv .imgList h3 img, #container #imgListDiv .imgList h3 video{
 		/* max-width: 150px;	 */	
 		height:84px;
@@ -82,7 +87,7 @@
 	#movieInfo{
 		width:100%;
 		height:400px;
-		/* margin:0 auto !important; */
+		margin:0 auto;
 	}
 	#movieInfo #moviePoster{
 		width:175px;
