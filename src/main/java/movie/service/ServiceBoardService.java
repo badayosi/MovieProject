@@ -143,4 +143,19 @@ public class ServiceBoardService {
 		}
 		return list;
 	}
+	
+	public List<ServiceBoard> selectByanswer(boolean b){
+		SqlSession session = null;
+		session = MySqlSessionFactory.openSession();
+		ServiceBoardDao dao = session.getMapper(ServiceBoardDao.class);
+		List<ServiceBoard> list = null;
+		try{
+			list = dao.selectByanswer(b);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			MySqlSessionFactory.closeSession(session);
+		}
+		return list;
+	}
 }

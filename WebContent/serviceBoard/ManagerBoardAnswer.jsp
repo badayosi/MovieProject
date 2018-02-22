@@ -70,7 +70,7 @@
 	}
 	#answer_update #label_text{
 		position: absolute;
-		top:30px;
+		top:500px;
 		left:40px;
 	}
 	#label_answer{
@@ -88,6 +88,20 @@
 	#p_answercontent p{
 		padding:10px;
 	}
+	#listbtn_wrap{
+		text-align: center;
+		margin-top:10px;
+	}
+	#listbtn_wrap #listbtn{
+		width:100px !important;
+		height: 40px !important;
+		background: #231f20;
+		color: #cdc197;
+		border:none;
+		cursor:pointer;
+		font-size:14px !important;
+			
+	}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
@@ -100,6 +114,10 @@
 			location.href="ManagerServiceBoard.jsp?answerCancel=1";
 			
 		})
+		$(document).on("click","#listbtn",function(){
+			location.href="ManagerServiceBoard.jsp?answerCancel=1";
+		})
+		
 	})
 </script>
 </head>
@@ -137,8 +155,11 @@
 							<div id="p_answercontent">
 								<p>${sb.answerContent }</p>
 							</div>
+							
 						</form>
+						
 					</td>
+					
 				</c:if>
 				<c:if test="${sb.answerContent == null }">
 					<td>
@@ -154,7 +175,14 @@
 					</td>
 				</c:if>
 			</tr>
-		</table>		
+		</table>
+		<c:if test="${sb.answerContent != null }">
+			<div id="listbtn_wrap">
+				<button id="listbtn">목록</button>
+			</div>
+		</c:if>
+		
+			
 	</div>
 </body>
 </html>

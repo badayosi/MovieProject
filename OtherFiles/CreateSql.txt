@@ -162,7 +162,7 @@ ADD CONSTRAINT FK_user_TO_board
 FOREIGN KEY (user_id)
 REFERENCES movie.user (user_id)
 on update cascade
-on delete cascade,
+on delete no action,
 ADD INDEX FK_user_TO_board (user_id);
 
 -- reservation
@@ -178,7 +178,7 @@ ADD CONSTRAINT FK_user_TO_reservation
 FOREIGN KEY (user_id)
 REFERENCES movie.user (user_id)
 on update cascade
-on delete cascade,
+on delete no action,
 ADD INDEX FK_user_TO_reservation (user_id);
 
 -- timetable

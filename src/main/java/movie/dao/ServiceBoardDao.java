@@ -13,4 +13,6 @@ public interface ServiceBoardDao {
 	public void insertFile(ServiceBoard sb);
 	public List<ServiceBoard> selectByUserlist(String userid);
 	public List<ServiceBoard> selectBytitle(ServiceBoard sb);
+	public List<ServiceBoard> selectByanswer(boolean b);
+	
 }

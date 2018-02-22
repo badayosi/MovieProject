@@ -42,4 +42,7 @@
 	<select id="selectBytitle" resultMap="serviceBoardResult" parameterType="ServiceBoard">
 		select * from serviceBoard where user_id = #{userId} and title like #{title} order by board_no desc;
 	</select>
+	<select id="selectByanswer" resultMap="serviceBoardResult" parameterType="Boolean">
+		select * from serviceboard where answer = #{answer};
+	</select>
 </mapper>
