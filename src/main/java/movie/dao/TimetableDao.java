@@ -12,4 +12,4 @@ public interface TimetableDao {
 	public Timetable selectByNo(int no);
 	public void deleteByNo(int no);
 	public void insert(Timetable timetable);
-}
+} 

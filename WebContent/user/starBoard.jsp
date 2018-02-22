@@ -37,7 +37,6 @@
 		top:40px;
 		left:50px;
 	}
-	
 	#outputtag{
 		position: absolute !important;
 		left:30px;

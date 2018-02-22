@@ -63,7 +63,12 @@
 		$(document).on("click",".titleClick",function(){
 			var no = $(this).find(".hidden_span").text();
 			location.href ="managerserviceboardupdate.do?no="+no;
-		})  
+		}) 
+		if($("#answercancel").val()!=""){
+			("#menuSelect").load("ManagerBoard.jsp");
+			$("#li2").addClass("select_menu");
+			$("#li1").removeClass("select_menu");
+		}
 		
 	})
 </script>
@@ -87,5 +92,6 @@
 			
 		</script>
 	</c:if>
+	<input type="hidden" value="${answerCancel }" id="answercancel">
 </body>
 </html>
