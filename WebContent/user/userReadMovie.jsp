@@ -56,7 +56,7 @@
 		color: white !important;
 	} */
 	#container{
-		max-width:835px;
+		max-width:990px;
 		
 		margin:0 auto;
 	}
@@ -66,7 +66,7 @@
 	#container #imgListDiv{
 		width:950px;
 		height:120px;
-		margin:15px auto;
+		margin:0 auto;
 
 	} 
 	.bigImg h3 img, .bigImg h3{
@@ -86,9 +86,9 @@
 		text-align: center;
 	}
 	#movieInfo{
-		width:990px;
+		width:100%;
 		height:400px;
-		margin:0 auto;
+		/* margin:0 auto !important; */
 	}
 	#movieInfo #moviePoster{
 		width:175px;
