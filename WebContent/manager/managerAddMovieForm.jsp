@@ -93,15 +93,48 @@
 <script type="text/javascript">
 	$(function(){
 		$("#addForm").submit(function(){
+			var boolean1 = true;
 			
+			$("td input[type=text]").each(function(i, obj) {
+				if($(this).val() ==""){ 
+					boolean1 = false;
+					alert($(this).parent().prev().text()+"를 입력해주세요");
+					return;
+				}
+			})
+			if(!boolean1){
+				return false;
+			}else if(boolean1){
+				if($("textarea[name='movieSynopsis']").val()==""){
+					alert("줄거리를 입력해주세요.")
+					return false;
+				}else{
+					if($("td input[name='movieOpenDate']").val()==""){
+						alert("개봉일을 입력해주세요");
+						return false;
+					}else if($("td input[name='movieEndDate']").val()==""){
+						alert("종료일을 입력해주세요");
+						return false;
+					}else{
+						var startdate = new Date($("td input[name='movieOpenDate']").val());
+						var enddate = new Date($("td input[name='movieEndDate']").val());
+						
+						if(startdate.getTime() >= enddate.getTime()){
+							alert("개봉일이 종료일보다 이전날짜입니다.");
+							return false;
+						}
+					}
+				}
+			}
 			var steelcutStr = "";
 			for(var i =0; i< $("#a").get(0).files.length; i++){
 				steelcutStr += $("#a").get(0).files[i].name + ",";
 			}
 			$("input[type='hidden']").val(steelcutStr);
 			var content=$("textarea[name='movieSynopsis']").val().replace(/(?:\r\n|\r|\n)/g, '<br />');
-			alert(content);
+			
 			$("textarea[name='movieSynopsis']").val(content);
+			
 		});
 		
 		
@@ -115,7 +148,6 @@
 				$(this).parent().find(".error1").css("display","block");
 			}
 		})
-		
 	});
 </script>
 </head>
@@ -158,7 +190,7 @@
 			<tr>
 				<th>상영시간</th>
 				<td>
-					<input type="text" name="moviePlaytime">
+					<input type="text" name="moviePlaytime" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
 					<span class="error1">숫자만 입력하세요</span>
 				</td>
 			</tr>
