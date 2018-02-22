@@ -102,7 +102,7 @@
 	}
 	#movieInfo #moviePoster a{
 		width:100%;
-		height:40px;
+		height:40px; 
 		margin-top:5px;
 		background: #231F20;
 		color:#CDC197;
