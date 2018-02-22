@@ -134,6 +134,13 @@
 	#countBtn .page_number:HOVER{
 		text-decoration: underline;
 	}
+	.user_star_content p{
+		height:63px;
+		overflow: scroll;
+		overflow-x:hidden;
+		
+		
+	}
 </style>
 
 <script type="text/javascript" src="js/star.js"></script>
@@ -263,8 +270,11 @@ function boardListView(boardNo){
 }
 	function addGrade(){
 		var grade=0;
-		
-		$(".user_star_board_socre").each(function(i,obj){
+		if($(".user_star_board_socre").length==0){
+			$("#grade").text(grade+"점");
+			return;
+		}
+		$(".user_star_board_socre").each(function(i,obj){			
 			grade+=Number($(obj).text());
 		})
 		grade=grade/$(".user_star_board_socre").size();
@@ -297,7 +307,7 @@ function boardListView(boardNo){
 	   			</span>
 			</div>
 			<div id="textAreaWrap">
-				<textarea rows="0" cols="0" placeholder="영화 리뷰는 로그인 후에 작성하실수 있습니다." id="user_star_content"></textarea>
+				<textarea rows="0" cols="0" rows="3" placeholder="영화 리뷰는 로그인 후에 작성하실수 있습니다." id="user_star_content"></textarea>
 			</div>
 			<div id="boradSendWrap">
 				<a href="#" id="insert_star_board">입력</a>

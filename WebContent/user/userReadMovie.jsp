@@ -206,31 +206,6 @@
    						</td>
    					</tr>
    				</table>
-   				<%-- 
-   				<span class="info1"><h3>관람평점 </h3><span id="grade"></span></span>
-   				<span class="info2"><h3>등급 </h3>${movie.rating }세 미만 관람 불가</span>
-   				<br>
-   				<span class="info3"><h3>개봉일 </h3>${openDate}</span>
-   				<span class="info4"><h3>방영시간 </h3>${movie.playTime }분</span>
-   				<br>
-   				<br>
-   				<br>
-   				<span class="info5"><h3>스페셜관 상영정보 </h3></span>
-   				<br>
-   				<table>
-   					<tr>
-   						<td><img src="../images/img_sinfo_01_off.jpg"></td>
-   						<td><img src="../images/img_sinfo_02_off.jpg"></td>
-   						<td><img src="../images/img_sinfo_03_off.jpg"></td>
-   						<td><img src="../images/img_sinfo_06_on.jpg"></td>
-   					</tr>
-   					<tr>
-   						<td><img src="../images/img_sinfo_08_off.jpg"></td>
-   						<td><img src="../images/img_sinfo_09_on.jpg"></td>
-   						<td><img src="../images/img_sinfo_10_on.jpg"></td>
-   						<td><img src="../images/img_sinfo_13_on.jpg"></td>
-   					</tr>
-   				</table> --%>
    			</div>
    			
    		</div>
