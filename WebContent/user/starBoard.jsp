@@ -138,8 +138,6 @@
 		height:63px;
 		overflow: scroll;
 		overflow-x:hidden;
-		
-		
 	}
 </style>
 
