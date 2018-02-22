@@ -68,12 +68,13 @@
 		margin:15px auto;
 
 	} 
-	
-	.bigImg h3 img , .bigImg h3 video{
+	.bigImg h3 img, .bigImg h3{
+		text-align: center;
+	}
+	.bigImg h3 img, .bigImg h3 video{
 		height:470px;
 		max-width:835px;
 		margin:0 auto;
-		text-align: center;
 	}
 	
 	#container #imgListDiv .imgList h3 img, #container #imgListDiv .imgList h3 video{
@@ -100,7 +101,7 @@
 	}
 	#movieInfo #moviePoster a{
 		width:100%;
-		height:40px;
+		height:40px; 
 		margin-top:5px;
 		background: #231F20;
 		color:#CDC197;
