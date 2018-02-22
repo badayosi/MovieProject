@@ -279,7 +279,7 @@
 			}
 		}) 
 	}
-	 
+	
 	function addScheduleProcess(theaterNo,date,wantDate,movieNo,endTime){
 		$.ajax({
 			url:"/MovieProject/manager/managerListTimetableByDate.do",
