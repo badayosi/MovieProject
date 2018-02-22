@@ -324,7 +324,6 @@
 			success:function(json){
 				var date=new Date();
 				var nowDate=date.getTime();
-				
 				var makeMovieList;
 				var length = json.length;
 				
