@@ -59,15 +59,8 @@
 		font-weight: bold;
 		background: #CDC197;
 	}
-<<<<<<< HEAD
-	#answer_update{
-		position: relative;
-	}
-	#answer_update #label_text{
-		position: absolute;
-		top:30px;
-		left:40px;
-=======
+
+	
 	#btn input:first-child{
 		margin-left:120px;
 	}
@@ -94,7 +87,6 @@
 	}
 	#p_answercontent p{
 		padding:10px;
->>>>>>> refs/heads/bum2
 	}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -102,6 +94,11 @@
 	$(function(){
 		$(document).on("submit","#answer_update",function(){
 			$("#answerContent").val($("#answerContent").val().replace(/(?:\r\n|\r|\n)/g, '<br />'));
+		})
+		$(document).on("click","#answerCancel",function(){
+			
+			location.href="ManagerServiceBoard.jsp?answerCancel=1";
+			
 		})
 	})
 </script>
@@ -150,7 +147,7 @@
 							<label id="label_text">답글 </label>
 							<textarea rows="" cols="" name="answerContent" id="answerContent"></textarea>			
 							<p id="btn">
-								<input type="reset" value="취소">
+								<input type=button value="취소" id="answerCancel">
 								<input type="submit" value="전송">
 							</p>
 						</form>
