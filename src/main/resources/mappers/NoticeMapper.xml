@@ -29,7 +29,7 @@
 		select * from notice where content like #{content} order by board_no desc limit #{boardNo},10;
 	</select>
 	<select id="selectByContentTitle" resultMap="noticeResult" parameterType="Notice">
-		select * from notice where content like #{content} and title like #{title} order by board_no desc limit #{boardNo},10;
+		select * from notice where content like #{content} or title like #{title} order by board_no desc limit #{boardNo},10;
 	</select>
 	<insert id="insert" parameterType="Notice">
 		insert into notice (title,content,regdate,readcount) values(#{title},#{content},#{regdate},#{readcount})

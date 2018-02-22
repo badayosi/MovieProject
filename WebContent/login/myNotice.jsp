@@ -209,9 +209,9 @@
 		                }
 						var tdanswer = "";
 						if(json[i].answer){
-							tdanswer = "<td>O</td>"
+							tdanswer = "<td>처리완료</td>"
 						}else{
-							tdanswer = "<td>X</td>"
+							tdanswer = "<td>처리중</td>"
 						}
 						tr += tdNo + tdclassification +tdtitle + tdRegdate + tdanswer;
 						$("#notice_table").append(tr);
@@ -243,7 +243,7 @@
 					<th id="th2"><span class="linetext">분류</span></th>
 					<th id="th3"><span class="linetext">제목</span></th>
 					<th id="th4"><span class="linetext">등록일</span></th>
-					<th id="th5">답변상태</th>
+					<th id="th5">처리상태</th>
 				</tr>
 			</table>
 		</div>
