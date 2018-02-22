@@ -335,6 +335,10 @@
 			
 		});
 		
+		$("#startTime").on("change",function(){
+			
+		});
+		
 		var mno="";
 		
 		$(document).on("click","input[name='movie']",function(){ 			
