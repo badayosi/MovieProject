@@ -166,7 +166,6 @@
 			</div>
    		</div>
    		
-   		
    		<div id="movieInfo">
    			<div id="moviePoster">
    				<img src="/MovieProject/upload/${movie.movieNo}/${movie.pathPoster}">
