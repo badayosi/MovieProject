@@ -44,7 +44,7 @@ public class UserFindPwHandler implements CommandHandler {
 		UserService service = UserService.getInstance();
 		User u = service.selectById(user.getUserId());
 		User findUser = service.findPw(user);
-		
+		//findUser.setName(u.getName());
 		
 		if(findUser==null){
 			req.setAttribute("result", "아이디 또는 이메일을 확인해 주세요");
