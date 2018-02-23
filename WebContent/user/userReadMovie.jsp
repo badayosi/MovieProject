@@ -27,7 +27,7 @@
 		  arrows:true,
 		  focusOnSelect: true
 		});
-		$(document).on("click","button.slick-prev.slick-arrow, button.slick-next.slick-arrow",function(){
+		$(document).on("click","button.slick-prev.slick-arrow, button.slick-next.slick-arrow, .aaa",function(){
 			$("#bigImgWrap .bigImg h3 video")[0].pause();
 		});
 	});
@@ -154,14 +154,14 @@
 			</c:forEach>
 	   	</div>
    	</div>
-   	
+   	   	
    	<div id="container">
    		<div id="imgListDiv">
    			<div class="imgList">
 				<h3><video src="/MovieProject/upload/${movie.movieNo}/${movie.pathVideo}"poster="/MovieProject/upload/${movie.movieNo}/${steelcut[0] }"></video></h3>
 				<c:forEach var="item" items="${steelcut}" begin="2">
 					
-					<h3><img src="/MovieProject/upload/${movie.movieNo}/${item}"></h3> 
+					<h3><img class='aaa' src="/MovieProject/upload/${movie.movieNo}/${item}"></h3> 
 				</c:forEach>
 			</div>
    		</div>
