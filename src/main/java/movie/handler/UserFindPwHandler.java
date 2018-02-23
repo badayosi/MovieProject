@@ -140,7 +140,6 @@ public class UserFindPwHandler implements CommandHandler {
 						+"<div style='float:left; background-color:#3e2b2c;padding:10px 0;text-align:center;width:100%;'>"
 						+"<p style='font-size:10px;color:#ab9899;'>Copyright © LOTTE CINEMA CO LTD. All Rights Reserved. 롯데시네마 : TEL +82-2-2230-5528</p>"
 						+"</div></div></div>";
-  
 			msg.setText(msg1, "UTF-8");
 
 			// 이메일 헤더
