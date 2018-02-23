@@ -315,7 +315,7 @@
 		makeStr += "</table>";		
 		$("#calendar_day").html(makeStr); 
 	}
-	
+	 
 	function loadAllMovie(){
 		$.ajax({
 			url:"reservationAjax.do",
