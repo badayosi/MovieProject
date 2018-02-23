@@ -42,6 +42,7 @@ public class UserFindPwHandler implements CommandHandler {
 		System.out.println(user.toString());
 		
 		UserService service = UserService.getInstance();
+		User u = service.selectById(user.getUserId());
 		User findUser = service.findPw(user);
 		
 		
@@ -50,7 +51,7 @@ public class UserFindPwHandler implements CommandHandler {
 		}else{
 			System.out.println(findUser.toString());
 			service.updatePw(user);
-			HtmlEmail(user);
+			HtmlEmail(u);
 			req.setAttribute("result", "이메일에서 임시 비밀번호를 확인해 주세요");
 		}
 		
@@ -105,16 +106,40 @@ public class UserFindPwHandler implements CommandHandler {
 			msg.setSubject("임시 비밀번호 입니다.", "UTF-8");
 
 			// 이메일 내용
-			String msg1 = "";
-			
-			msg1 = "롯데 시네마 임시 비밀번호 입니다.";
-			msg1 += "<div align='center' style='border:1px solid black; font-family:verdana'>";
-			msg1 += "<h3 style='color: blue;'>";
-			msg1 += user.getUserId() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
-			msg1 += "<p>임시 비밀번호 : ";
-			msg1 += user.getPassword() + "</p><br></div>";
-			
-			
+			String msg1 = "<div style='width:700px;background-color:#f1e3c4;margin:0 auto; padding:0;font:12px/160% Dotum,'돋움',serif; color:#101010;overflow:hidden;'>"
+						+"<div style='height:70px;text-align:center;'>"
+						+"<h1 style='margin:0px; padding:0px;'>"
+						+"<a style='text-decoration:none; color:#555' target='_blank' href='http://localhost:8080/MovieProject/index.jsp'>"
+						+"<img style='border:0; width:700px;' src=\'http://caching.lottecinema.co.kr//Media/WebAdmin/23339c901d7942cc826af0dd27360b90.gif\' alt=''>"
+						+ "</a></h1></div>"
+						+"<img style='border:0; width:700px;'  src=\'http://caching.lottecinema.co.kr//Media/WebAdmin/eacaf47c32e647eda0ca9d2ac8a7e9b4.jpg\' alt='신라리워즈 이미지'>"
+						+"<div style='float:left; width:680px; background:#FFF; min-height:100px; margin:0 10px; padding:0; padding-bottom:10px;'>"
+						+"<div style='margin:30px;line-height:200%'>"
+						+"<p style='margin:0; padding:0;color:#666;'>안녕하십니까. 롯데시네마입니다. </p>"
+						+"<p style='margin:0; padding:0;color:#666;'>"+user.getName()+"님의 임시비밀번호를 안내해 드립니다.</p></div>"
+						+"<div style='background-color:#f9f7f4;border-top:1px solid #edeae6;border-bottom:1px solid #edeae6;padding:10px 0 5px 0;'>"
+						+"<div style='margin:10px 30px 0 30px;'>"
+						+"<p style='color:#333;'>아래의 임시 비밀번호로 로그인 하신 후에 타인에게 공개되지 않도록 비밀번호를 변경해 주시기 바랍니다.</p>"
+						+"<div style='overflow:hidden;width:290px;margin:20px 0 30px 165px;'>"
+						+"<span style='display:block; width:87px; height:40px; background:url(http://www.shilla.net/images/ko/seoul/email/emailPwd/tmpPwdText.gif); text-indent:-9999%; overflow:hidden;float:left;'>임시비밀번호</span>"
+						+"<span style='float:right;width:185px;height:40px;background-color:#dbdbdb;font-size:20px;line-height:40px;text-align:center;font-family:Verdana;'>"+user.getPassword()+"</span>"
+						+"</div></div></div>"
+						+"<div style='margin:10px 30px 0 30px;padding:20px 0;text-align:center;'>"
+						+"<a style='text-decoration:none; color:#555' target='_blank' href='http://localhost:8080/MovieProject/login/Login.jsp'><img style='border:0;' src='http://www.shilla.net/images/ko/seoul/email/emailPwd/loginBtn.gif' alt='로그인 버튼'></a>"
+						+"</div></div>"
+						+"<div style='width:700px;'>"
+						+"<div style='float:left; overflow:hidden; margin:0px 40px; width:620px; height:100px;'>"
+						+"<div style='float:left;width:134px;'>"
+						+"<h2 style='margin:20px 0;'><a style='text-decoration:none; color:#555' target='_blank' href='http://localhost:8080/MovieProject/login/Login.jsp'><img style='border:0; width:150px;' src='http://www.lottecinema.co.kr/LCHS/Image/logo_footer.gif?v=17111301' alt=''></a></h2>"
+						+"</div>"
+						+"<div style='float:right;width:465px;margin-top:15px;'>"
+						+"<p style='color:#3e2b2c;font-size:11px; height:100px; line-height:33px;'>본 메일은 발신전용 메일입니다."
+						+"궁금하신 점은 <a style='text-decoration:none; color:#555' target='_blank' href='http://www.shillahotels.com/membership/inquires/contactus/memIndex.do?lang=ko'>Contact Us</a>로 문의해주시기 바랍니다.</p>"
+						+"</div></div>"
+						+"<div style='float:left; background-color:#3e2b2c;padding:10px 0;text-align:center;width:100%;'>"
+						+"<p style='font-size:10px;color:#ab9899;'>Copyright © LOTTE CINEMA CO LTD. All Rights Reserved. 롯데시네마 : TEL +82-2-2230-5528</p>"
+						+"</div></div></div>";
+  
 			msg.setText(msg1, "UTF-8");
 
 			// 이메일 헤더

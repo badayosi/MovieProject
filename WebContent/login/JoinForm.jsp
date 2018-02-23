@@ -260,7 +260,7 @@ input:FOCUS {
 		font-size:14px;
 	}
 	.checkimg{
-	
+		
 	}
 #radioCheckImg{
 	display: inline-block;
