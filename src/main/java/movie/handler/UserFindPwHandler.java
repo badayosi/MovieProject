@@ -50,7 +50,8 @@ public class UserFindPwHandler implements CommandHandler {
 			req.setAttribute("result", "아이디 또는 이메일을 확인해 주세요");
 		}else{
 			System.out.println(findUser.toString());
-			service.updatePw(user);
+			service.updatePw(findUser);
+			
 			HtmlEmail(u);
 			req.setAttribute("result", "이메일에서 임시 비밀번호를 확인해 주세요");
 		}
